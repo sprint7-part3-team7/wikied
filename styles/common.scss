@@ -1,0 +1,23 @@
+// responsive
+$tablet-max-width: 1199px;
+$mobile-max-width: 767px;
+
+// mixin
+@mixin Flex($col, $justifyContent, $alignItems) {
+  display: flex;
+  flex-direction: $col;
+  justify-content: $justifyContent;
+  align-items: $alignItems;
+}
+
+@mixin Font($font-size, $line-height, $font-weight, $color) {
+  font-size: $font-size;
+  line-height: $line-height;
+  font-weight: $font-weight;
+  color: $color;
+}
+
+@mixin Size($width, $height) {
+  width: $width;
+  height: $height;
+}
