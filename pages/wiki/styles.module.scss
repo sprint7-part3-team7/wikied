@@ -1,0 +1,17 @@
+@import '@/styles/import.scss';
+
+.container {
+  @include Size(1920px, 100vh);
+  @include Flex(column, center, center);
+  margin: 0 auto;
+  background-color: azure;
+  position: relative;
+
+  .nav {
+    @include Size(100%, 60px);
+    @include Flex(column, center, center);
+    background-color: lightgoldenrodyellow;
+    position: absolute;
+    top: 0;
+  }
+}
