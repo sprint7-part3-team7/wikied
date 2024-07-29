@@ -1,59 +1,25 @@
 @import "@/styles/import.scss";
 
-.boardCard {
-  @include Size(250px, 220px);
-  @include Flex(column, flex-start, stretch);
-  border-radius: 8px;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1);
-  overflow: hidden;
-
-  .image {
-    @include Size(100%, 131px);
-    object-fit: cover;
-  }
-
-  .content {
-    padding: 19px 19px 14px 19px;
-
-    h3 {
-      @include Font(
-        $font-size-2lg,
-        $line-height-2lg,
-        $font-weight-2lg-semibold,
-        $color-grayscale-500
-      );
-      margin: 0 0 6px;
-    }
-  }
-
-  .contentInfo {
-    @include Flex(row, space-between, center);
-    @include Font(
-      $font-size-md,
-      $line-height-md,
-      $font-weight-md-regular,
-      $color-grayscale-400
-    );
-
-    .contentDescription {
-      @include Flex(row, flex-start, center);
-      gap: 8px;
-    }
-
-    .likeCount {
-      @include Flex(row, flex-start, center);
-      gap: 4px;
-    }
-  }
-}
-
 .bestBoardList {
   max-width: 1060px;
-  margin: 24px auto 60px;
+  margin: 0 auto 60px;
+
+  @media (max-width: $tablet-max-width) {
+    padding: 0 60px;
+  }
+
+  @media (max-width: $mobile-max-width) {
+    padding: 0 20px;
+    margin-bottom: 40px;
+  }
 
   .bestBoardHeader {
     @include Flex(row, space-between, center);
-    margin-bottom: 20px;
+    margin: 60px 0;
+
+    @media (max-width: $mobile-max-width) {
+      margin: 40px 0;
+    }
 
     .addBoardButton {
       @include Font(
@@ -67,8 +33,12 @@
       border: none;
       border-radius: 10px;
       cursor: pointer;
+
+      @media (max-width: $mobile-max-width) {
+        @include Size(130px, 45px);
+      }
     }
-  } 
+  }
 
   h2 {
     @include Font(
@@ -77,14 +47,110 @@
       $font-weight-3xl-semibold,
       $color-grayscale-500
     );
-    margin: 60px 0 63px;
+
+    @media (max-width: $mobile-max-width) {
+      @include Font(
+        $font-size-2xl,
+        $line-height-2xl,
+        $font-weight-2xl-semibold,
+        $color-grayscale-500
+      );
+    }
   }
 
   .boardGrid {
-    @include Flex(row, flex-start, flex-start);
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 16px;
     max-width: 1048px;
     margin: 0 auto;
-    gap: 16px;
-    flex-wrap: wrap;
+
+    @media (max-width: $tablet-max-width) {
+      grid-template-columns: repeat(2, 1fr);
+      max-width: 100%;
+    }
+
+    @media (max-width: $mobile-max-width) {
+      display: flex;
+      flex-wrap: nowrap;
+      overflow-x: scroll;
+      gap: 0px;
+    }
+  }
+}
+
+.boardCard {
+  @include Size(100%, 220px);
+  @include Flex(column, flex-start, stretch);
+  border-radius: 8px;
+  box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  margin: 8px;
+
+  @media (max-width: $mobile-max-width) {
+    @include Size(250px, 200px);
+    flex: 0 0 auto;
+  }
+
+  .image {
+    @include Size(100%, 131px);
+    object-fit: cover;
+  }
+
+  .content {
+    padding: 19px 19px 14px 19px;
+
+    @media (max-width: $mobile-max-width) {
+      padding: 11px 20px;
+    }
+
+    h3 {
+      @include Font(
+        $font-size-2lg,
+        $line-height-2lg,
+        $font-weight-2lg-semibold,
+        $color-grayscale-500
+      );
+      margin: 0 0 6px;
+
+      @media (max-width: $mobile-max-width) {
+        @include Font(
+          $font-size-lg,
+          $line-height-lg,
+          $font-weight-lg-semibold,
+          $color-grayscale-500
+        );
+        margin: 0;
+      }
+    }
+  }
+
+  .contentInfo {
+    @include Flex(row, space-between, center);
+    @include Font(
+      $font-size-md,
+      $line-height-md,
+      $font-weight-md-regular,
+      $color-grayscale-400
+    );
+
+    @media (max-width: $mobile-max-width) {
+      @include Font(
+        $font-size-xs,
+        $line-height-xs-18,
+        $font-weight-xs-regular,
+        $color-grayscale-400
+      );
+    }
+
+    .contentDescription {
+      @include Flex(row, flex-start, center);
+      gap: 8px;
+    }
+
+    .likeCount {
+      @include Flex(row, flex-start, center);
+      gap: 4px;
+    }
   }
 }

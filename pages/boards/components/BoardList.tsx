@@ -3,7 +3,7 @@ import styles from "./BoardList.module.scss";
 import { Board } from "./boardType";
 import { getArticles } from "./articleApi";
 import Image from "next/image";
-import searchIcon from "@/assets/icons/ic_search.svg";
+import likeIcon from "@/assets/icons/ic_heart.svg";
 import OrderDropdown from "./OrderDropdown";
 
 const BoardList = () => {
@@ -133,6 +133,24 @@ const BoardList = () => {
               ))}
             </tbody>
           </table>
+
+          <div className={styles.mobileList}>
+            {boards.map((board) => (
+              <div key={board.id} className={styles.mobileListItem}>
+                <div className={styles.title}>{board.title}</div>
+                <div className={styles.info}>
+                  <span className={styles.author}>{board.writer.name}</span>
+                  <span className={styles.date}>
+                    {new Date(board.createdAt).toLocaleDateString()}
+                  </span>
+                  <span className={styles.likeCount}>
+                  <Image src={likeIcon} alt='likeIcon' width={18} />
+                    {board.likeCount}
+                  </span>
+                </div>
+              </div>
+            ))}
+          </div>
           <div className={styles.pagination}>{renderPageNumbers()}</div>
         </>
       )}

@@ -3,6 +3,10 @@
 .dropdown {
   @include Size(140px, auto);
   position: relative;
+
+  @media (max-width: $mobile-max-width) {
+    width: 100%;
+  }
 }
 
 .dropdownButton {
@@ -27,8 +31,6 @@
   background-size: 22px;
   background-repeat: no-repeat;
   background-position: right 20px center;
-
-
 }
 
 .dropdownMenu {

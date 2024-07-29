@@ -3,6 +3,14 @@
 .boardListContainer {
   max-width: 1060px;
   margin: 0 auto;
+
+  @media (max-width: $tablet-max-width) {
+    padding: 0 60px;
+  }
+
+  @media (max-width: $mobile-max-width) {
+    padding: 0 20px;
+  }
 }
 
 .searchContainer {
@@ -11,6 +19,13 @@
   margin-bottom: 20px;
   max-width: 1060px;
   gap: 20px;
+
+  @media (max-width: $mobile-max-width) {
+    flex-direction: column;
+    align-items: stretch;
+    margin-bottom: 30px;
+    gap: 20px;
+  }
 
   form {
     @include Flex(row, flex-start, center);
@@ -56,11 +71,21 @@
     border-radius: 10px;
     cursor: pointer;
   }
+
+  .orderDropdown {
+    @media (max-width: $mobile-max-width) {
+      width: 100%;
+    }
+  }
 }
 
 .boardTable {
   @include Size(100%, auto);
   border-collapse: collapse;
+
+  @media (max-width: $mobile-max-width) {
+    display: none;
+  }
 
   th,
   td {
@@ -86,6 +111,53 @@
       $font-weight-2lg-regular,
       $color-grayscale-500
     );
+  }
+}
+
+.mobileList {
+  display: none;
+
+  @media (max-width: $mobile-max-width) {
+    display: block;
+  }
+
+  .mobileListItem {
+    border-bottom: 1px solid $color-grayscale-200;
+    margin-bottom: 14px;
+
+    .title {
+      @include Font(
+        $font-size-lg,
+        $line-height-lg,
+        $font-weight-lg-regular,
+        $color-grayscale-500
+      );
+      margin-bottom: 3px;
+    }
+
+    .info {
+      @include Flex(row, space-between, center);
+      @include Font(
+        $font-size-lg,
+        $line-height-lg,
+        $font-weight-lg-regular,
+        $color-grayscale-400
+      );
+      margin-bottom: 10px;
+
+      .author {
+        margin-right: 16px;
+      }
+
+      .date {
+        flex-grow: 1;
+      }
+
+      .likeCount {
+        @include Flex(row, flex-start, center);
+        gap: 4px;
+      }
+    }
   }
 }
 
