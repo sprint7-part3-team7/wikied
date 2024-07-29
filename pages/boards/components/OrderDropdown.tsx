@@ -28,24 +28,24 @@ const OrderDropdown: React.FC<OrderDropdownProps> = ({
   };
 
   return (
-    <div className={styles.dropdown}>
+    <div className={styles["dropdown"]}>
       <button
-        className={styles.dropdownButton}
+        className={styles["dropdown-button"]}
         onClick={() => setIsOpen(!isOpen)}
       >
         {selectedLabel}
         <span
-          className={`${styles.arrow} ${isOpen ? styles.up : styles.down}`}
+          className={`${styles["arrow"]} ${isOpen ? styles["up"] : styles["down"]}`}
         ></span>
       </button>
       {isOpen && (
-        <ul className={styles.dropdownMenu}>
+        <ul className={styles["dropdown-menu"]}>
           {options.map((option) => (
             <li
               key={option.value}
               onClick={() => handleOptionClick(option.value)}
-              className={`${styles.dropdownItem} ${
-                selected === option.value ? styles.selected : ""
+              className={`${styles["dropdown-item"]} ${
+                selected === option.value ? styles["selected"] : ""
               }`}
             >
               {option.label}

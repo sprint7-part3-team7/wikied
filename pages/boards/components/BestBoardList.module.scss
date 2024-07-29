@@ -1,27 +1,14 @@
 @import "@/styles/import.scss";
 
-.bestBoardList {
+.best-board-list {
   max-width: 1060px;
   margin: 0 auto 60px;
 
-  @media (max-width: $tablet-max-width) {
-    padding: 0 60px;
-  }
-
-  @media (max-width: $mobile-max-width) {
-    padding: 0 20px;
-    margin-bottom: 40px;
-  }
-
-  .bestBoardHeader {
+  .best-board-header {
     @include Flex(row, space-between, center);
     margin: 60px 0;
 
-    @media (max-width: $mobile-max-width) {
-      margin: 40px 0;
-    }
-
-    .addBoardButton {
+    .add-board-button {
       @include Font(
         $font-size-md,
         $line-height-md,
@@ -33,64 +20,34 @@
       border: none;
       border-radius: 10px;
       cursor: pointer;
-
-      @media (max-width: $mobile-max-width) {
-        @include Size(130px, 45px);
-      }
     }
   }
 
-  h2 {
+  .header {
     @include Font(
       $font-size-3xl,
       $line-height-3xl-42,
       $font-weight-3xl-semibold,
       $color-grayscale-500
     );
-
-    @media (max-width: $mobile-max-width) {
-      @include Font(
-        $font-size-2xl,
-        $line-height-2xl,
-        $font-weight-2xl-semibold,
-        $color-grayscale-500
-      );
-    }
   }
 
-  .boardGrid {
+  .board-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    grid-template-columns: repeat(4, 1fr);
     gap: 16px;
     max-width: 1048px;
     margin: 0 auto;
-
-    @media (max-width: $tablet-max-width) {
-      grid-template-columns: repeat(2, 1fr);
-      max-width: 100%;
-    }
-
-    @media (max-width: $mobile-max-width) {
-      display: flex;
-      flex-wrap: nowrap;
-      overflow-x: scroll;
-      gap: 0px;
-    }
   }
 }
 
-.boardCard {
+.board-card {
   @include Size(100%, 220px);
   @include Flex(column, flex-start, stretch);
   border-radius: 8px;
   box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.1);
   overflow: hidden;
   margin: 8px;
-
-  @media (max-width: $mobile-max-width) {
-    @include Size(250px, 200px);
-    flex: 0 0 auto;
-  }
 
   .image {
     @include Size(100%, 131px);
@@ -100,10 +57,6 @@
   .content {
     padding: 19px 19px 14px 19px;
 
-    @media (max-width: $mobile-max-width) {
-      padding: 11px 20px;
-    }
-
     h3 {
       @include Font(
         $font-size-2lg,
@@ -112,8 +65,79 @@
         $color-grayscale-500
       );
       margin: 0 0 6px;
+    }
+  }
 
-      @media (max-width: $mobile-max-width) {
+  .content-info {
+    @include Flex(row, space-between, center);
+    @include Font(
+      $font-size-md,
+      $line-height-md,
+      $font-weight-md-regular,
+      $color-grayscale-400
+    );
+
+    .content-description {
+      @include Flex(row, flex-start, center);
+      gap: 8px;
+    }
+
+    .like-count {
+      @include Flex(row, flex-start, center);
+      gap: 4px;
+    }
+  }
+}
+
+@media (max-width: $tablet-max-width) {
+  .best-board-list {
+    padding: 0 60px;
+
+    .board-grid {
+      grid-template-columns: repeat(2, 1fr);
+      max-width: 100%;
+    }
+  }
+}
+
+@media (max-width: $mobile-max-width) {
+  .best-board-header {
+    margin: 40px 0;
+
+    .add-board-button {
+      @include Size(130px, 45px);
+    }
+  }
+
+  .header {
+    @include Font(
+      $font-size-2xl,
+      $line-height-2xl,
+      $font-weight-2xl-semibold,
+      $color-grayscale-500
+    );
+  }
+
+  .best-board-list {
+    padding: 0 20px;
+    margin-bottom: 40px;
+
+    .board-grid {
+      display: flex;
+      flex-wrap: nowrap;
+      overflow-x: scroll;
+      gap: 0px;
+    }
+  }
+
+  .board-card {
+    @include Size(250px, 200px);
+    flex: 0 0 auto;
+
+    .content {
+      padding: 11px 20px;
+
+      h3 {
         @include Font(
           $font-size-lg,
           $line-height-lg,
@@ -123,34 +147,14 @@
         margin: 0;
       }
     }
-  }
 
-  .contentInfo {
-    @include Flex(row, space-between, center);
-    @include Font(
-      $font-size-md,
-      $line-height-md,
-      $font-weight-md-regular,
-      $color-grayscale-400
-    );
-
-    @media (max-width: $mobile-max-width) {
+    .content-info {
       @include Font(
         $font-size-xs,
         $line-height-xs-18,
         $font-weight-xs-regular,
         $color-grayscale-400
       );
-    }
-
-    .contentDescription {
-      @include Flex(row, flex-start, center);
-      gap: 8px;
-    }
-
-    .likeCount {
-      @include Flex(row, flex-start, center);
-      gap: 4px;
     }
   }
 }

@@ -3,13 +3,9 @@
 .dropdown {
   @include Size(140px, auto);
   position: relative;
-
-  @media (max-width: $mobile-max-width) {
-    width: 100%;
-  }
 }
 
-.dropdownButton {
+.dropdown-button {
   @include Size(100%, 45px);
   @include Flex(row, space-between, center);
   @include Font(
@@ -33,7 +29,7 @@
   background-position: right 20px center;
 }
 
-.dropdownMenu {
+.dropdown-menu {
   position: absolute;
   top: 100%;
   left: 0;
@@ -43,7 +39,7 @@
   border-radius: 8px;
   margin-top: 4px;
 
-  .dropdownItem {
+  .dropdown-item {
     @include Font(
       $font-size-md,
       $line-height-md,
@@ -56,5 +52,11 @@
     &:hover {
       background-color: $color-grayscale-200;
     }
+  }
+}
+
+@media (max-width: $mobile-max-width) {
+  .dropdown {
+    width: 100%;
   }
 }

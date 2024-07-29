@@ -12,7 +12,7 @@ interface BestBoardCardProps {
 
 const BestBoardCard: React.FC<BestBoardCardProps> = ({ board }) => {
   return (
-    <div className={styles.boardCard}>
+    <div className={styles["board-card"]}>
       <Image
         src={board.image}
         alt={board.title}
@@ -22,12 +22,12 @@ const BestBoardCard: React.FC<BestBoardCardProps> = ({ board }) => {
       />
       <div className={styles.content}>
         <h3>{board.title}</h3>
-        <div className={styles.contentInfo}>
-          <div className={styles.contentDescription}>
+        <div className={styles["content-info"]}>
+          <div className={styles["content-description"]}>
             <p>{board.writer.name}</p>
             <p>{new Date(board.createdAt).toLocaleDateString()}</p>
           </div>
-          <div className={styles.likeCount}>
+          <div className={styles["like-count"]}>
             <Image src={likeIcon} alt='likeIcon' width={18} />
             <span>{board.likeCount}</span>
           </div>

@@ -28,12 +28,12 @@ const BestBoardList: React.FC = () => {
   }
 
   return (
-    <div className={styles.bestBoardList}>
-      <div className={styles.bestBoardHeader}>
-        <h2>베스트 게시글</h2>
-        <button className={styles.addBoardButton}>게시물 등록하기</button>
+    <div className={styles["best-board-list"]}>
+      <div className={styles["best-board-header"]}>
+        <div className={styles["header"]}>베스트 게시글</div>
+        <button className={styles["add-board-button"]}>게시물 등록하기</button>
       </div>
-      <div className={styles.boardGrid}>
+      <div className={styles["board-grid"]}>
         {bestBoards.map((board) => (
           <BestBoardCard key={board.id} board={board} />
         ))}

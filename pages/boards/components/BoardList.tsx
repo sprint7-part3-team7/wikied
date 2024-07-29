@@ -109,10 +109,10 @@ const BoardList = () => {
   }, [currentPage, totalPages, handlePageChange]);
 
   return (
-    <div className={styles.boardListContainer}>
-      <div className={styles.searchContainer}>
+    <div className={styles["board-list-container"]}>
+      <div className={styles["search-container"]}>
         <form onSubmit={handleSearch}>
-          <div className={styles.inputWrapper}>
+          <div className={styles["input-wrapper"]}>
             <input
               type='text'
               placeholder='제목을 검색해 주세요'
@@ -120,7 +120,7 @@ const BoardList = () => {
               onChange={handleSearchTermChange}
             />
           </div>
-          <button className={styles.searchButton} type='submit'>
+          <button className={styles["search-button"]} type='submit'>
             검색
           </button>
         </form>
@@ -134,7 +134,7 @@ const BoardList = () => {
         <div>Loading...</div>
       ) : (
         <>
-          <table className={styles.boardTable}>
+          <table className={styles["board-table"]}>
             <thead>
               <tr>
                 <th>번호</th>
@@ -157,16 +157,16 @@ const BoardList = () => {
             </tbody>
           </table>
 
-          <div className={styles.mobileList}>
+          <div className={styles["mobile-list"]}>
             {boards.map((board) => (
-              <div key={board.id} className={styles.mobileListItem}>
+              <div key={board.id} className={styles["mobile-list-item"]}>
                 <div className={styles.title}>{board.title}</div>
                 <div className={styles.info}>
                   <span className={styles.author}>{board.writer.name}</span>
                   <span className={styles.date}>
                     {new Date(board.createdAt).toLocaleDateString()}
                   </span>
-                  <span className={styles.likeCount}>
+                  <span className={styles["like-count"]}>
                     <Image
                       src={likeIcon}
                       alt='likeIcon'
