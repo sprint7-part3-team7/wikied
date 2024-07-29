@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import styles from "./BoardList.module.scss";
 import { Board } from "./boardType";
 import { getArticles } from "./articleApi";
@@ -19,11 +19,11 @@ const BoardList = () => {
     { value: "like", label: "인기순" },
   ];
 
-  useEffect(() => {
-    const fetchArticles = async (page: number) => {
+  const fetchArticles = useCallback(
+    async (page: number, search: string) => {
       setLoading(true);
       try {
-        const data = await getArticles(page, 10, orderOption, searchTerm);
+        const data = await getArticles(page, 10, orderOption, search);
         setBoards(data.list);
         setTotalPages(Math.ceil(data.totalCount / 10));
         setLoading(false);
@@ -31,21 +31,44 @@ const BoardList = () => {
         console.error(error);
         setLoading(false);
       }
-    };
+    },
+    [orderOption],
+  );
 
-    fetchArticles(currentPage);
-  }, [currentPage, searchTerm, orderOption]);
+  useEffect(() => {
+    fetchArticles(currentPage, searchTerm);
+  }, [currentPage, orderOption, fetchArticles]);
 
-  const handlePageChange = (page: number) => {
+  const handlePageChange = useCallback((page: number) => {
     setCurrentPage(page);
-  };
+  }, []);
 
-  const handleSearch = (e: React.FormEvent) => {
-    e.preventDefault();
-    setCurrentPage(1);
-  };
+  const handleSearch = useCallback(
+    (e: React.FormEvent) => {
+      e.preventDefault();
+      setCurrentPage(1);
+      fetchArticles(1, searchTerm);
+    },
+    [fetchArticles, searchTerm],
+  );
 
-  const renderPageNumbers = () => {
+  const handleSearchTermChange = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      setSearchTerm(e.target.value);
+    },
+    [],
+  );
+
+  const handleOrderChange = useCallback(
+    (value: string) => {
+      setOrderOption(value);
+      setCurrentPage(1);
+      fetchArticles(1, searchTerm);
+    },
+    [fetchArticles, searchTerm],
+  );
+
+  const renderPageNumbers = useCallback(() => {
     const pageNumbers = [];
     const startPage = Math.max(currentPage - 2, 1);
     const endPage = Math.min(startPage + 4, totalPages);
@@ -83,7 +106,7 @@ const BoardList = () => {
     );
 
     return pageNumbers;
-  };
+  }, [currentPage, totalPages, handlePageChange]);
 
   return (
     <div className={styles.boardListContainer}>
@@ -94,7 +117,7 @@ const BoardList = () => {
               type='text'
               placeholder='제목을 검색해 주세요'
               value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
+              onChange={handleSearchTermChange}
             />
           </div>
           <button className={styles.searchButton} type='submit'>
@@ -104,7 +127,7 @@ const BoardList = () => {
         <OrderDropdown
           options={options}
           selected={orderOption}
-          onChange={setOrderOption}
+          onChange={handleOrderChange}
         />
       </div>
       {loading ? (
@@ -144,7 +167,12 @@ const BoardList = () => {
                     {new Date(board.createdAt).toLocaleDateString()}
                   </span>
                   <span className={styles.likeCount}>
-                  <Image src={likeIcon} alt='likeIcon' width={18} />
+                    <Image
+                      src={likeIcon}
+                      alt='likeIcon'
+                      width={18}
+                      height={18}
+                    />
                     {board.likeCount}
                   </span>
                 </div>
