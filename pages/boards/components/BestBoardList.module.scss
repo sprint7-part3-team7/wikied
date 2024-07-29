@@ -1,0 +1,72 @@
+@import "@/styles/import.scss";
+
+.boardCard {
+  @include Size(250px, 220px);
+  @include Flex(column, flex-start, stretch);
+  border-radius: 8px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+
+  .image {
+    @include Size(100%, 131px);
+    object-fit: cover;
+  }
+
+  .content {
+    padding: 19px 19px 14px 19px;
+
+    h3 {
+      @include Font(
+        $font-size-2lg,
+        $line-height-2lg,
+        $font-weight-2lg-semibold,
+        $color-grayscale-500
+      );
+      margin: 0 0 6px;
+    }
+  }
+
+  .contentInfo {
+    @include Flex(row, space-between, center);
+    @include Font(
+      $font-size-md,
+      $line-height-md,
+      $font-weight-md-regular,
+      $color-grayscale-400
+    );
+
+    .contentDescription {
+      @include Flex(row, flex-start, center);
+      gap: 8px;
+    }
+
+    .likeCount {
+      @include Flex(row, flex-start, center);
+      gap: 4px;
+    }
+  }
+}
+
+.bestBoardList {
+  max-width: 1060px;
+  margin: 24px auto 60px;
+
+
+  h2 {
+    @include Font(
+      $font-size-3xl,
+      $line-height-3xl-42,
+      $font-weight-3xl-semibold,
+      $color-grayscale-500
+    );
+    margin-bottom: 63px;
+  }
+
+  .boardGrid {
+    @include Flex(row, flex-start, flex-start);
+    max-width: 1048px;
+    margin: 0 auto;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+}
