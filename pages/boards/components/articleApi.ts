@@ -12,6 +12,7 @@ export const getArticles = async (
   page: number,
   pageSize: number,
   orderBy?: string,
+  searchTerm?: string,
 ): Promise<ApiResponse> => {
   try {
     const response = await axios.get<ApiResponse>(
@@ -21,6 +22,7 @@ export const getArticles = async (
           page,
           pageSize,
           orderBy,
+          searchTerm,
         },
       },
     );
