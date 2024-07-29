@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styles from "./OrderDropdown.module.scss";
 
 interface OrderDropdownProps {
-  options: string[];
+  options: { value: string; label: string }[];
   selected: string;
   onChange: (value: string) => void;
 }
@@ -13,6 +13,14 @@ const OrderDropdown: React.FC<OrderDropdownProps> = ({
   onChange,
 }) => {
   const [isOpen, setIsOpen] = useState(false);
+  const [selectedLabel, setSelectedLabel] = useState("");
+
+  useEffect(() => {
+    const selectedOption = options.find((option) => option.value === selected);
+    if (selectedOption) {
+      setSelectedLabel(selectedOption.label);
+    }
+  }, [selected, options]);
 
   const handleOptionClick = (value: string) => {
     onChange(value);
@@ -25,20 +33,22 @@ const OrderDropdown: React.FC<OrderDropdownProps> = ({
         className={styles.dropdownButton}
         onClick={() => setIsOpen(!isOpen)}
       >
-        {selected}
-        <span className={styles.arrow}></span>
+        {selectedLabel}
+        <span
+          className={`${styles.arrow} ${isOpen ? styles.up : styles.down}`}
+        ></span>
       </button>
       {isOpen && (
         <ul className={styles.dropdownMenu}>
           {options.map((option) => (
             <li
-              key={option}
-              onClick={() => handleOptionClick(option)}
+              key={option.value}
+              onClick={() => handleOptionClick(option.value)}
               className={`${styles.dropdownItem} ${
-                selected === option ? styles.selected : ""
+                selected === option.value ? styles.selected : ""
               }`}
             >
-              {option}
+              {option.label}
             </li>
           ))}
         </ul>

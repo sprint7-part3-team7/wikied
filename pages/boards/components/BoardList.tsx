@@ -12,14 +12,18 @@ const BoardList = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
   const [searchTerm, setSearchTerm] = useState("");
-  const [orderOption, setOrderOption] = useState("최신순");
+  const [orderOption, setOrderOption] = useState("recent");
+
+  const options = [
+    { value: "recent", label: "최신순" },
+    { value: "like", label: "인기순" },
+  ];
 
   useEffect(() => {
     const fetchArticles = async (page: number) => {
       setLoading(true);
       try {
-        const order = orderOption === "최신순" ? "recent" : "popular";
-        const data = await getArticles(page, 10, order, searchTerm);
+        const data = await getArticles(page, 10, orderOption, searchTerm);
         setBoards(data.list);
         setTotalPages(Math.ceil(data.totalCount / 10));
         setLoading(false);
@@ -93,10 +97,12 @@ const BoardList = () => {
               onChange={(e) => setSearchTerm(e.target.value)}
             />
           </div>
-          <button className={styles.searchButton} type='submit'>검색</button>
+          <button className={styles.searchButton} type='submit'>
+            검색
+          </button>
         </form>
         <OrderDropdown
-          options={["최신순", "인기순"]}
+          options={options}
           selected={orderOption}
           onChange={setOrderOption}
         />
