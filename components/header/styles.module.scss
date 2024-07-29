@@ -1,0 +1,28 @@
+@import "@/styles/import.scss";
+
+.container {
+  max-width: 1920px;
+  @include Size(100%, 80px);
+  @include Flex(row, space-between, center);
+  padding: 0 80px;
+  position: sticky;
+  top: 0;
+  z-index: 999;
+  background-color: $color-grayscale-50;
+
+  .logo-item-wrapper {
+    @include Flex(row, space-between, center);
+    column-gap: 40px;
+  }
+
+  .login-wrapper {
+    position: relative;
+  }
+}
+
+@media screen and (max-width: $tablet-max-width) {
+  .container {
+    @include Size(100%, 60px);
+    padding: 0 20px;
+  }
+}
