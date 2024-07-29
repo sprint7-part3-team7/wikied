@@ -1,0 +1,65 @@
+@import '@/styles/import.scss';
+
+.wiki-actions {
+  @include Flex(column, center, flex-start);
+  gap: 32px;
+
+  .name-and-btn {
+    display: flex;
+    gap: 575px;
+
+    .username {
+      @include Font(
+        $font-size-5xl,
+        $line-height-5xl,
+        $font-weight-5xl-semibold,
+        $color-grayscale-500
+      );
+    }
+
+    .participate-btn {
+      @include Flex(column, normal, center);
+      @include Font(
+        $font-size-md,
+        $line-height-md,
+        $font-weight-md-semibold,
+        $color-grayscale-50
+      );
+      width: 160px;
+      height: 45px;
+      border-radius: 10px;
+      padding: 13px 40px;
+      white-space: nowrap;
+      background-color: $color-primary-green-200;
+      gap: 10px;
+    }
+  }
+
+  .link {
+    display: flex;
+    height: 34px;
+    border-radius: 10px;
+    padding: 5px 10px;
+    gap: 10px;
+    background-color: $color-primary-green-100;
+
+    .link-wrapper {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+
+      .link-copy-btn {
+        text-decoration: none;
+
+        .link-address {
+          @include Font(
+            $font-size-md,
+            $line-height-md,
+            $font-weight-md-regular,
+            $color-primary-green-200
+          );
+        }
+      }
+    }
+  }
+}
