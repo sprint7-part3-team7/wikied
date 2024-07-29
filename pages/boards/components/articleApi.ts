@@ -15,8 +15,7 @@ export const getArticles = async (
   keyword?: string,
 ): Promise<ApiResponse> => {
   try {
-    const response = await axios.get<ApiResponse>(
-      `https://wikied-api.vercel.app/6-8/articles`,
+    const response = await axios.get<ApiResponse>(`${API_BASE_URL}/articles`,
       {
         params: {
           page,
