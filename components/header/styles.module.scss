@@ -1,7 +1,7 @@
 @import "@/styles/import.scss";
 
 .container {
-  max-width: 1920px;
+  width: 1920px;
   @include Size(100%, 80px);
   @include Flex(row, space-between, center);
   padding: 0 80px;
