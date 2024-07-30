@@ -1,12 +1,12 @@
 import React, { useState, useEffect, useCallback } from "react";
 import Image from "next/image";
-import styles from "./BoardList.module.scss";
-import { Board } from "../boardType";
-import { getArticles } from "../articleApi";
-import SearchForm from "./SearchForm";
-import Pagination from "./Pagination";
+import styles from "./styles.module.scss";
+import { Board } from "../../../../types/article";
+import { getArticles } from "../../../../services/api/articleApi";
+import SearchForm from "../../../../components/searchForm";
+import Pagination from "../../../../components/pagination";
 import likeIcon from "@/assets/icons/ic_heart.svg";
-import OrderDropdown from "./OrderDropdown";
+import OrderDropdown from "../orderDropdown";
 
 const BoardList = () => {
   const [boards, setBoards] = useState<Board[]>([]);
@@ -66,7 +66,7 @@ const BoardList = () => {
   return (
     <div className={styles["board-list-container"]}>
       <div className={styles["search-order-container"]}>
-        <SearchForm onSearch={handleSearch} text="제목을 검색해 주세요" />
+        <SearchForm onSearch={handleSearch} text='제목을 검색해 주세요' />
         <OrderDropdown
           options={orderOptions}
           selected={orderOption}

@@ -28,6 +28,7 @@
     }
 
     img {
+      @include Size(24px, 24px);
       display: block;
       margin: 0 auto;
     }
@@ -44,6 +45,10 @@
         $color-grayscale-400
       );
       @include Size(40px, 40px);
+
+      img{
+        @include Size(18px, 18px);
+      }
     }
   }
 }

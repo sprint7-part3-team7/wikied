@@ -1,5 +1,5 @@
-import BestBoardList from "./components/BestBoardList/BestBoardList";
-import BoardList from "./components/BoardList/BoardList";
+import BestBoardList from "./components/bestBoardList/bestBoardList";
+import BoardList from "./components/boardList";
 
 const Boards = () => {
   return (

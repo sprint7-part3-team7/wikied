@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import styles from "./OrderDropdown.module.scss";
+import styles from "./styles.module.scss";
 
 interface OrderDropdownProps {
   options: { value: string; label: string }[];

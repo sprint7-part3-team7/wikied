@@ -1,5 +1,5 @@
 import axios from "axios";
-import { Board } from "./boardType";
+import { Board } from "../../types/article";
 
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
 
@@ -15,16 +15,14 @@ export const getArticles = async (
   keyword?: string,
 ): Promise<ApiResponse> => {
   try {
-    const response = await axios.get<ApiResponse>(`${API_BASE_URL}/articles`,
-      {
-        params: {
-          page,
-          pageSize,
-          orderBy,
-          keyword,
-        },
+    const response = await axios.get<ApiResponse>(`${API_BASE_URL}/articles`, {
+      params: {
+        page,
+        pageSize,
+        orderBy,
+        keyword,
       },
-    );
+    });
     return response.data;
   } catch (error) {
     console.error(error);

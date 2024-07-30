@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import styles from "./SearchForm.module.scss";
+import styles from "@/components/searchForm/styles.module.scss";
 
 interface SearchFormProps {
   onSearch: (term: string) => void;
