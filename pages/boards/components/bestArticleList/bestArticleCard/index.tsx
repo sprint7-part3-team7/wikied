@@ -2,13 +2,13 @@ import React from "react";
 import Image from "next/image";
 import styles from "../styles.module.scss";
 import likeIcon from "@/assets/icons/ic_heart.svg";
-import { Board } from "../../../../../types/article";
+import { Article } from "../../../../../types/article";
 
-interface BestBoardCardProps {
-  board: Board;
+interface BestArticleCardProps {
+  board: Article;
 }
 
-const BestBoardCard = ({ board }: BestBoardCardProps) => {
+const BestArticleCard = ({ board }: BestArticleCardProps) => {
   return (
     <div className={styles["board-card"]}>
       <Image
@@ -35,4 +35,4 @@ const BestBoardCard = ({ board }: BestBoardCardProps) => {
   );
 };
 
-export default BestBoardCard;
+export default BestArticleCard;

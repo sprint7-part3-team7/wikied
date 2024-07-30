@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from "react";
 import styles from "./styles.module.scss";
 
-interface OrderDropdownProps {
+interface ArticleOrderDropdownProps {
   options: { value: string; label: string }[];
   selected: string;
   onChange: (value: string) => void;
 }
 
-const OrderDropdown = ({ options, selected, onChange }: OrderDropdownProps) => {
+const ArticleOrderDropdown = ({ options, selected, onChange }: ArticleOrderDropdownProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedLabel, setSelectedLabel] = useState("");
 
@@ -48,4 +48,4 @@ const OrderDropdown = ({ options, selected, onChange }: OrderDropdownProps) => {
   );
 };
 
-export default OrderDropdown;
+export default ArticleOrderDropdown;

@@ -1,11 +1,11 @@
 import axios from "axios";
-import { Board } from "../../types/article";
+import { Article } from "../../types/article";
 
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
 
 interface ApiResponse {
   totalCount: number;
-  list: Board[];
+  list: Article[];
 }
 
 export const getArticles = async (

@@ -1,15 +1,15 @@
 import React, { useState, useEffect, useCallback } from "react";
 import Image from "next/image";
 import styles from "./styles.module.scss";
-import { Board } from "../../../../types/article";
+import { Article } from "../../../../types/article";
 import { getArticles } from "../../../../services/api/article";
 import SearchForm from "../../../../components/searchForm";
 import Pagination from "../../../../components/pagination";
 import likeIcon from "@/assets/icons/ic_heart.svg";
-import OrderDropdown from "../orderDropdown";
+import OrderDropdown from "../articleOrderDropdown";
 
-const BoardList = () => {
-  const [boards, setBoards] = useState<Board[]>([]);
+const ArticleList = () => {
+  const [boards, setBoards] = useState<Article[]>([]);
   const [loading, setLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
@@ -133,4 +133,4 @@ const BoardList = () => {
   );
 };
 
-export default BoardList;
+export default ArticleList;
