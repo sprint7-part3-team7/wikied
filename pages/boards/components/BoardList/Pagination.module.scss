@@ -11,7 +11,7 @@
       $font-weight-2lg-regular,
       $color-grayscale-400
     );
-    @include Size(40px, 40px);
+    @include Size(45px, 45px);
     background-color: $color-grayscale-50;
     box-shadow: 0px 4px 20px 0px #00000014;
     border-radius: 10px;
@@ -25,6 +25,25 @@
     &:disabled {
       opacity: 0.5;
       cursor: not-allowed;
+    }
+
+    img {
+      display: block;
+      margin: 0 auto;
+    }
+  }
+}
+
+@media (max-width: $mobile-max-width) {
+  .pagination{
+    button{
+      @include Font(
+        $font-size-xs,
+        $line-height-xs-18,
+        $font-weight-xs-regular,
+        $color-grayscale-400
+      );
+      @include Size(40px, 40px);
     }
   }
 }

@@ -1,5 +1,8 @@
 import React from "react";
 import styles from "./Pagination.module.scss";
+import rightArrow from "@/assets/icons/pg_right.svg";
+import leftArrow from "@/assets/icons/pg_left.svg";
+import Image from "next/image";
 
 interface PaginationProps {
   currentPage: number;
@@ -23,7 +26,7 @@ const Pagination = ({
         onClick={() => onPageChange(currentPage - 1)}
         disabled={currentPage === 1}
       >
-        &lt;
+        <Image src={leftArrow} alt='prev' />
       </button>,
     );
 
@@ -32,7 +35,7 @@ const Pagination = ({
         <button
           key={i}
           onClick={() => onPageChange(i)}
-          className={currentPage === i ? styles.active : ""}
+          className={currentPage === i ? styles["active"] : ""}
         >
           {i}
         </button>,
@@ -45,7 +48,7 @@ const Pagination = ({
         onClick={() => onPageChange(currentPage + 1)}
         disabled={currentPage === totalPages}
       >
-        &gt;
+        <Image src={rightArrow} alt='next' />
       </button>,
     );
 

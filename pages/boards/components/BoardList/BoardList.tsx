@@ -103,10 +103,10 @@ const BoardList = () => {
           <div className={styles["mobile-list"]}>
             {boards.map((board) => (
               <div key={board.id} className={styles["mobile-list-item"]}>
-                <div className={styles.title}>{board.title}</div>
-                <div className={styles.info}>
-                  <span className={styles.author}>{board.writer.name}</span>
-                  <span className={styles.date}>
+                <div className={styles["title"]}>{board.title}</div>
+                <div className={styles["info"]}>
+                  <span className={styles["author"]}>{board.writer.name}</span>
+                  <span className={styles["date"]}>
                     {new Date(board.createdAt).toLocaleDateString()}
                   </span>
                   <span className={styles["like-count"]}>
