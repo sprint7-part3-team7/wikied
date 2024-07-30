@@ -1,0 +1,30 @@
+@import "@/styles/import.scss";
+
+.pagination {
+  @include Flex(row, center, center);
+  margin: 60px 0 120px;
+
+  button {
+    @include Font(
+      $font-size-2lg,
+      $line-height-2lg,
+      $font-weight-2lg-regular,
+      $color-grayscale-400
+    );
+    @include Size(40px, 40px);
+    background-color: $color-grayscale-50;
+    box-shadow: 0px 4px 20px 0px #00000014;
+    border-radius: 10px;
+    margin: 0 5px;
+    cursor: pointer;
+
+    &.active {
+      color: $color-primary-green-200;
+    }
+
+    &:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+  }
+}

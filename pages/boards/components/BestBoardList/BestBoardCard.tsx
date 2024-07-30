@@ -4,7 +4,7 @@ import React from "react";
 import Image from "next/image";
 import styles from "./BestBoardList.module.scss";
 import likeIcon from "@/assets/icons/ic_heart.svg";
-import { Board } from "./boardType";
+import { Board } from "../boardType";
 
 interface BestBoardCardProps {
   board: Board;

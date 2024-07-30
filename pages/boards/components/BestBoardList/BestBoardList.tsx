@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styles from "./BestBoardList.module.scss";
-import { Board } from "./boardType";
-import { getArticles } from "./articleApi";
+import { Board } from "../boardType";
+import { getArticles } from "../articleApi";
 import BestBoardCard from "./BestBoardCard";
 
 const BestBoardList = () => {

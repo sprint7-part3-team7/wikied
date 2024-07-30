@@ -5,57 +5,11 @@
   margin: 0 auto;
 }
 
-.search-container {
-  @include Flex(row, space-between, center);
-  @include Size(100%, auto);
+.search-order-container {
+  display: flex;
+  justify-content: space-between;
   margin-bottom: 20px;
-  max-width: 1060px;
   gap: 20px;
-
-  form {
-    @include Flex(row, flex-start, center);
-    flex: 1;
-    gap: 20px;
-  }
-
-  .input-wrapper {
-    flex: 1;
-    input {
-      @include Size(100%, 40px);
-      @include Font(
-        $font-size-md,
-        $line-height-md,
-        $font-weight-md-regular,
-        $color-grayscale-500
-      );
-      background-color: $color-grayscale-100;
-      border: none;
-      border-radius: 8px;
-      padding: 7px 0 7px 58px;
-
-      &::placeholder {
-        color: $color-grayscale-400;
-      }
-      background-image: url("../../../assets/icons/ic_search.svg");
-      background-size: 22px;
-      background-repeat: no-repeat;
-      background-position: 20px center;
-    }
-  }
-
-  .search-button {
-    @include Font(
-      $font-size-md,
-      $line-height-md,
-      $font-weight-md-semibold,
-      $color-grayscale-50
-    );
-    @include Size(80px, 45px);
-    background-color: $color-primary-green-200;
-    border: none;
-    border-radius: 10px;
-    cursor: pointer;
-  }
 }
 
 .board-table {
@@ -132,35 +86,6 @@
   }
 }
 
-.pagination {
-  @include Flex(row, center, center);
-  margin: 60px 0 120px;
-
-  button {
-    @include Font(
-      $font-size-2lg,
-      $line-height-2lg,
-      $font-weight-2lg-regular,
-      $color-grayscale-400
-    );
-    @include Size(40px, 40px);
-    background-color: $color-grayscale-50;
-    box-shadow: 0px 4px 20px 0px #00000014;
-    border-radius: 10px;
-    margin: 0 5px;
-    cursor: pointer;
-
-    &.active {
-      color: $color-primary-green-200;
-    }
-
-    &:disabled {
-      opacity: 0.5;
-      cursor: not-allowed;
-    }
-  }
-}
-
 @media (max-width: $tablet-max-width) {
   .board-list-container {
     padding: 0 60px;
@@ -172,15 +97,10 @@
     padding: 0 20px;
   }
 
-  .search-container {
+  .search-order-container {
     flex-direction: column;
     align-items: stretch;
     margin-bottom: 30px;
-    gap: 20px;
-
-    .order-dropdown {
-      width: 100%;
-    }
   }
 
   .board-table {
