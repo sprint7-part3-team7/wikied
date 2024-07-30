@@ -10,7 +10,6 @@
 
 .grid-item {
   @include Flex(column, center, flex-start);
-  background-color: #f2f2f2; /* 나중에 삭제 */
   text-align: left;
   gap: 8px;
 
