@@ -1,4 +1,5 @@
 import React from 'react';
+import Blockquote from '@/pages/wiki/components/wikiArticle/components/blockquote';
 import styles from '@/pages/wiki/components/wikiArticle/styles.module.scss';
 
 interface WikiArticleProps {
@@ -28,6 +29,16 @@ const WikiArticle: React.FC<WikiArticleProps> = ({ className }) => {
           이렇게 키운 식물들을 직접 요리에 활용하기도 한다는데, 실제로 집에
           방문한 사람들에 의하면 요리 실력 또한 상당하다고 한다.{' '}
         </span>
+        <Blockquote>
+          여기는 Block Quote를 나타내는 영역이에요.
+          <p />
+          이런 식으로 텍스트가 늘어나면 영역도 같이 늘어나게 됩니다.
+          <p />
+          여기는 Block Quote를 나타내는 영역이에요.
+          <p />
+          이런 식으로 텍스트가 늘어나면 영역도 같이 늘어나게 됩니다.
+          <p />
+        </Blockquote>
       </div>
       <div className={styles['grid-item']}>
         <span className={styles['wiki-article-title']}>03. 여담</span>
