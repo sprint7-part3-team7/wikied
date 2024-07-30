@@ -1,36 +1,51 @@
 @import '@/styles/import.scss';
 
 .container {
-  @include Size(1920px, 100vh);
-  @include Flex(column, center, center);
+  @include Size(auto, 100vh);
+  @include Flex(column, inherit, center);
+  max-width: 100%;
+  padding: 0 60px;
   margin: 0 auto;
   background-color: rgb(158, 165, 165);
   position: relative;
+  box-sizing: border-box;
+  padding-top: 120px;
 
-  .nav {
-    @include Size(100%, 60px);
-    @include Flex(column, center, center);
-    background-color: lightgoldenrodyellow;
-    position: absolute;
-    top: 0;
-  }
+  .wiki-main {
+    display: grid;
+    grid-template-columns: 0.46512fr 1fr auto;
+    width: 100%;
+    max-width: 1920px;
+    position: relative;
 
-  .wiki-header {
-    position: absolute;
-    top: 160px;
-    left: 460px;
-  }
+    .wiki-padding {
+      width: 100%;
+      max-width: 460px;
+      overflow: hidden;
+    }
 
-  .wiki-article {
-    position: absolute;
-    top: 328px;
-    left: 460px;
-  }
+    .wiki-section {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      margin-top: 40px;
 
-  .wiki-aside {
-    position: absolute;
-    top: 120px;
-    // left: 1400px;
-    right: 200px;
+      .wiki-header,
+      .wiki-article {
+        width: 100%;
+        box-sizing: border-box;
+        max-width: 860px;
+      }
+
+      .wiki-header {
+        margin-bottom: 56px;
+      }
+    }
+    .wiki-aside {
+      width: 320px;
+      position: relative;
+      margin-left: 80px;
+      margin-right: 140px;
+    }
   }
 }

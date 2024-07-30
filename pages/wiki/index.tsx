@@ -6,9 +6,12 @@ import styles from '@/pages/wiki/styles.module.scss';
 const Wiki = () => {
   return (
     <div className={styles['container']}>
-      <main>
-        <WikiHeader className={styles['wiki-header']} />
-        <WikiArticle className={styles['wiki-article']} />
+      <main className={styles['wiki-main']}>
+        <div className={styles['wiki-padding']}></div>
+        <section className={styles['wiki-section']}>
+          <WikiHeader className={styles['wiki-header']} />
+          <WikiArticle className={styles['wiki-article']} />
+        </section>
         <WikiAside className={styles['wiki-aside']} />
       </main>
     </div>

@@ -5,8 +5,8 @@
   gap: 32px;
 
   .name-and-btn {
-    display: flex;
-    gap: 575px;
+    @include Flex(row, space-between, inherit);
+    width: 100%;
 
     .username {
       @include Font(
@@ -15,6 +15,7 @@
         $font-weight-5xl-semibold,
         $color-grayscale-500
       );
+      white-space: nowrap;
     }
 
     .participate-btn {
