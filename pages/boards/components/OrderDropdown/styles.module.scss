@@ -1,0 +1,62 @@
+@import "@/styles/import.scss";
+
+.dropdown {
+  @include Size(140px, auto);
+  position: relative;
+}
+
+.dropdown-button {
+  @include Size(100%, 45px);
+  @include Flex(row, space-between, center);
+  @include Font(
+    $font-size-md,
+    $line-height-md,
+    $font-weight-md-regular,
+    $color-grayscale-500
+  );
+  padding: 10.5px 20px;
+  border-radius: 10px;
+  background-color: $color-grayscale-100;
+  cursor: pointer;
+
+  &:focus {
+    outline: none;
+  }
+
+  background-image: url("../../../../assets/icons/ic_arrow.svg");
+  background-size: 22px;
+  background-repeat: no-repeat;
+  background-position: right 20px center;
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background-color: $color-grayscale-100;
+  border: 1px solid $color-grayscale-300;
+  border-radius: 8px;
+  margin-top: 4px;
+
+  .dropdown-item {
+    @include Font(
+      $font-size-md,
+      $line-height-md,
+      $font-weight-md-regular,
+      $color-grayscale-500
+    );
+    padding: 10.5px 20px;
+    cursor: pointer;
+
+    &:hover {
+      background-color: $color-grayscale-200;
+    }
+  }
+}
+
+@media (max-width: $mobile-max-width) {
+  .dropdown {
+    width: 100%;
+  }
+}
