@@ -1,0 +1,54 @@
+@import '@/styles/import.scss';
+
+.user-profile {
+  @include Flex(column, inherit, inherit);
+  width: 320px;
+  height: 671px;
+  border-radius: 10px;
+  background-color: $color-grayscale-50;
+  box-shadow: 0px 4px 20px 0px #00000014;
+}
+
+.image-container {
+  width: 100%;
+  @include Flex(column, center, center);
+
+  .image {
+    @include Flex(column, center, center);
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    margin: 60px;
+    background-color: aqua;
+  }
+}
+
+.user-attribute-container {
+  @include Flex(column, inherit, inherit);
+  gap: 16px;
+  position: absolute;
+  top: 320px;
+  left: 30px;
+
+  .user-attribute {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    font-size: $font-size-md;
+    line-height: $line-height-md;
+    font-weight: $font-weight-md-regular;
+    white-space: nowrap;
+  }
+  .attribute-name {
+    color: $color-grayscale-400;
+    width: 60px;
+    flex-shrink: 0;
+  }
+
+  .attribute-value {
+    color: $color-grayscale-500;
+    flex: 1; // 두 번째 열이 남은 공간을 차지하도록 설정합니다.
+    text-align: left;
+    min-width: 0;
+  }
+}
