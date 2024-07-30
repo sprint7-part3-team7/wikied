@@ -1,0 +1,38 @@
+@import "@/styles/import.scss";
+
+.item-list {
+  display: flex;
+  column-gap: 40px;
+
+  .wiki {
+    @include Font(
+      $font-size-md,
+      $line-height-md,
+      $font-weight-md-regular,
+      $color-grayscale-500
+    );
+    text-decoration: none;
+  }
+
+  .boards {
+    @include Font(
+      $font-size-md,
+      $line-height-md,
+      $font-weight-md-regular,
+      $color-grayscale-500
+    );
+    text-decoration: none;
+  }
+}
+
+@media screen and (max-width: $mobile-max-width) {
+  .item-list {
+    .wiki {
+      display: none;
+    }
+
+    .boards {
+      display: none;
+    }
+  }
+}
