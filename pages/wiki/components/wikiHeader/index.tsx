@@ -1,7 +1,7 @@
 import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import styles from '@/pages/wiki/components/wikiComponents/wikiHeader/styles.module.scss';
+import styles from '@/pages/wiki/components/wikiHeader/styles.module.scss';
 import link from '@/assets/icons/ic_link.svg';
 
 interface WikiHeaderProps {
