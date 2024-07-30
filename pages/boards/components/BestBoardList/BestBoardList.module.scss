@@ -57,7 +57,7 @@
   .content {
     padding: 19px 19px 14px 19px;
 
-    h3 {
+    .content-title {
       @include Font(
         $font-size-2lg,
         $line-height-2lg,
@@ -137,7 +137,7 @@
     .content {
       padding: 11px 20px;
 
-      h3 {
+      .content-title {
         @include Font(
           $font-size-lg,
           $line-height-lg,

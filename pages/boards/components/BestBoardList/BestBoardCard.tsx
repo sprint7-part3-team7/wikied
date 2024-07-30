@@ -21,7 +21,7 @@ const BestBoardCard = ({ board }: BestBoardCardProps) => {
         height={131}
       />
       <div className={styles["content"]}>
-        <h3>{board.title}</h3>
+        <div className={styles["content-title"]}>{board.title}</div>
         <div className={styles["content-info"]}>
           <div className={styles["content-description"]}>
             <p>{board.writer.name}</p>
