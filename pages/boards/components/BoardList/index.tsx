@@ -2,7 +2,7 @@ import React, { useState, useEffect, useCallback } from "react";
 import Image from "next/image";
 import styles from "./styles.module.scss";
 import { Board } from "../../../../types/article";
-import { getArticles } from "../../../../services/api/articleApi";
+import { getArticles } from "../../../../services/api/article";
 import SearchForm from "../../../../components/searchForm";
 import Pagination from "../../../../components/pagination";
 import likeIcon from "@/assets/icons/ic_heart.svg";
@@ -39,7 +39,7 @@ const BoardList = () => {
 
   useEffect(() => {
     fetchArticles(currentPage, searchTerm);
-  }, [currentPage, orderOption, fetchArticles]);
+  }, [currentPage, orderOption, fetchArticles, searchTerm]);
 
   const handleSearch = useCallback(
     (term: string) => {

@@ -1,4 +1,4 @@
-import BestBoardList from "./components/bestBoardList/bestBoardList";
+import BestBoardList from "./components/bestBoardList/index";
 import BoardList from "./components/boardList";
 
 const Boards = () => {

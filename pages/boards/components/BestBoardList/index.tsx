@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
-import styles from "../styles.module.scss";
-import { Board } from "../../../../../types/article";
-import { getArticles } from "../../../../../services/api/articleApi";
-import BestBoardCard from "../BestBoardCard";
+import styles from "./styles.module.scss";
+import { getArticles } from "@/services/api/article";
+import { Board } from "@/types/article";
+import BestBoardCard from "./bestBoardCard";
 
 const BestBoardList = () => {
   const [bestBoards, setBestBoards] = useState<Board[]>([]);
