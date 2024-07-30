@@ -34,9 +34,6 @@ const OrderDropdown: React.FC<OrderDropdownProps> = ({
         onClick={() => setIsOpen(!isOpen)}
       >
         {selectedLabel}
-        <span
-          className={`${styles["arrow"]} ${isOpen ? styles["up"] : styles["down"]}`}
-        ></span>
       </button>
       {isOpen && (
         <ul className={styles["dropdown-menu"]}>
@@ -44,9 +41,7 @@ const OrderDropdown: React.FC<OrderDropdownProps> = ({
             <li
               key={option.value}
               onClick={() => handleOptionClick(option.value)}
-              className={`${styles["dropdown-item"]} ${
-                selected === option.value ? styles["selected"] : ""
-              }`}
+              className={styles["dropdown-item"]}
             >
               {option.label}
             </li>

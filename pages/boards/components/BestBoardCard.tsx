@@ -16,11 +16,11 @@ const BestBoardCard: React.FC<BestBoardCardProps> = ({ board }) => {
       <Image
         src={board.image}
         alt={board.title}
-        className={styles.image}
+        className={styles["image"]}
         width={250}
         height={131}
       />
-      <div className={styles.content}>
+      <div className={styles["content"]}>
         <h3>{board.title}</h3>
         <div className={styles["content-info"]}>
           <div className={styles["content-description"]}>
