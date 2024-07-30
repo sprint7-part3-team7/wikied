@@ -7,11 +7,7 @@ interface OrderDropdownProps {
   onChange: (value: string) => void;
 }
 
-const OrderDropdown: React.FC<OrderDropdownProps> = ({
-  options,
-  selected,
-  onChange,
-}) => {
+const OrderDropdown = ({ options, selected, onChange }: OrderDropdownProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedLabel, setSelectedLabel] = useState("");
 

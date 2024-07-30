@@ -10,7 +10,7 @@ interface BestBoardCardProps {
   board: Board;
 }
 
-const BestBoardCard: React.FC<BestBoardCardProps> = ({ board }) => {
+const BestBoardCard = ({ board }: BestBoardCardProps) => {
   return (
     <div className={styles["board-card"]}>
       <Image

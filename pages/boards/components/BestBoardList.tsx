@@ -4,7 +4,7 @@ import { Board } from "./boardType";
 import { getArticles } from "./articleApi";
 import BestBoardCard from "./BestBoardCard";
 
-const BestBoardList: React.FC = () => {
+const BestBoardList = () => {
   const [bestBoards, setBestBoards] = useState<Board[]>([]);
   const [loading, setLoading] = useState(true);
 
