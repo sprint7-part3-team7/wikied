@@ -31,10 +31,10 @@ const Wiki: React.FC<WikiProps> = ({ className, code }) => {
     <div className={styles['container']}>
       <main className={styles['wiki-main']}>
         <div className={styles['wiki-padding']}></div>
-        <section className={styles['wiki-section']}>
-          <WikiHeader className={styles['wiki-header']} profile={profile} />
-          <WikiArticle className={styles['wiki-article']} />
-        </section>
+        <WikiHeader className={styles['wiki-header']} profile={profile} />
+        <div className={styles['spacer1']}></div>
+        <WikiArticle className={styles['wiki-article']} />
+        <div className={styles['spacer2']}></div>
         <WikiAside className={styles['wiki-aside']} profile={profile} />
       </main>
     </div>

@@ -1,50 +1,127 @@
 @import '@/styles/import.scss';
 
 .container {
-  @include Size(auto, 100vh);
+  @include Size(100%, 100vh);
   @include Flex(column, inherit, center);
   max-width: 100%;
-  padding: 0 60px;
+  // padding: 0 60px;
   margin: 0 auto;
   position: relative;
   box-sizing: border-box;
-  padding-top: 120px;
+  padding-top: 78px;
 
   .wiki-main {
     display: grid;
-    grid-template-columns: 0.46512fr 1fr auto;
+    grid-template-columns: minmax(60px, 1fr) minmax(0, 860px) 80px 320px 200px;
     width: 100%;
     max-width: 1920px;
     position: relative;
 
     .wiki-padding {
+      grid-column: 1;
+      grid-row: 1;
       width: 100%;
       max-width: 460px;
       overflow: hidden;
     }
 
-    .wiki-section {
-      display: flex;
-      flex-direction: column;
-      align-items: flex-end;
-      margin-top: 40px;
+    .wiki-header {
+      grid-column: 2;
+      grid-row: 1;
+      margin-bottom: 20px;
+      width: 100%;
+      box-sizing: border-box;
+    }
 
-      .wiki-header,
-      .wiki-article {
-        width: 100%;
-        box-sizing: border-box;
-        max-width: 860px;
+    .wiki-article {
+      grid-column: 2;
+      grid-row: 2;
+      width: 100%;
+      box-sizing: border-box;
+    }
+
+    .wiki-aside {
+      grid-column: 4;
+      grid-row: 1 / span 2;
+      width: 320px;
+      position: relative;
+      // margin-left: 80px;
+    }
+  }
+}
+
+@media screen and (max-width: 1199px) {
+  .container {
+    padding: 0 60px;
+    padding-top: 60px;
+
+    .wiki-main {
+      grid-template-columns: 1fr !important;
+      grid-template-rows: auto auto auto;
+      grid-template-areas:
+        'header'
+        'spacer1'
+        'aside'
+        'spacer2'
+        'article';
+
+      .wiki-padding {
+        display: none;
       }
 
       .wiki-header {
-        margin-bottom: 56px;
+        grid-area: header !important;
+        margin: 0 auto;
+      }
+
+      .spacer1 {
+        grid-area: spacer1;
+        height: 15px;
+      }
+
+      .wiki-aside {
+        grid-area: aside !important;
+        margin-left: 0;
+        margin-right: 0;
+        margin: 0 auto;
+        width: 100%;
+        height: auto;
+        padding: 20px 30px 0 30px;
+        margin: 0;
+        gap: 40px;
+      }
+
+      .spacer2 {
+        grid-area: spacer2;
+        height: 60px;
+      }
+
+      .wiki-article {
+        grid-area: article !important;
+        margin: 0 auto;
       }
     }
-    .wiki-aside {
-      width: 320px;
-      position: relative;
-      margin-left: 80px;
-      margin-right: 140px;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .container {
+    padding: 0 20px;
+    margin-top: 40px;
+
+    .wiki-main {
+      .spacer1 {
+        height: 12px;
+      }
+
+      .spacer2 {
+        height: 40px;
+      }
+
+      .wiki-aside {
+        width: 100%;
+        margin: 0;
+      }
     }
   }
 }

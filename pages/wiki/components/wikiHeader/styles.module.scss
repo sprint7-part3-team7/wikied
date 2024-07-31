@@ -27,9 +27,9 @@
         $color-grayscale-50
       );
       width: 160px;
-      height: 45px;
+      // height: 45px;
       border-radius: 10px;
-      padding: 13px 40px;
+      padding: 10.5px 42px;
       white-space: nowrap;
       background-color: $color-primary-green-200;
       gap: 10px;
@@ -65,6 +65,18 @@
           );
           display: inline;
         }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .wiki-actions {
+    gap: 24px;
+    .name-and-btn {
+      .participate-btn {
+        width: 120px;
+        padding: 9.5px 22px;
       }
     }
   }
