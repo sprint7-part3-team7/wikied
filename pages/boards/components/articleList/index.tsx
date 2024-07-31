@@ -25,10 +25,10 @@ const ArticleList = () => {
   ];
 
   const fetchArticles = useCallback(
-    async (page: number, search: string) => {
+    async (page: number, search: string, order: string) => {
       setLoading(true);
       try {
-        const data = await getArticles(page, 10, orderOption, search);
+        const data = await getArticles(page, 10, order, search);
         setBoards(data.list);
         setTotalPages(Math.ceil(data.totalCount / 10));
         setLoading(false);
@@ -37,29 +37,29 @@ const ArticleList = () => {
         setLoading(false);
       }
     },
-    [orderOption],
+    [],
   );
 
   useEffect(() => {
-    fetchArticles(currentPage, searchTerm);
-  }, [currentPage, orderOption, fetchArticles, searchTerm]);
+    fetchArticles(currentPage, searchTerm, orderOption);
+  }, [currentPage, orderOption, searchTerm, fetchArticles]);
 
   const handleSearch = useCallback(
     (term: string) => {
       setSearchTerm(term);
       setCurrentPage(1);
-      fetchArticles(1, term);
+      fetchArticles(1, term, orderOption);
     },
-    [fetchArticles],
+    [orderOption, fetchArticles],
   );
 
   const handleOrderChange = useCallback(
     (value: string) => {
       setOrderOption(value);
       setCurrentPage(1);
-      fetchArticles(1, searchTerm);
+      fetchArticles(1, searchTerm, value);
     },
-    [fetchArticles, searchTerm],
+    [searchTerm, fetchArticles],
   );
 
   const handlePageChange = useCallback((page: number) => {

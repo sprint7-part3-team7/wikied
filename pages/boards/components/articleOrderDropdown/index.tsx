@@ -1,4 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, {
+  useState,
+  useCallback,
+  useMemo,
+  useEffect,
+  useRef,
+} from "react";
 import styles from "./styles.module.scss";
 
 interface ArticleOrderDropdownProps {
@@ -7,28 +13,51 @@ interface ArticleOrderDropdownProps {
   onChange: (value: string) => void;
 }
 
-const ArticleOrderDropdown = ({ options, selected, onChange }: ArticleOrderDropdownProps) => {
+const ArticleOrderDropdown = ({
+  options,
+  selected,
+  onChange,
+}: ArticleOrderDropdownProps) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [selectedLabel, setSelectedLabel] = useState("");
+  const dropdownRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(event.target as Node)
+      ) {
+        setIsOpen(false);
+      }
+    };
+
+    document.addEventListener("mouseup", handleClickOutside);
+    return () => {
+      document.removeEventListener("mouseup", handleClickOutside);
+    };
+  }, []);
+
+  const selectedLabel = useMemo(() => {
     const selectedOption = options.find((option) => option.value === selected);
-    if (selectedOption) {
-      setSelectedLabel(selectedOption.label);
-    }
+    return selectedOption ? selectedOption.label : "";
   }, [selected, options]);
 
-  const handleOptionClick = (value: string) => {
-    onChange(value);
-    setIsOpen(false);
-  };
+  const handleOptionClick = useCallback(
+    (value: string) => {
+      onChange(value);
+      setIsOpen(false);
+    },
+    [onChange],
+  );
+
+  const toggleDropdown = useCallback((e: React.MouseEvent) => {
+    e.stopPropagation();
+    setIsOpen((prev) => !prev);
+  }, []);
 
   return (
-    <div className={styles["dropdown"]}>
-      <button
-        className={styles["dropdown-button"]}
-        onClick={() => setIsOpen(!isOpen)}
-      >
+    <div className={styles["dropdown"]} ref={dropdownRef}>
+      <button className={styles["dropdown-button"]} onClick={toggleDropdown}>
         {selectedLabel}
       </button>
       {isOpen && (
@@ -48,4 +77,4 @@ const ArticleOrderDropdown = ({ options, selected, onChange }: ArticleOrderDropd
   );
 };
 
-export default ArticleOrderDropdown;
+export default React.memo(ArticleOrderDropdown);
