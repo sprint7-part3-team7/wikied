@@ -18,13 +18,13 @@ const BestArticleCard = ({ board }: BestArticleCardProps) => {
 
   return (
     <div className={styles["board-card"]} onClick={handleClick}>
-      <Image
+      {board.image && <Image
         src={board.image}
         alt={board.title}
         className={styles["image"]}
         width={250}
         height={131}
-      />
+      />}
       <div className={styles["content"]}>
         <div className={styles["content-title"]}>{board.title}</div>
         <div className={styles["content-info"]}>

@@ -6,7 +6,7 @@ export interface Writer {
 export interface Article {
   id: number;
   title: string;
-  image: string;
+  image: string | null;
   createdAt: string;
   updatedAt: string;
   writer: Writer;

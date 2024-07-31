@@ -7,6 +7,7 @@ import SearchForm from "../../../../components/searchForm";
 import Pagination from "../../../../components/pagination";
 import likeIcon from "@/assets/icons/ic_heart.svg";
 import OrderDropdown from "../articleOrderDropdown";
+import { useRouter } from "next/router";
 
 const ArticleList = () => {
   const [boards, setBoards] = useState<Article[]>([]);
@@ -15,6 +16,8 @@ const ArticleList = () => {
   const [totalPages, setTotalPages] = useState(1);
   const [searchTerm, setSearchTerm] = useState("");
   const [orderOption, setOrderOption] = useState("recent");
+
+  const router = useRouter();
 
   const orderOptions = [
     { value: "recent", label: "최신순" },
@@ -63,6 +66,10 @@ const ArticleList = () => {
     setCurrentPage(page);
   }, []);
 
+  const handleClick = (id: number) => {
+    router.push(`/boards/${id}`);
+  };
+
   return (
     <div className={styles["board-list-container"]}>
       <div className={styles["search-order-container"]}>
@@ -89,7 +96,7 @@ const ArticleList = () => {
             </thead>
             <tbody>
               {boards.map((board) => (
-                <tr key={board.id}>
+                <tr key={board.id} onClick={() => handleClick(board.id)}>
                   <td>{board.id}</td>
                   <td>{board.title}</td>
                   <td>{board.writer.name}</td>
@@ -102,7 +109,11 @@ const ArticleList = () => {
 
           <div className={styles["mobile-list"]}>
             {boards.map((board) => (
-              <div key={board.id} className={styles["mobile-list-item"]}>
+              <div
+                key={board.id}
+                className={styles["mobile-list-item"]}
+                onClick={() => handleClick(board.id)}
+              >
                 <div className={styles["title"]}>{board.title}</div>
                 <div className={styles["info"]}>
                   <span className={styles["author"]}>{board.writer.name}</span>

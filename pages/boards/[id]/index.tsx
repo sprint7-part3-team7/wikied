@@ -74,12 +74,14 @@ const ArticleDetailPage = () => {
         </div>
 
         <div className={styles["image"]}>
-          <Image
-            src={article.image}
-            alt={article.title}
-            width={500}
-            height={300}
-          />
+          {article.image && (
+            <Image
+              src={article.image}
+              alt={article.title}
+              width={500}
+              height={300}
+            />
+          )}
         </div>
         <div
           className={styles["content"]}
