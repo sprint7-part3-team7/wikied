@@ -61,7 +61,6 @@
       background-color: $color-primary-green-200;
       border: none;
       border-radius: 10px;
-      cursor: pointer;
       margin-left: 14px;
     }
   }
@@ -92,7 +91,6 @@
     background-color: $color-grayscale-50;
     border: 1px solid $color-primary-green-200;
     border-radius: 10px;
-    cursor: pointer;
     display: block;
     margin: 0 auto 60px;
   }
@@ -149,8 +147,7 @@
     }
 
     .header-button {
-      width: 22px;
-      height: 22px;
+      @include Size(22px, 22px);
       margin-left: 12px;
       font-size: 0;
       background-position: center;

@@ -16,7 +16,7 @@ const CommentList = ({ comments }: CommentListProps) => {
   return (
     <div className={styles["comment-container"]}>
       <div className={styles["comment-title"]}>
-        댓글 <span>{comments.length}</span>
+        댓글 <span className={styles["comment-count"]}>{comments.length}</span>
       </div>
 
       <form className={styles["comment-input"]}>

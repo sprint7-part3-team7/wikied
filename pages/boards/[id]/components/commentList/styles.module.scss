@@ -14,7 +14,7 @@
   );
   margin-bottom: 14px;
 
-  span {
+  .comment-count {
     color: $color-primary-green-200;
   }
 }
@@ -52,7 +52,6 @@
     background-color: $color-primary-green-200;
     border: none;
     border-radius: 10px;
-    cursor: pointer;
 
     &:hover {
       background-color: darken($color-primary-green-200, 10%);
@@ -130,7 +129,6 @@
   @include Size(24px, 24px);
   background-color: transparent;
   border: none;
-  cursor: pointer;
   padding: 0;
 
   img {
@@ -189,7 +187,8 @@
   .comment-button-wrapper {
     gap: 15px;
   }
-  
+
   .comment-button {
-    @include Size(20px, 20px);}
+    @include Size(20px, 20px);
+  }
 }
