@@ -2,7 +2,7 @@ import styles from "@/pages/mypage/components/changePasswordInput/styles.module.
 
 const ChangePasswordInput = () => {
   return (
-    <div className={styles["container"]}>
+    <form className={styles["container"]}>
       <label htmlFor="password" className={styles["label"]}>
         비밀번호 변경
       </label>
@@ -32,7 +32,7 @@ const ChangePasswordInput = () => {
       <button type="submit" className={styles["button"]}>
         변경하기
       </button>
-    </div>
+    </form>
   );
 };
 

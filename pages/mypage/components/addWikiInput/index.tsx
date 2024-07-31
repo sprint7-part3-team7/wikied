@@ -2,7 +2,7 @@ import styles from "@/pages/mypage/components/addWikiInput/styles.module.scss";
 
 const AddWikiInput = () => {
   return (
-    <div className={styles["container"]}>
+    <form className={styles["container"]}>
       <label htmlFor="wiki" className={styles["label"]}>
         위키 생성하기
       </label>
@@ -25,7 +25,7 @@ const AddWikiInput = () => {
       <button type="submit" className={styles["button"]}>
         생성하기
       </button>
-    </div>
+    </form>
   );
 };
 
