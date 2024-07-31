@@ -1,0 +1,11 @@
+@import "@/styles/import.scss";
+
+.login {
+  @include Font(
+    $font-size-md,
+    $line-height-md,
+    $font-weight-md-regular,
+    $color-grayscale-500
+  );
+  background-color: $color-grayscale-50;
+}

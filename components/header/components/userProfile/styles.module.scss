@@ -1,0 +1,35 @@
+@import "@/styles/import.scss";
+
+.container {
+  @include Flex(row, center, center);
+  column-gap: 24px;
+
+  .alarm {
+    background-color: $color-grayscale-50;
+  }
+
+  .profile {
+    background-color: $color-grayscale-50;
+  }
+
+  .menu {
+    background-color: $color-grayscale-50;
+    display: none;
+  }
+}
+
+@media screen and (max-width: $mobile-max-width) {
+  .container {
+    .alarm {
+      display: none;
+    }
+
+    .profile {
+      display: none;
+    }
+
+    .menu {
+      display: block;
+    }
+  }
+}
