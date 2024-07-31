@@ -1,21 +1,22 @@
 @import "@/styles/import.scss";
 @font-face {
-  font-family: 'NEXON Lv1 Gothic OTF';
-  src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.1/NEXON%20Lv1%20Gothic%20OTF.woff') format('woff');
+  font-family: "NEXON Lv1 Gothic OTF";
+  src: url("https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.1/NEXON%20Lv1%20Gothic%20OTF.woff")
+    format("woff");
   font-weight: normal;
   font-style: normal;
 }
 @font-face {
-    font-family: 'NEXON Lv1 Gothic OTF';
-    src: url('https://cdn.jsdelivr.net/gh/fontbee/font@main/Nexon/NEXON Lv1 Gothic OTF.woff') format('woff');
-    font-weight: 400;
-    font-style: normal;
+  font-family: "NEXON Lv1 Gothic OTF";
+  src: url("https://cdn.jsdelivr.net/gh/fontbee/font@main/Nexon/NEXON Lv1 Gothic OTF.woff")
+    format("woff");
+  font-weight: 400;
+  font-style: normal;
 }
 
 .landing-container {
   @include Size(100%, 5035px);
 }
-
 
 .header {
   @include Size(100%, 2125px);
@@ -31,27 +32,25 @@
   @include Size(455px, 188px);
   @include Flex(column, center, center);
   margin-top: 120px;
-    
-    .paragraph {
-      font-family: 'NEXON Lv1 Gothic OTF';
-      font-size: 60px;
-      line-height: 69px;
-      color: $color-grayscale-500;
-    }
 
+  .paragraph {
+    font-family: "NEXON Lv1 Gothic OTF";
+    font-size: 60px;
+    line-height: 69px;
+    color: $color-grayscale-500;
+  }
 
-    .heading {
-      font-family:'NEXON Lv1 Gothic OTF';
-      font-size: 90px;
-      font-weight: 700;
-      line-height: 103.5px;
-      margin-top: 15px;
-      color: $color-grayscale-500;
-    }
+  .heading {
+    font-family: "NEXON Lv1 Gothic OTF";
+    font-size: 90px;
+    font-weight: 700;
+    line-height: 103.5px;
+    margin-top: 15px;
+    color: $color-grayscale-500;
+  }
 }
 
-
-.wikidMain-pageBts {
+.wikidMain-page-bts {
   @include Size(170px, 59px);
   @include Flex(column, center, center);
   margin-top: 40px;
@@ -60,14 +59,13 @@
   padding: 15px 30px 15px 30px;
   gap: 10px;
 
-    h1 {
-      @include Size(110px, 29px);
-      font-size: 20px;
-      font-weight: 700;
-      color: $color-grayscale-50; 
-    }
+  h1 {
+    @include Size(110px, 29px);
+    font-size: 20px;
+    font-weight: 700;
+    color: $color-grayscale-50;
+  }
 }
-
 
 .landing-img1 {
   margin-top: 54px;
@@ -76,75 +74,190 @@
 
 .write-container {
   @include Size(100%, 1211px);
-  @include Flex(column, null, center);
+  @include Flex(column, center, center);
   position: relative;
   background-color: $color-grayscale-500;
 
+  .write-wrapper {
+    // @include Size(924px, 681px);
+    @include Flex(row, null, center);
+    .feature-text {
+      @include Size(364px, 681px);
+      @include Flex(column, space-between, null);
+      margin-right: 40px;
 
-    .write-wrapper {
-      @include Size(924px, 681px);
-      @include Flex(row, null, center);
-  
-        .feature-text {
-          @include Size(364px, 681px);
-          @include Flex(column, space-between, null);
-          margin-right: 40px;
-    
-          .feature-title {
-            font-family: 'NEXON Lv1 Gothic OTF';
-            font-size: 30px;
-            font-weight: 700;
-            line-height: 34.5px;
-            color: $color-primary-green-200;
-          }
-    
-          .feature-content {
-            margin-bottom: 60px;
-              p {
-                font-family: 'NEXON Lv1 Gothic OTF';
-                font-size: 50px;
-                font-weight: 400;
-                line-height: 57.5px;
-                color: $color-grayscale-50; 
-              }
-          }   
+      .feature-title {
+        font-family: "NEXON Lv1 Gothic OTF";
+        font-size: 30px;
+        font-weight: 700;
+        line-height: 34.5px;
+        color: $color-primary-green-200;
+      }
 
-          .write-img-wrapper {
-            background-color: $color-primary-green-200;
-            border-radius: 20px;
-          }
+      .feature-content {
+        margin-bottom: 60px;
+        p {
+          font-family: "NEXON Lv1 Gothic OTF";
+          font-size: 50px;
+          font-weight: 400;
+          line-height: 57.5px;
+          color: $color-grayscale-50;
         }
-    }
-}
+      }
 
+      .write-img-wrapper {
+        background-color: $color-primary-green-200;
+        border-radius: 20px;
+      }
+    }
+  }
+}
 
 .share-container {
   @include Size(100%, 1211px);
-  
+  @include Flex(column, center, center);
+
+  .feature-text {
+    text-align: right;
+    margin-left: 1027px;
+
+    .feature-title {
+      font-family: "NEXON Lv1 Gothic OTF";
+      font-size: 30px;
+      font-weight: 700;
+      line-height: 34.5px;
+      color: $color-primary-green-200;
+    }
+
+    .feature-content {
+      margin-top: 20px;
+      p {
+        font-family: "NEXON Lv1 Gothic OTF";
+        font-size: 50px;
+        font-weight: 400;
+        line-height: 57.5px;
+        color: $color-grayscale-500;
+      }
+    }
+  }
+
+  .img-container {
+    @include Flex(row, center, center);
+    gap: 70px;
+    margin-top: 120px;
+
+    .img-box {
+      @include Size(360px, 360px);
+      background-color: #dee5f5;
+      border-radius: 25px;
+    }
+    .share-img1 {
+      background-color: $color-secondary-purple-100;
+      border-radius: 25px;
+    }
+    .share-img2 {
+      background-color: #adedde;
+      border-radius: 25px;
+    }
+    .share-img3 {
+      background-color: #dee5f5;
+      border-radius: 25px;
+    }
+    .share-img4 {
+      background-color: #dee5f5;
+      border-radius: 25px;
+    }
+  }
+}
+
+.view-container {
+  @include Size(100%, 1291px);
+  @include Flex(column, center, center);
+  background-color: #ecf0fa;
+
+  .view-wrapper {
+    @include Size(924px, 891px);
 
     .feature-text {
-      @include Size(395px, 171px);
-      margin-top: 200px;
-      text-align: right;
-      margin-left: 1027px;
-      
-        .feature-title {
-          font-family: 'NEXON Lv1 Gothic OTF';
-            font-size: 30px;
-            font-weight: 700;
-            line-height: 34.5px;
-            color: $color-primary-green-200;
-        }
+      text-align: left;
 
-        .feature-content {
-          margin-top: 20px;
-            p {
-              font-family: 'NEXON Lv1 Gothic OTF';
-              font-size: 50px;
-              font-weight: 400;
-              line-height: 57.5px;
-              color: $color-grayscale-500; 
-            }
-        } 
+      .feature-title {
+        font-family: "NEXON Lv1 Gothic OTF";
+        font-size: 30px;
+        font-weight: 700;
+        line-height: 34.5px;
+        color: $color-primary-green-200;
+      }
+
+      .feature-content {
+        margin-top: 20px;
+        p {
+          font-family: "NEXON Lv1 Gothic OTF";
+          font-size: 50px;
+          font-weight: 400;
+          line-height: 57.5px;
+          color: $color-grayscale-500;
+        }
+      }
     }
+
+    .img-container {
+      // @include Size(924px, 280px);
+      margin-top: 120px;
+      gap: 40px;
+
+      .view-img1 {
+        grid-area: top;
+      }
+
+      .img-wrapper {
+        @include Flex(row, space-between, center);
+        margin-top: 40px;
+
+        .view-img2 {
+          background-color: $color-secondary-purple-100;
+          border-radius: 25px;
+        }
+        .view-img3 {
+
+        }
+      }
+    }
+  }
+}
+
+.start-container {
+  @include Size(100%, 568px);
+  @include Flex(column, center, center);
+  background-color: $color-grayscale-500;
+
+  .start-wrapper {
+    @include Flex(column, center, center);
+    gap: 40px;
+  }
+
+  .start-title {
+    font-family: "NEXON Lv1 Gothic OTF";
+    font-size: 60px;
+    font-weight: 700;
+    line-height: 57.5px;
+    color: #ffffff;
+  }
+
+  .strat-bts {
+    @include Size(190px, 59px);
+    background: #ffffff;
+    border-radius: 15px;
+    // padding: 15px 30px 15px 30px;
+
+    h1 {
+      // @include Size(100%, 29px);
+      @include Font(
+        $font-size-2xl,
+        $line-height-2xl,
+        $font-weight-2xl-bold,
+        $color-grayscale-500
+      );
+    }
+  }
 }

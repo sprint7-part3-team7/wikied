@@ -3,6 +3,14 @@ import styles from "@/pages/landing/styles.module.scss";
 import landing_1 from "@/assets/images/landing/landing_1.png";
 import landing_2 from "@/assets/images/landing/landing_2.png";
 import landing_3 from "@/assets/images/landing/landing_3.png";
+import landing_4 from "@/assets/images/landing/landing_4.png";
+import landing_5 from "@/assets/images/landing/landing_5.png";
+import landing_6 from "@/assets/images/landing/landing_6.png";
+import landing_7 from "@/assets/images/landing/landing_7.png";
+import landing_10 from "@/assets/images/landing/landing_10.png";
+import landing_11 from "@/assets/images/landing/landing_11.png";
+import landing_12 from "@/assets/images/landing/landing_12.png";
+
 
 const Landing = () => {
   return (
@@ -15,7 +23,7 @@ const Landing = () => {
               <div className={styles["heading"]}>나만의 위키</div>
             </div>
             <div className={styles["btn-wrapper"]}>
-              <button className={styles["wikidMain-pageBts"]}>
+              <button className={styles["wikidMain-page-bts"]}>
                 <h1>위키 만들기</h1>
               </button>
             </div>           
@@ -52,12 +60,41 @@ const Landing = () => {
                   <p>친구에게 공유해요</p>
                 </div>      
             </div>
-            <div className={styles[]}>
+            <div className={styles["img-container"]}>
+              <div className={styles["img-box"]}></div>
+              <Image className={styles["share-img1"]} width={360} height={360} src={landing_4} alt="쉐어이미지1"/>
+              <Image className={styles["share-img2"]} width={360} height={360} src={landing_5} alt="쉐어이미지2"/>
+              <Image className={styles["share-img3"]} width={360} height={360} src={landing_6} alt="쉐어이미지3"/>
+              <Image className={styles["share-img4"]} width={360} height={360} src={landing_7} alt="쉐어이미지4"/>
+              <div className={styles["img-box"]}></div>
+            </div>
+          </section>
+          <section className={styles["view-container"]}>
+            <div className={styles["view-wrapper"]}>
+              <div className={styles["feature-text"]}>
+                  <div className={styles["feature-title"]}>VIEW</div>
+                  <div className={styles["feature-content"]}>
+                    <p>친구들이 달아준</p>
+                    <p>내용을 확인해 봐요</p>
+                  </div>      
+              </div>
+              <div className={styles["img-container"]}>
+                <Image className={styles["view-img1"]} width={924} height={280} src={landing_10} alt="뷰이미지1"/>
+                <div className={styles["img-wrapper"]}>
+                  <Image className={styles["view-img2"]} width={280} height={280} src={landing_12} alt="뷰이미지2"/>
+                  <Image className={styles["view-img3"]} width={604} height={280} src={landing_11} alt="뷰이미지3"/>
+                </div>
+              </div>
+            </div>
+          </section>
+          <section className={styles["start-container"]}>
+            <div className={styles["start-wrapper"]}>
+              <div className={styles["start-title"]}>나만의 위키 만들어 보기</div>
+              <button className={styles["strat-bts"]}>
+                <h1>지금 시작하기</h1>
+              </button>
 
             </div>
-
-
-
           </section>
         </main>
       </div>
