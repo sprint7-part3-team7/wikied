@@ -17,7 +17,7 @@
       height: 200px;
       border-radius: 50%;
       margin: 60px;
-      background-color: aqua;
+      box-sizing: border-box;
     }
   }
 
@@ -39,40 +39,42 @@
       flex-direction: row;
       gap: 20px;
       white-space: nowrap;
-    }
 
-    .attribute-name {
-      color: $color-grayscale-400;
-      width: 60px;
-      flex-shrink: 0;
-    }
+      .attribute-name {
+        color: $color-grayscale-400;
+        width: 60px;
+        flex-shrink: 0;
+      }
 
-    .attribute-value {
-      color: $color-grayscale-500;
-      flex: 1;
-      text-align: left;
-      min-width: 0;
+      .attribute-value {
+        color: $color-grayscale-500;
+        flex: 1;
+        text-align: left;
+        min-width: 0;
+      }
     }
   }
 }
 
 @media screen and (max-width: 1199px) {
   .user-profile {
-    @include Flex(row, inherit, inherit);
+    @include Flex(row, inherit, flex-start);
 
     .image-container {
       @include Flex(column, inherit, center);
-      width: auto;
+      width: 71px;
 
       .image {
         width: 71px;
         height: 71px;
         margin: 0;
+        box-sizing: border-box;
       }
     }
+
     .user-attribute-container {
       position: static;
-      width: 100%;
+      width: auto;
       gap: 4px;
     }
   }
@@ -80,6 +82,14 @@
 
 @media screen and (max-width: 767px) {
   .user-profile {
+    .image-container {
+      width: 62px;
+
+      .image {
+        width: 62px;
+        height: 62px;
+      }
+    }
     .user-attribute-container {
       .user-attribute {
         @include Font(

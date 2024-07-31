@@ -13,13 +13,13 @@ const WikiAside: React.FC<WikiAsideProps> = ({ className, profile }) => {
   return (
     <div className={`${styles['user-profile']} ${className}`}>
       <div className={styles['image-container']}>
-        <div className={styles['image']}>임시 이미지</div>
-        {/* <Image
+        <Image
+          className={styles['image']}
           src={profile?.image}
           width={200}
           height={200}
           alt='profile image'
-        /> */}
+        />
       </div>
       <div className={styles['user-attribute-container']}>
         <div className={styles['user-attribute']}>
