@@ -37,6 +37,7 @@
   }
 
   .link {
+    max-width: 860px;
     display: flex;
     height: 34px;
     border-radius: 10px;
@@ -50,7 +51,10 @@
       gap: 5px;
 
       .link-copy-btn {
+        overflow: hidden;
+        white-space: nowrap;
         text-decoration: none;
+        text-overflow: ellipsis;
 
         .link-address {
           @include Font(
@@ -59,6 +63,7 @@
             $font-weight-md-regular,
             $color-primary-green-200
           );
+          display: inline;
         }
       }
     }

@@ -1,4 +1,5 @@
 import React from 'react';
+import classNames from 'classnames';
 import Blockquote from '@/pages/wiki/components/wikiArticle/components/blockquote';
 import styles from '@/pages/wiki/components/wikiArticle/styles.module.scss';
 
@@ -7,6 +8,10 @@ interface WikiArticleProps {
 }
 
 const WikiArticle: React.FC<WikiArticleProps> = ({ className }) => {
+  const hasBlockquote = (index: number) => {
+    return index === 1;
+  };
+
   return (
     <div className={`${styles['grid-container']} ${className}`}>
       <div className={styles['grid-item']}>
@@ -27,7 +32,7 @@ const WikiArticle: React.FC<WikiArticleProps> = ({ className }) => {
           의하면 요리 실력 또한 상당하다고 한다. <p />
           <p />
           이렇게 키운 식물들을 직접 요리에 활용하기도 한다는데, 실제로 집에
-          방문한 사람들에 의하면 요리 실력 또한 상당하다고 한다.{' '}
+          방문한 사람들에 의하면 요리 실력 또한 상당하다고 한다.
         </span>
         <Blockquote>
           여기는 Block Quote를 나타내는 영역이에요.

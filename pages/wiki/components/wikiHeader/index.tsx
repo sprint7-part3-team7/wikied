@@ -22,7 +22,7 @@ const WikiHeader: React.FC<WikiHeaderProps> = ({ className, profile }) => {
           <Image src={link} width={20} height={20} alt='link icon' />
           <Link href='#' className={styles['link-copy-btn']}>
             <section className={styles['link-address']}>
-              https://www.wikied.kr/${profile?.code}
+              https://www.wikied.kr/{profile?.code}
             </section>
           </Link>
         </section>
