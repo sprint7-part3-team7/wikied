@@ -7,8 +7,10 @@ export interface Article {
   id: number;
   title: string;
   image: string;
-  writer: Writer;
-  likeCount: number;
   createdAt: string;
   updatedAt: string;
+  writer: Writer;
+  content: string;
+  likeCount: number;
+  isLiked: boolean | null;
 }

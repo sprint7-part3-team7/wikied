@@ -3,14 +3,21 @@ import Image from "next/image";
 import styles from "../styles.module.scss";
 import likeIcon from "@/assets/icons/ic_heart.svg";
 import { Article } from "../../../../../types/article";
+import { useRouter } from "next/router";
 
 interface BestArticleCardProps {
   board: Article;
 }
 
 const BestArticleCard = ({ board }: BestArticleCardProps) => {
+  const router = useRouter();
+
+  const handleClick = () => {
+    router.push(`/boards/${board.id}`)
+  }
+
   return (
-    <div className={styles["board-card"]}>
+    <div className={styles["board-card"]} onClick={handleClick}>
       <Image
         src={board.image}
         alt={board.title}
