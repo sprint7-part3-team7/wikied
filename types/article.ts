@@ -1,6 +1,7 @@
 export interface Writer {
   name: string;
   id: number;
+  image?: string;
 }
 
 export interface Article {
@@ -13,4 +14,12 @@ export interface Article {
   content: string;
   likeCount: number;
   isLiked: boolean | null;
+}
+
+export interface Comment {
+  id: number;
+  content: string;
+  createdAt: string;
+  updatedAt: string;
+  writer: Writer;
 }

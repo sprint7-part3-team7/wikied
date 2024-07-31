@@ -1,8 +1,8 @@
 import axios from "axios";
-import { Article } from "../../types/article";
+import { Article, Comment } from "@/types/article";
 
 //const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
-const API_BASE_URL = `https://wikied-api.vercel.app/6-8`
+const API_BASE_URL = `https://wikied-api.vercel.app/6-8`;
 
 interface ApiResponse {
   totalCount: number;
@@ -37,6 +37,29 @@ export const getArticleDetail = async (id: number): Promise<Article> => {
     return response.data;
   } catch (error) {
     console.log(error);
+    throw error;
+  }
+};
+
+interface CommentResponse {
+  list: Comment[];
+  nextCursor: string | null;
+}
+
+export const getArticleComments = async (
+  articleId: number,
+  limit: number = 100,
+): Promise<CommentResponse> => {
+  try {
+    const response = await axios.get<CommentResponse>(
+      `${API_BASE_URL}/articles/${articleId}/comments`,
+      {
+        params: { limit },
+      },
+    );
+    return response.data;
+  } catch (error) {
+    console.error(error);
     throw error;
   }
 };

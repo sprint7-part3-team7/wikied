@@ -1,32 +1,37 @@
-import { getArticleDetail } from "@/services/api/article";
-import { Article } from "@/types/article";
+import { getArticleComments, getArticleDetail } from "@/services/api/article";
+import { Article, Comment } from "@/types/article";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import styles from "./styles.module.scss";
 import likeIcon from "@/assets/icons/ic_heart.svg";
+import CommentList from "./components/commentList";
 
 const ArticleDetailPage = () => {
   const router = useRouter();
   const { id } = router.query;
   const [article, setArticle] = useState<Article | null>(null);
+  const [comments, setComments] = useState<Comment[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     if (id) {
-      const fetchArticle = async () => {
+      const fetchArticleAndComments = async () => {
         try {
-          const articleData = await getArticleDetail(Number(id));
+          const [articleData, commentsData] = await Promise.all([
+            getArticleDetail(Number(id)),
+            getArticleComments(Number(id)),
+          ]);
           articleData.content = articleData.content.replace(/<img.*?>/g, "");
-          console.log(articleData);
           setArticle(articleData);
+          setComments(commentsData.list);
         } catch (error) {
           console.log(error);
         } finally {
           setLoading(false);
         }
       };
-      fetchArticle();
+      fetchArticleAndComments();
     }
   }, [id]);
 
@@ -91,6 +96,7 @@ const ArticleDetailPage = () => {
       <button className={styles["button-back"]} onClick={handleBackButtonClick}>
         목록으로
       </button>
+      <CommentList comments={comments} />
     </div>
   );
 };
