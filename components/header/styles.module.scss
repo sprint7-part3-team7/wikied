@@ -1,4 +1,4 @@
-@import "@/styles/import.scss";
+@import "@/styles/index.scss";
 
 .container {
   width: 1920px;
@@ -10,7 +10,7 @@
   z-index: 999;
   background-color: $color-grayscale-50;
   // box-shadow 컬러 변수 추가 해야 함
-  box-shadow: 0px 4px 20px 0px #0000000D;
+  box-shadow: 0px 4px 20px 0px #0000000d;
 
   .logo-item-wrapper {
     @include Flex(row, space-between, center);

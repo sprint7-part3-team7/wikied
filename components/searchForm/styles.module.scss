@@ -1,0 +1,60 @@
+@import "@/styles/import.scss";
+
+.search-container {
+  @include Flex(row, space-between, center);
+  @include Size(100%, auto);
+  max-width: 1060px;
+  gap: 20px;
+
+  form {
+    @include Flex(row, flex-start, center);
+    flex: 1;
+    gap: 20px;
+  }
+
+  .input-wrapper {
+    flex: 1;
+    input {
+      @include Size(100%, 40px);
+      @include Font(
+        $font-size-md,
+        $line-height-md,
+        $font-weight-md-regular,
+        $color-grayscale-500
+      );
+      background-color: $color-grayscale-100;
+      border: none;
+      border-radius: 8px;
+      padding: 7px 0 7px 58px;
+
+      &::placeholder {
+        color: $color-grayscale-400;
+      }
+      background-image: url("../../assets/icons/ic_search.svg");
+      background-size: 22px;
+      background-repeat: no-repeat;
+      background-position: 20px center;
+    }
+  }
+
+  .search-button {
+    @include Font(
+      $font-size-md,
+      $line-height-md,
+      $font-weight-md-semibold,
+      $color-grayscale-50
+    );
+    @include Size(80px, 45px);
+    background-color: $color-primary-green-200;
+    border: none;
+    border-radius: 10px;
+  }
+}
+
+@media (max-width: $mobile-max-width) {
+  .search-container {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 20px;
+  }
+}
