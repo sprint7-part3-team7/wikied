@@ -35,18 +35,31 @@ const MediaComponent = (props: MediaComponentProps) => {
 const Editor: React.FC = () => {
   const [editorState, setEditorState] = useState<EditorState | null>(null);
   const [title, setTitle] = useState("");
+  const [isSubmitEnabled, setIsSubmitEnabled] = useState(false);
   const editorRef = useRef<DraftEditor | null>(null);
 
   useEffect(() => {
     setEditorState(EditorState.createEmpty());
   }, []);
 
-  const focusEditor = () => {
-    editorRef.current?.focus();
-  };
+  const checkSubmitEnabled = useCallback(() => {
+    const contentState = editorState?.getCurrentContent();
+    const hasText = contentState ? contentState.hasText() : false;
+    const isTitleValid = title.trim().length > 0;
+    setIsSubmitEnabled(isTitleValid && hasText);
+  }, [editorState, title]);
+
+  useEffect(() => {
+    checkSubmitEnabled();
+  }, [checkSubmitEnabled]);
 
   const handleEditorChange = (newEditorState: EditorState) => {
     setEditorState(newEditorState);
+    checkSubmitEnabled();
+  };
+
+  const focusEditor = () => {
+    editorRef.current?.focus();
   };
 
   const handleKeyCommand = useCallback(
@@ -122,7 +135,13 @@ const Editor: React.FC = () => {
     <div className={styles.editorWrapper}>
       <div className={styles.editorHeader}>
         <div className={styles.heading}>게시물 등록하기</div>
-        <button className={styles.submitButton} onClick={handleSubmit}>
+        <button
+          className={`${styles.submitButton} ${
+            isSubmitEnabled ? styles.enabled : styles.disabled
+          }`}
+          onClick={handleSubmit}
+          disabled={!isSubmitEnabled}
+        >
           등록하기
         </button>
       </div>
@@ -136,7 +155,10 @@ const Editor: React.FC = () => {
           type='text'
           placeholder='제목을 입력해주세요'
           value={title}
-          onChange={(e) => setTitle(e.target.value)}
+          onChange={(e) => {
+            setTitle(e.target.value);
+            checkSubmitEnabled();
+          }}
           maxLength={30}
         />
         <span className={styles.titleCount}>
