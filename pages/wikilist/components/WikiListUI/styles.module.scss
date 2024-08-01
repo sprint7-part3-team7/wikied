@@ -1,0 +1,10 @@
+@import '@/styles/import.scss';
+
+.wikilistUI {
+  margin: 0 auto;
+  max-width: 860px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}

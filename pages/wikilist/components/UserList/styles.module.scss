@@ -1,0 +1,17 @@
+@import '@/styles/import.scss';
+
+.userListContainer {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: center;
+  margin-top: 50px;
+}
+
+.userList {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}

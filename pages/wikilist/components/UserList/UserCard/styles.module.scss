@@ -1,0 +1,29 @@
+@import '@/styles/import.scss';
+
+.userCard {
+  display: flex;
+  align-items: center;
+  padding: 12px;
+  border: 1px solid $color-grayscale-200;
+  border-radius: 8px;
+  background-color: $color-grayscale-50;
+  margin-bottom: 12px;
+}
+
+.userInfo {
+  margin-left: 16px;
+  display: flex;
+  flex-direction: column;
+}
+
+.userName {
+  font-size: $font-size-lg;
+  font-weight: $font-weight-lg-bold;
+  color: $color-grayscale-600;
+}
+
+.userDetails {
+  font-size: $font-size-md;
+  color: $color-grayscale-400;
+  margin-top: 4px;
+}
