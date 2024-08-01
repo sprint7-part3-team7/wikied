@@ -1,0 +1,143 @@
+@import "@/styles/index.scss";
+
+.editorWrapper {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 46px 30px 30px 30px;
+}
+
+.editorHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.heading {
+  @include Font(
+    $font-size-2xl,
+    $line-height-2xl,
+    $font-weight-2xl-semibold,
+    $color-grayscale-500
+  );
+}
+
+.dateWrapper {
+  margin-bottom: 33px;
+  @include Font(
+    $font-size-lg,
+    $line-height-lg,
+    $font-weight-lg-regular,
+    $color-grayscale-400
+  );
+
+  .date-post {
+    margin-right: 12px;
+  }
+}
+
+.titleWrapper {
+  display: flex;
+  align-items: space-between;
+  padding: 12px 0;
+  border-bottom: 1px solid $color-grayscale-200;
+  border-top: 1px solid $color-grayscale-200;
+
+  .titleCount {
+    @include Font(
+      $font-size-md,
+      $line-height-md,
+      $font-weight-md-regular,
+      $color-grayscale-500
+    );
+  }
+
+  .currentCount {
+    color: black;
+  }
+
+  .maxCount {
+    color: $color-primary-green-200;
+  }
+}
+
+.titleInput {
+  width: 100%;
+  font-size: 18px;
+  border-radius: 4px;
+
+  ::placeholder {
+    @include Font(
+      $font-size-xl,
+      $line-height-xl,
+      $font-weight-xl-regular,
+      $color-grayscale-400
+    );
+  }
+
+  outline: none;
+  :focus {
+    border: none;
+  }
+}
+
+.content-count {
+  margin-top: 20px;
+  &-text {
+    @include Font(
+      $font-size-lg,
+      $line-height-lg,
+      $font-weight-lg-semibold,
+      $color-grayscale-600
+    );
+  }
+}
+
+.editorOuterContainer {
+  border-radius: 4px;
+  padding: 10px 0;
+  margin-bottom: 20px;
+}
+
+.editorContainer {
+  min-height: 200px;
+  margin-bottom: 10px;
+
+  :global(.public-DraftEditor-content) {
+    min-height: 200px;
+  }
+
+  :global(.public-DraftEditorPlaceholder-root) {
+    color: #999;
+  }
+
+  :global(.DraftEditor-root) {
+    border: none;
+    outline: none;
+  }
+
+  :global(.text-align-left) {
+    text-align: left !important;
+  }
+
+  :global(.text-align-center) {
+    text-align: center !important;
+  }
+
+  :global(.text-align-right) {
+    text-align: right !important;
+  }
+}
+
+.submitButton {
+  @include Font(
+    $font-size-md,
+    $line-height-md,
+    $font-weight-md-semibold,
+    $color-grayscale-50
+  );
+  @include Size(160px, 45px);
+  background-color: $color-primary-green-200;
+  border: none;
+  border-radius: 10px;
+}
