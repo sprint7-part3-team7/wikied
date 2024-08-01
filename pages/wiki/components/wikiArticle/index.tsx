@@ -8,10 +8,6 @@ interface WikiArticleProps {
 }
 
 const WikiArticle: React.FC<WikiArticleProps> = ({ className }) => {
-  const hasBlockquote = (index: number) => {
-    return index === 1;
-  };
-
   return (
     <div className={`${styles['grid-container']} ${className}`}>
       <div className={styles['grid-item']}>
@@ -22,7 +18,7 @@ const WikiArticle: React.FC<WikiArticleProps> = ({ className }) => {
           프론트엔드 엔지니어 출신이다.
         </span>
       </div>
-      <div className={styles['grid-item']}>
+      <div className={`${styles['grid-item']} ${styles['blockquote-item']}`}>
         <span className={styles['wiki-article-title']}>02. 취미</span>
         <div className={styles['separator']} />
         <span className={styles['wiki-article-content']}>

@@ -42,7 +42,6 @@ const WikiAside: React.FC<WikiAsideProps> = ({ className, profile }) => {
             <span className={styles['attribute-value']}>{profile?.job}</span>
           </div>
         </div>
-        {/* 데스크탑 */}
         <div className={styles['desktop-user-attribute']}>
           <div className={styles['user-attribute']}>
             <span className={styles['attribute-name']}>SNS 계정</span>
@@ -73,7 +72,6 @@ const WikiAside: React.FC<WikiAsideProps> = ({ className, profile }) => {
             </span>
           </div>
         </div>
-        {/* 데스크탑 */}
         {isExpanded && (
           <div className={styles['selective-show-user-attribute']}>
             <div className={styles['user-attribute']}>

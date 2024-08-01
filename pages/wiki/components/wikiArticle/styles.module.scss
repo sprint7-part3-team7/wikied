@@ -34,6 +34,10 @@
       );
     }
   }
+
+  .blockquote-item {
+    gap: 12px;
+  }
 }
 
 @media screen and (max-width: 1199px) {
@@ -68,6 +72,9 @@
           $color-grayscale-500
         );
       }
+    }
+    .blockquote-item {
+      gap: 8px;
     }
   }
 }
