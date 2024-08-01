@@ -1,4 +1,4 @@
-@import "@/styles/import.scss";
+@import "@/styles/index.scss";
 
 .best-board-list {
   max-width: 1060px;
@@ -19,7 +19,6 @@
       background-color: $color-primary-green-200;
       border: none;
       border-radius: 10px;
-      cursor: pointer;
     }
   }
 
@@ -47,6 +46,7 @@
   box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.1);
   overflow: hidden;
   margin: 8px;
+  cursor: pointer;
 
   .image {
     @include Size(100%, 131px);

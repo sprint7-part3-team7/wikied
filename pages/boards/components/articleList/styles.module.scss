@@ -1,4 +1,4 @@
-@import "@/styles/import.scss";
+@import "@/styles/index.scss";
 
 .board-list-container {
   max-width: 1060px;
@@ -15,6 +15,7 @@
 .board-table {
   @include Size(100%, auto);
   border-collapse: collapse;
+  cursor: pointer;
 
   th,
   td {

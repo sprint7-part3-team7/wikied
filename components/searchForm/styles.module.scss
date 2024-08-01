@@ -1,4 +1,4 @@
-@import "@/styles/import.scss";
+@import "@/styles/index.scss";
 
 .search-container {
   @include Flex(row, space-between, center);
@@ -48,7 +48,6 @@
     background-color: $color-primary-green-200;
     border: none;
     border-radius: 10px;
-    cursor: pointer;
   }
 }
 
