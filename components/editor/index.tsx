@@ -137,7 +137,7 @@ const Editor: React.FC = () => {
         <div className={styles.heading}>게시물 등록하기</div>
         <button
           className={`${styles.submitButton} ${
-            isSubmitEnabled ? styles.enabled : styles.disabled
+            isSubmitEnabled ? "": styles.disabled
           }`}
           onClick={handleSubmit}
           disabled={!isSubmitEnabled}
