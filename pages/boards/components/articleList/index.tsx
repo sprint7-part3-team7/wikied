@@ -1,20 +1,23 @@
 import React, { useState, useEffect, useCallback } from "react";
 import Image from "next/image";
 import styles from "./styles.module.scss";
-import { Board } from "../../../../types/article";
+import { Article } from "../../../../types/article";
 import { getArticles } from "../../../../services/api/article";
 import SearchForm from "../../../../components/searchForm";
 import Pagination from "../../../../components/pagination";
 import likeIcon from "@/assets/icons/ic_heart.svg";
-import OrderDropdown from "../orderDropdown";
+import OrderDropdown from "../articleOrderDropdown";
+import { useRouter } from "next/router";
 
-const BoardList = () => {
-  const [boards, setBoards] = useState<Board[]>([]);
+const ArticleList = () => {
+  const [boards, setBoards] = useState<Article[]>([]);
   const [loading, setLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
   const [searchTerm, setSearchTerm] = useState("");
   const [orderOption, setOrderOption] = useState("recent");
+
+  const router = useRouter();
 
   const orderOptions = [
     { value: "recent", label: "최신순" },
@@ -22,10 +25,10 @@ const BoardList = () => {
   ];
 
   const fetchArticles = useCallback(
-    async (page: number, search: string) => {
+    async (page: number, search: string, order: string) => {
       setLoading(true);
       try {
-        const data = await getArticles(page, 10, orderOption, search);
+        const data = await getArticles(page, 10, order, search);
         setBoards(data.list);
         setTotalPages(Math.ceil(data.totalCount / 10));
         setLoading(false);
@@ -34,34 +37,38 @@ const BoardList = () => {
         setLoading(false);
       }
     },
-    [orderOption],
+    [],
   );
 
   useEffect(() => {
-    fetchArticles(currentPage, searchTerm);
-  }, [currentPage, orderOption, fetchArticles, searchTerm]);
+    fetchArticles(currentPage, searchTerm, orderOption);
+  }, [currentPage, orderOption, searchTerm, fetchArticles]);
 
   const handleSearch = useCallback(
     (term: string) => {
       setSearchTerm(term);
       setCurrentPage(1);
-      fetchArticles(1, term);
+      fetchArticles(1, term, orderOption);
     },
-    [fetchArticles],
+    [orderOption, fetchArticles],
   );
 
   const handleOrderChange = useCallback(
     (value: string) => {
       setOrderOption(value);
       setCurrentPage(1);
-      fetchArticles(1, searchTerm);
+      fetchArticles(1, searchTerm, value);
     },
-    [fetchArticles, searchTerm],
+    [searchTerm, fetchArticles],
   );
 
   const handlePageChange = useCallback((page: number) => {
     setCurrentPage(page);
   }, []);
+
+  const handleClick = (id: number) => {
+    router.push(`/boards/${id}`);
+  };
 
   return (
     <div className={styles["board-list-container"]}>
@@ -89,7 +96,7 @@ const BoardList = () => {
             </thead>
             <tbody>
               {boards.map((board) => (
-                <tr key={board.id}>
+                <tr key={board.id} onClick={() => handleClick(board.id)}>
                   <td>{board.id}</td>
                   <td>{board.title}</td>
                   <td>{board.writer.name}</td>
@@ -102,7 +109,11 @@ const BoardList = () => {
 
           <div className={styles["mobile-list"]}>
             {boards.map((board) => (
-              <div key={board.id} className={styles["mobile-list-item"]}>
+              <div
+                key={board.id}
+                className={styles["mobile-list-item"]}
+                onClick={() => handleClick(board.id)}
+              >
                 <div className={styles["title"]}>{board.title}</div>
                 <div className={styles["info"]}>
                   <span className={styles["author"]}>{board.writer.name}</span>
@@ -133,4 +144,4 @@ const BoardList = () => {
   );
 };
 
-export default BoardList;
+export default ArticleList;

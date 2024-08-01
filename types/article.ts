@@ -1,14 +1,25 @@
 export interface Writer {
   name: string;
   id: number;
+  image?: string;
 }
 
-export interface Board {
+export interface Article {
   id: number;
   title: string;
-  image: string;
-  writer: Writer;
-  likeCount: number;
+  image: string | null;
   createdAt: string;
   updatedAt: string;
+  writer: Writer;
+  content: string;
+  likeCount: number;
+  isLiked: boolean | null;
+}
+
+export interface Comment {
+  id: number;
+  content: string;
+  createdAt: string;
+  updatedAt: string;
+  writer: Writer;
 }

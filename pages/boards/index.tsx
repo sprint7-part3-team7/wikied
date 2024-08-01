@@ -1,11 +1,11 @@
-import BestBoardList from "./components/bestBoardList/index";
-import BoardList from "./components/boardList";
+import ArticleList from "./components/articleList";
+import BestArticleList from "./components/bestArticleList";
 
 const Boards = () => {
   return (
     <div>
-      <BestBoardList />
-      <BoardList />
+      <BestArticleList />
+      <ArticleList />
     </div>
   );
 };

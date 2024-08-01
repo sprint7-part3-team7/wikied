@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
 import styles from "./styles.module.scss";
 import { getArticles } from "@/services/api/article";
-import { Board } from "@/types/article";
-import BestBoardCard from "./bestBoardCard";
+import { Article } from "@/types/article";
+import BestBoardCard from "./bestArticleCard";
 
-const BestBoardList = () => {
-  const [bestBoards, setBestBoards] = useState<Board[]>([]);
+const BestArticleList = () => {
+  const [bestBoards, setBestBoards] = useState<Article[]>([]);
   const [loading, setLoading] = useState(true);
 
   const fetchArticles = async () => {
@@ -42,4 +42,4 @@ const BestBoardList = () => {
   );
 };
 
-export default BestBoardList;
+export default BestArticleList;

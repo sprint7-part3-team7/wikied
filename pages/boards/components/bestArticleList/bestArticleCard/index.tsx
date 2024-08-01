@@ -2,22 +2,29 @@ import React from "react";
 import Image from "next/image";
 import styles from "../styles.module.scss";
 import likeIcon from "@/assets/icons/ic_heart.svg";
-import { Board } from "../../../../../types/article";
+import { Article } from "../../../../../types/article";
+import { useRouter } from "next/router";
 
-interface BestBoardCardProps {
-  board: Board;
+interface BestArticleCardProps {
+  board: Article;
 }
 
-const BestBoardCard = ({ board }: BestBoardCardProps) => {
+const BestArticleCard = ({ board }: BestArticleCardProps) => {
+  const router = useRouter();
+
+  const handleClick = () => {
+    router.push(`/boards/${board.id}`)
+  }
+
   return (
-    <div className={styles["board-card"]}>
-      <Image
+    <div className={styles["board-card"]} onClick={handleClick}>
+      {board.image && <Image
         src={board.image}
         alt={board.title}
         className={styles["image"]}
         width={250}
         height={131}
-      />
+      />}
       <div className={styles["content"]}>
         <div className={styles["content-title"]}>{board.title}</div>
         <div className={styles["content-info"]}>
@@ -35,4 +42,4 @@ const BestBoardCard = ({ board }: BestBoardCardProps) => {
   );
 };
 
-export default BestBoardCard;
+export default BestArticleCard;
