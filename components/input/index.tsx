@@ -29,7 +29,7 @@ const Input = ({
         className={clsx(styles["input"], { [styles["error"]]: error })}
         {...props}
       />
-      {error && <p className={styles["errorText"]}>{error}</p>}
+      {error && <p className={styles["error-text"]}>{error}</p>}
     </div>
   );
 };
