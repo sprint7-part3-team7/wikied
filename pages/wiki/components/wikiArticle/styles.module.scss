@@ -1,10 +1,10 @@
 @import '@/styles/import.scss';
 
 .grid-container {
+  @include Size(100%, '');
   display: grid;
   grid-template-rows: repeat(4, auto);
   row-gap: 64px;
-  width: 100%;
 
   .grid-item {
     @include Flex(column, center, flex-start);
@@ -21,8 +21,8 @@
     }
 
     .separator {
+      @include Size(100%, '');
       border: 1px solid $color-grayscale-200;
-      width: 100%;
     }
 
     .wiki-article-content {

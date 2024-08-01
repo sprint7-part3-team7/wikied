@@ -10,39 +10,39 @@
   padding-top: 78px;
 
   .wiki-main {
+    @include Size(100%, '');
+    max-width: 1920px;
     display: grid;
     grid-template-columns: minmax(60px, 1fr) minmax(0, 860px) 80px 320px 200px;
-    width: 100%;
-    max-width: 1920px;
     position: relative;
 
     .wiki-padding {
+      @include Size(100%, '');
+      max-width: 460px;
       grid-column: 1;
       grid-row: 1;
-      width: 100%;
-      max-width: 460px;
       overflow: hidden;
     }
 
     .wiki-header {
+      @include Size(100%, '');
       grid-column: 2;
       grid-row: 1;
       margin-bottom: 20px;
-      width: 100%;
       box-sizing: border-box;
     }
 
     .wiki-article {
+      @include Size(100%, '');
       grid-column: 2;
       grid-row: 2;
-      width: 100%;
       box-sizing: border-box;
     }
 
     .wiki-aside {
+      @include Size(320px, '');
       grid-column: 4;
       grid-row: 1 / span 2;
-      width: 320px;
       position: relative;
     }
   }
@@ -73,21 +73,20 @@
       }
 
       .spacer1 {
+        @include Size('', 15px);
         grid-area: spacer1;
-        height: 15px;
       }
 
       .wiki-aside {
+        @include Size(100%, auto);
         grid-area: aside;
-        width: 100%;
-        height: auto;
         padding: 20px 30px 5px 30px;
         margin: 0;
       }
 
       .spacer2 {
+        @include Size('', 60px);
         grid-area: spacer2;
-        height: 60px;
       }
 
       .wiki-article {
@@ -105,18 +104,17 @@
 
     .wiki-main {
       .spacer1 {
-        height: 12px;
+        @include Size('', 12px);
       }
 
       .spacer2 {
-        height: 40px;
+        @include Size('', 40px);
       }
 
       .wiki-aside {
-        width: 100%;
+        @include Size(100%, '');
         margin: 0;
         padding: 15px 20px 0 20px;
-        // gap: 20px;
       }
     }
   }

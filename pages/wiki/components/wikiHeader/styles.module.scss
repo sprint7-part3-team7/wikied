@@ -6,7 +6,7 @@
 
   .name-and-btn {
     @include Flex(row, space-between, inherit);
-    width: 100%;
+    @include Size(100%, '');
 
     .username {
       @include Font(
@@ -26,7 +26,7 @@
         $font-weight-md-semibold,
         $color-grayscale-50
       );
-      width: 160px;
+      @include Size(160px, '');
       border-radius: 10px;
       padding: 10.5px 42px;
       white-space: nowrap;
@@ -36,9 +36,9 @@
   }
 
   .link {
+    @include Size('', 34px);
     max-width: 860px;
     display: flex;
-    height: 34px;
     border-radius: 10px;
     padding: 5px 10px;
     gap: 10px;
@@ -74,7 +74,7 @@
     gap: 24px;
     .name-and-btn {
       .participate-btn {
-        width: 120px;
+        @include Size(120px, '');
         padding: 9.5px 22px;
       }
     }
