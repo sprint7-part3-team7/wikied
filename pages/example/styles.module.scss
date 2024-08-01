@@ -1,0 +1,17 @@
+@import "@/styles/index.scss";
+
+.container {
+  @include Size(1920px, 100vh);
+  @include Flex(column, center, center);
+  background-color: $color-secondary-yellow-100;
+  margin: 0 auto;
+
+  .fighting {
+    @include Font(
+      $font-size-5xl,
+      $line-height-5xl,
+      $font-weight-5xl-semibold,
+      $color-grayscale-200
+    );
+  }
+}

@@ -1,0 +1,184 @@
+@import "@/styles/import.scss";
+
+.article {
+  max-width: 1060px;
+  margin: 0 auto;
+
+  &-container {
+    width: 100%;
+    margin: 60px auto;
+    padding: 40px 30px;
+    box-shadow: 0px 4px 20px 0px #00000014;
+    border-radius: 10px;
+  }
+
+  &-header {
+    margin-bottom: 30px;
+  }
+
+  &-title {
+    @include Font(
+      $font-size-3xl,
+      $line-height-3xl-42,
+      $font-weight-3xl-semibold,
+      $color-grayscale-500
+    );
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100%;
+  }
+
+  &-info {
+    @include Flex(row, space-between, center);
+    @include Font(
+      $font-size-md,
+      $line-height-md,
+      $font-weight-md-regular,
+      $color-grayscale-400
+    );
+  }
+
+  &-description {
+    @include Flex(row, flex-start, center);
+    gap: 8px;
+  }
+
+  .header {
+    &-wrapper {
+      @include Flex(row, space-between, center);
+      margin-bottom: 30px;
+    }
+
+    &-button {
+      @include Font(
+        $font-size-md,
+        $line-height-md,
+        $font-weight-md-semibold,
+        $color-grayscale-50
+      );
+      @include Size(140px, 45px);
+      background-color: $color-primary-green-200;
+      border: none;
+      border-radius: 10px;
+      margin-left: 14px;
+    }
+  }
+
+  .like-count {
+    @include Flex(row, flex-start, center);
+    gap: 4px;
+  }
+
+  .image {
+    margin-bottom: 20px;
+  }
+
+  .content {
+    li {
+      list-style-position: inside;
+    }
+  }
+
+  .button-back {
+    @include Font(
+      $font-size-md,
+      $line-height-md,
+      $font-weight-md-semibold,
+      $color-primary-green-200
+    );
+    @include Size(140px, 45px);
+    background-color: $color-grayscale-50;
+    border: 1px solid $color-primary-green-200;
+    border-radius: 10px;
+    display: block;
+    margin: 0 auto 60px;
+  }
+}
+
+@media (max-width: $tablet-max-width) {
+  .article {
+    padding: 0 60px;
+
+    &-header {
+      border-bottom: 1px solid $color-grayscale-200;
+      padding-bottom: 8px;
+
+      .header-wrapper {
+        flex-wrap: wrap;
+      }
+    }
+
+    &-title {
+      max-width: calc(100% - 300px);
+    }
+
+    .header-button {
+      width: 120px;
+    }
+
+    .button-back {
+      margin: 0 auto 40px;
+    }
+  }
+}
+
+@media (max-width: $mobile-max-width) {
+  .article {
+    padding: 0 20px;
+
+    .header-wrapper {
+      margin-bottom: 14px;
+    }
+
+    &-header {
+      margin-bottom: 15px;
+      padding-bottom: 11px;
+    }
+
+    &-title {
+      @include Font(
+        $font-size-2xl,
+        $line-height-2xl,
+        $font-weight-2xl-semibold,
+        $color-grayscale-500
+      );
+      max-width: calc(100% - 68px);
+    }
+
+    .header-button {
+      @include Size(22px, 22px);
+      margin-left: 12px;
+      font-size: 0;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: 20px;
+      background-color: transparent;
+
+      &.edit {
+        background-image: url("../../../assets/icons/ic_edit.svg");
+      }
+
+      &.delete {
+        background-image: url("../../../assets/icons/ic_delete.svg");
+      }
+    }
+
+    &-info {
+      @include Font(
+        $font-size-xs,
+        $line-height-xs-18,
+        $font-weight-xs-regular,
+        $color-grayscale-400
+      );
+    }
+
+    .image {
+      img {
+        width: 100%;
+        height: auto;
+        object-fit: cover;
+      }
+    }
+  }
+}

@@ -1,0 +1,32 @@
+@import "@/styles/index.scss";
+
+.container {
+  @include Size(400px, auto);
+  @include Flex(column, "", "");
+  margin: 0 auto;
+  row-gap: 64px;
+  margin-top: 140px;
+
+  .title {
+    @include Font(
+      $font-size-2xl,
+      $line-height-2xl,
+      $font-weight-2xl-semibold,
+      $color-grayscale-500
+    );
+    text-align: center;
+  }
+}
+
+@media screen and (max-width: $tablet-max-width) {
+  .container {
+    margin-top: 210px;
+  }
+}
+
+@media screen and (max-width: $mobile-max-width) {
+  .container {
+  @include Size(335px, auto);
+    margin-top: 170px;
+  }
+}
