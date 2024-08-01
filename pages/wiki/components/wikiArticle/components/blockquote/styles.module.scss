@@ -1,0 +1,20 @@
+@import "@/styles/index.scss";
+
+.blockquote-container {
+  @include Flex(row, center, center);
+  gap: 20px;
+
+  .prefix {
+    @include Size(4px, 100%);
+    background-color: $color-grayscale-500;
+  }
+
+  .content {
+    @include Font(
+      $font-size-lg,
+      $line-height-lg,
+      $font-weight-lg-regular,
+      $color-grayscale-500
+    );
+  }
+}

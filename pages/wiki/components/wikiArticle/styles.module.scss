@@ -1,0 +1,80 @@
+@import "@/styles/index.scss";
+
+.grid-container {
+  @include Size(100%, "");
+  display: grid;
+  grid-template-rows: repeat(4, auto);
+  row-gap: 64px;
+
+  .grid-item {
+    @include Flex(column, center, flex-start);
+    text-align: left;
+    gap: 8px;
+
+    .wiki-article-title {
+      @include Font(
+        $font-size-2xl,
+        $line-height-2xl,
+        $font-weight-2xl-semibold,
+        $color-grayscale-500
+      );
+    }
+
+    .separator {
+      @include Size(100%, "");
+      border: 1px solid $color-grayscale-200;
+    }
+
+    .wiki-article-content {
+      @include Font(
+        $font-size-lg,
+        $line-height-lg,
+        $font-weight-lg-regular,
+        $color-grayscale-500
+      );
+    }
+  }
+
+  .blockquote-item {
+    gap: 12px;
+  }
+}
+
+@media screen and (max-width: 1199px) {
+  .grid-container {
+    .grid-item {
+      gap: 9px;
+    }
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .grid-container {
+    row-gap: 32px;
+
+    .grid-item {
+      gap: 8px;
+
+      .wiki-article-title {
+        @include Font(
+          $font-size-xl,
+          $line-height-xl,
+          $font-weight-xl-semibold,
+          $color-grayscale-500
+        );
+      }
+
+      .wiki-article-content {
+        @include Font(
+          $font-size-md,
+          $line-height-md,
+          $font-weight-md-regular,
+          $color-grayscale-500
+        );
+      }
+    }
+    .blockquote-item {
+      gap: 8px;
+    }
+  }
+}

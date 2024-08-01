@@ -15,6 +15,7 @@
 .board-table {
   @include Size(100%, auto);
   border-collapse: collapse;
+  cursor: pointer;
 
   th,
   td {

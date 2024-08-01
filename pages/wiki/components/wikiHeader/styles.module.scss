@@ -1,0 +1,82 @@
+@import "@/styles/index.scss";
+
+.wiki-actions {
+  @include Flex(column, center, flex-start);
+  gap: 32px;
+
+  .name-and-btn {
+    @include Flex(row, space-between, inherit);
+    @include Size(100%, "");
+
+    .username {
+      @include Font(
+        $font-size-5xl,
+        $line-height-5xl,
+        $font-weight-5xl-semibold,
+        $color-grayscale-500
+      );
+      white-space: nowrap;
+    }
+
+    .participate-btn {
+      @include Flex(column, normal, center);
+      @include Font(
+        $font-size-md,
+        $line-height-md,
+        $font-weight-md-semibold,
+        $color-grayscale-50
+      );
+      @include Size(160px, "");
+      border-radius: 10px;
+      padding: 10.5px 42px;
+      white-space: nowrap;
+      background-color: $color-primary-green-200;
+      gap: 10px;
+    }
+  }
+
+  .link {
+    @include Size("", 34px);
+    max-width: 860px;
+    display: flex;
+    border-radius: 10px;
+    padding: 5px 10px;
+    gap: 10px;
+    background-color: $color-primary-green-100;
+
+    .link-wrapper {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+
+      .link-copy-btn {
+        overflow: hidden;
+        white-space: nowrap;
+        text-decoration: none;
+        text-overflow: ellipsis;
+
+        .link-address {
+          @include Font(
+            $font-size-md,
+            $line-height-md,
+            $font-weight-md-regular,
+            $color-primary-green-200
+          );
+          display: inline;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .wiki-actions {
+    gap: 24px;
+    .name-and-btn {
+      .participate-btn {
+        @include Size(120px, "");
+        padding: 9.5px 22px;
+      }
+    }
+  }
+}
