@@ -4,7 +4,6 @@
   @include Size(100%, 100vh);
   @include Flex(column, inherit, center);
   max-width: 100%;
-  // padding: 0 60px;
   margin: 0 auto;
   position: relative;
   box-sizing: border-box;
@@ -45,7 +44,6 @@
       grid-row: 1 / span 2;
       width: 320px;
       position: relative;
-      // margin-left: 80px;
     }
   }
 }
@@ -56,7 +54,7 @@
     padding-top: 60px;
 
     .wiki-main {
-      grid-template-columns: 1fr !important;
+      grid-template-columns: 1fr;
       grid-template-rows: auto auto auto;
       grid-template-areas:
         'header'
@@ -70,7 +68,7 @@
       }
 
       .wiki-header {
-        grid-area: header !important;
+        grid-area: header;
         margin: 0 auto;
       }
 
@@ -80,7 +78,7 @@
       }
 
       .wiki-aside {
-        grid-area: aside !important;
+        grid-area: aside;
         width: 100%;
         height: auto;
         padding: 20px 30px 5px 30px;
@@ -93,7 +91,7 @@
       }
 
       .wiki-article {
-        grid-area: article !important;
+        grid-area: article;
         margin: 0 auto;
       }
     }
