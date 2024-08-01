@@ -6,6 +6,7 @@
   border-radius: 10px;
   background-color: $color-grayscale-50;
   box-shadow: 0px 4px 20px 0px #00000014;
+  overflow: hidden;
 
   .image-container {
     width: 100%;
@@ -23,46 +24,65 @@
 
   .user-attribute-container {
     @include Flex(column, inherit, inherit);
-    gap: 16px;
     position: absolute;
     top: 320px;
     left: 30px;
+    gap: 16px;
 
-    .user-attribute {
-      @include Font(
-        $font-size-md,
-        $line-height-md,
-        $font-weight-md-regular,
-        inherit
-      );
-      display: flex;
-      flex-direction: row;
-      gap: 20px;
-      white-space: nowrap;
+    .always-show-user-attribute,
+    .desktop-user-attribute,
+    .selective-show-user-attribute {
+      @include Flex(column, center, stretch);
+      gap: 16px;
 
-      .attribute-name {
-        color: $color-grayscale-400;
-        width: 60px;
-        flex-shrink: 0;
-      }
+      .user-attribute {
+        @include Font(
+          $font-size-md,
+          $line-height-md,
+          $font-weight-md-regular,
+          inherit
+        );
+        display: flex;
+        flex-direction: row;
+        white-space: nowrap;
+        gap: 20px;
 
-      .attribute-value {
-        color: $color-grayscale-500;
-        flex: 1;
-        text-align: left;
-        min-width: 0;
+        .attribute-name {
+          color: $color-grayscale-400;
+          width: 60px;
+          flex-shrink: 0;
+        }
+
+        .attribute-value {
+          color: $color-grayscale-500;
+          flex: 1;
+          text-align: left;
+          min-width: 0;
+        }
       }
     }
+
+    .selective-show-user-attribute {
+      display: none;
+    }
+  }
+
+  .expand-btn {
+    display: none;
   }
 }
 
 @media screen and (max-width: 1199px) {
   .user-profile {
-    @include Flex(row, inherit, flex-start);
+    display: grid;
+    grid-template-columns: 71px 40px auto 40px 71px;
+    grid-template-rows: auto 1px 24px;
+    gap: 0;
 
     .image-container {
       @include Flex(column, inherit, center);
       width: 71px;
+      grid-column: 1;
 
       .image {
         width: 71px;
@@ -75,13 +95,36 @@
     .user-attribute-container {
       position: static;
       width: auto;
+      grid-column: 3;
       gap: 4px;
+
+      .desktop-user-attribute {
+        display: none;
+      }
+
+      .always-show-user-attribute,
+      .selective-show-user-attribute {
+        @include Flex(column, center, stretch);
+        gap: 4px;
+      }
+      .user-attribute {
+        gap: 10px;
+      }
+    }
+
+    .expand-btn {
+      @include Flex(column, center, center);
+      grid-column: 3;
+      grid-row: 3;
+      background-color: $color-grayscale-50;
     }
   }
 }
 
 @media screen and (max-width: 767px) {
   .user-profile {
+    grid-template-columns: 62px 20px auto 20px 62px;
+
     .image-container {
       width: 62px;
 
@@ -98,7 +141,6 @@
           $font-weight-xs-regular,
           inherit
         );
-        gap: 8px;
       }
     }
   }

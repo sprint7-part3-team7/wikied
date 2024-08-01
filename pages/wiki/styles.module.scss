@@ -83,9 +83,8 @@
         grid-area: aside !important;
         width: 100%;
         height: auto;
-        padding: 20px 30px 0 30px;
+        padding: 20px 30px 5px 30px;
         margin: 0;
-        gap: 40px;
       }
 
       .spacer2 {
@@ -119,7 +118,7 @@
         width: 100%;
         margin: 0;
         padding: 15px 20px 0 20px;
-        gap: 20px;
+        // gap: 20px;
       }
     }
   }
