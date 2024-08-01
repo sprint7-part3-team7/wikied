@@ -1,7 +1,7 @@
 @import "@/styles/index.scss";
 
 .wiki-actions {
-  @include Flex(column, center, flex-start);
+  @include Flex(column, flex-start, flex-start);
   gap: 32px;
 
   .name-and-btn {

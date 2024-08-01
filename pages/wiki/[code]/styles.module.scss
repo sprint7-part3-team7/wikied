@@ -7,7 +7,11 @@
   margin: 0 auto;
   position: relative;
   box-sizing: border-box;
-  padding-top: 78px;
+  padding-top: 38px;
+
+  &.container-no-sections {
+    padding-top: 40px;
+  }
 
   .wiki-main {
     @include Size(100%, "");
@@ -28,7 +32,8 @@
       @include Size(100%, "");
       grid-column: 2;
       grid-row: 1;
-      margin-bottom: 20px;
+      margin-top: 40px;
+      margin-bottom: 56px;
       box-sizing: border-box;
     }
 
@@ -37,6 +42,7 @@
       grid-column: 2;
       grid-row: 2;
       box-sizing: border-box;
+      margin-bottom: 80px;
     }
 
     .wiki-aside {
@@ -52,6 +58,10 @@
   .container {
     padding: 0 60px;
     padding-top: 60px;
+
+    &.container-no-sections {
+      padding-top: 60px;
+    }
 
     .wiki-main {
       grid-template-columns: 1fr;
@@ -101,6 +111,11 @@
   .container {
     padding: 0 20px;
     margin-top: 40px;
+
+    &.container-no-sections {
+      margin-top: 40px;
+      padding-top: 0;
+    }
 
     .wiki-main {
       .spacer1 {
