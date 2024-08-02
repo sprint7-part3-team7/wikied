@@ -26,7 +26,9 @@
 
 @media screen and (max-width: $mobile-max-width) {
   .container {
-  @include Size(335px, auto);
+    max-width: 400px;
+    @include Size(100%, auto);
     margin-top: 170px;
+    padding: 0 20px;
   }
 }
