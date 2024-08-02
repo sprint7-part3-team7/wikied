@@ -1,0 +1,93 @@
+@import "@/styles/index.scss";
+
+.login-container {
+  @include Size(400px, auto);
+  @include Flex(column, center, "");
+  margin: 0 auto;
+  margin-top: 140px;
+
+
+  .login-wrapper {
+
+    .title {
+      @include Font(
+        $font-size-2xl,
+        $line-height-2xl,
+        $font-weight-2xl-semibold,
+        $color-grayscale-500
+      );
+      text-align: center;
+      margin-bottom: 50px;
+    }
+    @include Flex(column, "", "");
+    row-gap: 24px;
+
+    .label {
+      @include Font(
+        $font-size-md,
+        $line-height-md,
+        $font-weight-md-regular,
+        $color-grayscale-400
+      );
+    }
+
+    .email-input-wrapper {
+      @include Flex(column, "", "");
+      row-gap: 8px;
+
+      .email-input {
+        @include Size(100%, 45px);
+        background-color: $color-grayscale-100;
+        border-radius: 10px;
+        padding: 14px 20px;
+      }
+    }
+
+    .password-input-wrapper {
+      @include Flex(column, "", "");
+      row-gap: 8px;
+
+      .password-input {
+        @include Size(100%, 45px);
+        background-color: $color-grayscale-100;
+        border-radius: 10px;
+        padding: 14px 20px;
+      }
+    }
+  }
+  .button {
+    @include Size(100%, 45px);
+    @include Font(
+      $font-size-md,
+      $line-height-md,
+      $font-weight-md-semibold,
+      $color-grayscale-100
+    );
+    background-color: $color-primary-green-200;
+    border-radius: 10px;
+    margin-top: 32px;
+  }
+
+  .signup {
+    @include Font(
+      $font-size-md,
+      $line-height-md,
+      $font-weight-md-regular,
+      $color-grayscale-500
+    );
+    text-decoration: none;
+    align-self: center;
+    color:$color-primary-green-200 ;
+    margin-top: 40px;
+  }
+}
+
+@media screen and (max-width: $tablet-max-width) {
+}
+
+@media screen and (max-width: $mobile-max-width) {
+  .login-container {
+    @include Size(335px, 405px);
+    margin-top: 140px;
+  }
+}
