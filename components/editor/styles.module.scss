@@ -35,8 +35,7 @@
 }
 
 .title-wrapper {
-  display: flex;
-  align-items: space-between;
+  @include Flex(col, space-between, center);
   padding: 12px 0;
   border-bottom: 1px solid $color-grayscale-200;
   border-top: 1px solid $color-grayscale-200;
@@ -51,7 +50,7 @@
   }
 
   .current-count {
-    color: black;
+    color: $color-grayscale-500;
   }
 
   .max-count {
