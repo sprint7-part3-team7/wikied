@@ -1,9 +1,9 @@
 @import "@/styles/index.scss";
 
-.inputContainer {
+.input-container {
   @include Flex(column, null, null);
 
-  &.fullWidth {
+  &.full-width {
     width: 100%;
   }
 }
@@ -41,7 +41,7 @@
   );
 }
 
-.error-text {
+.error-message {
   @include Font(
     $font-size-xs,
     $line-height-xs-18,

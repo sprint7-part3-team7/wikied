@@ -52,7 +52,7 @@ const ChangePasswordInput = () => {
         onChange={(e) => setVerifyNewPassword(e.target.value)}
         type="password"
         fullWidth
-        error={error}
+        errorMessage={error}
       />
       <button type="submit" className={styles["button"]}>
         변경하기

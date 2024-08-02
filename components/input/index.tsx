@@ -1,35 +1,38 @@
-import React from "react";
 import clsx from "clsx";
 import styles from "@/components/input/styles.module.scss";
 
 interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   label?: string;
-  error?: string;
+  errorMessage?: string;
   fullWidth?: boolean;
   className?: string;
 }
 
 const Input = ({
   label,
-  error,
+  errorMessage,
   fullWidth = false,
   className,
   ...props
 }: InputProps) => {
   return (
     <div
-      className={clsx(
-        styles["inputContainer"],
-        { [styles["fullWidth"]]: fullWidth },
-        className
-      )}
+      className={clsx(styles["input-container"], {
+        [styles["full-width"]]: fullWidth,
+      })}
     >
       {label && <label className={styles["label"]}>{label}</label>}
       <input
-        className={clsx(styles["input"], { [styles["error"]]: error })}
+        className={clsx(
+          styles["input"],
+          { [styles["error"]]: errorMessage },
+          className
+        )}
         {...props}
       />
-      {error && <p className={styles["error-text"]}>{error}</p>}
+      {errorMessage && (
+        <p className={styles["error-message"]}>{errorMessage}</p>
+      )}
     </div>
   );
 };
