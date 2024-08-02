@@ -10,6 +10,7 @@ import landing_7 from "@/assets/images/landing/landing_7.png";
 import landing_10 from "@/assets/images/landing/landing_10.png";
 import landing_11 from "@/assets/images/landing/landing_11.png";
 import landing_12 from "@/assets/images/landing/landing_12.png";
+import Ellipse from "@/assets/icons/ic_Ellipse 22.svg";
 
 
 const Landing = () => {
@@ -34,7 +35,8 @@ const Landing = () => {
               src={landing_1}
               alt="위키만들기_일러스트"
             />
-          </section>    
+          </section>
+          <Image className={styles["ellipse-img"]} width={2000} height={400} src={Ellipse} alt="타원이미지"/>  
           <section className={styles["write-container"]}>
             <div className={styles["write-wrapper"]}>
               <div className={styles["feature-text"]}>

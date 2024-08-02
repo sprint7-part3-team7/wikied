@@ -13,11 +13,17 @@
   font-weight: 400;
   font-style: normal;
 }
+.ellipse-img {
+  width: 2000px;
+  position: absolute;
+  top: 713px
+}
 
 .landing-container {
   width: 1920px;
-  @include Size(100%, "");
+  @include Size(100%, auto);
   overflow-x: hidden;
+  position: relative;
 
   .header {
     background-color: #f1f4fd;
@@ -72,14 +78,14 @@
     z-index: 1;
   }
 
+
+
   .write-container {
     @include Size(100%, 1211px);
     @include Flex(column, center, center);
-    // position: relative;
     background-color: $color-grayscale-500;
 
     .write-wrapper {
-      // @include Size(100%, 681px);
       @include Flex(row, center, "");
       margin-top: 65px;
 
@@ -309,6 +315,10 @@
     .wikid-banner {
       @include Size(100%, 900px);
     }
+    .ellipse-img {
+      top: 784px
+    }
+  
     .write-container {
       @include Size(100%, 942px);
 

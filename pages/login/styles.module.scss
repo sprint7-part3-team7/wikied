@@ -4,7 +4,7 @@
   @include Size(400px, auto);
   @include Flex(column, center, "");
   margin: 0 auto;
-  margin-top: 140px;
+  margin-top: 261px;
 
 
   .login-wrapper {
@@ -83,11 +83,14 @@
 }
 
 @media screen and (max-width: $tablet-max-width) {
+  .login-container {
+    margin-top: 281px;
+  }
 }
 
 @media screen and (max-width: $mobile-max-width) {
   .login-container {
-    @include Size(335px, 405px);
-    margin-top: 140px;
+    @include Size(335px, "");
+    margin-top: 143.5px;
   }
 }
