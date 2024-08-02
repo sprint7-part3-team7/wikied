@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback } from 'react';
-import styles from './styles.module.scss';
+import styles from '@/pages/wikilist/components/UserList/styles.module.scss';
 import { User } from '@/types/user';
 import UserCard from './UserCard';
 import { getUsers } from '@/services/api/user';
@@ -47,13 +47,13 @@ const UserList = () => {
   }, []);
 
   return (
-    <div className={styles.userListContainer}>
+    <div className={styles['user-list-container']}>
       <SearchForm onSearch={handleSearch} text="사용자 검색" />
       {loading ? (
         <div>Loading...</div>
       ) : (
         <>
-          <div className={styles.userList}>
+          <div className={styles['user-list']}>
             {users.map((user) => (
               <UserCard key={user.id} user={user} />
             ))}

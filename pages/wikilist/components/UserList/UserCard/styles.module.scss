@@ -1,6 +1,6 @@
 @import "@/styles/index.scss";
 
-.userCard {
+.user-card {
   @include Flex(row, flex-start, flex-start);
   padding: 24px 36px;
   border: 1px solid $color-grayscale-100;
@@ -11,27 +11,35 @@
   box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.profileImage {
+.profile-image {
   @include Size(85px, 85px);
   border-radius: 50%;
 }
 
-.userInfo {
+.user-info {
   margin-left: 24px;
   @include Flex(column, flex-start, flex-start);
 }
 
-.userName {
-  @include Font(24px, "", $font-weight-lg-bold, $color-grayscale-600);
+.user-name {
+  @include Font(
+    $font-size-2xl,
+    $line-height-2xl,
+    $font-weight-2xl-semibold,
+    $color-grayscale-600);
   border: none;
 }
 
-.userDetails {
-  @include Font($font-size-md, "", $font-weight-md-regular, $color-grayscale-400);
+.user-details {
+  @include Font(
+    $font-size-md,
+    $line-height-md,
+    $font-weight-md-regular,
+    $color-grayscale-400);
   margin-top: 12px;
 }
 
-.userLinkContainer {
+.user-link-container {
   position: absolute;
   right: 16px;
   bottom: 16px;

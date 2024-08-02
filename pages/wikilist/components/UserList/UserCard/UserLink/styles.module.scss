@@ -1,15 +1,19 @@
 @import "@/styles/index.scss";
 
-.linkContainer {
+.link-container {
   @include Flex(row, "", center);
   padding: 5px 10px;
   border-radius: 10px;
   background-color: $color-primary-green-100;
 }
 
-.linkText {
+.link-text {
   margin-left: 8px;
-  @include Font($font-size-md, "", "", $color-primary-green-200);
+  @include Font(
+    $font-size-md,
+    $line-height-md,
+    $font-weight-md-regular,
+    $color-primary-green-200);
   text-decoration: none;
 
   &:hover {

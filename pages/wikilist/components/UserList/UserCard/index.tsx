@@ -1,8 +1,9 @@
-import styles from './styles.module.scss';
+import React from 'react';
+import styles from '@/pages/wikilist/components/UserList/UserCard/styles.module.scss';
 import { User } from '@/types/user';
 import Image from 'next/image';
 import DefaultProfileImg from '@/assets/icons/ic_profile.svg';
-import UserLink from './UserLink';
+import UserLink from './userLink';
 
 interface UserCardProps {
   user: User;
@@ -10,16 +11,16 @@ interface UserCardProps {
 
 const UserCard = ({ user }: UserCardProps) => {
   return (
-    <div className={styles.userCard}>
-      <Image src={DefaultProfileImg} alt="User profile" width={85} height={85} className={styles.profileImage} />
-      <div className={styles.userInfo}>
-        <div className={styles.userName}>{user.name}</div>
-        <div className={styles.userDetails}>
+    <div className={styles['user-card']}>
+      <Image src={DefaultProfileImg} alt="User profile" width={85} height={85} className={styles['profile-image']} />
+      <div className={styles['user-info']}>
+        <div className={styles['user-name']}>{user.name}</div>
+        <div className={styles['user-details']}>
           <div>{user.location}</div>
           <div>{user.occupation}</div>
         </div>
       </div>
-      <div className={styles.userLinkContainer}>
+      <div className={styles['user-link-container']}>
         <UserLink url={user.profileUrl} />
       </div>
     </div>

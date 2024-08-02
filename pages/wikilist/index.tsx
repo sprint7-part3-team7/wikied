@@ -1,12 +1,7 @@
-import React from 'react';
 import WikilistUI from './components/WikiListUI';
 
-const Wikilist: React.FC = () => {
-  return (
-    <div>
-      <WikilistUI />
-    </div>
-  );
+const Wikilist = () => {
+  return <WikilistUI />;
 };
 
 export default Wikilist;
