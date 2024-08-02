@@ -1,8 +1,9 @@
 import React from 'react';
 import styles from './styles.module.scss';
-import { User } from '@/types/user'; 
+import { User } from '@/types/user';
 import Image from 'next/image';
 import DefaultProfileImg from '@/assets/icons/ic_profile.svg';
+import UserLink from './UserLink';
 
 interface UserCardProps {
   user: User;
@@ -11,15 +12,16 @@ interface UserCardProps {
 const UserCard: React.FC<UserCardProps> = ({ user }) => {
   return (
     <div className={styles.userCard}>
-      <Image src={DefaultProfileImg} alt="User profile" width={40} height={40} />
+      <Image src={DefaultProfileImg} alt="User profile" width={85} height={85} className={styles.profileImage} />
       <div className={styles.userInfo}>
         <div className={styles.userName}>{user.name}</div>
         <div className={styles.userDetails}>
-          {user.location} | {user.occupation}
+          <div>{user.location}</div>
+          <div>{user.occupation}</div>
         </div>
-        <a href={user.profileUrl} target="_blank" rel="noopener noreferrer">
-          {user.profileUrl}
-        </a>
+      </div>
+      <div className={styles.userLinkContainer}>
+        <UserLink url={user.profileUrl} />
       </div>
     </div>
   );

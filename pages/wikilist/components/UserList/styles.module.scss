@@ -1,17 +1,14 @@
-@import '@/styles/import.scss';
+@import "@/styles/index.scss";
 
 .userListContainer {
+  @include Flex(column, center, "");
+  row-gap: 20px;
   width: 100%;
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  align-items: center;
   margin-top: 50px;
-}
 
-.userList {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
+  .userList {
+    @include Flex(column, "", "");
+    row-gap: 16px;
+    width: 100%;
+  }
 }
