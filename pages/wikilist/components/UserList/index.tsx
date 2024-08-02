@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import styles from './styles.module.scss';
 import { User } from '@/types/user';
 import UserCard from './UserCard';
@@ -6,7 +6,7 @@ import { getUsers } from '@/services/api/user';
 import Pagination from '@/components/pagination';
 import SearchForm from '@/components/searchForm';
 
-const UserList: React.FC = () => {
+const UserList = () => {
   const [users, setUsers] = useState<User[]>([]);
   const [loading, setLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);

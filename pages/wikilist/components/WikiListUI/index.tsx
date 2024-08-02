@@ -1,8 +1,7 @@
-import React from 'react';
 import UserList from '../UserList';
 import styles from './styles.module.scss';
 
-const WikilistUI: React.FC = () => {
+const WikilistUI = () => {
   return (
     <div className={styles.wikilistUI}>
       <UserList />

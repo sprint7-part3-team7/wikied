@@ -1,4 +1,3 @@
-import React from 'react';
 import styles from './styles.module.scss';
 import { User } from '@/types/user';
 import Image from 'next/image';
@@ -9,7 +8,7 @@ interface UserCardProps {
   user: User;
 }
 
-const UserCard: React.FC<UserCardProps> = ({ user }) => {
+const UserCard = ({ user }: UserCardProps) => {
   return (
     <div className={styles.userCard}>
       <Image src={DefaultProfileImg} alt="User profile" width={85} height={85} className={styles.profileImage} />
