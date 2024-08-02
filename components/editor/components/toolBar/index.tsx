@@ -17,7 +17,7 @@ import alignCenter from "@/assets/icons/align_center.svg";
 import alignRight from "@/assets/icons/align_right.svg";
 import listBulletIcon from "@/assets/icons/ic_bullet.svg";
 import listNumberIcon from "@/assets/icons/ic_number.svg";
-import linkIcon from "@/assets/icons/ic_link.svg";
+import linkIcon from "@/assets/icons/link_gray.svg";
 import imageIcon from "@/assets/icons/ic_image.svg";
 
 interface ToolBarProps {
@@ -43,8 +43,8 @@ const ToolBar = ({
     toggleTextAlign(editorState, onEditorChange, `text-align-${alignment}`);
   };
   return (
-    <div className={styles.toolbar}>
-      <div className={styles.leftButtons}>
+    <div className={styles["toolbar"]}>
+      <div className={styles["left-buttons"]}>
         <div className={styles["button-wrapper"]}>
           <button onClick={() => toggleInlineStyle("BOLD")}>
             <Image src={boldIcon} alt='Bold' width={24} height={24} />
@@ -62,11 +62,9 @@ const ToolBar = ({
               e.preventDefault();
               handleToggleAlign("left");
             }}
-            style={{
-              backgroundColor: isTextLeftAligned(editorState)
-                ? "#4cb5f5"
-                : "transparent",
-            }}
+            className={`${styles["align-button"]} ${
+              isTextLeftAligned(editorState) ? styles["active"] : ""
+            }`}
           >
             <Image src={alignLeft} alt='Align Left' width={24} height={24} />
           </button>
@@ -75,11 +73,9 @@ const ToolBar = ({
               e.preventDefault();
               handleToggleAlign("center");
             }}
-            style={{
-              backgroundColor: isTextCenterAligned(editorState)
-                ? "#4cb5f5"
-                : "transparent",
-            }}
+            className={`${styles["align-button"]} ${
+              isTextCenterAligned(editorState) ? styles["active"] : ""
+            }`}
           >
             <Image
               src={alignCenter}
@@ -93,11 +89,9 @@ const ToolBar = ({
               e.preventDefault();
               handleToggleAlign("right");
             }}
-            style={{
-              backgroundColor: isTextRightAligned(editorState)
-                ? "#4cb5f5"
-                : "transparent",
-            }}
+            className={`${styles["align-button"]} ${
+              isTextRightAligned(editorState) ? styles["active"] : ""
+            }`}
           >
             <Image src={alignRight} alt='Align Right' width={24} height={24} />
           </button>
@@ -126,6 +120,7 @@ const ToolBar = ({
       </div>
       <button
         onClick={() => console.log("Link functionality to be implemented")}
+        className={styles["link-button"]}
       >
         <Image src={linkIcon} alt='Link' width={24} height={24} />
       </button>

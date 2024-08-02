@@ -1,15 +1,13 @@
 @import "@/styles/index.scss";
 
-.editorWrapper {
+.editor-wrapper {
   max-width: 800px;
   margin: 0 auto;
   padding: 46px 30px 30px 30px;
 }
 
-.editorHeader {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+.editor-header {
+  @include Flex(col, space-between, center);
   margin-bottom: 24px;
 }
 
@@ -22,7 +20,7 @@
   );
 }
 
-.dateWrapper {
+.date-wrapper {
   margin-bottom: 33px;
   @include Font(
     $font-size-lg,
@@ -36,14 +34,14 @@
   }
 }
 
-.titleWrapper {
+.title-wrapper {
   display: flex;
   align-items: space-between;
   padding: 12px 0;
   border-bottom: 1px solid $color-grayscale-200;
   border-top: 1px solid $color-grayscale-200;
 
-  .titleCount {
+  .title-count {
     @include Font(
       $font-size-md,
       $line-height-md,
@@ -52,21 +50,21 @@
     );
   }
 
-  .currentCount {
+  .current-count {
     color: black;
   }
 
-  .maxCount {
+  .max-count {
     color: $color-primary-green-200;
   }
 }
 
-.titleInput {
+.title-input {
   width: 100%;
   font-size: 18px;
   border-radius: 4px;
 
-  ::placeholder {
+  &::placeholder {
     @include Font(
       $font-size-xl,
       $line-height-xl,
@@ -76,7 +74,7 @@
   }
 
   outline: none;
-  :focus {
+  &:focus {
     border: none;
   }
 }
@@ -93,43 +91,45 @@
   }
 }
 
-.editorOuterContainer {
+.editor-outer-container {
   border-radius: 4px;
   padding: 10px 0;
   margin-bottom: 20px;
 }
 
-.editorContainer {
+.editor-container {
   min-height: 200px;
   margin-bottom: 10px;
 
-  :global(.public-DraftEditor-content) {
-    min-height: 200px;
-  }
+  :global {
+    .public-DraftEditor-content {
+      min-height: 200px;
+    }
 
-  :global(.public-DraftEditorPlaceholder-root) {
-    color: #999;
-  }
+    .public-DraftEditorPlaceholder-root {
+      color: #999;
+    }
 
-  :global(.DraftEditor-root) {
-    border: none;
-    outline: none;
-  }
+    .DraftEditor-root {
+      border: none;
+      outline: none;
+    }
 
-  :global(.text-align-left) {
-    text-align: left !important;
-  }
+    .text-align-left {
+      text-align: left !important;
+    }
 
-  :global(.text-align-center) {
-    text-align: center !important;
-  }
+    .text-align-center {
+      text-align: center !important;
+    }
 
-  :global(.text-align-right) {
-    text-align: right !important;
+    .text-align-right {
+      text-align: right !important;
+    }
   }
 }
 
-.submitButton {
+.submit-button {
   @include Font(
     $font-size-md,
     $line-height-md,

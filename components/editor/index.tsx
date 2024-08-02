@@ -32,7 +32,7 @@ const MediaComponent = (props: MediaComponentProps) => {
   );
 };
 
-const Editor: React.FC = () => {
+const Editor = () => {
   const [editorState, setEditorState] = useState<EditorState | null>(null);
   const [title, setTitle] = useState("");
   const [isSubmitEnabled, setIsSubmitEnabled] = useState(false);
@@ -132,12 +132,12 @@ const Editor: React.FC = () => {
   }
 
   return (
-    <div className={styles.editorWrapper}>
-      <div className={styles.editorHeader}>
-        <div className={styles.heading}>게시물 등록하기</div>
+    <div className={styles["editor-wrapper"]}>
+      <div className={styles["editor-header"]}>
+        <div className={styles["heading"]}>게시물 등록하기</div>
         <button
-          className={`${styles.submitButton} ${
-            isSubmitEnabled ? "": styles.disabled
+          className={`${styles["submit-button"]} ${
+            isSubmitEnabled ? "" : styles["disabled"]
           }`}
           onClick={handleSubmit}
           disabled={!isSubmitEnabled}
@@ -145,13 +145,13 @@ const Editor: React.FC = () => {
           등록하기
         </button>
       </div>
-      <div className={styles.dateWrapper}>
+      <div className={styles["date-wrapper"]}>
         <span className={styles["date-post"]}>등록일</span>
         <span>{new Date().toISOString().split("T")[0].replace(/-/g, ".")}</span>
       </div>
-      <div className={styles.titleWrapper}>
+      <div className={styles["title-wrapper"]}>
         <input
-          className={styles.titleInput}
+          className={styles["title-input"]}
           type='text'
           placeholder='제목을 입력해주세요'
           value={title}
@@ -161,9 +161,9 @@ const Editor: React.FC = () => {
           }}
           maxLength={30}
         />
-        <span className={styles.titleCount}>
-          <span className={styles.currentCount}>{title.length}/</span>
-          <span className={styles.maxCount}>30</span>
+        <span className={styles["title-count"]}>
+          <span className={styles["current-count"]}>{title.length}/</span>
+          <span className={styles["max-count"]}>30</span>
         </span>
       </div>
       <div className={styles["content-count"]}>
@@ -175,8 +175,8 @@ const Editor: React.FC = () => {
           자
         </span>
       </div>
-      <div className={styles.editorOuterContainer}>
-        <div className={styles.editorContainer} onClick={focusEditor}>
+      <div className={styles["editor-outer-container"]}>
+        <div className={styles["editor-container"]} onClick={focusEditor}>
           <DraftEditor
             ref={editorRef}
             editorState={editorState}
