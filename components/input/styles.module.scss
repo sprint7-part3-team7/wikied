@@ -26,6 +26,10 @@
   &.error {
     background-color: $color-secondary-red-100;
   }
+
+  &:focus {
+    outline: 1px solid $color-primary-green-200;
+  }
 }
 
 .input::placeholder {
