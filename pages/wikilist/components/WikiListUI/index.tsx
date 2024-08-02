@@ -1,4 +1,4 @@
-import UserList from '../UserList';
+import UserList from '../userList';
 import styles from '@/pages/wikilist/components/WikiListUI/styles.module.scss';
 
 const WikilistUI = () => {

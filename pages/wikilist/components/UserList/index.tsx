@@ -1,10 +1,11 @@
 import { useState, useEffect, useCallback } from 'react';
 import styles from '@/pages/wikilist/components/UserList/styles.module.scss';
 import { User } from '@/types/user';
-import UserCard from './UserCard';
+import UserCard from './userCard';
 import { getUsers } from '@/services/api/user';
 import Pagination from '@/components/pagination';
 import SearchForm from '@/components/searchForm';
+import NotFound from '@/pages/wikilist/components/notFound';
 
 const UserList = () => {
   const [users, setUsers] = useState<User[]>([]);
@@ -51,6 +52,8 @@ const UserList = () => {
       <SearchForm onSearch={handleSearch} text="사용자 검색" />
       {loading ? (
         <div>Loading...</div>
+      ) : users.length === 0 ? (
+        <NotFound searchTerm={searchTerm} />
       ) : (
         <>
           <div className={styles['user-list']}>

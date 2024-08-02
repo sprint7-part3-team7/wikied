@@ -1,4 +1,4 @@
-import WikilistUI from './components/WikiListUI';
+import WikilistUI from './components/wikiListUI';
 
 const Wikilist = () => {
   return <WikilistUI />;
