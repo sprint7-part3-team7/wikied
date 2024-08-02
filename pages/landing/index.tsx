@@ -24,7 +24,7 @@ const Landing = () => {
             </div>
             <div className={styles["btn-wrapper"]}>
               <button className={styles["wikidMain-page-bts"]}>
-                <h1>위키 만들기</h1>
+                <strong>위키 만들기</strong>
               </button>
             </div>           
             <Image
@@ -52,21 +52,23 @@ const Landing = () => {
           </section>
         </header>
         <main>
-          <section className={styles["share-container"]}>
-            <div className={styles["feature-text"]}>
-                <div className={styles["feature-title"]}>SHARE</div>
-                <div className={styles["feature-content"]}>
-                  <p>내 위키 만들고</p>
-                  <p>친구에게 공유해요</p>
-                </div>      
-            </div>
-            <div className={styles["img-container"]}>
-              <div className={styles["img-box"]}></div>
-              <Image className={styles["share-img1"]} width={360} height={360} src={landing_4} alt="쉐어이미지1"/>
-              <Image className={styles["share-img2"]} width={360} height={360} src={landing_5} alt="쉐어이미지2"/>
-              <Image className={styles["share-img3"]} width={360} height={360} src={landing_6} alt="쉐어이미지3"/>
-              <Image className={styles["share-img4"]} width={360} height={360} src={landing_7} alt="쉐어이미지4"/>
-              <div className={styles["img-box"]}></div>
+          <section className={styles["share-container"]}> 
+            <div className={styles["share-wrapper"]}>
+              <div className={styles["feature-text"]}>
+                  <div className={styles["feature-title"]}>SHARE</div>
+                  <div className={styles["feature-content"]}>
+                    <p>내 위키 만들고</p>
+                    <p>친구에게 공유해요</p>
+                  </div>      
+              </div>
+              <div className={styles["img-container"]}>
+                <div className={styles["img-box"]}></div>
+                <Image className={styles["share-img1"]} width={360} height={360} src={landing_4} alt="쉐어이미지1"/>
+                <Image className={styles["share-img2"]} width={360} height={360} src={landing_5} alt="쉐어이미지2"/>
+                <Image className={styles["share-img3"]} width={360} height={360} src={landing_6} alt="쉐어이미지3"/>
+                <Image className={styles["share-img4"]} width={360} height={360} src={landing_7} alt="쉐어이미지4"/>
+                <div className={styles["img-box"]}></div>
+              </div>
             </div>
           </section>
           <section className={styles["view-container"]}>
@@ -91,15 +93,31 @@ const Landing = () => {
             <div className={styles["start-wrapper"]}>
               <div className={styles["start-title"]}>나만의 위키 만들어 보기</div>
               <button className={styles["strat-bts"]}>
-                <h1>지금 시작하기</h1>
+                <strong>지금 시작하기</strong>
               </button>
-
             </div>
           </section>
         </main>
+        <footer>
+          <div className={styles["footer-container"]}>
+            <div className={styles["footer-wrapper"]}>
+              <div className={styles["copyright"]}>Copyright ⓒ Wikied. All Rights Reserved</div>
+              <div className={styles["impormaion"]}>
+                <p >사업자등록번호 000-00-00000  |  통신판매신고 제2020-서울-00000호  |  대표 : 이지은</p>
+                <p >서울특별시 중구 청계천로 123, 위키드빌딩</p>
+              </div>
+              <div className={styles["footer-menu"]}>
+                <p>서비스 이용약관</p>
+                <p>개인정보 취급방침</p>
+                <p>전자금융거래 기본약관</p>
+              </div>
+            </div>  
+          </div>
+        </footer>
       </div>
     </>
   );
 };
 
 export default Landing;
+ 

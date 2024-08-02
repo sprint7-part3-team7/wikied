@@ -1,4 +1,4 @@
-@import "@/styles/import.scss";
+@import "@/styles/index.scss";
 @font-face {
   font-family: "NEXON Lv1 Gothic OTF";
   src: url("https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.1/NEXON%20Lv1%20Gothic%20OTF.woff")
@@ -15,249 +15,637 @@
 }
 
 .landing-container {
-  @include Size(100%, 5035px);
-}
+  width: 1920px;
+  @include Size(100%, "");
+  overflow-x: hidden;
 
-.header {
-  @include Size(100%, 2125px);
-  @include Flex(column, center, center);
-  background-color: #f1f4fd;
-}
-
-.wikid-banner {
-  @include Flex(column, center, center);
-}
-
-.banner-title {
-  @include Size(455px, 188px);
-  @include Flex(column, center, center);
-  margin-top: 120px;
-
-  .paragraph {
-    font-family: "NEXON Lv1 Gothic OTF";
-    font-size: 60px;
-    line-height: 69px;
-    color: $color-grayscale-500;
+  .header {
+    background-color: #f1f4fd;
   }
 
-  .heading {
-    font-family: "NEXON Lv1 Gothic OTF";
-    font-size: 90px;
-    font-weight: 700;
-    line-height: 103.5px;
-    margin-top: 15px;
-    color: $color-grayscale-500;
-  }
-}
-
-.wikidMain-page-bts {
-  @include Size(170px, 59px);
-  @include Flex(column, center, center);
-  margin-top: 40px;
-  background: $color-grayscale-500;
-  border-radius: 15px;
-  padding: 15px 30px 15px 30px;
-  gap: 10px;
-
-  h1 {
-    @include Size(110px, 29px);
-    font-size: 20px;
-    font-weight: 700;
-    color: $color-grayscale-50;
-  }
-}
-
-.landing-img1 {
-  margin-top: 54px;
-  z-index: 1;
-}
-
-.write-container {
-  @include Size(100%, 1211px);
-  @include Flex(column, center, center);
-  position: relative;
-  background-color: $color-grayscale-500;
-
-  .write-wrapper {
-    // @include Size(924px, 681px);
-    @include Flex(row, null, center);
-    .feature-text {
-      @include Size(364px, 681px);
-      @include Flex(column, space-between, null);
-      margin-right: 40px;
-
-      .feature-title {
-        font-family: "NEXON Lv1 Gothic OTF";
-        font-size: 30px;
-        font-weight: 700;
-        line-height: 34.5px;
-        color: $color-primary-green-200;
-      }
-
-      .feature-content {
-        margin-bottom: 60px;
-        p {
-          font-family: "NEXON Lv1 Gothic OTF";
-          font-size: 50px;
-          font-weight: 400;
-          line-height: 57.5px;
-          color: $color-grayscale-50;
-        }
-      }
-
-      .write-img-wrapper {
-        background-color: $color-primary-green-200;
-        border-radius: 20px;
-      }
-    }
-  }
-}
-
-.share-container {
-  @include Size(100%, 1211px);
-  @include Flex(column, center, center);
-
-  .feature-text {
-    text-align: right;
-    margin-left: 1027px;
-
-    .feature-title {
-      font-family: "NEXON Lv1 Gothic OTF";
-      font-size: 30px;
-      font-weight: 700;
-      line-height: 34.5px;
-      color: $color-primary-green-200;
-    }
-
-    .feature-content {
-      margin-top: 20px;
-      p {
-        font-family: "NEXON Lv1 Gothic OTF";
-        font-size: 50px;
-        font-weight: 400;
-        line-height: 57.5px;
-        color: $color-grayscale-500;
-      }
-    }
+  .wikid-banner {
+    @include Flex(column, "", center);
+    @include Size(100%, 914px);
   }
 
-  .img-container {
-    @include Flex(row, center, center);
-    gap: 70px;
+  .banner-title {
+    @include Size(100%, 188px);
+    @include Flex(column, center, center);
     margin-top: 120px;
 
-    .img-box {
-      @include Size(360px, 360px);
-      background-color: #dee5f5;
-      border-radius: 25px;
+    .paragraph {
+      font-family: "NEXON Lv1 Gothic OTF";
+      font-size: 60px;
+      line-height: 69px;
+      color: $color-grayscale-500;
     }
-    .share-img1 {
-      background-color: $color-secondary-purple-100;
-      border-radius: 25px;
-    }
-    .share-img2 {
-      background-color: #adedde;
-      border-radius: 25px;
-    }
-    .share-img3 {
-      background-color: #dee5f5;
-      border-radius: 25px;
-    }
-    .share-img4 {
-      background-color: #dee5f5;
-      border-radius: 25px;
+
+    .heading {
+      font-family: "NEXON Lv1 Gothic OTF";
+      font-size: 90px;
+      font-weight: 700;
+      line-height: 103.5px;
+      margin-top: 15px;
+      color: $color-grayscale-500;
     }
   }
-}
 
-.view-container {
-  @include Size(100%, 1291px);
-  @include Flex(column, center, center);
-  background-color: #ecf0fa;
+  .wikidMain-page-bts {
+    @include Size(170px, 59px);
+    @include Flex(column, center, center);
+    margin-top: 40px;
+    background: $color-grayscale-500;
+    border-radius: 15px;
+    padding: 15px 30px 15px 30px;
+    gap: 10px;
 
-  .view-wrapper {
-    @include Size(924px, 891px);
+    strong {
+      @include Size(110px, 29px);
+      font-size: 20px;
+      font-weight: 700;
+      color: $color-grayscale-50;
+    }
+  }
 
-    .feature-text {
-      text-align: left;
+  .landing-img1 {
+    margin-top: 54px;
+    z-index: 1;
+  }
 
-      .feature-title {
-        font-family: "NEXON Lv1 Gothic OTF";
-        font-size: 30px;
-        font-weight: 700;
-        line-height: 34.5px;
-        color: $color-primary-green-200;
-      }
+  .write-container {
+    @include Size(100%, 1211px);
+    @include Flex(column, center, center);
+    // position: relative;
+    background-color: $color-grayscale-500;
 
-      .feature-content {
-        margin-top: 20px;
-        p {
+    .write-wrapper {
+      // @include Size(100%, 681px);
+      @include Flex(row, center, "");
+      margin-top: 65px;
+
+      .feature-text {
+        @include Size(364px, 681px);
+        @include Flex(column, "", "");
+        margin-right: 40px;
+
+        .feature-title {
           font-family: "NEXON Lv1 Gothic OTF";
-          font-size: 50px;
-          font-weight: 400;
-          line-height: 57.5px;
-          color: $color-grayscale-500;
+          font-size: 30px;
+          font-weight: 700;
+          line-height: 34.5px;
+          color: $color-primary-green-200;
+        }
+
+        .feature-content {
+          margin-bottom: 60px;
+          margin-top: 20px;
+          p {
+            font-family: "NEXON Lv1 Gothic OTF";
+            font-size: 50px;
+            font-weight: 400;
+            line-height: 57.5px;
+            color: $color-grayscale-50;
+          }
+        }
+
+        .write-img1 {
+          @include Size(364px, 450px);
+          background-color: $color-primary-green-200;
+          border-radius: 20px;
         }
       }
     }
+  }
 
-    .img-container {
-      // @include Size(924px, 280px);
-      margin-top: 120px;
-      gap: 40px;
+  .share-container {
+    @include Size(100%, 1051px);
+    @include Flex(column, center, center);
 
-      .view-img1 {
-        grid-area: top;
+    .share-wrapper {
+      @include Flex(column, center, center);
+
+      .feature-text {
+        @include Size(924px, "");
+        text-align: right;
+
+        .feature-title {
+          font-family: "NEXON Lv1 Gothic OTF";
+          font-size: 30px;
+          font-weight: 700;
+          line-height: 34.5px;
+          color: $color-primary-green-200;
+        }
+
+        .feature-content {
+          margin-top: 20px;
+          p {
+            font-family: "NEXON Lv1 Gothic OTF";
+            font-size: 50px;
+            font-weight: 400;
+            line-height: 57.5px;
+            color: $color-grayscale-500;
+          }
+        }
       }
 
-      .img-wrapper {
-        @include Flex(row, space-between, center);
-        margin-top: 40px;
+      .img-container {
+        @include Flex(row, center, center);
+        @include Size(100%, 360px);
+        gap: 70px;
+        margin-top: 120px;
 
-        .view-img2 {
+        .img-box {
+          @include Size(360px, 360px);
+          background-color: #dee5f5;
+          border-radius: 25px;
+        }
+        .share-img1 {
           background-color: $color-secondary-purple-100;
           border-radius: 25px;
         }
-        .view-img3 {
+        .share-img2 {
+          background-color: #adedde;
+          border-radius: 25px;
+        }
+        .share-img3 {
+          background-color: #dee5f5;
+          border-radius: 25px;
+        }
+        .share-img4 {
+          background-color: #dee5f5;
+          border-radius: 25px;
+        }
+      }
+    }
+  }
 
+  .view-container {
+    @include Size(100%, 1291px);
+    @include Flex(column, center, center);
+    background-color: #ecf0fa;
+
+    .view-wrapper {
+      @include Size(924px, 891px);
+
+      .feature-text {
+        text-align: left;
+
+        .feature-title {
+          font-family: "NEXON Lv1 Gothic OTF";
+          font-size: 30px;
+          font-weight: 700;
+          line-height: 34.5px;
+          color: $color-primary-green-200;
+        }
+
+        .feature-content {
+          margin-top: 20px;
+          p {
+            font-family: "NEXON Lv1 Gothic OTF";
+            font-size: 50px;
+            font-weight: 400;
+            line-height: 57.5px;
+            color: $color-grayscale-500;
+          }
+        }
+      }
+
+      .img-container {
+        @include Flex(column, center, center);
+        margin-top: 120px;
+        gap: 40px;
+
+        .img-wrapper {
+          @include Flex(row, space-between, "");
+          @include Size(924px, 280px);
+
+
+          .view-img2 {
+            background-color: $color-secondary-purple-100;
+            border-radius: 25px;
+            @include Size(280px, 280px);
+          }
+          .view-img3 {
+            @include Size(px, 280px);
+          }
+        }
+      }
+    }
+  }
+
+  .start-container {
+    @include Size(100%, 568px);
+    @include Flex(column, center, center);
+    background-color: $color-grayscale-500;
+
+    .start-wrapper {
+      @include Flex(column, center, center);
+      gap: 40px;
+    }
+
+    .start-title {
+      font-family: "NEXON Lv1 Gothic OTF";
+      font-size: 60px;
+      font-weight: 700;
+      line-height: 69px;
+      color: $color-grayscale-50;
+    }
+
+    .strat-bts {
+      @include Size(190px, 59px);
+      background: $color-grayscale-50;
+      border-radius: 15px;
+      padding: 15px 30px 15px 30px;
+
+      strong {
+        @include Size(130px, 29px);
+        @include Font(
+          $font-size-xl,
+          $line-height-xl,
+          $font-weight-xl-bold,
+          $color-grayscale-500
+        );
+      }
+    }
+  }
+
+  .footer-container {
+    @include Size(100%, 270px);
+    background-color: $color-grayscale-600;
+    padding: 80px;
+    color: $color-grayscale-50;
+
+    .footer-wrapper {
+
+      .copyright {
+        @include Font($font-size-lg, $line-height-lg, $font-weight-lg-bold, "");
+      }
+
+      .impormaion {
+        @include Font(
+          $font-size-md,
+          $line-height-md,
+          $font-weight-md-regular,
+          ""
+        );
+        margin-top: 10px;
+      }
+
+      .footer-menu {
+        @include Flex(row, "", center);
+        @include Font(
+          $font-size-md,
+          $line-height-md,
+          $font-weight-md-medium,
+          ""
+        );
+        margin-top: 30px;
+        gap: 30px;
+      }
+    }
+  }
+
+  @media screen and (max-width: $tablet-max-width) {
+    .wikid-banner {
+      @include Size(100%, 900px);
+    }
+    .write-container {
+      @include Size(100%, 942px);
+
+      .write-wrapper {
+        margin-top: 71.5px;
+
+        .feature-text {
+          @include Size(262px, 479px);
+
+          .feature-title {
+            font-family: "NEXON Lv1 Gothic OTF";
+            font-size: 20px;
+            line-height: 23px;
+          }
+
+          .feature-content {
+            margin-bottom: 40px;
+            p {
+              font-size: 32px;
+              line-height: 36.8px;
+            }
+          }
+          .write-img1 {
+            @include Size(262px, 322px);
+          }
+        }
+        .write-img2 {
+          @include Size(365px, 479px);
+        }
+      }
+    }
+
+    .share-container {
+      @include Size(100%, 676px);
+
+      .share-wrapper {
+        @include Flex(column, center, center);
+
+        .feature-text {
+          @include Size(647px, "");
+
+          .feature-title {
+            font-size: 20px;
+            line-height: 23px;
+          }
+
+          .feature-content {
+            margin-top: 32px;
+            p {
+              font-size: 32px;
+              font-weight: 400;
+              line-height: 36.8px;
+            }
+          }
+        }
+
+        .img-container {
+          @include Flex(row, center, center);
+          @include Size(100%, 147px);
+          gap: 20px;
+          margin-top: 80px;
+
+          .img-box {
+            @include Size(147px, 147px);
+          }
+          .share-img1 {
+            @include Size(147px, 147px);
+          }
+          .share-img2 {
+            @include Size(147px, 147px);
+          }
+          .share-img3 {
+            @include Size(147px, 147px);
+          }
+          .share-img4 {
+            @include Size(147px, 147px);
+          }
+        }
+      }
+    }
+
+    .view-container {
+      @include Size(100%, 933px);
+
+      
+      .view-wrapper {
+        @include Size(648px, 613px);
+
+        .feature-text {
+          .feature-title {
+            font-size: 20px;
+            line-height: 23px;
+          }
+
+          .feature-content {
+            p {
+              font-size: 32px;
+              line-height: 36.8px;
+            }
+          }
+        }
+
+        .img-container {
+          @include Size(648px, 416px);
+          margin-top: 80px;
+          gap: 22px;
+
+          
+          .img-wrapper {
+            @include Size(648px, 198px);
+          
+
+            .view-img2 {
+              @include Size(198px, 198px);
+            }
+
+            .view-img3 {
+              @include Size(428px, 198px);
+            }
+          }
         }
       }
     }
   }
 }
 
-.start-container {
-  @include Size(100%, 568px);
-  @include Flex(column, center, center);
-  background-color: $color-grayscale-500;
+@media (max-width: $mobile-max-width) {
+  .landing-container {
+    min-width: 375px;
 
-  .start-wrapper {
-    @include Flex(column, center, center);
-    gap: 40px;
-  }
+    .wikid-banner {
+      @include Size(100%, 592px);
+    }
 
-  .start-title {
-    font-family: "NEXON Lv1 Gothic OTF";
-    font-size: 60px;
-    font-weight: 700;
-    line-height: 57.5px;
-    color: #ffffff;
-  }
+    .banner-title {
+      @include Size(100%, 188px);
+      margin-top: 100px;
 
-  .strat-bts {
-    @include Size(190px, 59px);
-    background: #ffffff;
-    border-radius: 15px;
-    // padding: 15px 30px 15px 30px;
+      .paragraph {
+        font-size: 40px;
+        line-height: 46px;
+      }
 
-    h1 {
-      // @include Size(100%, 29px);
-      @include Font(
-        $font-size-2xl,
-        $line-height-2xl,
-        $font-weight-2xl-bold,
-        $color-grayscale-500
-      );
+      .heading {
+        font-size: 60px;
+        line-height: 69px;
+      }
+    }
+
+    .wikidMain-page-bts {
+      @include Size(152px, 54px);
+    }
+
+    .landing-img1 {
+      @include Size(336px, 398px);
+      margin-top: 44px;
+    }
+
+    .write-container {
+      @include Size(100%, 624px);
+
+      .write-wrapper {
+        margin-top: 87px;
+
+        .feature-text {
+          @include Size(133px, 250px);
+          margin-right: 10px;
+          
+
+          .feature-title {
+            font-size: 10px;
+            line-height: 11.5px;
+          }
+
+          .feature-content {
+            margin-bottom: 10px;
+            p {
+              font-size: 16px;
+              line-height: 18.4px;
+            }
+          }
+          .write-img1 {
+            @include Size(133px, 162px);
+          }
+        }
+        .write-img2 {
+          @include Size(192px, 250px);
+        }
+      }
+    }
+
+    .share-container {
+      @include Size(100%, 374px);
+
+      .share-wrapper {
+
+        .feature-text {
+          @include Size(335px, "");
+
+          .feature-title {
+            font-size: 10px;
+            line-height: 11.5px;
+          }
+
+          .feature-content {
+            margin-top: 10px;
+            p {
+              font-size: 16px;
+              line-height: 18.4px;
+            }
+          }
+        }
+
+        .img-container {
+          @include Size(375px, 76px);
+          gap: 10px;
+          margin-top: 40px;
+
+          .img-box {
+            @include Size(76px, 76px);
+          }
+          .share-img1 {
+            @include Size(76px, 76px);
+          }
+          .share-img2 {
+            @include Size(76px, 76px);
+          }
+          .share-img3 {
+            @include Size(76px, 76px);
+          }
+          .share-img4 {
+            @include Size(76px, 76px);
+          }
+        }
+      }
+    }
+
+    .view-container {
+      @include Size(100%, 512px);
+
+      .view-wrapper {
+        @include Size(335px, 312px);
+
+        .feature-text {
+          .feature-title {
+            font-size: 10px;
+            line-height: 11.5px;
+          }
+
+          .feature-content {
+            margin-top: 10px;
+            p {
+              font-size: 16px;
+              line-height: 18.4px;
+              
+            }
+          }
+        }
+
+        .img-container {
+          @include Size(335px, 214px);
+          margin-top: 40px;
+          gap: 10px;
+
+
+
+          .img-wrapper {
+            @include Size(335px, 102px);
+
+            .view-img2 {
+              @include Size(102px, 102px);
+              border-radius: 10px
+            }
+
+            .view-img3 {
+              @include Size(223px, 102px);
+            }
+          }
+        }
+      }
+    }
+
+    .start-container {
+      @include Size(100%, 329px);
+
+      .start-wrapper {
+        gap: 40px;
+      }
+  
+      .start-title {
+        font-size: 30px;
+        line-height: 34.5px;
+      }
+  
+      .strat-bts {
+        @include Size(169px, 54px);
+        padding: 15px 20px 15px 20px;
+        
+  
+        strong {
+          @include Size(130px, 29px);
+          @include Font(
+            $font-size-xl,
+            $line-height-xl,
+            $font-weight-xl-bold,
+            $color-grayscale-500
+          );
+        }
+      }
+    }
+
+    .footer-container {
+      @include Size(100%, 152px);
+      padding: 40px;
+      .footer-wrapper {
+        @include Size(335px, 72px);
+  
+        .copyright {
+          @include Font($font-size-lg, $line-height-lg, $font-weight-lg-bold, "");
+        }
+  
+        .impormaion {
+          @include Font(
+            $font-size-md,
+            $line-height-md,
+            $font-weight-md-regular,
+            ""
+          );
+          margin-top: 10px;
+        }
+
+        p{
+          @include Size(100%, "");
+        }
+  
+      }
     }
   }
+
 }
