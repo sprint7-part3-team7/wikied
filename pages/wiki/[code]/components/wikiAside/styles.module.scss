@@ -11,12 +11,52 @@
   .image-container {
     @include Size(100%, "");
     @include Flex(column, center, center);
+    margin-top: 60px;
+
+    .file-input-wrapper {
+      // margin-top: 60px;
+      position: relative;
+
+      .fileInput {
+        @include Size(200px, 200px);
+        border-radius: 50%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        display: none;
+      }
+
+      .fileUploadIcon {
+        @include Size(36px, 36px);
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 2;
+      }
+
+      .overlay {
+        @include Size(200px, 200px);
+        position: absolute;
+        left: 60px;
+        background-color: #000000;
+        opacity: 50%;
+        border-radius: 50%;
+        z-index: 1;
+      }
+
+      .previewImage {
+        @include Size(200px, 200px);
+        border-radius: 50%;
+      }
+    }
 
     .image {
       @include Flex(column, center, center);
       @include Size(200px, 200px);
       border-radius: 50%;
-      margin: 60px;
+      margin: 0 60px;
       box-sizing: border-box;
     }
   }
@@ -29,7 +69,7 @@
     gap: 16px;
 
     .always-show-user-attribute,
-    .desktop-user-attribute,
+    .editable-attribute,
     .selective-show-user-attribute {
       @include Flex(column, center, stretch);
       gap: 16px;
@@ -78,10 +118,34 @@
     grid-template-rows: auto 1px 24px;
     gap: 0;
 
+    &.editable {
+      @include Flex(column, "", center);
+      gap: 32px;
+
+      .file-input-wrapper {
+        margin-top: 20px;
+
+        .overlay {
+          @include Flex("", center, center);
+          @include Size(71px, 71px);
+          left: 0;
+        }
+
+        .fileUploadIcon {
+          @include Size(20px, 20px);
+        }
+
+        .previewImage {
+          @include Size(71px, 71px);
+        }
+      }
+    }
+
     .image-container {
       @include Flex(column, inherit, center);
       @include Size(71px, "");
       grid-column: 1;
+      margin-top: 20px;
 
       .image {
         @include Size(71px, 71px);
@@ -92,15 +156,21 @@
 
     .user-attribute-container {
       @include Size(auto, "");
+      @include Flex(column, inherit, "");
       position: static;
       grid-column: 3;
-      gap: 4px;
+      gap: 0;
 
       .desktop-user-attribute {
         display: none;
       }
 
+      .always-show-user-attribute {
+        margin-bottom: 4px;
+      }
+
       .always-show-user-attribute,
+      .desktop-user-attribute,
       .selective-show-user-attribute {
         @include Flex(column, center, stretch);
         gap: 4px;
@@ -122,6 +192,15 @@
 @media screen and (max-width: 767px) {
   .user-profile {
     grid-template-columns: 62px 20px auto 20px 62px;
+
+    &.editable {
+      .file-input-wrapper {
+        .overlay {
+          @include Size(62px, 62px);
+          left: 0;
+        }
+      }
+    }
 
     .image-container {
       @include Size(62px, "");

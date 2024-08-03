@@ -1,17 +1,13 @@
-import React from "react";
 import { Section } from "@/types/wiki";
 import Blockquote from "@/pages/wiki/[code]/components/wikiArticle/components/blockquote";
 import styles from "@/pages/wiki/[code]/components/wikiArticle/styles.module.scss";
 
 interface WikiArticleProps {
-  className?: string;
+  className: string;
   sections: Section[];
 }
 
-const WikiArticle: React.FC<WikiArticleProps> = ({
-  className,
-  sections = [],
-}) => {
+const WikiArticle = ({ className, sections }: WikiArticleProps) => {
   const hasSections = sections.length > 0;
 
   return (

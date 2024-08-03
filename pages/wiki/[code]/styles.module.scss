@@ -1,5 +1,55 @@
 @import "@/styles/index.scss";
 
+// 내 위키 페이지 - 수정 진행중
+.editable-container {
+  @include Size(100%, 100vh);
+  // @include Flex(column, inherit, center);
+  max-width: 100%;
+  margin: 0 auto;
+  position: relative;
+  box-sizing: border-box;
+  padding-top: 40px;
+
+  .editable-wiki-main {
+    display: grid;
+    grid-template-columns: minmax(60px, 1fr) minmax(0, 1120px) 120px 400px 80px !important;
+    grid-template-areas:
+      "space1 header space2 aside space3"
+      "space1 article space2 article space3";
+
+    .editable-wiki-padding {
+      @include Size(100%, "");
+      max-width: 200px;
+      grid-column: 1;
+      grid-row: 1;
+      overflow: hidden;
+    }
+
+    .editable-wiki-header {
+      @include Size(100%, "");
+      grid-column: 2;
+      grid-row: 1;
+      box-sizing: border-box;
+    }
+
+    .editable-wiki-article {
+      @include Size(100%, "");
+      grid-column: 2;
+      grid-row: 2;
+      box-sizing: border-box;
+      margin-bottom: 80px;
+    }
+
+    .editable-wiki-aside {
+      @include Size(100%, "");
+      grid-column: 4;
+      grid-row: 1 / span 2;
+      position: relative;
+    }
+  }
+}
+
+// 위키페이지
 .container {
   @include Size(100%, 100vh);
   @include Flex(column, inherit, center);
@@ -46,7 +96,7 @@
     }
 
     .wiki-aside {
-      @include Size(320px, "");
+      @include Size(100%, "");
       grid-column: 4;
       grid-row: 1 / span 2;
       position: relative;
@@ -55,6 +105,60 @@
 }
 
 @media screen and (max-width: 1199px) {
+  // 내 위키 페이지 - 수정 진행중
+  .editable-container {
+    padding: 47px 60px 0 47px;
+
+    .editable-wiki-main {
+      display: grid;
+      grid-template-columns: 1fr !important;
+      grid-template-rows: 60px 388px 10px 60px 40px 1fr;
+      grid-template-areas:
+        "space1"
+        "aside"
+        "space2"
+        "header"
+        "space3"
+        "article";
+
+      .editable-wiki-padding {
+        @include Size("", 60x);
+        grid-area: space1;
+        grid-row: 1;
+      }
+
+      .editable-wiki-aside {
+        @include Size("", 388px);
+        grid-area: aside;
+        grid-row: 2;
+      }
+
+      .editable-space1 {
+        @include Size("", 10px);
+        grid-area: space2;
+        grid-row: 3;
+      }
+
+      .editable-wiki-header {
+        @include Size("", 60px);
+        grid-area: header;
+        grid-row: 4;
+      }
+
+      .editable-space2 {
+        @include Size("", 40px);
+        grid-area: space3;
+        grid-row: 5;
+      }
+
+      .editable-wiki-article {
+        grid-area: article;
+        grid-row: 6;
+      }
+    }
+  }
+
+  // 내 위키 페이지
   .container {
     padding: 0 60px;
     padding-top: 60px;
@@ -68,9 +172,9 @@
       grid-template-rows: auto auto auto;
       grid-template-areas:
         "header"
-        "spacer1"
+        "space1"
         "aside"
-        "spacer2"
+        "space2"
         "article";
 
       .wiki-padding {
@@ -82,9 +186,9 @@
         margin: 0 auto;
       }
 
-      .spacer1 {
+      .space1 {
         @include Size("", 15px);
-        grid-area: spacer1;
+        grid-area: space1;
       }
 
       .wiki-aside {
@@ -94,9 +198,9 @@
         margin: 0;
       }
 
-      .spacer2 {
+      .space2 {
         @include Size("", 60px);
-        grid-area: spacer2;
+        grid-area: space2;
       }
 
       .wiki-article {
@@ -108,6 +212,22 @@
 }
 
 @media screen and (max-width: 767px) {
+  // 내 위키 페이지 - 수정 진행중
+  .editable-container {
+    padding: 15px 20px 0 20px;
+
+    .editable-wiki-main {
+      display: grid;
+      grid-template-columns: 1fr !important;
+      grid-template-rows: 55px 511px 15px 60px 15px 1fr;
+
+      .editable-wiki-aside {
+        @include Size("", 511px);
+      }
+    }
+  }
+
+  // 내 위키페이지
   .container {
     padding: 0 20px;
     margin-top: 40px;
@@ -118,11 +238,11 @@
     }
 
     .wiki-main {
-      .spacer1 {
+      .space1 {
         @include Size("", 12px);
       }
 
-      .spacer2 {
+      .space2 {
         @include Size("", 40px);
       }
 

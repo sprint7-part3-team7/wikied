@@ -1,5 +1,4 @@
 export interface Profile {
-  // id: number;
   image: string;
   city: string;
   mbti: string;
@@ -17,6 +16,12 @@ export interface Profile {
   securityQuestion: string;
   teamId: string;
   id: number;
+  isMyProfile?: boolean;
+}
+
+export interface Section {
+  title: string;
+  content: string;
 }
 
 export interface Section {
