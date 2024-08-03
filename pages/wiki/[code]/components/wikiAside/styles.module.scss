@@ -40,7 +40,7 @@
         @include Size(200px, 200px);
         position: absolute;
         left: 60px;
-        background-color: #000000;
+        background-color: $color-grayscale-700;
         opacity: 50%;
         border-radius: 50%;
         z-index: 1;
@@ -111,7 +111,7 @@
   }
 }
 
-@media screen and (max-width: 1199px) {
+@media screen and (max-width: $tablet-max-width) {
   .user-profile {
     display: grid;
     grid-template-columns: 71px 40px auto 40px 71px;
@@ -165,7 +165,7 @@
   }
 }
 
-@media screen and (max-width: 767px) {
+@media screen and (max-width: $mobile-max-width) {
   .user-profile {
     grid-template-columns: 62px 20px auto 20px 62px;
 

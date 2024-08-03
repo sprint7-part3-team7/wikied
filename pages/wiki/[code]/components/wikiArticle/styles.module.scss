@@ -74,7 +74,7 @@
   }
 }
 
-@media screen and (max-width: 1199px) {
+@media screen and (max-width: $tablet-max-width) {
   .grid-container {
     .grid-item {
       gap: 9px;
@@ -82,7 +82,7 @@
   }
 }
 
-@media screen and (max-width: 767px) {
+@media screen and (max-width: $mobile-max-width) {
   .grid-container {
     row-gap: 32px;
 
