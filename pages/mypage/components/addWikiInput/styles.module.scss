@@ -1,7 +1,7 @@
-@import "@/styles/index.scss";
+@import '@/styles/index.scss';
 
 .container {
-  @include Flex(column, "", "");
+  @include Flex(column, '', '');
   row-gap: 10px;
   padding-top: 32px;
 
@@ -15,7 +15,7 @@
   }
 
   .wiki-input-wrapper {
-    @include Flex(column, "", "");
+    @include Flex(column, '', '');
     row-gap: 8px;
 
     .wiki-input {
@@ -33,18 +33,5 @@
         $color-grayscale-400
       );
     }
-  }
-
-  .button {
-    @include Size(89px, 40px);
-    @include Font(
-      $font-size-md,
-      $line-height-md,
-      $font-weight-md-semibold,
-      $color-grayscale-100
-    );
-    background-color: $color-primary-green-200;
-    border-radius: 10px;
-    align-self: flex-end;
   }
 }

@@ -5,7 +5,7 @@
   @include Flex(column, "", "");
   margin: 0 auto;
   row-gap: 64px;
-  margin-top: 140px;
+  padding: 140px 0;
 
   .title {
     @include Font(
@@ -20,13 +20,15 @@
 
 @media screen and (max-width: $tablet-max-width) {
   .container {
-    margin-top: 210px;
+    padding: 210px 0;
   }
 }
 
 @media screen and (max-width: $mobile-max-width) {
   .container {
-  @include Size(335px, auto);
+    max-width: 400px;
+    @include Size(100%, auto);
     margin-top: 170px;
+    padding: 0 20px;
   }
 }
