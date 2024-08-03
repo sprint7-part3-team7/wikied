@@ -1,7 +1,8 @@
 import axios from 'axios';
 import { Article, Comment } from '@/types/article';
 
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
+//const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
+const API_BASE_URL = `https://wikied-api.vercel.app/6-8`;
 
 interface ApiResponse {
   totalCount: number;

@@ -5,6 +5,7 @@ import Image from 'next/image';
 import defaultProfile from '@/assets/icons/ic_profile.svg';
 import editImage from '@/assets/icons/ic_edit.svg';
 import deleteImage from '@/assets/icons/ic_delete.svg';
+import Button from '@/components/button';
 
 interface CommentListProps {
   comments: Comment[];
@@ -25,7 +26,13 @@ const CommentList = ({ comments }: CommentListProps) => {
           onChange={(e) => setNewComment(e.target.value)}
           placeholder="댓글을 입력해 주세요"
         />
-        <button type="submit">댓글 등록</button>
+        <Button
+          color="primary"
+          size="large"
+          className={styles['submit-button']}
+        >
+          댓글 등록
+        </Button>
       </form>
 
       <div className={styles['comment-list']}>
