@@ -6,6 +6,7 @@ import Image from 'next/image';
 import styles from './styles.module.scss';
 import likeIcon from '@/assets/icons/ic_heart.svg';
 import CommentList from './components/commentList';
+import Button from '@/components/button';
 
 const ArticleDetailPage = () => {
   const router = useRouter();
@@ -54,16 +55,20 @@ const ArticleDetailPage = () => {
           <div className={styles['header-wrapper']}>
             <div className={styles['article-title']}>{article.title}</div>
             <div className={styles['header-button-wrapper']}>
-              <button
+              <Button
+                color="primary"
+                size="large"
                 className={`${styles['header-button']} ${styles['edit']}`}
               >
                 수정하기
-              </button>
-              <button
+              </Button>
+              <Button
+                color="primary"
+                size="large"
                 className={`${styles['header-button']} ${styles['delete']}`}
               >
                 삭제하기
-              </button>
+              </Button>
             </div>
           </div>
           <div className={styles['article-info']}>
@@ -93,9 +98,14 @@ const ArticleDetailPage = () => {
           dangerouslySetInnerHTML={{ __html: article.content }}
         ></div>
       </div>
-      <button className={styles['button-back']} onClick={handleBackButtonClick}>
+      <Button
+        color="outline"
+        size="large"
+        className={styles['button-back']}
+        onClick={handleBackButtonClick}
+      >
         목록으로
-      </button>
+      </Button>
       <CommentList comments={comments} />
     </div>
   );
