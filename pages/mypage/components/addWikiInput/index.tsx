@@ -1,24 +1,24 @@
-import Input from "@/components/input";
-import styles from "@/pages/mypage/components/addWikiInput/styles.module.scss";
-import { useState } from "react";
+import Input from '@/components/input';
+import styles from '@/pages/mypage/components/addWikiInput/styles.module.scss';
+import { useState } from 'react';
 
 const AddWikiInput = () => {
   /**
    * @ 임시로 만든 질문 로직
    */
-  const [question, setQuestion] = useState("");
-  const [answer, setAnswer] = useState("");
+  const [question, setQuestion] = useState('');
+  const [answer, setAnswer] = useState('');
 
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault();
   };
 
   return (
-    <form className={styles["container"]} onSubmit={handleSubmit}>
-      <label htmlFor="wiki" className={styles["label"]}>
+    <form className={styles['container']} onSubmit={handleSubmit}>
+      <label htmlFor="wiki" className={styles['label']}>
         위키 생성하기
       </label>
-      <div className={styles["wiki-input-wrapper"]}>
+      <div className={styles['wiki-input-wrapper']}>
         <Input
           id="wiki-question"
           name="question"
@@ -38,7 +38,7 @@ const AddWikiInput = () => {
           fullWidth
         />
       </div>
-      <button type="submit" className={styles["button"]}>
+      <button type="submit" className={styles['button']}>
         생성하기
       </button>
     </form>

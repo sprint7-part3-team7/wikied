@@ -1,5 +1,5 @@
-import Example from "./example";
-import Landing from "./landing";
+import Example from './example';
+import Landing from './landing';
 
 export default function Home() {
   return (

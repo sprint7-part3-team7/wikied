@@ -1,4 +1,4 @@
-@import "@/styles/index.scss";
+@import '@/styles/index.scss';
 
 .search-container {
   @include Flex(row, space-between, center);
@@ -30,7 +30,7 @@
       &::placeholder {
         color: $color-grayscale-400;
       }
-      background-image: url("../../assets/icons/ic_search.svg");
+      background-image: url('../../assets/icons/ic_search.svg');
       background-size: 22px;
       background-repeat: no-repeat;
       background-position: 20px center;
