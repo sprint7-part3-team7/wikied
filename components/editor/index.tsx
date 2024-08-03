@@ -12,6 +12,7 @@ import { Editor as DraftEditor } from 'draft-js';
 import 'draft-js/dist/Draft.css';
 import styles from './styles.module.scss';
 import ToolBar from '@/components/editor/components/toolBar';
+import { blockStyleFn } from 'contenido';
 
 interface MediaComponentProps {
   contentState: ContentState;
@@ -184,6 +185,7 @@ const Editor = () => {
             onChange={handleEditorChange}
             placeholder="본문을 입력해주세요"
             blockRendererFn={blockRendererFn}
+            blockStyleFn={blockStyleFn}
           />
         </div>
         <ToolBar
