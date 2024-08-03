@@ -33,7 +33,7 @@ const CommentList = ({ comments }: CommentListProps) => {
           <div key={comment.id} className={styles['comment-box']}>
             <div className={styles['comment-author-image']}>
               {comment.writer.image ? (
-                <Image
+                <img
                   src={comment.writer.image}
                   alt={comment.writer.name}
                   width={50}

@@ -19,7 +19,7 @@ const BestArticleCard = ({ board }: BestArticleCardProps) => {
   return (
     <div className={styles['board-card']} onClick={handleClick}>
       {board.image && (
-        <Image
+        <img
           src={board.image}
           alt={board.title}
           className={styles['image']}

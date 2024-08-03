@@ -80,7 +80,7 @@ const ArticleDetailPage = () => {
 
         <div className={styles['image']}>
           {article.image && (
-            <Image
+            <img
               src={article.image}
               alt={article.title}
               width={500}
