@@ -1,4 +1,3 @@
-import React from 'react';
 import Image from 'next/image';
 import styles from '../styles.module.scss';
 import likeIcon from '@/assets/icons/ic_heart.svg';
