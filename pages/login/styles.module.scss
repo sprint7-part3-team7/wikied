@@ -1,14 +1,12 @@
-@import "@/styles/index.scss";
+@import '@/styles/index.scss';
 
 .login-container {
   @include Size(400px, auto);
-  @include Flex(column, center, "");
+  @include Flex(column, center, '');
   margin: 0 auto;
   margin-top: 261px;
 
-
   .login-wrapper {
-
     .title {
       @include Font(
         $font-size-2xl,
@@ -19,7 +17,7 @@
       text-align: center;
       margin-bottom: 50px;
     }
-    @include Flex(column, "", "");
+    @include Flex(column, '', '');
     row-gap: 24px;
 
     .label {
@@ -32,7 +30,7 @@
     }
 
     .email-input-wrapper {
-      @include Flex(column, "", "");
+      @include Flex(column, '', '');
       row-gap: 8px;
 
       .email-input {
@@ -44,7 +42,7 @@
     }
 
     .password-input-wrapper {
-      @include Flex(column, "", "");
+      @include Flex(column, '', '');
       row-gap: 8px;
 
       .password-input {
@@ -77,7 +75,7 @@
     );
     text-decoration: none;
     align-self: center;
-    color:$color-primary-green-200 ;
+    color: $color-primary-green-200;
     margin-top: 40px;
   }
 }
@@ -90,7 +88,7 @@
 
 @media screen and (max-width: $mobile-max-width) {
   .login-container {
-    @include Size(335px, "");
+    @include Size(335px, '');
     margin-top: 143.5px;
   }
 }

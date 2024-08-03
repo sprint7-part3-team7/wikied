@@ -1,4 +1,4 @@
-@import "@/styles/index.scss";
+@import '@/styles/index.scss';
 
 .container {
   @include Size(100%, 100vh);
@@ -10,14 +10,14 @@
   padding-top: 78px;
 
   .wiki-main {
-    @include Size(100%, "");
+    @include Size(100%, '');
     max-width: 1920px;
     display: grid;
     grid-template-columns: minmax(60px, 1fr) minmax(0, 860px) 80px 320px 200px;
     position: relative;
 
     .wiki-padding {
-      @include Size(100%, "");
+      @include Size(100%, '');
       max-width: 460px;
       grid-column: 1;
       grid-row: 1;
@@ -25,7 +25,7 @@
     }
 
     .wiki-header {
-      @include Size(100%, "");
+      @include Size(100%, '');
       grid-column: 2;
       grid-row: 1;
       margin-bottom: 20px;
@@ -33,14 +33,14 @@
     }
 
     .wiki-article {
-      @include Size(100%, "");
+      @include Size(100%, '');
       grid-column: 2;
       grid-row: 2;
       box-sizing: border-box;
     }
 
     .wiki-aside {
-      @include Size(320px, "");
+      @include Size(320px, '');
       grid-column: 4;
       grid-row: 1 / span 2;
       position: relative;
@@ -57,11 +57,11 @@
       grid-template-columns: 1fr;
       grid-template-rows: auto auto auto;
       grid-template-areas:
-        "header"
-        "spacer1"
-        "aside"
-        "spacer2"
-        "article";
+        'header'
+        'spacer1'
+        'aside'
+        'spacer2'
+        'article';
 
       .wiki-padding {
         display: none;
@@ -73,7 +73,7 @@
       }
 
       .spacer1 {
-        @include Size("", 15px);
+        @include Size('', 15px);
         grid-area: spacer1;
       }
 
@@ -85,7 +85,7 @@
       }
 
       .spacer2 {
-        @include Size("", 60px);
+        @include Size('', 60px);
         grid-area: spacer2;
       }
 
@@ -104,15 +104,15 @@
 
     .wiki-main {
       .spacer1 {
-        @include Size("", 12px);
+        @include Size('', 12px);
       }
 
       .spacer2 {
-        @include Size("", 40px);
+        @include Size('', 40px);
       }
 
       .wiki-aside {
-        @include Size(100%, "");
+        @include Size(100%, '');
         margin: 0;
         padding: 15px 20px 0 20px;
       }

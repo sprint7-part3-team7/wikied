@@ -1,22 +1,22 @@
-@import "@/styles/index.scss";
+@import '@/styles/index.scss';
 @font-face {
-  font-family: "NEXON Lv1 Gothic OTF";
-  src: url("https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.1/NEXON%20Lv1%20Gothic%20OTF.woff")
-    format("woff");
+  font-family: 'NEXON Lv1 Gothic OTF';
+  src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.1/NEXON%20Lv1%20Gothic%20OTF.woff')
+    format('woff');
   font-weight: normal;
   font-style: normal;
 }
 @font-face {
-  font-family: "NEXON Lv1 Gothic OTF";
-  src: url("https://cdn.jsdelivr.net/gh/fontbee/font@main/Nexon/NEXON Lv1 Gothic OTF.woff")
-    format("woff");
+  font-family: 'NEXON Lv1 Gothic OTF';
+  src: url('https://cdn.jsdelivr.net/gh/fontbee/font@main/Nexon/NEXON Lv1 Gothic OTF.woff')
+    format('woff');
   font-weight: 400;
   font-style: normal;
 }
 .ellipse-img {
   width: 2000px;
   position: absolute;
-  top: 713px
+  top: 713px;
 }
 
 .landing-container {
@@ -30,7 +30,7 @@
   }
 
   .wikid-banner {
-    @include Flex(column, "", center);
+    @include Flex(column, '', center);
     @include Size(100%, 914px);
   }
 
@@ -40,14 +40,14 @@
     margin-top: 120px;
 
     .paragraph {
-      font-family: "NEXON Lv1 Gothic OTF";
+      font-family: 'NEXON Lv1 Gothic OTF';
       font-size: 60px;
       line-height: 69px;
       color: $color-grayscale-500;
     }
 
     .heading {
-      font-family: "NEXON Lv1 Gothic OTF";
+      font-family: 'NEXON Lv1 Gothic OTF';
       font-size: 90px;
       font-weight: 700;
       line-height: 103.5px;
@@ -78,24 +78,22 @@
     z-index: 1;
   }
 
-
-
   .write-container {
     @include Size(100%, 1211px);
     @include Flex(column, center, center);
     background-color: $color-grayscale-500;
 
     .write-wrapper {
-      @include Flex(row, center, "");
+      @include Flex(row, center, '');
       margin-top: 65px;
 
       .feature-text {
         @include Size(364px, 681px);
-        @include Flex(column, "", "");
+        @include Flex(column, '', '');
         margin-right: 40px;
 
         .feature-title {
-          font-family: "NEXON Lv1 Gothic OTF";
+          font-family: 'NEXON Lv1 Gothic OTF';
           font-size: 30px;
           font-weight: 700;
           line-height: 34.5px;
@@ -106,7 +104,7 @@
           margin-bottom: 60px;
           margin-top: 20px;
           p {
-            font-family: "NEXON Lv1 Gothic OTF";
+            font-family: 'NEXON Lv1 Gothic OTF';
             font-size: 50px;
             font-weight: 400;
             line-height: 57.5px;
@@ -131,11 +129,11 @@
       @include Flex(column, center, center);
 
       .feature-text {
-        @include Size(924px, "");
+        @include Size(924px, '');
         text-align: right;
 
         .feature-title {
-          font-family: "NEXON Lv1 Gothic OTF";
+          font-family: 'NEXON Lv1 Gothic OTF';
           font-size: 30px;
           font-weight: 700;
           line-height: 34.5px;
@@ -145,7 +143,7 @@
         .feature-content {
           margin-top: 20px;
           p {
-            font-family: "NEXON Lv1 Gothic OTF";
+            font-family: 'NEXON Lv1 Gothic OTF';
             font-size: 50px;
             font-weight: 400;
             line-height: 57.5px;
@@ -197,7 +195,7 @@
         text-align: left;
 
         .feature-title {
-          font-family: "NEXON Lv1 Gothic OTF";
+          font-family: 'NEXON Lv1 Gothic OTF';
           font-size: 30px;
           font-weight: 700;
           line-height: 34.5px;
@@ -207,7 +205,7 @@
         .feature-content {
           margin-top: 20px;
           p {
-            font-family: "NEXON Lv1 Gothic OTF";
+            font-family: 'NEXON Lv1 Gothic OTF';
             font-size: 50px;
             font-weight: 400;
             line-height: 57.5px;
@@ -222,9 +220,8 @@
         gap: 40px;
 
         .img-wrapper {
-          @include Flex(row, space-between, "");
+          @include Flex(row, space-between, '');
           @include Size(924px, 280px);
-
 
           .view-img2 {
             background-color: $color-secondary-purple-100;
@@ -250,7 +247,7 @@
     }
 
     .start-title {
-      font-family: "NEXON Lv1 Gothic OTF";
+      font-family: 'NEXON Lv1 Gothic OTF';
       font-size: 60px;
       font-weight: 700;
       line-height: 69px;
@@ -282,9 +279,8 @@
     color: $color-grayscale-50;
 
     .footer-wrapper {
-
       .copyright {
-        @include Font($font-size-lg, $line-height-lg, $font-weight-lg-bold, "");
+        @include Font($font-size-lg, $line-height-lg, $font-weight-lg-bold, '');
       }
 
       .impormaion {
@@ -292,18 +288,18 @@
           $font-size-md,
           $line-height-md,
           $font-weight-md-regular,
-          ""
+          ''
         );
         margin-top: 10px;
       }
 
       .footer-menu {
-        @include Flex(row, "", center);
+        @include Flex(row, '', center);
         @include Font(
           $font-size-md,
           $line-height-md,
           $font-weight-md-medium,
-          ""
+          ''
         );
         margin-top: 30px;
         gap: 30px;
@@ -316,9 +312,9 @@
       @include Size(100%, 900px);
     }
     .ellipse-img {
-      top: 784px
+      top: 784px;
     }
-  
+
     .write-container {
       @include Size(100%, 942px);
 
@@ -329,7 +325,7 @@
           @include Size(262px, 479px);
 
           .feature-title {
-            font-family: "NEXON Lv1 Gothic OTF";
+            font-family: 'NEXON Lv1 Gothic OTF';
             font-size: 20px;
             line-height: 23px;
           }
@@ -358,7 +354,7 @@
         @include Flex(column, center, center);
 
         .feature-text {
-          @include Size(647px, "");
+          @include Size(647px, '');
 
           .feature-title {
             font-size: 20px;
@@ -403,7 +399,6 @@
     .view-container {
       @include Size(100%, 933px);
 
-      
       .view-wrapper {
         @include Size(648px, 613px);
 
@@ -426,10 +421,8 @@
           margin-top: 80px;
           gap: 22px;
 
-          
           .img-wrapper {
             @include Size(648px, 198px);
-          
 
             .view-img2 {
               @include Size(198px, 198px);
@@ -486,7 +479,6 @@
         .feature-text {
           @include Size(133px, 250px);
           margin-right: 10px;
-          
 
           .feature-title {
             font-size: 10px;
@@ -514,9 +506,8 @@
       @include Size(100%, 374px);
 
       .share-wrapper {
-
         .feature-text {
-          @include Size(335px, "");
+          @include Size(335px, '');
 
           .feature-title {
             font-size: 10px;
@@ -573,7 +564,6 @@
             p {
               font-size: 16px;
               line-height: 18.4px;
-              
             }
           }
         }
@@ -583,14 +573,12 @@
           margin-top: 40px;
           gap: 10px;
 
-
-
           .img-wrapper {
             @include Size(335px, 102px);
 
             .view-img2 {
               @include Size(102px, 102px);
-              border-radius: 10px
+              border-radius: 10px;
             }
 
             .view-img3 {
@@ -607,17 +595,16 @@
       .start-wrapper {
         gap: 40px;
       }
-  
+
       .start-title {
         font-size: 30px;
         line-height: 34.5px;
       }
-  
+
       .strat-bts {
         @include Size(169px, 54px);
         padding: 15px 20px 15px 20px;
-        
-  
+
         strong {
           @include Size(130px, 29px);
           @include Font(
@@ -635,27 +622,30 @@
       padding: 40px;
       .footer-wrapper {
         @include Size(335px, 72px);
-  
+
         .copyright {
-          @include Font($font-size-lg, $line-height-lg, $font-weight-lg-bold, "");
+          @include Font(
+            $font-size-lg,
+            $line-height-lg,
+            $font-weight-lg-bold,
+            ''
+          );
         }
-  
+
         .impormaion {
           @include Font(
             $font-size-md,
             $line-height-md,
             $font-weight-md-regular,
-            ""
+            ''
           );
           margin-top: 10px;
         }
 
-        p{
-          @include Size(100%, "");
+        p {
+          @include Size(100%, '');
         }
-  
       }
     }
   }
-
 }

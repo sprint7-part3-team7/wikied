@@ -24,7 +24,7 @@ const WikiAside: React.FC<WikiAsideProps> = ({ className, profile }) => {
           src={profile?.image}
           width={200}
           height={200}
-          alt='profile image'
+          alt="profile image"
         />
       </div>
       <div className={styles['user-attribute-container']}>
@@ -111,7 +111,7 @@ const WikiAside: React.FC<WikiAsideProps> = ({ className, profile }) => {
           src={expandIcon}
           width={24}
           height={24}
-          alt='profile image'
+          alt="profile image"
         />
       </button>
     </div>

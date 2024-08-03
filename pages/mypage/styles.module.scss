@@ -1,8 +1,8 @@
-@import "@/styles/index.scss";
+@import '@/styles/index.scss';
 
 .container {
   @include Size(400px, auto);
-  @include Flex(column, "", "");
+  @include Flex(column, '', '');
   margin: 0 auto;
   row-gap: 64px;
   padding: 140px 0;

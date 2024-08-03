@@ -1,4 +1,4 @@
-import Editor from "@/components/editor";
+import Editor from '@/components/editor';
 
 const EditorTest = () => {
   return (

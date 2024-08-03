@@ -1,8 +1,8 @@
-@import "@/styles/index.scss";
+@import '@/styles/index.scss';
 
 .signup-container {
   @include Size(400px, 100%);
-  @include Flex(column, "", "");
+  @include Flex(column, '', '');
   margin: 0 auto;
   margin-top: 153px;
 
@@ -18,11 +18,11 @@
   }
 
   .signup-wrapper {
-    @include Flex(column, "", "");
+    @include Flex(column, '', '');
     row-gap: 24px;
 
     .input-wrapper {
-      @include Flex(column, "", "");
+      @include Flex(column, '', '');
       row-gap: 10px;
     }
 
@@ -33,7 +33,7 @@
         $font-weight-md-regular,
         $color-grayscale-400
       );
-      @include Flex(column, "", "");
+      @include Flex(column, '', '');
       row-gap: 8px;
     }
     input {
@@ -57,17 +57,17 @@
   }
 
   .logon-wrapper {
-    @include Flex(row, center,center);
+    @include Flex(row, center, center);
     gap: 10px;
 
     margin-top: 40px;
     strong {
       @include Font(
-      $font-size-md,
-      $line-height-md,
-      $font-weight-md-semibold,
-      $color-grayscale-400
-    );
+        $font-size-md,
+        $line-height-md,
+        $font-weight-md-semibold,
+        $color-grayscale-400
+      );
     }
 
     .login {

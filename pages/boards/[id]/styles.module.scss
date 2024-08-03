@@ -1,4 +1,4 @@
-@import "@/styles/index.scss";
+@import '@/styles/index.scss';
 
 .article {
   max-width: 1060px;
@@ -156,11 +156,11 @@
       background-color: transparent;
 
       &.edit {
-        background-image: url("../../../assets/icons/ic_edit.svg");
+        background-image: url('../../../assets/icons/ic_edit.svg');
       }
 
       &.delete {
-        background-image: url("../../../assets/icons/ic_delete.svg");
+        background-image: url('../../../assets/icons/ic_delete.svg');
       }
     }
 

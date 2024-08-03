@@ -1,5 +1,5 @@
-import clsx from "clsx";
-import styles from "@/components/input/styles.module.scss";
+import clsx from 'clsx';
+import styles from '@/components/input/styles.module.scss';
 
 interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   label?: string;
@@ -17,21 +17,21 @@ const Input = ({
 }: InputProps) => {
   return (
     <div
-      className={clsx(styles["input-container"], {
-        [styles["full-width"]]: fullWidth,
+      className={clsx(styles['input-container'], {
+        [styles['full-width']]: fullWidth,
       })}
     >
-      {label && <label className={styles["label"]}>{label}</label>}
+      {label && <label className={styles['label']}>{label}</label>}
       <input
         className={clsx(
-          styles["input"],
-          { [styles["error"]]: errorMessage },
-          className
+          styles['input'],
+          { [styles['error']]: errorMessage },
+          className,
         )}
         {...props}
       />
       {errorMessage && (
-        <p className={styles["error-message"]}>{errorMessage}</p>
+        <p className={styles['error-message']}>{errorMessage}</p>
       )}
     </div>
   );

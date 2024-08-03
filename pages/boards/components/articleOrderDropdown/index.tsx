@@ -4,8 +4,8 @@ import React, {
   useMemo,
   useEffect,
   useRef,
-} from "react";
-import styles from "./styles.module.scss";
+} from 'react';
+import styles from './styles.module.scss';
 
 interface ArticleOrderDropdownProps {
   options: { value: string; label: string }[];
@@ -31,15 +31,15 @@ const ArticleOrderDropdown = ({
       }
     };
 
-    document.addEventListener("mouseup", handleClickOutside);
+    document.addEventListener('mouseup', handleClickOutside);
     return () => {
-      document.removeEventListener("mouseup", handleClickOutside);
+      document.removeEventListener('mouseup', handleClickOutside);
     };
   }, []);
 
   const selectedLabel = useMemo(() => {
     const selectedOption = options.find((option) => option.value === selected);
-    return selectedOption ? selectedOption.label : "";
+    return selectedOption ? selectedOption.label : '';
   }, [selected, options]);
 
   const handleOptionClick = useCallback(
@@ -56,17 +56,17 @@ const ArticleOrderDropdown = ({
   }, []);
 
   return (
-    <div className={styles["dropdown"]} ref={dropdownRef}>
-      <button className={styles["dropdown-button"]} onClick={toggleDropdown}>
+    <div className={styles['dropdown']} ref={dropdownRef}>
+      <button className={styles['dropdown-button']} onClick={toggleDropdown}>
         {selectedLabel}
       </button>
       {isOpen && (
-        <ul className={styles["dropdown-menu"]}>
+        <ul className={styles['dropdown-menu']}>
           {options.map((option) => (
             <li
               key={option.value}
               onClick={() => handleOptionClick(option.value)}
-              className={styles["dropdown-item"]}
+              className={styles['dropdown-item']}
             >
               {option.label}
             </li>

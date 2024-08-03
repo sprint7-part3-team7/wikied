@@ -1,5 +1,5 @@
-import axios from "axios";
-import { Article, Comment } from "@/types/article";
+import axios from 'axios';
+import { Article, Comment } from '@/types/article';
 
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
 
