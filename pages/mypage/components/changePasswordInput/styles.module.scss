@@ -1,7 +1,7 @@
-@import "@/styles/index.scss";
+@import '@/styles/index.scss';
 
 .container {
-  @include Flex(column, "", "");
+  @include Flex(column, '', '');
   row-gap: 10px;
   padding-bottom: 32px;
   border-bottom: 1px solid $color-grayscale-200;
@@ -16,7 +16,7 @@
   }
 
   .password-input-wrapper {
-    @include Flex(column, "", "");
+    @include Flex(column, '', '');
     row-gap: 8px;
 
     .password-input {

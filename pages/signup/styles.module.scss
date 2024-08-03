@@ -1,0 +1,98 @@
+@import '@/styles/index.scss';
+
+.signup-container {
+  @include Size(400px, 100%);
+  @include Flex(column, '', '');
+  margin: 0 auto;
+  margin-top: 153px;
+
+  .title {
+    @include Font(
+      $font-size-2xl,
+      $line-height-2xl,
+      $font-weight-2xl-semibold,
+      $color-grayscale-500
+    );
+    text-align: center;
+    margin-bottom: 50px;
+  }
+
+  .signup-wrapper {
+    @include Flex(column, '', '');
+    row-gap: 24px;
+
+    .input-wrapper {
+      @include Flex(column, '', '');
+      row-gap: 10px;
+    }
+
+    .label {
+      @include Font(
+        $font-size-md,
+        $line-height-md,
+        $font-weight-md-regular,
+        $color-grayscale-400
+      );
+      @include Flex(column, '', '');
+      row-gap: 8px;
+    }
+    input {
+      @include Size(100%, 45px);
+      background-color: $color-grayscale-100;
+      border-radius: 10px;
+      row-gap: 8px;
+    }
+  }
+  .button {
+    @include Size(100%, 45px);
+    @include Font(
+      $font-size-md,
+      $line-height-md,
+      $font-weight-md-semibold,
+      $color-grayscale-100
+    );
+    background-color: $color-primary-green-200;
+    border-radius: 10px;
+    margin-top: 32px;
+  }
+
+  .logon-wrapper {
+    @include Flex(row, center, center);
+    gap: 10px;
+
+    margin-top: 40px;
+    strong {
+      @include Font(
+        $font-size-md,
+        $line-height-md,
+        $font-weight-md-semibold,
+        $color-grayscale-400
+      );
+    }
+
+    .login {
+      @include Font(
+        $font-size-md,
+        $line-height-md,
+        $font-weight-md-regular,
+        $color-grayscale-500
+      );
+      text-decoration: none;
+      align-self: center;
+      color: $color-primary-green-200;
+    }
+  }
+}
+
+@media screen and (max-width: $tablet-max-width) {
+  .signup-container {
+    margin-top: 203px;
+  }
+}
+
+@media screen and (max-width: $mobile-max-width) {
+  .signup-container {
+    // @include Size(335px, "");
+    margin-top: 48px;
+  }
+}

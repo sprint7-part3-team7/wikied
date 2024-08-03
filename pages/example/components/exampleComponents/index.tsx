@@ -1,9 +1,9 @@
-import styles from "@/pages/example/components/exampleComponents/styles.module.scss";
+import styles from '@/pages/example/components/exampleComponents/styles.module.scss';
 
 const ExampleComponents = () => {
   return (
     <>
-      <p className={styles["wohaha"]}>우하하</p>
+      <p className={styles['wohaha']}>우하하</p>
     </>
   );
 };

@@ -1,8 +1,8 @@
-import React from "react";
-import styles from "@/components/pagination/styles.module.scss";
-import rightArrow from "@/assets/icons/pg_right.svg";
-import leftArrow from "@/assets/icons/pg_left.svg";
-import Image from "next/image";
+import React from 'react';
+import styles from '@/components/pagination/styles.module.scss';
+import rightArrow from '@/assets/icons/pg_right.svg';
+import leftArrow from '@/assets/icons/pg_left.svg';
+import Image from 'next/image';
 
 interface PaginationProps {
   currentPage: number;
@@ -22,11 +22,11 @@ const Pagination = ({
 
     pageNumbers.push(
       <button
-        key='prev'
+        key="prev"
         onClick={() => onPageChange(currentPage - 1)}
         disabled={currentPage === 1}
       >
-        <Image src={leftArrow} alt='prev' />
+        <Image src={leftArrow} alt="prev" />
       </button>,
     );
 
@@ -35,7 +35,7 @@ const Pagination = ({
         <button
           key={i}
           onClick={() => onPageChange(i)}
-          className={currentPage === i ? styles["active"] : ""}
+          className={currentPage === i ? styles['active'] : ''}
         >
           {i}
         </button>,
@@ -44,18 +44,18 @@ const Pagination = ({
 
     pageNumbers.push(
       <button
-        key='next'
+        key="next"
         onClick={() => onPageChange(currentPage + 1)}
         disabled={currentPage === totalPages}
       >
-        <Image src={rightArrow} alt='next' />
+        <Image src={rightArrow} alt="next" />
       </button>,
     );
 
     return pageNumbers;
   };
 
-  return <div className={styles["pagination"]}>{renderPageNumbers()}</div>;
+  return <div className={styles['pagination']}>{renderPageNumbers()}</div>;
 };
 
 export default Pagination;

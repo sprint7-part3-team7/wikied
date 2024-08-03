@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import styles from "@/components/searchForm/styles.module.scss";
+import React, { useState } from 'react';
+import styles from '@/components/searchForm/styles.module.scss';
 
 interface SearchFormProps {
   onSearch: (term: string) => void;
@@ -7,7 +7,7 @@ interface SearchFormProps {
 }
 
 const SearchForm: React.FC<SearchFormProps> = ({ onSearch, text }) => {
-  const [searchTerm, setSearchTerm] = useState("");
+  const [searchTerm, setSearchTerm] = useState('');
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -15,17 +15,17 @@ const SearchForm: React.FC<SearchFormProps> = ({ onSearch, text }) => {
   };
 
   return (
-    <div className={styles["search-container"]}>
+    <div className={styles['search-container']}>
       <form onSubmit={handleSubmit}>
-        <div className={styles["input-wrapper"]}>
+        <div className={styles['input-wrapper']}>
           <input
-            type='text'
+            type="text"
             placeholder={text}
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
           />
         </div>
-        <button className={styles["search-button"]} type='submit'>
+        <button className={styles['search-button']} type="submit">
           검색
         </button>
       </form>
