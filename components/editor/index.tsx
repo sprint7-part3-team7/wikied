@@ -12,7 +12,8 @@ import { Editor as DraftEditor } from 'draft-js';
 import 'draft-js/dist/Draft.css';
 import styles from './styles.module.scss';
 import ToolBar from '@/components/editor/components/toolBar';
-import { blockStyleFn } from 'contenido';
+import { blockStyleFn, initialStyleMap } from 'contenido';
+import { colorPalette } from '@/components/editor/components/colorPalette';
 
 interface MediaComponentProps {
   contentState: ContentState;
@@ -53,6 +54,13 @@ const Editor = () => {
   useEffect(() => {
     checkSubmitEnabled();
   }, [checkSubmitEnabled]);
+
+  const styleMap = {
+    ...initialStyleMap,
+    ...Object.fromEntries(
+      colorPalette.map((color) => [color.name, { color: color.color }]),
+    ),
+  };
 
   const handleEditorChange = (newEditorState: EditorState) => {
     setEditorState(newEditorState);
@@ -186,6 +194,7 @@ const Editor = () => {
             placeholder="본문을 입력해주세요"
             blockRendererFn={blockRendererFn}
             blockStyleFn={blockStyleFn}
+            customStyleMap={styleMap}
           />
         </div>
         <ToolBar
