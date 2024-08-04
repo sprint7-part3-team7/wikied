@@ -1,20 +1,40 @@
 import clsx from 'clsx';
-import styles from '@/components/input/styles.module.scss';
+import styles from '@/components/linkPreview/styles.module.scss';
 import Image from 'next/image';
 import link from '@/assets/icons/ic_link.svg';
+import Link from 'next/link';
 
 interface LinkPreviewProps {
   url: string;
+  iconSize?: 'small' | 'large';
   className?: string;
 }
 
-const LinkPreview = ({ url, className }: LinkPreviewProps) => {
+const LinkPreview = ({
+  url,
+  iconSize = 'large',
+  className,
+}: LinkPreviewProps) => {
+  const iconDimensions = iconSize === 'small' ? 16 : 20;
+
   return (
-    <div className={styles['container']}>
+    <div className={clsx(styles['container'], className)}>
       <div className={styles['icon']}>
-        <Image src={link} alt="링크" />
+        <Image
+          src={link}
+          alt="링크"
+          width={iconDimensions}
+          height={iconDimensions}
+        />
       </div>
-      <span className={styles['url']}>{url}</span>
+      <Link
+        className={styles['url-wrapper']}
+        href={url}
+        passHref
+        target="_blank"
+      >
+        <span className={styles['url']}>{url}</span>
+      </Link>
     </div>
   );
 };

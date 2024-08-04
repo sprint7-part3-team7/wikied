@@ -1,5 +1,26 @@
 @import '@/styles/index.scss';
 
 .container {
+  @include Flex(row, null, center);
   padding: 5px 10px;
+  border-radius: 10px;
+  background-color: $color-primary-green-100;
+
+  .icon {
+    margin-right: 5px;
+    @include Flex(null, null, center);
+  }
+
+  .url-wrapper {
+    text-decoration: none;
+
+    .url {
+      @include Font(
+        $font-size-md,
+        $line-height-md,
+        $font-weight-md-regular,
+        $color-primary-green-200
+      );
+    }
+  }
 }
