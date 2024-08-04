@@ -54,6 +54,10 @@
       @include Size(140px, 45px);
       margin-left: 14px;
     }
+
+    &-icon {
+      display: none;
+    }
   }
 
   .like-count {
@@ -130,21 +134,14 @@
     }
 
     .header-button {
-      @include Size(22px, 22px);
+      display: none;
+    }
+
+    .header-icon {
+      display: inline-flex;
       margin-left: 12px;
-      font-size: 0;
-      background-position: center;
-      background-repeat: no-repeat;
-      background-size: 20px;
-      background-color: transparent !important;
-
-      &.edit {
-        background-image: url('../../../assets/icons/ic_edit.svg');
-      }
-
-      &.delete {
-        background-image: url('../../../assets/icons/ic_delete.svg');
-      }
+      padding: 0;
+      background-color: transparent;
     }
 
     &-info {
