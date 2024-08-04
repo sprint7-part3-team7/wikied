@@ -11,17 +11,15 @@
     @include Flex(null, null, center);
   }
 
-  .url-wrapper {
-    text-decoration: none;
+  .url {
+    @include Font(
+      $font-size-md,
+      $line-height-md,
+      $font-weight-md-regular,
+      $color-primary-green-200
+    );
 
-    .url {
-      @include Font(
-        $font-size-md,
-        $line-height-md,
-        $font-weight-md-regular,
-        $color-primary-green-200
-      );
-    }
+    text-decoration: none;
   }
 }
 

@@ -2,7 +2,6 @@ import clsx from 'clsx';
 import styles from '@/components/linkPreview/styles.module.scss';
 import Image from 'next/image';
 import link from '@/assets/icons/ic_link.svg';
-import Link from 'next/link';
 
 interface LinkPreviewProps {
   url: string;
@@ -31,14 +30,7 @@ const LinkPreview = ({
           height={iconDimensions}
         />
       </div>
-      <Link
-        className={styles['url-wrapper']}
-        href={url}
-        passHref
-        target="_blank"
-      >
-        <span className={styles['url']}>{url}</span>
-      </Link>
+      <span className={styles['url']}>{url}</span>
     </div>
   );
 };
