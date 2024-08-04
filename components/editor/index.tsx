@@ -1,11 +1,9 @@
 import { useState, useRef, useCallback, useEffect } from 'react';
-import Image from 'next/image';
 import {
   EditorState,
   RichUtils,
   convertToRaw,
   AtomicBlockUtils,
-  ContentState,
   ContentBlock,
 } from 'draft-js';
 import { Editor as DraftEditor } from 'draft-js';
