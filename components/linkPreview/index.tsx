@@ -7,18 +7,22 @@ import Link from 'next/link';
 interface LinkPreviewProps {
   url: string;
   iconSize?: 'small' | 'large';
+  height?: '26px' | '30px';
   className?: string;
 }
 
 const LinkPreview = ({
   url,
   iconSize = 'large',
+  height = '30px',
   className,
 }: LinkPreviewProps) => {
   const iconDimensions = iconSize === 'small' ? 16 : 20;
+  const heightSize =
+    height === '26px' ? styles['height-small'] : styles['height-large'];
 
   return (
-    <div className={clsx(styles['container'], className)}>
+    <div className={clsx(styles['container'], heightSize, className)}>
       <div className={styles['icon']}>
         <Image
           src={link}
