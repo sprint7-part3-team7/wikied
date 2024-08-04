@@ -59,15 +59,6 @@
         text-align: center;
       }
       .start-btn {
-        @include Font(
-          $font-size-md,
-          $line-height-md,
-          $font-weight-md-semibold,
-          $color-grayscale-50
-        );
-        border-radius: 10px;
-        padding: 8px 20px;
-        background-color: $color-primary-green-200;
         white-space: nowrap;
       }
     }
@@ -122,8 +113,6 @@
             $font-weight-md-regular,
             $color-grayscale-400
           );
-        }
-        .start-btn {
         }
       }
     }

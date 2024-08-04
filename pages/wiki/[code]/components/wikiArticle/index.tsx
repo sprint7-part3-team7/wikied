@@ -1,6 +1,7 @@
-import { Section } from "@/types/wiki";
-import Blockquote from "@/pages/wiki/[code]/components/wikiArticle/components/blockquote";
-import styles from "@/pages/wiki/[code]/components/wikiArticle/styles.module.scss";
+import { Section } from '@/types/wiki';
+import Blockquote from '@/pages/wiki/[code]/components/wikiArticle/components/blockquote';
+import Button from '@/components/button';
+import styles from '@/pages/wiki/[code]/components/wikiArticle/styles.module.scss';
 
 interface WikiArticleProps {
   className: string;
@@ -11,15 +12,15 @@ const WikiArticle = ({ className, sections }: WikiArticleProps) => {
   const hasSections = sections.length > 0;
 
   return (
-    <div className={`${styles["grid-container"]} ${className}`}>
+    <div className={`${styles['grid-container']} ${className}`}>
       {hasSections ? (
         sections.map((section, index) => (
-          <div key={index} className={styles["grid-item"]}>
-            <span className={styles["wiki-article-title"]}>
+          <div key={index} className={styles['grid-item']}>
+            <span className={styles['wiki-article-title']}>
               {section.title}
             </span>
-            <div className={styles["separator"]} />
-            <span className={styles["wiki-article-content"]}>
+            <div className={styles['separator']} />
+            <span className={styles['wiki-article-content']}>
               {section.content}
             </span>
             {index === 1 && (
@@ -37,14 +38,21 @@ const WikiArticle = ({ className, sections }: WikiArticleProps) => {
           </div>
         ))
       ) : (
-        <div className={styles["empty-wiki-container"]}>
-          <div className={styles["span-btn-wrapper"]}>
-            <span className={styles["notice"]}>
+        <div className={styles['empty-wiki-container']}>
+          <div className={styles['span-btn-wrapper']}>
+            <span className={styles['notice']}>
               아직 작성된 내용이 없네요.
               <p />
               위키에 참여해 보세요!
             </span>
-            <button className={styles["start-btn"]}>시작하기</button>
+            <Button
+              className={styles['start-btn']}
+              color="primary"
+              size="small"
+              defaultPadding={true}
+            >
+              시작하기
+            </Button>
           </div>
         </div>
       )}

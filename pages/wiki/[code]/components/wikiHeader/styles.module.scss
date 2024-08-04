@@ -22,23 +22,6 @@
       @include Size(160px, '');
       white-space: nowrap;
     }
-
-    // .participate-btn {
-    //   @include Flex(column, normal, center);
-    //   @include Font(
-    //     $font-size-md,
-    //     $line-height-md,
-    //     $font-weight-md-semibold,
-    //     $color-grayscale-50
-    //   );
-
-    //   @include Size(160px, '');
-    //   border-radius: 10px;
-    //   padding: 10.5px 42px;
-    //   white-space: nowrap;
-    //   background-color: $color-primary-green-200;
-    //   gap: 10px;
-    // }
   }
 
   .link {
@@ -90,7 +73,6 @@
 
       .participate-btn {
         @include Size(120px, 43px);
-        // padding: 9.5px 22px;
       }
     }
   }
