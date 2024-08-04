@@ -14,25 +14,7 @@ import styles from './styles.module.scss';
 import ToolBar from '@/components/editor/components/toolBar';
 import { blockStyleFn, initialStyleMap } from 'contenido';
 import { colorPalette } from '@/components/editor/components/colorPalette';
-
-interface MediaComponentProps {
-  contentState: ContentState;
-  block: ContentBlock;
-}
-
-const MediaComponent = (props: MediaComponentProps) => {
-  const entity = props.contentState.getEntity(props.block.getEntityAt(0));
-  const { src } = entity.getData();
-  return (
-    <Image
-      src={src}
-      alt="Uploaded content"
-      width={500}
-      height={300}
-      style={{ maxWidth: '100%', height: 'auto' }}
-    />
-  );
-};
+import Media from '@/components/editor/components/media';
 
 const Editor = () => {
   const [editorState, setEditorState] = useState<EditorState | null>(null);
@@ -44,6 +26,13 @@ const Editor = () => {
     setEditorState(EditorState.createEmpty());
   }, []);
 
+  const styleMap = {
+    ...initialStyleMap,
+    ...Object.fromEntries(
+      colorPalette.map((color) => [color.name, { color: color.color }]),
+    ),
+  };
+
   const checkSubmitEnabled = useCallback(() => {
     const contentState = editorState?.getCurrentContent();
     const hasText = contentState ? contentState.hasText() : false;
@@ -54,13 +43,6 @@ const Editor = () => {
   useEffect(() => {
     checkSubmitEnabled();
   }, [checkSubmitEnabled]);
-
-  const styleMap = {
-    ...initialStyleMap,
-    ...Object.fromEntries(
-      colorPalette.map((color) => [color.name, { color: color.color }]),
-    ),
-  };
 
   const handleEditorChange = (newEditorState: EditorState) => {
     setEditorState(newEditorState);
@@ -116,7 +98,7 @@ const Editor = () => {
   const blockRendererFn = (contentBlock: ContentBlock) => {
     if (contentBlock.getType() === 'atomic') {
       return {
-        component: MediaComponent,
+        component: Media,
         editable: false,
       };
     }
