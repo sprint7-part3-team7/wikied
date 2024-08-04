@@ -1,10 +1,11 @@
-import { useState, useRef } from "react";
-import Image from "next/image";
-import clsx from "clsx";
-import { Profile } from "@/types/wiki";
-import styles from "@/pages/wiki/[code]/components/wikiAside/styles.module.scss";
-import expandIcon from "@/assets/icons/ic_expand.svg";
-import fileUploadIcon from "@/assets/icons/ic_camera.svg";
+import { useState, useRef, useEffect } from 'react';
+import Image from 'next/image';
+import clsx from 'clsx';
+import { Profile } from '@/types/wiki';
+import UserAttribute from './components/userAttribute';
+import styles from '@/pages/wiki/[code]/components/wikiAside/styles.module.scss';
+import expandIcon from '@/assets/icons/ic_expand.svg';
+import fileUploadIcon from '@/assets/icons/ic_camera.svg';
 
 interface WikiAsideProps {
   className: string;
@@ -13,6 +14,7 @@ interface WikiAsideProps {
 }
 
 const WikiAside = ({ className, profile, isEditable }: WikiAsideProps) => {
+  const hasToggleBtn = false;
   const [isExpanded, setIsExpanded] = useState(false);
   const [preview, setPreview] = useState<string | null>(null);
   const inputRef = useRef<HTMLInputElement | null>(null);
@@ -37,16 +39,34 @@ const WikiAside = ({ className, profile, isEditable }: WikiAsideProps) => {
     inputRef.current?.click();
   };
 
+  // console.log('Styles Object:', styles);
+  // Object.keys(styles).forEach((key) => {
+  //   console.log(`${key}: ${styles[key]}`);
+  // });
+
+  const attributes = [
+    { name: '거주 도시', value: profile?.city },
+    { name: 'MBTI', value: profile?.mbti },
+    { name: '직업', value: profile?.job },
+    { name: 'SNS 계정', value: profile?.sns },
+    { name: '생일', value: profile?.birthday },
+    { name: '별명', value: profile?.nickname },
+    { name: '혈액형', value: profile?.bloodType },
+    { name: '국적', value: profile?.nationality },
+  ];
+
   return (
     <div
-      className={clsx(styles["user-profile"], className, {
-        [styles["editable"]]: isEditable,
+      className={clsx(styles['user-profile'], className, {
+        [styles['editable']]: isEditable,
+        [styles['non-editable']]: !isEditable,
       })}
     >
-      <div className={styles["image-container"]}>
+      {/* 프로필 이미지 부분 */}
+      <div className={styles['image-container']}>
         {isEditable ? (
           <div
-            className={styles["file-input-wrapper"]}
+            className={styles['file-input-wrapper']}
             onClick={handleDivClick}
           >
             <input
@@ -61,16 +81,16 @@ const WikiAside = ({ className, profile, isEditable }: WikiAsideProps) => {
               <>
                 <Image
                   src={fileUploadIcon}
-                  className={styles["fileUploadIcon"]}
+                  className={styles['fileUploadIcon']}
                   width={36}
                   height={36}
                   alt="파일 업로드 아이콘"
                 />
-                {profile.image && (
+                {profile?.image && (
                   <>
-                    <div className={styles["overlay"]}></div>
+                    <div className={styles['overlay']}></div>
                     <img
-                      src={profile.image}
+                      src={profile?.image}
                       className={styles.image}
                       alt="프로필 이미지"
                     />
@@ -86,122 +106,84 @@ const WikiAside = ({ className, profile, isEditable }: WikiAsideProps) => {
             )}
           </div>
         ) : (
-          <>
-            <Image
-              className={styles["image"]}
-              src={profile?.image}
-              width={200}
-              height={200}
-              alt="프로필 이미지"
-            />
-          </>
-        )}
-      </div>
-      <div className={styles["user-attribute-container"]}>
-        <div className={styles["always-show-user-attribute"]}>
-          <div className={styles["user-attribute"]}>
-            <span className={styles["attribute-name"]}>거주 도시</span>
-            <span className={styles["attribute-value"]}>
-              {profile ? profile.city : ""}
-            </span>
-          </div>
-          <div className={styles["user-attribute"]}>
-            <span className={styles["attribute-name"]}>MBTI</span>
-            <span className={styles["attribute-value"]}>
-              {profile?.mbti ?? ""}
-            </span>
-          </div>
-          <div className={styles["user-attribute"]}>
-            <span className={styles["attribute-name"]}>직업</span>
-            <span className={styles["attribute-value"]}>
-              {profile?.job ?? ""}
-            </span>
-          </div>
-        </div>
-        {isEditable && (
-          <div
-            className={clsx(styles["desktop-user-attribute"], {
-              [styles["editable-attribute"]]: isEditable,
-            })}
-          >
-            <div className={styles["user-attribute"]}>
-              <span className={styles["attribute-name"]}>SNS 계정</span>
-              <span className={styles["attribute-value"]}>
-                {profile ? profile.sns : ""}
-              </span>
-            </div>
-            <div className={styles["user-attribute"]}>
-              <span className={styles["attribute-name"]}>생일</span>
-              <span className={styles["attribute-value"]}>
-                {profile ? profile.birthday : ""}
-              </span>
-            </div>
-            <div className={styles["user-attribute"]}>
-              <span className={styles["attribute-name"]}>별명</span>
-              <span className={styles["attribute-value"]}>
-                {profile ? profile.nickname : ""}
-              </span>
-            </div>
-            <div className={styles["user-attribute"]}>
-              <span className={styles["attribute-name"]}>혈액형</span>
-              <span className={styles["attribute-value"]}>
-                {profile ? profile.bloodType : ""}
-              </span>
-            </div>
-            <div className={styles["user-attribute"]}>
-              <span className={styles["attribute-name"]}>국적</span>
-              <span className={styles["attribute-value"]}>
-                {profile ? profile.nationality : ""}
-              </span>
-            </div>
-          </div>
-        )}
-      </div>
-      {!isEditable && isExpanded && (
-        <div className={styles["selective-show-user-attribute"]}>
-          <div className={styles["user-attribute"]}>
-            <span className={styles["attribute-name"]}>SNS 계정</span>
-            <span className={styles["attribute-value"]}>{profile.sns}</span>
-          </div>
-          <div className={styles["user-attribute"]}>
-            <span className={styles["attribute-name"]}>생일</span>
-            <span className={styles["attribute-value"]}>
-              {profile.birthday}
-            </span>
-          </div>
-          <div className={styles["user-attribute"]}>
-            <span className={styles["attribute-name"]}>별명</span>
-            <span className={styles["attribute-value"]}>
-              {profile.nickname}
-            </span>
-          </div>
-          <div className={styles["user-attribute"]}>
-            <span className={styles["attribute-name"]}>혈액형</span>
-            <span className={styles["attribute-value"]}>
-              {profile.bloodType}
-            </span>
-          </div>
-          <div className={styles["user-attribute"]}>
-            <span className={styles["attribute-name"]}>국적</span>
-            <span className={styles["attribute-value"]}>
-              {profile.nationality}
-            </span>
-          </div>
-        </div>
-      )}
-      {!isEditable && (
-        <button className={styles["expand-btn"]} onClick={handleToggle}>
           <Image
-            className={styles["expand-icon"]}
+            className={styles['image']}
+            src={profile?.image}
+            width={200}
+            height={200}
+            alt="프로필 이미지"
+          />
+        )}
+      </div>
+
+      {/* 프로필 내용 관련 부분 */}
+      <div className={styles['user-attribute-container']}>
+        {isEditable ? (
+          // 수정중: 그냥 다 보임
+          <div className={styles['editable']}>
+            {attributes.map((attr, index) => (
+              <UserAttribute
+                key={index}
+                attributeName={attr.name}
+                value={attr.value}
+                isEditable={isEditable}
+              />
+            ))}
+          </div>
+        ) : (
+          // 수정중X
+          <div className={styles['non-editable-attribute-container']}>
+            {/* 화면 너비에 상관 없이 모두 보이는 속성 3개 */}
+            <div className={styles['always-show-user-attribute']}>
+              {attributes.slice(0, 3).map((attr, index) => (
+                <UserAttribute
+                  key={index}
+                  attributeName={attr.name}
+                  value={attr.value}
+                  isEditable={isEditable}
+                />
+              ))}
+            </div>
+            {/* 그 외 속성: 데스크탑에서 보여질 부분 */}
+            <div className={styles['desktop-user-attribute']}>
+              {attributes.slice(3, 8).map((attr, index) => (
+                <UserAttribute
+                  key={index}
+                  attributeName={attr.name}
+                  value={attr.value}
+                  isEditable={isEditable}
+                />
+              ))}
+            </div>
+            {/* 그 외 속성: 태블릿, 모바일에서 보여질 부분 */}
+            {isExpanded && (
+              <div className={styles['tablet-mobile-expanded']}>
+                {attributes.slice(3, 8).map((attr, index) => (
+                  <UserAttribute
+                    key={index}
+                    attributeName={attr.name}
+                    value={attr.value}
+                    isEditable={isEditable}
+                  />
+                ))}
+              </div>
+            )}
+          </div>
+        )}
+      </div>
+      {/* 토글 버튼 */}
+      {!isEditable && (
+        <button className={styles['expand-btn']} onClick={handleToggle}>
+          <Image
+            className={styles['expand-icon']}
             src={expandIcon}
             width={24}
             height={24}
-            alt="토글 버튼 아이콘"
+            alt="더보기 아이콘"
           />
         </button>
       )}
     </div>
-    // </div>
   );
 };
 

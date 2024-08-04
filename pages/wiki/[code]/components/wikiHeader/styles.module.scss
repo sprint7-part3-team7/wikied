@@ -19,21 +19,26 @@
     }
 
     .participate-btn {
-      @include Flex(column, normal, center);
-      @include Font(
-        $font-size-md,
-        $line-height-md,
-        $font-weight-md-semibold,
-        $color-grayscale-50
-      );
-
       @include Size(160px, '');
-      border-radius: 10px;
-      padding: 10.5px 42px;
       white-space: nowrap;
-      background-color: $color-primary-green-200;
-      gap: 10px;
     }
+
+    // .participate-btn {
+    //   @include Flex(column, normal, center);
+    //   @include Font(
+    //     $font-size-md,
+    //     $line-height-md,
+    //     $font-weight-md-semibold,
+    //     $color-grayscale-50
+    //   );
+
+    //   @include Size(160px, '');
+    //   border-radius: 10px;
+    //   padding: 10.5px 42px;
+    //   white-space: nowrap;
+    //   background-color: $color-primary-green-200;
+    //   gap: 10px;
+    // }
   }
 
   .link {
@@ -74,9 +79,18 @@
   .wiki-actions {
     gap: 24px;
     .name-and-btn {
+      .username {
+        @include Font(
+          $font-size-3xl,
+          $line-height-3xl-42,
+          $font-weight-5xl-semibold,
+          $color-grayscale-500
+        );
+      }
+
       .participate-btn {
-        @include Size(120px, '');
-        padding: 9.5px 22px;
+        @include Size(120px, 43px);
+        // padding: 9.5px 22px;
       }
     }
   }
