@@ -1,36 +1,18 @@
 import { useState, useRef, useCallback, useEffect } from 'react';
-import Image from 'next/image';
 import {
   EditorState,
   RichUtils,
   convertToRaw,
   AtomicBlockUtils,
-  ContentState,
   ContentBlock,
 } from 'draft-js';
 import { Editor as DraftEditor } from 'draft-js';
 import 'draft-js/dist/Draft.css';
 import styles from './styles.module.scss';
 import ToolBar from '@/components/editor/components/toolBar';
-
-interface MediaComponentProps {
-  contentState: ContentState;
-  block: ContentBlock;
-}
-
-const MediaComponent = (props: MediaComponentProps) => {
-  const entity = props.contentState.getEntity(props.block.getEntityAt(0));
-  const { src } = entity.getData();
-  return (
-    <Image
-      src={src}
-      alt="Uploaded content"
-      width={500}
-      height={300}
-      style={{ maxWidth: '100%', height: 'auto' }}
-    />
-  );
-};
+import { blockStyleFn, initialStyleMap } from 'contenido';
+import { colorPalette } from '@/components/editor/components/colorPalette';
+import Media from '@/components/editor/components/media';
 
 const Editor = () => {
   const [editorState, setEditorState] = useState<EditorState | null>(null);
@@ -41,6 +23,13 @@ const Editor = () => {
   useEffect(() => {
     setEditorState(EditorState.createEmpty());
   }, []);
+
+  const styleMap = {
+    ...initialStyleMap,
+    ...Object.fromEntries(
+      colorPalette.map((color) => [color.name, { color: color.color }]),
+    ),
+  };
 
   const checkSubmitEnabled = useCallback(() => {
     const contentState = editorState?.getCurrentContent();
@@ -107,7 +96,7 @@ const Editor = () => {
   const blockRendererFn = (contentBlock: ContentBlock) => {
     if (contentBlock.getType() === 'atomic') {
       return {
-        component: MediaComponent,
+        component: Media,
         editable: false,
       };
     }
@@ -184,12 +173,18 @@ const Editor = () => {
             onChange={handleEditorChange}
             placeholder="본문을 입력해주세요"
             blockRendererFn={blockRendererFn}
+            blockStyleFn={blockStyleFn}
+            customStyleMap={styleMap}
           />
         </div>
         <ToolBar
           editorState={editorState}
           onEditorChange={handleEditorChange}
-          onImageUpload={handleImageUpload}
+          on
+          
+          
+          
+          Upload={handleImageUpload}
         />
       </div>
     </div>
