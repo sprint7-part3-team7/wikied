@@ -34,7 +34,7 @@ const AddImage = ({ size = 'large' }: AddImageProps): JSX.Element => {
 
   return (
     <div className={`${styles['container']} ${styles[size]}`}>
-      <Image src={closeIcon} alt="닫기" />
+      <Image className={styles['close-image']} src={closeIcon} alt="닫기" />
       <div className={styles['image-wrapper']}>
         <label className={styles['image-label']}>이미지</label>
         <div className={styles['image-input-box']} onClick={handleInputClick}>

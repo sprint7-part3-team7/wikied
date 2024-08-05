@@ -7,6 +7,10 @@
   box-shadow: 0px 4px 20px 0px $color-shadow;
   margin-bottom: 10px;
 
+  .close-image {
+    align-self: flex-end;
+  }
+
   &.large {
     @include Size(394px, 336px);
   }
