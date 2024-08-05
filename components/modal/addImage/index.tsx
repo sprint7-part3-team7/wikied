@@ -1,6 +1,6 @@
 import Button from '@/components/button';
 import Image from 'next/image';
-import styles from '@/components/\bmodal/addImage/styles.module.scss';
+import styles from '@/components/modal/addImage/styles.module.scss';
 import closeIcon from '@/assets/icons/ic_close.svg';
 import cameraIcon from '@/assets/icons/ic_camera.svg';
 import { useState, useRef, ChangeEvent } from 'react';
