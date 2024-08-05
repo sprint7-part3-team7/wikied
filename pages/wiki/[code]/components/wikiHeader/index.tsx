@@ -26,7 +26,7 @@ const WikiHeader = ({
       {isEditable ? (
         <div className={styles['header-container']}>
           <div className={styles['user-name-wrapper']}>
-            <span className={styles['user-name']}>{profile?.name}</span>
+            <span className={styles['user-name']}>{profile.name}</span>
           </div>
           <div></div>
           {/* 임시 사용 */}
@@ -35,7 +35,7 @@ const WikiHeader = ({
       ) : (
         <section className={`${styles['wiki-actions']} ${className}`}>
           <section className={styles['name-and-btn']}>
-            <span className={styles['user-name']}>{profile?.name}</span>
+            <span className={styles['user-name']}>{profile.name}</span>
             {hasSections && (
               <Button
                 className={styles['participate-btn']}
@@ -51,7 +51,7 @@ const WikiHeader = ({
               <Image src={link} width={20} height={20} alt="링크 아이콘" />
               <Link href="#" className={styles['link-copy-btn']}>
                 <section className={styles['link-address']}>
-                  https://www.wikied.kr/{profile?.code}
+                  https://www.wikied.kr/{profile.code}
                 </section>
               </Link>
             </section>

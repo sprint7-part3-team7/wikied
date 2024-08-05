@@ -1,7 +1,6 @@
 import { useState, useEffect, useCallback } from 'react';
 import { useRouter } from 'next/router';
 import clsx from 'clsx';
-import axios from 'axios';
 import { getProfiles } from '@/services/api/wiki';
 import { Profile, Section } from '@/types/wiki';
 import WikiHeader from '@/pages/wiki/[code]/components/wikiHeader';
@@ -11,7 +10,7 @@ import styles from '@/pages/wiki/[code]/styles.module.scss';
 
 interface WikiProps {
   className: string;
-  profile: any;
+  profile: Profile;
 }
 
 const Wiki = (props: WikiProps) => {
@@ -83,6 +82,10 @@ const Wiki = (props: WikiProps) => {
       getList(code);
     }
   }, [code, getList]);
+
+  if (!profile) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <>

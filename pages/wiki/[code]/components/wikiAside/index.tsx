@@ -40,14 +40,14 @@ const WikiAside = ({ className, profile, isEditable }: WikiAsideProps) => {
   };
 
   const attributes = [
-    { name: '거주 도시', value: profile?.city },
-    { name: 'MBTI', value: profile?.mbti },
-    { name: '직업', value: profile?.job },
-    { name: 'SNS 계정', value: profile?.sns },
-    { name: '생일', value: profile?.birthday },
-    { name: '별명', value: profile?.nickname },
-    { name: '혈액형', value: profile?.bloodType },
-    { name: '국적', value: profile?.nationality },
+    { name: '거주 도시', value: profile.city },
+    { name: 'MBTI', value: profile.mbti },
+    { name: '직업', value: profile.job },
+    { name: 'SNS 계정', value: profile.sns },
+    { name: '생일', value: profile.birthday },
+    { name: '별명', value: profile.nickname },
+    { name: '혈액형', value: profile.bloodType },
+    { name: '국적', value: profile.nationality },
   ];
 
   return (
@@ -82,11 +82,11 @@ const WikiAside = ({ className, profile, isEditable }: WikiAsideProps) => {
                     height={36}
                     alt="파일 업로드 아이콘"
                   />
-                  {profile?.image && (
+                  {profile.image && (
                     <>
                       <div className={styles['overlay']}></div>
                       <img
-                        src={profile?.image}
+                        src={profile.image}
                         className={styles.image}
                         alt="프로필 이미지"
                       />
@@ -104,7 +104,7 @@ const WikiAside = ({ className, profile, isEditable }: WikiAsideProps) => {
           ) : (
             <img
               className={styles['image']}
-              src={profile?.image}
+              src={profile.image}
               alt="프로필 이미지"
             />
           )}
