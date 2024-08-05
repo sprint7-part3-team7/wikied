@@ -185,6 +185,10 @@
   right: 80px;
   gap: 10px;
 
+  .cancel-btn {
+    background-color: $color-grayscale-50;
+  }
+
   .cancel-btn,
   .save-btn {
     @include Size(65px, '');

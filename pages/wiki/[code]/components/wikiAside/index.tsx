@@ -68,7 +68,7 @@ const WikiAside = ({ className, profile, isEditable }: WikiAsideProps) => {
               <input
                 type="file"
                 id="fileInput"
-                className={styles.fileInput}
+                className={styles['fileInput']}
                 onChange={handleFileChange}
                 ref={inputRef}
                 accept="image/*"

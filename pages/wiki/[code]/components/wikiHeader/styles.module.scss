@@ -1,7 +1,7 @@
 @import '@/styles/index.scss';
 
 .header-container {
-  background-color: #f7f7fa;
+  background-color: $color-grayscale-100;
   display: grid;
   grid-template-columns: 82px minmax(0, 178px) minmax(537px, auto);
   overflow: hidden;
