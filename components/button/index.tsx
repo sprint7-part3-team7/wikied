@@ -2,7 +2,7 @@ import styles from '@/components/button/styles.module.scss';
 import clsx from 'clsx';
 
 interface ButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
-  color: 'primary' | 'outline';
+  color: 'primary' | 'outline' | 'disabled';
   size: 'small' | 'large';
   defaultPadding?: boolean;
   fullWidth?: boolean;

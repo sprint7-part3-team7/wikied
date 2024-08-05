@@ -43,6 +43,16 @@
       $color-primary-green-200
     );
   }
+
+  &.disabled {
+    background-color: $color-grayscale-300;
+    @include Font(
+      $font-size-md,
+      $line-height-md,
+      $font-weight-md-semibold,
+      $color-grayscale-50
+    );
+  }
 }
 
 .icon {
