@@ -1,4 +1,3 @@
-import React from 'react';
 import Image from 'next/image';
 import { EditorState, RichUtils } from 'draft-js';
 import {
@@ -7,6 +6,7 @@ import {
   isTextRightAligned,
   toggleTextAlign,
 } from 'contenido';
+import ColorPalette from '@/components/editor/components/colorPalette';
 import styles from './styles.module.scss';
 
 import boldIcon from '@/assets/icons/ic_bold.svg';
@@ -66,7 +66,7 @@ const ToolBar = ({
               isTextLeftAligned(editorState) ? styles['active'] : ''
             }`}
           >
-            <Image src={alignLeft} alt="Align Left" width={24} height={24} />
+            <Image src={alignLeft} alt="왼쪽 정렬" width={24} height={24} />
           </button>
           <button
             onClick={(e) => {
@@ -77,12 +77,7 @@ const ToolBar = ({
               isTextCenterAligned(editorState) ? styles['active'] : ''
             }`}
           >
-            <Image
-              src={alignCenter}
-              alt="Align Center"
-              width={24}
-              height={24}
-            />
+            <Image src={alignCenter} alt="중앙 정렬" width={24} height={24} />
           </button>
           <button
             onClick={(e) => {
@@ -93,7 +88,7 @@ const ToolBar = ({
               isTextRightAligned(editorState) ? styles['active'] : ''
             }`}
           >
-            <Image src={alignRight} alt="Align Right" width={24} height={24} />
+            <Image src={alignRight} alt="오른쪽 정렬" width={24} height={24} />
           </button>
         </div>
         <div className={styles['button-wrapper']}>
@@ -113,6 +108,10 @@ const ToolBar = ({
               height={24}
             />
           </button>
+          <ColorPalette
+            editorState={editorState}
+            onEditorChange={onEditorChange}
+          />
           <button onClick={onImageUpload}>
             <Image src={imageIcon} alt="Image" width={24} height={24} />
           </button>
