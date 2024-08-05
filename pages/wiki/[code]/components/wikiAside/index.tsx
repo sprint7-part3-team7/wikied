@@ -1,5 +1,4 @@
 import { useState, useRef, useEffect } from 'react';
-import Image from 'next/image';
 import clsx from 'clsx';
 import { Profile } from '@/types/wiki';
 import UserAttribute from '@/pages/wiki/[code]/components/wikiAside/components/userAttribute';
@@ -74,11 +73,9 @@ const WikiAside = ({ className, profile, isEditable }: WikiAsideProps) => {
               />
               {!preview ? (
                 <>
-                  <Image
-                    src={fileUploadIcon}
+                  <img
+                    src={fileUploadIcon.src}
                     className={styles['file-upload-icon']}
-                    width={36}
-                    height={36}
                     alt="파일 업로드 아이콘"
                   />
                   {profile.image && (
@@ -169,11 +166,9 @@ const WikiAside = ({ className, profile, isEditable }: WikiAsideProps) => {
         {/* 토글 버튼 */}
         {!isEditable && (
           <button className={styles['expand-btn']} onClick={handleToggle}>
-            <Image
+            <img
               className={styles['expand-icon']}
-              src={expandIcon}
-              width={24}
-              height={24}
+              src={expandIcon.src}
               alt="더보기 아이콘"
             />
           </button>

@@ -1,4 +1,3 @@
-import Image from 'next/image';
 import Link from 'next/link';
 import { Profile, Section } from '@/types/wiki';
 import styles from '@/pages/wiki/[code]/components/wikiHeader/styles.module.scss';
@@ -48,7 +47,7 @@ const WikiHeader = ({
           </section>
           <section className={styles['link']}>
             <section className={styles['link-wrapper']}>
-              <Image src={link} width={20} height={20} alt="링크 아이콘" />
+              <img src={link.src} width={20} height={20} alt="링크 아이콘" />
               <Link href="#" className={styles['link-copy-btn']}>
                 <section className={styles['link-address']}>
                   https://www.wikied.kr/{profile.code}
