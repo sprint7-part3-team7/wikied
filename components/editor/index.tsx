@@ -180,7 +180,11 @@ const Editor = () => {
         <ToolBar
           editorState={editorState}
           onEditorChange={handleEditorChange}
-          onImageUpload={handleImageUpload}
+          on
+          
+          
+          
+          Upload={handleImageUpload}
         />
       </div>
     </div>

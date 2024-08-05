@@ -7,6 +7,8 @@ import styles from './styles.module.scss';
 import likeIcon from '@/assets/icons/ic_heart.svg';
 import CommentList from './components/commentList';
 import Button from '@/components/button';
+import editIcon from '@/assets/icons/ic_edit.svg';
+import deleteIcon from '@/assets/icons/ic_delete.svg';
 
 const ArticleDetailPage = () => {
   const router = useRouter();
@@ -69,6 +71,16 @@ const ArticleDetailPage = () => {
               >
                 삭제하기
               </Button>
+              <button
+                className={`${styles['header-icon']} ${styles['edit-icon']}`}
+              >
+                <Image src={editIcon} alt="Edit" width={24} height={24} />
+              </button>
+              <button
+                className={`${styles['header-icon']} ${styles['delete-icon']}`}
+              >
+                <Image src={deleteIcon} alt="Delete" width={24} height={24} />
+              </button>
             </div>
           </div>
           <div className={styles['article-info']}>
