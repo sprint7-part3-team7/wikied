@@ -1,4 +1,5 @@
-import { getArticleComments, getArticleDetail } from '@/services/api/article';
+import { getArticleById } from '@/services/api/article';
+import { getArticleComments } from '@/services/api/comment';
 import { Article, Comment } from '@/types/article';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
@@ -22,7 +23,7 @@ const ArticleDetailPage = () => {
       const fetchArticleAndComments = async () => {
         try {
           const [articleData, commentsData] = await Promise.all([
-            getArticleDetail(Number(id)),
+            getArticleById(Number(id)),
             getArticleComments(Number(id)),
           ]);
           articleData.content = articleData.content.replace(/<img.*?>/g, '');
