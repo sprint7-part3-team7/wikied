@@ -44,6 +44,12 @@
     object-fit: cover;
   }
 
+  .no-image {
+    @include Size(100%, 131px);
+    @include Flex(column, center, center);
+    background-color: $color-grayscale-50;
+  }
+
   .content {
     padding: 19px 19px 14px 19px;
 
@@ -55,6 +61,9 @@
         $color-grayscale-500
       );
       margin: 0 0 6px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
   }
 
