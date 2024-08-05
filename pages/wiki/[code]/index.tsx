@@ -89,61 +89,34 @@ const Wiki = (props: WikiProps) => {
 
   return (
     <>
-      {isEditable ? (
-        <div
-          className={clsx(styles['editable-container'], {
-            [styles['container-no-sections']]: sectionsData.length === 0,
-          })}
-        >
-          <main className={styles['editable-wiki-main']}>
-            <div className={styles['editable-wiki-padding']}></div>
-            <WikiHeader
-              className={styles['editable-wiki-header']}
-              profile={profile}
-              sections={sectionsData}
-              isEditable={isEditable}
-            />
-            <div className={styles['editable-space1']}></div>
-            <WikiArticle
-              className={styles['editable-wiki-article']}
-              sections={sectionsData}
-            />
-            <div className={styles['editable-space2']}></div>
-            <WikiAside
-              className={styles['editable-wiki-aside']}
-              profile={profile}
-              isEditable={isEditable}
-            />
-          </main>
-        </div>
-      ) : (
-        <div
-          className={clsx(styles['container'], {
-            [styles['container-no-sections']]: sectionsData.length === 0,
-          })}
-        >
-          <main className={styles['wiki-main']}>
-            <div className={styles['wiki-padding']}></div>
-            <WikiHeader
-              className={styles['wiki-header']}
-              profile={profile}
-              sections={sectionsData}
-              isEditable={isEditable}
-            />
-            <div className={styles['space1']}></div>
-            <WikiArticle
-              className={styles['wiki-article']}
-              sections={sectionsData}
-            />
-            <div className={styles['space2']}></div>
-            <WikiAside
-              className={styles['wiki-aside']}
-              profile={profile}
-              isEditable={isEditable}
-            />
-          </main>
-        </div>
-      )}
+      <div
+        className={clsx(styles['container'], {
+          [styles['non-editable']]: !isEditable,
+          [styles['editable']]: isEditable,
+          [styles['no-data']]: sectionsData.length === 0,
+        })}
+      >
+        <main className={styles['wiki-main']}>
+          <div className={styles['wiki-padding']}></div>
+          <WikiHeader
+            className={styles['wiki-header']}
+            profile={profile}
+            sections={sectionsData}
+            isEditable={isEditable}
+          />
+          <div className={styles['space1']}></div>
+          <WikiArticle
+            className={styles['wiki-article']}
+            sections={sectionsData}
+          />
+          <div className={styles['space2']}></div>
+          <WikiAside
+            className={styles['wiki-aside']}
+            profile={profile}
+            isEditable={isEditable}
+          />
+        </main>
+      </div>
     </>
   );
 };

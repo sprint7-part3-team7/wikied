@@ -18,7 +18,7 @@
     .file-input-wrapper {
       position: relative;
 
-      .fileInput {
+      .file-input {
         @include Flex(column, center, center);
         @include Size(200px, 200px);
         border-radius: 50%;
@@ -206,7 +206,7 @@
       // padding: 20px 0 32px 0;
 
       .file-input-wrapper {
-        .fileInput {
+        .file-input {
           @include Size(200px, 200px);
         }
 
@@ -346,7 +346,7 @@
       // padding: 24px 0;
 
       .file-input-wrapper {
-        .fileInput {
+        .file-input {
           @include Size(200px, 200px);
         }
 
