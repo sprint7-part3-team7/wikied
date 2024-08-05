@@ -7,9 +7,7 @@ interface CommentResponse {
 }
 
 export const getArticleComments = (articleId: number, limit: number = 99) => {
-  return axiosInstance
-    .get<CommentResponse>(`/articles/${articleId}/comments`, {
-      params: { limit },
-    })
-    .then((response) => response.data);
+  return axiosInstance.get<CommentResponse>(`/articles/${articleId}/comments`, {
+    params: { limit },
+  });
 };

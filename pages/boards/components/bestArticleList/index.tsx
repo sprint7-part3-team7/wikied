@@ -11,11 +11,12 @@ const BestArticleList = () => {
 
   const fetchArticles = async () => {
     try {
-      const response = await getArticles({
+      const data = await getArticles({
         page: 1,
         pageSize: 4,
         orderBy: 'like',
       });
+      const response = data.data;
       setBestBoards(response.list);
       setLoading(false);
     } catch (error) {

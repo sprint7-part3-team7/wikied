@@ -1,10 +1,10 @@
 import { useState, useEffect, useCallback } from 'react';
 import Image from 'next/image';
 import styles from './styles.module.scss';
-import { Article } from '../../../../types/article';
-import { getArticles } from '../../../../services/api/article';
-import SearchForm from '../../../../components/searchForm';
-import Pagination from '../../../../components/pagination';
+import { Article } from '@/types/article';
+import { getArticles } from '@/services/api/article';
+import SearchForm from '@/components/searchForm';
+import Pagination from '@/components/pagination';
 import likeIcon from '@/assets/icons/ic_heart.svg';
 import OrderDropdown from '../articleOrderDropdown';
 import { useRouter } from 'next/router';
@@ -28,12 +28,13 @@ const ArticleList = () => {
     async (page: number, search: string, order: string) => {
       setLoading(true);
       try {
-        const data = await getArticles({
+        const response = await getArticles({
           page,
           pageSize: 10,
           orderBy: order,
           keyword: search,
         });
+        const data = response.data;
         setBoards(data.list);
         setTotalPages(Math.ceil(data.totalCount / 10));
         setLoading(false);

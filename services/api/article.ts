@@ -12,15 +12,11 @@ export const getArticles = (params: {
   orderBy?: string;
   keyword?: string;
 }) => {
-  return axiosInstance
-    .get<ArticleResponse>('/articles', { params })
-    .then((response) => response.data);
+  return axiosInstance.get<ArticleResponse>('/articles', { params });
 };
 
 export const getArticleById = (articleId: number) => {
-  return axiosInstance
-    .get<Article>(`/articles/${articleId}`)
-    .then((response) => response.data);
+  return axiosInstance.get<Article>(`/articles/${articleId}`);
 };
 
 export const createArticle = (article: {
@@ -28,23 +24,20 @@ export const createArticle = (article: {
   content: string;
   image?: string;
 }) => {
-  return axiosInstance
-    .post<Article>('/articles', article)
-    .then((response) => response.data);
+  return axiosInstance.post<Article>('/articles', article);
 };
 
-export const updateArticle = (articleId: number, article: {
-  title: string;
-  content: string;
-  image?: string;
-}) => {
-  return axiosInstance
-    .patch<Article>(`/articles/${articleId}`, article)
-    .then((response) => response.data);
+export const updateArticle = (
+  articleId: number,
+  article: {
+    title: string;
+    content: string;
+    image?: string;
+  },
+) => {
+  return axiosInstance.patch<Article>(`/articles/${articleId}`, article);
 };
 
 export const deleteArticle = (articleId: number) => {
-  return axiosInstance
-    .delete<void>(`/articles/${articleId}`)
-    .then((response) => response.data);
+  return axiosInstance.delete<void>(`/articles/${articleId}`);
 };

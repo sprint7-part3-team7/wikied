@@ -22,10 +22,14 @@ const ArticleDetailPage = () => {
     if (id) {
       const fetchArticleAndComments = async () => {
         try {
-          const [articleData, commentsData] = await Promise.all([
+          const [articleResponse, commentsResponse] = await Promise.all([
             getArticleById(Number(id)),
             getArticleComments(Number(id)),
           ]);
+
+          const articleData = articleResponse.data;
+          const commentsData = commentsResponse.data;
+
           articleData.content = articleData.content.replace(/<img.*?>/g, '');
           setArticle(articleData);
           setComments(commentsData.list);
