@@ -5,6 +5,7 @@
   display: grid;
   grid-template-columns: 82px minmax(0, 178px) minmax(537px, auto);
   overflow: hidden;
+  border-radius: 10px;
 
   .user-name-wrapper {
     @include Font(
