@@ -2,11 +2,11 @@ import { useState, useRef, useEffect } from 'react';
 import Image from 'next/image';
 import clsx from 'clsx';
 import { Profile } from '@/types/wiki';
-import UserAttribute from './components/userAttribute';
+import UserAttribute from '@/pages/wiki/[code]/components/wikiAside/components/userAttribute';
+import Button from '@/components/button';
 import styles from '@/pages/wiki/[code]/components/wikiAside/styles.module.scss';
 import expandIcon from '@/assets/icons/ic_expand.svg';
 import fileUploadIcon from '@/assets/icons/ic_camera.svg';
-import Button from '@/components/button';
 
 interface WikiAsideProps {
   className: string;
@@ -76,7 +76,7 @@ const WikiAside = ({ className, profile, isEditable }: WikiAsideProps) => {
                 <>
                   <Image
                     src={fileUploadIcon}
-                    className={styles['fileUploadIcon']}
+                    className={styles['file-upload-icon']}
                     width={36}
                     height={36}
                     alt="파일 업로드 아이콘"
@@ -86,7 +86,7 @@ const WikiAside = ({ className, profile, isEditable }: WikiAsideProps) => {
                       <div className={styles['overlay']}></div>
                       <img
                         src={profile.image}
-                        className={styles.image}
+                        className={styles['image']}
                         alt="프로필 이미지"
                       />
                     </>
@@ -95,7 +95,7 @@ const WikiAside = ({ className, profile, isEditable }: WikiAsideProps) => {
               ) : (
                 <img
                   src={preview}
-                  className={styles.previewImage}
+                  className={styles['preview-image']}
                   alt="첨부파일 미리보기"
                 />
               )}
