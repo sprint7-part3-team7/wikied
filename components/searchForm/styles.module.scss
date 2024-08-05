@@ -14,6 +14,15 @@
 
   .input-wrapper {
     flex: 1;
+    position: relative;
+
+    .search-icon {
+      position: absolute;
+      left: 20px;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+
     input {
       @include Size(100%, 40px);
       @include Font(
@@ -30,24 +39,11 @@
       &::placeholder {
         color: $color-grayscale-400;
       }
-      background-image: url('../../assets/icons/ic_search.svg');
-      background-size: 22px;
-      background-repeat: no-repeat;
-      background-position: 20px center;
     }
   }
 
   .search-button {
-    @include Font(
-      $font-size-md,
-      $line-height-md,
-      $font-weight-md-semibold,
-      $color-grayscale-50
-    );
     @include Size(80px, 45px);
-    background-color: $color-primary-green-200;
-    border: none;
-    border-radius: 10px;
   }
 }
 
