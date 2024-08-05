@@ -28,7 +28,12 @@ const ArticleList = () => {
     async (page: number, search: string, order: string) => {
       setLoading(true);
       try {
-        const data = await getArticles(page, 10, order, search);
+        const data = await getArticles({
+          page,
+          pageSize: 10,
+          orderBy: order,
+          keyword: search,
+        });
         setBoards(data.list);
         setTotalPages(Math.ceil(data.totalCount / 10));
         setLoading(false);
