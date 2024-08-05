@@ -1,4 +1,8 @@
-import { getArticleById } from '@/services/api/article';
+import {
+  getArticleById,
+  updateArticle,
+  deleteArticle,
+} from '@/services/api/article';
 import { getArticleComments } from '@/services/api/comment';
 import { Article, Comment } from '@/types/article';
 import { useRouter } from 'next/router';
@@ -47,6 +51,36 @@ const ArticleDetailPage = () => {
     router.push('/boards');
   };
 
+  const handleEditButtonClick = async () => {
+    if (article) {
+      try {
+        const updatedArticle = await updateArticle(article.id, {
+          title: article.title,
+          content: article.content,
+          image: article.image,
+        });
+        setArticle(updatedArticle.data);
+        alert('게시글이 수정되었습니다.');
+      } catch (error) {
+        console.error('게시글 수정 실패', error);
+        alert('게시글 수정 실패');
+      }
+    }
+  };
+
+  const handleDeleteButtonClick = async () => {
+    if (article) {
+      try {
+        await deleteArticle(article.id);
+        alert('게시글이 삭제되었습니다.');
+        router.push('/boards');
+      } catch (error) {
+        console.error('게시글 삭제 실패', error);
+        alert('게시글 삭제 실패');
+      }
+    }
+  };
+
   if (loading) {
     return <div>Loading...</div>;
   }
@@ -66,6 +100,7 @@ const ArticleDetailPage = () => {
                 color="primary"
                 size="large"
                 className={`${styles['header-button']} ${styles['edit']}`}
+                onClick={handleEditButtonClick}
               >
                 수정하기
               </Button>
@@ -73,16 +108,19 @@ const ArticleDetailPage = () => {
                 color="primary"
                 size="large"
                 className={`${styles['header-button']} ${styles['delete']}`}
+                onClick={handleDeleteButtonClick}
               >
                 삭제하기
               </Button>
               <button
                 className={`${styles['header-icon']} ${styles['edit-icon']}`}
+                onClick={handleEditButtonClick}
               >
                 <Image src={editIcon} alt="Edit" width={24} height={24} />
               </button>
               <button
                 className={`${styles['header-icon']} ${styles['delete-icon']}`}
+                onClick={handleDeleteButtonClick}
               >
                 <Image src={deleteIcon} alt="Delete" width={24} height={24} />
               </button>

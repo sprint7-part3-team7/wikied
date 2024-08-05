@@ -22,7 +22,7 @@ export const getArticleById = (articleId: number) => {
 export const createArticle = (article: {
   title: string;
   content: string;
-  image?: string;
+  image: string | null;
 }) => {
   return axiosInstance.post<Article>('/articles', article);
 };
@@ -32,7 +32,7 @@ export const updateArticle = (
   article: {
     title: string;
     content: string;
-    image?: string;
+    image: string | null;
   },
 ) => {
   return axiosInstance.patch<Article>(`/articles/${articleId}`, article);
