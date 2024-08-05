@@ -8,23 +8,20 @@
   background-color: $color-grayscale-50;
   box-shadow: 0px 4px 20px 0px #00000014;
   overflow: hidden;
+  // padding: 60px;
 
   .image-container {
-    @include Size(100%, '');
+    @include Size(100%, 200px);
     @include Flex(column, center, center);
-    margin-top: 60px;
+    // margin: 60px 0;
 
     .file-input-wrapper {
-      // margin-top: 60px;
       position: relative;
 
       .fileInput {
+        @include Flex(column, center, center);
         @include Size(200px, 200px);
         border-radius: 50%;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
         display: none;
       }
 
@@ -62,13 +59,54 @@
     }
   }
 
+  // 수정 모드
   &.editable {
-    .user-attribute {
+    .image-container {
+      margin: 60px 0;
+    }
+
+    .user-attribute-container {
+      padding: 0 40px;
+
+      .attribute-wrapper {
+        @include Flex(column, '', '');
+        @include Font(
+          $font-size-md,
+          $line-height-md,
+          $font-weight-md-regular,
+          inherit
+        );
+        gap: 16px;
+
+        .user-attribute {
+          @include Flex(row, '', center);
+          @include Size(320px, '');
+          max-width: 320px;
+          white-space: nowrap;
+          gap: 20px;
+          margin: 0 auto;
+
+          .attribute-name {
+            @include Size(60px, '');
+          }
+
+          .attribute-value {
+            @include Size(240px, 45px);
+            background-color: $color-grayscale-100;
+            padding: 14px 20px;
+            border-radius: 10px;
+          }
+        }
+      }
     }
   }
 
-  // 비수정 모드일 때
+  // 비수정 모드
   &.non-editable {
+    .image-container {
+      margin: 60px 0;
+    }
+
     .non-editable-attribute-container {
       @include Flex(column, '', '');
       @include Font(
@@ -87,8 +125,7 @@
         gap: 16px;
 
         .user-attribute {
-          display: flex;
-          flex-direction: row;
+          @include Flex(row, '', '');
           white-space: nowrap;
           gap: 20px;
 
@@ -141,13 +178,28 @@
   }
 }
 
+.profile-save-btn {
+  @include Flex(row, '', '');
+  position: absolute;
+  top: 900px;
+  right: 80px;
+  gap: 10px;
+
+  .cancel-btn,
+  .save-btn {
+    @include Size(65px, '');
+  }
+}
+
 @media (max-width: $tablet-max-width) {
   .user-profile {
     .image-container {
+      @include Size('', 80px);
       @include Flex(column, inherit, center);
-      @include Size(71px, '');
       grid-column: 1;
-      margin-top: 0;
+      margin: 0 auto;
+      padding: 0;
+      // padding: 20px 0 32px 0;
 
       .file-input-wrapper {
         .fileInput {
@@ -155,10 +207,12 @@
         }
 
         .fileUploadIcon {
+          @include Size(20px, 20px);
         }
 
         .overlay {
           @include Size(71px, 71px);
+          left: 0;
         }
       }
       .image {
@@ -177,7 +231,38 @@
 
     // 수정모드
     &.editable {
-      .user-attribute {
+      .image-container {
+        margin: 20px 0 32px 0;
+
+        .file-input-wrapper {
+        }
+      }
+      .user-attribute-container {
+        @include Size(592px, '');
+        margin: 0 auto;
+        padding: 0;
+
+        .attribute-wrapper {
+          @include Size(592px, 228px);
+          flex-flow: column wrap;
+          margin-bottom: 37px;
+          display: flex;
+          align-content: space-between;
+
+          .user-attribute {
+            width: 276px;
+            gap: 16px;
+            margin: 0;
+
+            .attribute-name {
+            }
+
+            .attribute-value {
+              background-color: $color-grayscale-100;
+              width: 200px;
+            }
+          }
+        }
       }
     }
 
@@ -187,6 +272,10 @@
       grid-template-columns: 71px 40px auto 40px 71px;
       grid-template-rows: auto 1px 24px;
       gap: 0;
+
+      .image-container {
+        margin: 0;
+      }
 
       .non-editable-attribute-container {
         position: relative;
@@ -210,8 +299,7 @@
           gap: 4px;
 
           .user-attribute {
-            display: flex;
-            flex-direction: row;
+            @include Flex(row, '', '');
             white-space: nowrap;
             gap: 10px;
 
@@ -222,10 +310,10 @@
             }
 
             .attribute-value {
-              color: $color-grayscale-500;
               flex: 1;
               text-align: left;
               min-width: 0;
+              color: $color-grayscale-500;
             }
           }
         }
@@ -240,18 +328,26 @@
       background-color: $color-grayscale-50;
     }
   }
+
+  .profile-save-btn {
+    top: 47px;
+    right: 57px;
+  }
 }
 
 @media (max-width: $mobile-max-width) {
   .user-profile {
     .image-container {
       @include Size(62px, '');
+      // padding: 24px 0;
+
       .file-input-wrapper {
         .fileInput {
           @include Size(200px, 200px);
         }
 
         .fileUploadIcon {
+          @include Size(17px, 17px);
         }
 
         .overlay {
@@ -267,14 +363,41 @@
     .user-attribute-container {
     }
 
+    // 수정 모드
     &.editable {
-      .user-attribute {
+      .image-container {
+        @include Size(100%, '');
+        margin: 24px 0;
+      }
+
+      .user-attribute-container {
+        @include Size(268px, '');
+        .attribute-wrapper {
+          @include Size('', 384px);
+          padding-bottom: 17px;
+          flex-flow: column;
+
+          .user-attribute {
+            .attribute-name {
+              @include Font($font-size-xs, $line-height-xs-18, '', '');
+            }
+
+            .attribute-value {
+              @include Size('', 34px);
+              @include Font($font-size-xs, $line-height-xs-18, '', '');
+              padding: 10px 16px;
+            }
+          }
+        }
       }
     }
 
-    // 비수정 모드일 때
+    // 비수정 모드
     &.non-editable {
       grid-template-columns: 62px 20px auto 20px 62px;
+
+      .image-container {
+      }
 
       .non-editable-attribute-container {
         @include Font(
@@ -301,5 +424,10 @@
         }
       }
     }
+  }
+
+  .profile-save-btn {
+    top: 15px;
+    right: 17px;
   }
 }

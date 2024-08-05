@@ -25,16 +25,17 @@ const WikiHeader = ({
     <>
       {isEditable ? (
         <div className={styles['header-container']}>
-          <div className={styles['user-name']}>
-            <span>{profile?.name}</span>
+          <div className={styles['user-name-wrapper']}>
+            <span className={styles['user-name']}>{profile?.name}</span>
           </div>
+          <div></div>
           {/* 임시 사용 */}
           <EditorBtn />
         </div>
       ) : (
         <section className={`${styles['wiki-actions']} ${className}`}>
           <section className={styles['name-and-btn']}>
-            <span className={styles['username']}>{profile?.name}</span>
+            <span className={styles['user-name']}>{profile?.name}</span>
             {hasSections && (
               <Button
                 className={styles['participate-btn']}

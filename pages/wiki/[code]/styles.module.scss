@@ -16,6 +16,7 @@
     grid-template-areas:
       'space1 header space2 aside space3'
       'space1 article space2 article space3';
+    grid-template-rows: 60px auto;
 
     .editable-wiki-padding {
       @include Size(100%, '');
@@ -37,11 +38,13 @@
       grid-column: 2;
       grid-row: 2;
       box-sizing: border-box;
-      margin-bottom: 80px;
+      // margin: 52px 0 80px 0;
+      margin-top: 60px;
+      // margin-bottom: 80px;
     }
 
     .editable-wiki-aside {
-      @include Size(100%, '');
+      @include Size(100%, 828px);
       grid-column: 4;
       grid-row: 1 / span 2;
       position: relative;
@@ -154,6 +157,7 @@
       .editable-wiki-article {
         grid-area: article;
         grid-row: 6;
+        margin-top: 0;
       }
     }
   }

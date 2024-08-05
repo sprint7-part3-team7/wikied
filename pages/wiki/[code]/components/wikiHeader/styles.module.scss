@@ -1,5 +1,26 @@
 @import '@/styles/index.scss';
 
+.header-container {
+  background-color: #f7f7fa;
+  display: grid;
+  grid-template-columns: 82px minmax(0, 178px) minmax(537px, auto);
+  overflow: hidden;
+
+  .user-name-wrapper {
+    @include Font(
+      $font-size-xl,
+      $line-height-xl,
+      $font-weight-xl-semibold,
+      $color-grayscale-500
+    );
+    .user-name {
+      position: relative;
+      top: 18px;
+      left: 30px;
+    }
+  }
+}
+
 .wiki-actions {
   @include Flex(column, flex-start, flex-start);
   gap: 32px;
@@ -8,7 +29,7 @@
     @include Flex(row, space-between, inherit);
     @include Size(100%, '');
 
-    .username {
+    .user-name {
       @include Font(
         $font-size-5xl,
         $line-height-5xl,
@@ -58,11 +79,26 @@
   }
 }
 
+@media (max-width: $tablet-max-width) {
+  .header-container {
+    display: flex;
+    padding-left: 20px;
+
+    .user-name-wrapper {
+      .user-name {
+        display: none;
+      }
+    }
+  }
+}
+
 @media screen and (max-width: $mobile-max-width) {
+  .header-container {
+  }
   .wiki-actions {
     gap: 24px;
     .name-and-btn {
-      .username {
+      .user-name {
         @include Font(
           $font-size-3xl,
           $line-height-3xl-42,

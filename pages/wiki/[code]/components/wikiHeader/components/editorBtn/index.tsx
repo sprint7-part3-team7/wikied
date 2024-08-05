@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import styles from '@/pages/wiki/[code]/components/wikiHeader/styles.module.scss';
+import styles from '@/pages/wiki/[code]/components/wikiHeader/components/editorBtn/styles.module.scss';
 import bold from '@/assets/icons/ic_bold.svg';
 import italic from '@/assets/icons/ic_italic.svg';
 import underline from '@/assets/icons/ic_underline.svg';
