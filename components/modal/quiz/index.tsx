@@ -45,7 +45,11 @@ const Quiz = ({ size = 'large' }: QuizProps) => {
           <p>위키를 작성해보세요.</p>
         </div>
       </div>
-      <div className={styles['input-wrapper']}>
+      <div
+        className={clsx(styles['input-wrapper'], {
+          [styles['error']]: errorMessage,
+        })}
+      >
         <label className={styles['label']}>특별히 싫어하는 음식은?</label>
         <Input
           id="answer"

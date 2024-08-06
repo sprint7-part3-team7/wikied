@@ -45,6 +45,10 @@
     margin: 36px 0 40px 0;
     row-gap: 10px;
 
+    &.error {
+      margin: 36px 0;
+    }
+
     .label {
       @include Font(
         $font-size-2lg,
