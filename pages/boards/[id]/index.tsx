@@ -21,6 +21,7 @@ const ArticleDetailPage = () => {
   const [article, setArticle] = useState<Article | null>(null);
   const [comments, setComments] = useState<Comment[]>([]);
   const [loading, setLoading] = useState(true);
+  const [isAuthor, setIsAuthor] = useState(false);
 
   useEffect(() => {
     if (id) {
@@ -37,8 +38,12 @@ const ArticleDetailPage = () => {
           articleData.content = articleData.content.replace(/<img.*?>/g, '');
           setArticle(articleData);
           setComments(commentsData.list);
+
+          const currentUserId = localStorage.getItem('userId');
+          setIsAuthor(currentUserId === articleData.writer.id.toString());
         } catch (error) {
           console.log(error);
+          alert('게시글을 불러오는데 실패했습니다.');
         } finally {
           setLoading(false);
         }
@@ -51,33 +56,28 @@ const ArticleDetailPage = () => {
     router.push('/boards');
   };
 
-  const handleEditButtonClick = async () => {
-    if (article) {
-      try {
-        const updatedArticle = await updateArticle(article.id, {
-          title: article.title,
-          content: article.content,
-          image: article.image,
-        });
-        setArticle(updatedArticle.data);
-        alert('게시글이 수정되었습니다.');
-      } catch (error) {
-        console.error('게시글 수정 실패', error);
-        alert('게시글 수정 실패');
-      }
+  const handleEditButtonClick = () => {
+    if (article && isAuthor) {
+      router.push(`/board/${article.id}/edit`);
+    } else {
+      alert('게시글 수정 권한이 없습니다.');
     }
   };
 
   const handleDeleteButtonClick = async () => {
-    if (article) {
-      try {
-        await deleteArticle(article.id);
-        alert('게시글이 삭제되었습니다.');
-        router.push('/boards');
-      } catch (error) {
-        console.error('게시글 삭제 실패', error);
-        alert('게시글 삭제 실패');
+    if (article && isAuthor) {
+      if (window.confirm('정말로 이 게시글을 삭제하시겠습니까?')) {
+        try {
+          await deleteArticle(article.id);
+          alert('게시글이 삭제되었습니다.');
+          router.push('/boards');
+        } catch (error) {
+          console.error('게시글 삭제 실패', error);
+          alert('게시글 삭제에 실패했습니다.');
+        }
       }
+    } else {
+      alert('게시글 삭제 권한이 없습니다.');
     }
   };
 
@@ -95,36 +95,38 @@ const ArticleDetailPage = () => {
         <div className={styles['article-header']}>
           <div className={styles['header-wrapper']}>
             <div className={styles['article-title']}>{article.title}</div>
-            <div className={styles['header-button-wrapper']}>
-              <Button
-                color="primary"
-                size="large"
-                className={`${styles['header-button']} ${styles['edit']}`}
-                onClick={handleEditButtonClick}
-              >
-                수정하기
-              </Button>
-              <Button
-                color="primary"
-                size="large"
-                className={`${styles['header-button']} ${styles['delete']}`}
-                onClick={handleDeleteButtonClick}
-              >
-                삭제하기
-              </Button>
-              <button
-                className={`${styles['header-icon']} ${styles['edit-icon']}`}
-                onClick={handleEditButtonClick}
-              >
-                <Image src={editIcon} alt="Edit" width={24} height={24} />
-              </button>
-              <button
-                className={`${styles['header-icon']} ${styles['delete-icon']}`}
-                onClick={handleDeleteButtonClick}
-              >
-                <Image src={deleteIcon} alt="Delete" width={24} height={24} />
-              </button>
-            </div>
+            {isAuthor && (
+              <div className={styles['header-button-wrapper']}>
+                <Button
+                  color="primary"
+                  size="large"
+                  className={`${styles['header-button']} ${styles['edit']}`}
+                  onClick={handleEditButtonClick}
+                >
+                  수정하기
+                </Button>
+                <Button
+                  color="primary"
+                  size="large"
+                  className={`${styles['header-button']} ${styles['delete']}`}
+                  onClick={handleDeleteButtonClick}
+                >
+                  삭제하기
+                </Button>
+                <button
+                  className={`${styles['header-icon']} ${styles['edit-icon']}`}
+                  onClick={handleEditButtonClick}
+                >
+                  <Image src={editIcon} alt="Edit" width={24} height={24} />
+                </button>
+                <button
+                  className={`${styles['header-icon']} ${styles['delete-icon']}`}
+                  onClick={handleDeleteButtonClick}
+                >
+                  <Image src={deleteIcon} alt="Delete" width={24} height={24} />
+                </button>
+              </div>
+            )}
           </div>
           <div className={styles['article-info']}>
             <div className={styles['article-description']}>
