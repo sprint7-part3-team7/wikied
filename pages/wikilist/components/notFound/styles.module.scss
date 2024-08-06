@@ -1,0 +1,33 @@
+@import "@/styles/index.scss";
+
+.not-found-container {
+    @include Flex(column, center, center);
+    text-align: center;
+    margin-top: 204px;
+
+    p {
+      margin-bottom: 32px;
+      @include Font(
+        $font-size-lg,
+        $line-height-lg,
+        $font-weight-lg-medium,
+        $color-grayscale-400);
+    }
+
+    img {
+      width: 144px;
+      height: 144px;
+    }
+}
+
+@media screen and (max-width: $tablet-max-width) {
+  .not-found-container {
+    margin-top: 298px;
+  }
+}
+
+@media screen and (max-width: $mobile-max-width) {
+  .not-found-container {
+    margin-top: 177px;
+  }
+}
