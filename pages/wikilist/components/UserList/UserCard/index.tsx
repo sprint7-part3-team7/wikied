@@ -12,7 +12,13 @@ interface UserCardProps {
 const UserCard = ({ user }: UserCardProps) => {
   return (
     <div className={styles['user-card']}>
-      <Image src={DefaultProfileImg} alt="User profile" width={85} height={85} className={styles['profile-image']} />
+      <Image
+        src={DefaultProfileImg}
+        alt="User profile"
+        width={85}
+        height={85}
+        className={styles['profile-image']}
+      />
       <div className={styles['user-info']}>
         <div className={styles['user-name']}>{user.name}</div>
         <div className={styles['user-details']}>

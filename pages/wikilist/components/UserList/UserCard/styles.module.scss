@@ -1,4 +1,4 @@
-@import "@/styles/index.scss";
+@import '@/styles/index.scss';
 
 .user-card {
   @include Flex(row, flex-start, flex-start);
@@ -26,7 +26,8 @@
     $font-size-2xl,
     $line-height-2xl,
     $font-weight-2xl-semibold,
-    $color-grayscale-600);
+    $color-grayscale-600
+  );
   border: none;
 }
 
@@ -35,7 +36,8 @@
     $font-size-md,
     $line-height-md,
     $font-weight-md-regular,
-    $color-grayscale-400);
+    $color-grayscale-400
+  );
   margin-top: 12px;
 }
 

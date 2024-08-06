@@ -14,21 +14,18 @@ const UserList = () => {
   const [totalPages, setTotalPages] = useState(1);
   const [searchTerm, setSearchTerm] = useState('');
 
-  const fetchUsers = useCallback(
-    async (page: number, search: string) => {
-      setLoading(true);
-      try {
-        const data = await getUsers(page, 3, search);
-        setUsers(data.list);
-        setTotalPages(Math.ceil(data.totalCount / 3));
-        setLoading(false);
-      } catch (error) {
-        console.error(error);
-        setLoading(false);
-      }
-    },
-    []
-  );
+  const fetchUsers = useCallback(async (page: number, search: string) => {
+    setLoading(true);
+    try {
+      const data = await getUsers(page, 3, search);
+      setUsers(data.list);
+      setTotalPages(Math.ceil(data.totalCount / 3));
+      setLoading(false);
+    } catch (error) {
+      console.error(error);
+      setLoading(false);
+    }
+  }, []);
 
   useEffect(() => {
     fetchUsers(currentPage, searchTerm);
@@ -40,7 +37,7 @@ const UserList = () => {
       setCurrentPage(1);
       fetchUsers(1, term);
     },
-    [fetchUsers]
+    [fetchUsers],
   );
 
   const handlePageChange = useCallback((page: number) => {

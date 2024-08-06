@@ -28,8 +28,8 @@ const BestArticleCard = ({ board }: BestArticleCardProps) => {
         />
       ) : (
         <div className={styles['no-image']}>
-        <Image src={noImage} alt="이미지 공백" width={24} height={24} />
-      </div>
+          <Image src={noImage} alt="이미지 공백" width={24} height={24} />
+        </div>
       )}
       <div className={styles['content']}>
         <div className={styles['content-title']}>{board.title}</div>

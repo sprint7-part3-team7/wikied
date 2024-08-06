@@ -11,7 +11,12 @@ const UserLink = ({ url }: UserLinkProps) => {
   return (
     <div className={styles['link-container']}>
       <Image src={LinkIcon} alt="Link icon" width={20} height={20} />
-      <a href={url} target="_blank" rel="noopener noreferrer" className={styles['link-text']}>
+      <a
+        href={url}
+        target="_blank"
+        rel="noopener noreferrer"
+        className={styles['link-text']}
+      >
         {url}
       </a>
     </div>
