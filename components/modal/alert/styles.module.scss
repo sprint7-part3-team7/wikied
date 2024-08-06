@@ -21,8 +21,15 @@
   .contents-wrapper {
     @include Flex(column, null, null);
     padding-left: 10px;
-    row-gap: 10px;
-    margin: 18px 0 34px 0;
+    margin: 20px 0 33px 0;
+
+    &.large {
+      row-gap: 10px;
+    }
+
+    &.small {
+      row-gap: 8px;
+    }
 
     .title {
       @include Font(

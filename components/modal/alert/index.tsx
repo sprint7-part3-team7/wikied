@@ -29,9 +29,11 @@ const Alert = ({
         width={20}
         height={20}
       />
-      <div className={styles['contents-wrapper']}>
-        <strong className={clsx(styles.title, styles[size])}>{title}</strong>
-        <p className={clsx(styles.description, styles[size])}>{description}</p>
+      <div className={clsx(styles['contents-wrapper'], styles[size])}>
+        <strong className={clsx(styles['title'], styles[size])}>{title}</strong>
+        <p className={clsx(styles['description'], styles[size])}>
+          {description}
+        </p>
       </div>
       <Button color={buttonColor} size="small" defaultPadding alignEnd>
         {content}
