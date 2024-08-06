@@ -1,5 +1,7 @@
 import styles from '@/pages/login/styles.module.scss';
 import Link from 'next/link';
+import Button from '@/components/button';
+import Input from '@/components/input';
 
 const LoginPage = () => {
   /**
@@ -10,33 +12,28 @@ const LoginPage = () => {
       <div className={styles['login-wrapper']}>
         <p className={styles['title']}>로그인</p>
         <div className={styles['email-input-wrapper']}>
-          <label htmlFor="email" className={styles['label']}>
-            이메일
-          </label>
-          <input
+          <Input
+            label="이메일"
             id="email"
             name="email"
             type="email"
             className={styles['email-input']}
             placeholder="이메일을 입력해 주세요"
-          />
+          ></Input>
         </div>
+
         <div className={styles['password-input-wrapper']}>
-          <label htmlFor="password" className={styles['label']}>
-            비밀번호
-          </label>
-          <input
-            id="password"
-            name="password"
-            type="password"
+          <Input
+            label="비밀번호"
+            id="email"
+            name="email"
+            type="email"
             className={styles['password-input']}
             placeholder="비밀번호를 입력해 주세요"
-          />
+          ></Input>
         </div>
       </div>
-      <button type="submit" className={styles['button']}>
-        변경하기
-      </button>
+      <Button className={styles['login-bts']}>로그인</Button>
       <Link className={styles['signup']} href="/signup">
         회원가입
       </Link>
