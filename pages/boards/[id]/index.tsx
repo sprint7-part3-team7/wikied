@@ -6,6 +6,9 @@ import Image from 'next/image';
 import styles from './styles.module.scss';
 import likeIcon from '@/assets/icons/ic_heart.svg';
 import CommentList from './components/commentList';
+import Button from '@/components/button';
+import editIcon from '@/assets/icons/ic_edit.svg';
+import deleteIcon from '@/assets/icons/ic_delete.svg';
 
 const ArticleDetailPage = () => {
   const router = useRouter();
@@ -54,15 +57,29 @@ const ArticleDetailPage = () => {
           <div className={styles['header-wrapper']}>
             <div className={styles['article-title']}>{article.title}</div>
             <div className={styles['header-button-wrapper']}>
-              <button
+              <Button
+                color="primary"
+                size="large"
                 className={`${styles['header-button']} ${styles['edit']}`}
               >
                 수정하기
-              </button>
-              <button
+              </Button>
+              <Button
+                color="primary"
+                size="large"
                 className={`${styles['header-button']} ${styles['delete']}`}
               >
                 삭제하기
+              </Button>
+              <button
+                className={`${styles['header-icon']} ${styles['edit-icon']}`}
+              >
+                <Image src={editIcon} alt="Edit" width={24} height={24} />
+              </button>
+              <button
+                className={`${styles['header-icon']} ${styles['delete-icon']}`}
+              >
+                <Image src={deleteIcon} alt="Delete" width={24} height={24} />
               </button>
             </div>
           </div>
@@ -80,7 +97,7 @@ const ArticleDetailPage = () => {
 
         <div className={styles['image']}>
           {article.image && (
-            <Image
+            <img
               src={article.image}
               alt={article.title}
               width={500}
@@ -93,9 +110,14 @@ const ArticleDetailPage = () => {
           dangerouslySetInnerHTML={{ __html: article.content }}
         ></div>
       </div>
-      <button className={styles['button-back']} onClick={handleBackButtonClick}>
+      <Button
+        color="outline"
+        size="large"
+        className={styles['button-back']}
+        onClick={handleBackButtonClick}
+      >
         목록으로
-      </button>
+      </Button>
       <CommentList comments={comments} />
     </div>
   );

@@ -1,10 +1,4 @@
-import React, {
-  useState,
-  useCallback,
-  useMemo,
-  useEffect,
-  useRef,
-} from 'react';
+import { useState, useCallback, useMemo, useEffect, useRef } from 'react';
 import styles from './styles.module.scss';
 
 interface ArticleOrderDropdownProps {
@@ -77,4 +71,4 @@ const ArticleOrderDropdown = ({
   );
 };
 
-export default React.memo(ArticleOrderDropdown);
+export default ArticleOrderDropdown;

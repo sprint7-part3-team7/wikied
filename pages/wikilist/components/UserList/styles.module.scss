@@ -15,14 +15,12 @@
 
 @media screen and (max-width: $tablet-max-width) {
   .user-list-container {
-    @include Size(100%, "");
     margin-top: 40px;
   }
 }
 
 @media screen and (max-width: $mobile-max-width) {
   .user-list-container {
-    @include Size(100%, "");
     margin-top: 20px;
   }
 }

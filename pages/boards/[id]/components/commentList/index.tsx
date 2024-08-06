@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import styles from './styles.module.scss';
 import { Comment } from '@/types/article';
 import Image from 'next/image';
 import defaultProfile from '@/assets/icons/ic_profile.svg';
 import editImage from '@/assets/icons/ic_edit.svg';
 import deleteImage from '@/assets/icons/ic_delete.svg';
+import Button from '@/components/button';
 
 interface CommentListProps {
   comments: Comment[];
@@ -25,7 +26,13 @@ const CommentList = ({ comments }: CommentListProps) => {
           onChange={(e) => setNewComment(e.target.value)}
           placeholder="댓글을 입력해 주세요"
         />
-        <button type="submit">댓글 등록</button>
+        <Button
+          color="primary"
+          size="large"
+          className={styles['submit-button']}
+        >
+          댓글 등록
+        </Button>
       </form>
 
       <div className={styles['comment-list']}>
@@ -33,7 +40,7 @@ const CommentList = ({ comments }: CommentListProps) => {
           <div key={comment.id} className={styles['comment-box']}>
             <div className={styles['comment-author-image']}>
               {comment.writer.image ? (
-                <Image
+                <img
                   src={comment.writer.image}
                   alt={comment.writer.name}
                   width={50}
