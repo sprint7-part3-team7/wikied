@@ -2,7 +2,7 @@ import { useState, useEffect, useCallback } from 'react';
 import { useRouter } from 'next/router';
 import clsx from 'clsx';
 import { getProfileByCode } from '@/services/api/profile';
-import { Profile, Section } from '@/types/wiki';
+import { ProfileDetail, Section } from '@/types/wiki';
 import WikiHeader from '@/pages/wiki/[code]/components/wikiHeader';
 import WikiArticle from '@/pages/wiki/[code]/components/wikiArticle';
 import WikiAside from '@/pages/wiki/[code]/components/wikiAside';
@@ -10,7 +10,7 @@ import styles from '@/pages/wiki/[code]/styles.module.scss';
 
 interface WikiProps {
   className: string;
-  profile: Profile;
+  profile: ProfileDetail;
 }
 
 const Wiki = (props: WikiProps) => {

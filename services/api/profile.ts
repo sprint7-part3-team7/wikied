@@ -1,9 +1,9 @@
 import axiosInstance from './axiosInstance';
-import { Profile } from '@/types/wiki';
+import { ProfileDetail, ProfileSummary } from '@/types/wiki';
 
 interface ProfileResponse {
   totalCount: number;
-  list: Profile[];
+  list: ProfileSummary[];
 }
 
 export const getProfiles = (params: {
@@ -15,5 +15,5 @@ export const getProfiles = (params: {
 };
 
 export const getProfileByCode = (code: string) => {
-  return axiosInstance.get<Profile>(`/profiles/${code}`);
+  return axiosInstance.get<ProfileDetail>(`/profiles/${code}`);
 };
