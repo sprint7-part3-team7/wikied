@@ -1,34 +1,40 @@
-import React, { useState, useEffect, useCallback } from "react";
-import Image from "next/image";
-import styles from "./styles.module.scss";
-import { Article } from "../../../../types/article";
-import { getArticles } from "../../../../services/api/article";
-import SearchForm from "../../../../components/searchForm";
-import Pagination from "../../../../components/pagination";
-import likeIcon from "@/assets/icons/ic_heart.svg";
-import OrderDropdown from "../articleOrderDropdown";
-import { useRouter } from "next/router";
+import { useState, useEffect, useCallback } from 'react';
+import Image from 'next/image';
+import styles from './styles.module.scss';
+import { Article } from '@/types/article';
+import { getArticles } from '@/services/api/article';
+import SearchForm from '@/components/searchForm';
+import Pagination from '@/components/pagination';
+import likeIcon from '@/assets/icons/ic_heart.svg';
+import OrderDropdown from '../articleOrderDropdown';
+import { useRouter } from 'next/router';
 
 const ArticleList = () => {
   const [boards, setBoards] = useState<Article[]>([]);
   const [loading, setLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
-  const [searchTerm, setSearchTerm] = useState("");
-  const [orderOption, setOrderOption] = useState("recent");
+  const [searchTerm, setSearchTerm] = useState('');
+  const [orderOption, setOrderOption] = useState('recent');
 
   const router = useRouter();
 
   const orderOptions = [
-    { value: "recent", label: "최신순" },
-    { value: "like", label: "인기순" },
+    { value: 'recent', label: '최신순' },
+    { value: 'like', label: '인기순' },
   ];
 
   const fetchArticles = useCallback(
     async (page: number, search: string, order: string) => {
       setLoading(true);
       try {
-        const data = await getArticles(page, 10, order, search);
+        const response = await getArticles({
+          page,
+          pageSize: 10,
+          orderBy: order,
+          keyword: search,
+        });
+        const data = response.data;
         setBoards(data.list);
         setTotalPages(Math.ceil(data.totalCount / 10));
         setLoading(false);
@@ -71,9 +77,9 @@ const ArticleList = () => {
   };
 
   return (
-    <div className={styles["board-list-container"]}>
-      <div className={styles["search-order-container"]}>
-        <SearchForm onSearch={handleSearch} text='제목을 검색해 주세요' />
+    <div className={styles['board-list-container']}>
+      <div className={styles['search-order-container']}>
+        <SearchForm onSearch={handleSearch} text="제목을 검색해 주세요" />
         <OrderDropdown
           options={orderOptions}
           selected={orderOption}
@@ -84,7 +90,7 @@ const ArticleList = () => {
         <div>Loading...</div>
       ) : (
         <>
-          <table className={styles["board-table"]}>
+          <table className={styles['board-table']}>
             <thead>
               <tr>
                 <th>번호</th>
@@ -107,23 +113,23 @@ const ArticleList = () => {
             </tbody>
           </table>
 
-          <div className={styles["mobile-list"]}>
+          <div className={styles['mobile-list']}>
             {boards.map((board) => (
               <div
                 key={board.id}
-                className={styles["mobile-list-item"]}
+                className={styles['mobile-list-item']}
                 onClick={() => handleClick(board.id)}
               >
-                <div className={styles["title"]}>{board.title}</div>
-                <div className={styles["info"]}>
-                  <span className={styles["author"]}>{board.writer.name}</span>
-                  <span className={styles["date"]}>
+                <div className={styles['title']}>{board.title}</div>
+                <div className={styles['info']}>
+                  <span className={styles['author']}>{board.writer.name}</span>
+                  <span className={styles['date']}>
                     {new Date(board.createdAt).toLocaleDateString()}
                   </span>
-                  <span className={styles["like-count"]}>
+                  <span className={styles['like-count']}>
                     <Image
                       src={likeIcon}
-                      alt='likeIcon'
+                      alt="likeIcon"
                       width={18}
                       height={18}
                     />

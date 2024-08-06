@@ -7,16 +7,27 @@ const nextConfig = {
         protocol: 'https',
         hostname: 'sprint-fe-project.s3.ap-northeast-2.amazonaws.com',
         port: '',
-        pathname: '/Sprint_Mission/**',
+        pathname: '/**',
       },
       {
         protocol: 'https',
-        hostname: 'encrypted-tbn0.gstatic.com',
+        hostname: 'example.com',
         port: '',
-        pathname: '/images**',
+        pathname: '/**',
       },
     ],
   },
+  /**
+   * @svgr/webpack 사용하기 위해 추가해야하는 설정
+   */
+  // webpack(config) {
+  //   config.module.rules.push({
+  //     test: /\.svg$/,
+  //     use: ['@svgr/webpack'],
+  //   });
+
+  //   return config;
+  // },
 };
 
 export default nextConfig;

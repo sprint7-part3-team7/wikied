@@ -1,4 +1,4 @@
-@import "@/styles/import.scss";
+@import '@/styles/index.scss';
 
 .comment-container {
   width: 100%;
@@ -37,26 +37,13 @@
     background-color: $color-grayscale-100;
     resize: none;
   }
+}
 
-  button {
-    @include Size(120px, 45px);
-    @include Font(
-      $font-size-md,
-      $line-height-md,
-      $font-weight-md-semibold,
-      $color-grayscale-50
-    );
-    position: absolute;
-    bottom: 15px;
-    right: 13px;
-    background-color: $color-primary-green-200;
-    border: none;
-    border-radius: 10px;
-
-    &:hover {
-      background-color: darken($color-primary-green-200, 10%);
-    }
-  }
+.submit-button {
+  position: absolute;
+  bottom: 15px;
+  right: 13px;
+  width: 120px;
 }
 
 .comment-box {

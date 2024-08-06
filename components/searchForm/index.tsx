@@ -1,13 +1,16 @@
-import React, { useState } from "react";
-import styles from "@/components/searchForm/styles.module.scss";
+import { useState } from 'react';
+import styles from '@/components/searchForm/styles.module.scss';
+import Button from '@/components/button';
+import Image from 'next/image';
+import searchIcon from '@/assets/icons/ic_search.svg';
 
 interface SearchFormProps {
   onSearch: (term: string) => void;
   text: string;
 }
 
-const SearchForm: React.FC<SearchFormProps> = ({ onSearch, text }) => {
-  const [searchTerm, setSearchTerm] = useState("");
+const SearchForm = ({ onSearch, text }: SearchFormProps) => {
+  const [searchTerm, setSearchTerm] = useState('');
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -15,19 +18,30 @@ const SearchForm: React.FC<SearchFormProps> = ({ onSearch, text }) => {
   };
 
   return (
-    <div className={styles["search-container"]}>
+    <div className={styles['search-container']}>
       <form onSubmit={handleSubmit}>
-        <div className={styles["input-wrapper"]}>
+        <div className={styles['input-wrapper']}>
+          <Image
+            src={searchIcon}
+            alt="Search"
+            width={22}
+            height={22}
+            className={styles['search-icon']}
+          />
           <input
-            type='text'
+            type="text"
             placeholder={text}
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
           />
         </div>
-        <button className={styles["search-button"]} type='submit'>
+        <Button
+          color="primary"
+          size="large"
+          className={styles['search-button']}
+        >
           검색
-        </button>
+        </Button>
       </form>
     </div>
   );

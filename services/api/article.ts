@@ -1,64 +1,43 @@
-import axios from "axios";
-import { Article, Comment } from "@/types/article";
+import axiosInstance from './axiosInstance';
+import { Article } from '@/types/article';
 
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
-
-interface ApiResponse {
+interface ArticleResponse {
   totalCount: number;
   list: Article[];
 }
 
-export const getArticles = async (
-  page: number,
-  pageSize: number,
-  orderBy?: string,
-  keyword?: string,
-): Promise<ApiResponse> => {
-  try {
-    const response = await axios.get<ApiResponse>(`${API_BASE_URL}/articles`, {
-      params: {
-        page,
-        pageSize,
-        orderBy,
-        keyword,
-      },
-    });
-    return response.data;
-  } catch (error) {
-    console.error(error);
-    throw error;
-  }
+export const getArticles = (params: {
+  page?: number;
+  pageSize?: number;
+  orderBy?: string;
+  keyword?: string;
+}) => {
+  return axiosInstance.get<ArticleResponse>('/articles', { params });
 };
 
-export const getArticleDetail = async (id: number): Promise<Article> => {
-  try {
-    const response = await axios.get<Article>(`${API_BASE_URL}/articles/${id}`);
-    return response.data;
-  } catch (error) {
-    console.log(error);
-    throw error;
-  }
+export const getArticleById = (articleId: number) => {
+  return axiosInstance.get<Article>(`/articles/${articleId}`);
 };
 
-interface CommentResponse {
-  list: Comment[];
-  nextCursor: string | null;
-}
+export const createArticle = (article: {
+  title: string;
+  content: string;
+  image: string | null;
+}) => {
+  return axiosInstance.post<Article>('/articles', article);
+};
 
-export const getArticleComments = async (
+export const updateArticle = (
   articleId: number,
-  limit: number = 100,
-): Promise<CommentResponse> => {
-  try {
-    const response = await axios.get<CommentResponse>(
-      `${API_BASE_URL}/articles/${articleId}/comments`,
-      {
-        params: { limit },
-      },
-    );
-    return response.data;
-  } catch (error) {
-    console.error(error);
-    throw error;
-  }
+  article: {
+    title: string;
+    content: string;
+    image: string | null;
+  },
+) => {
+  return axiosInstance.patch<Article>(`/articles/${articleId}`, article);
+};
+
+export const deleteArticle = (articleId: number) => {
+  return axiosInstance.delete<void>(`/articles/${articleId}`);
 };

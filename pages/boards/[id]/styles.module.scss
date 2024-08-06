@@ -1,4 +1,4 @@
-@import "@/styles/import.scss";
+@import '@/styles/index.scss';
 
 .article {
   max-width: 1060px;
@@ -51,17 +51,12 @@
     }
 
     &-button {
-      @include Font(
-        $font-size-md,
-        $line-height-md,
-        $font-weight-md-semibold,
-        $color-grayscale-50
-      );
       @include Size(140px, 45px);
-      background-color: $color-primary-green-200;
-      border: none;
-      border-radius: 10px;
       margin-left: 14px;
+    }
+
+    &-icon {
+      display: none;
     }
   }
 
@@ -81,16 +76,8 @@
   }
 
   .button-back {
-    @include Font(
-      $font-size-md,
-      $line-height-md,
-      $font-weight-md-semibold,
-      $color-primary-green-200
-    );
     @include Size(140px, 45px);
     background-color: $color-grayscale-50;
-    border: 1px solid $color-primary-green-200;
-    border-radius: 10px;
     display: block;
     margin: 0 auto 60px;
   }
@@ -147,21 +134,14 @@
     }
 
     .header-button {
-      @include Size(22px, 22px);
+      display: none;
+    }
+
+    .header-icon {
+      display: inline-flex;
       margin-left: 12px;
-      font-size: 0;
-      background-position: center;
-      background-repeat: no-repeat;
-      background-size: 20px;
+      padding: 0;
       background-color: transparent;
-
-      &.edit {
-        background-image: url("../../../assets/icons/ic_edit.svg");
-      }
-
-      &.delete {
-        background-image: url("../../../assets/icons/ic_delete.svg");
-      }
     }
 
     &-info {
