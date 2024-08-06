@@ -20,39 +20,10 @@
   .signup-wrapper {
     @include Flex(column, '', '');
     row-gap: 24px;
-
-    .input-wrapper {
-      @include Flex(column, '', '');
-      row-gap: 10px;
-    }
-
-    .label {
-      @include Font(
-        $font-size-md,
-        $line-height-md,
-        $font-weight-md-regular,
-        $color-grayscale-400
-      );
-      @include Flex(column, '', '');
-      row-gap: 8px;
-    }
-    input {
-      @include Size(100%, 45px);
-      background-color: $color-grayscale-100;
-      border-radius: 10px;
-      row-gap: 8px;
-    }
   }
-  .button {
-    @include Size(100%, 45px);
-    @include Font(
-      $font-size-md,
-      $line-height-md,
-      $font-weight-md-semibold,
-      $color-grayscale-100
-    );
-    background-color: $color-primary-green-200;
-    border-radius: 10px;
+
+
+  .signup-bts {
     margin-top: 32px;
   }
 
@@ -61,6 +32,7 @@
     gap: 10px;
 
     margin-top: 40px;
+    
     strong {
       @include Font(
         $font-size-md,

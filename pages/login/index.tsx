@@ -25,9 +25,9 @@ const LoginPage = () => {
         <div className={styles['password-input-wrapper']}>
           <Input
             label="비밀번호"
-            id="email"
-            name="email"
-            type="email"
+            id="password"
+            name="password"
+            type="password"
             className={styles['password-input']}
             placeholder="비밀번호를 입력해 주세요"
           ></Input>
