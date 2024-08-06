@@ -11,7 +11,11 @@ interface SnackBarProps {
   size?: 'small' | 'large';
 }
 
-const SnackBar = ({ message, type = 'info', size = 'large' }: SnackBarProps) => {
+const SnackBar = ({
+  message,
+  type = 'info',
+  size = 'large',
+}: SnackBarProps) => {
   const icon = type === 'success' ? check : type === 'error' ? error : info;
 
   return (

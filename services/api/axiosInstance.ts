@@ -15,7 +15,7 @@ axiosInstance.interceptors.request.use(
     }
     return config;
   },
-  (error) => Promise.reject(error)
+  (error) => Promise.reject(error),
 );
 
 axiosInstance.interceptors.response.use(
@@ -25,7 +25,7 @@ axiosInstance.interceptors.response.use(
       error.message = '로그인 필요';
     }
     return Promise.reject(error);
-  }
+  },
 );
 
 export default axiosInstance;
