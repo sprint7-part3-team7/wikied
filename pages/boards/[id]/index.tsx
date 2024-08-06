@@ -1,11 +1,11 @@
-import { getArticleComments, getArticleDetail } from "@/services/api/article";
-import { Article, Comment } from "@/types/article";
-import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
-import Image from "next/image";
-import styles from "./styles.module.scss";
-import likeIcon from "@/assets/icons/ic_heart.svg";
-import CommentList from "./components/commentList";
+import { getArticleComments, getArticleDetail } from '@/services/api/article';
+import { Article, Comment } from '@/types/article';
+import { useRouter } from 'next/router';
+import { useEffect, useState } from 'react';
+import Image from 'next/image';
+import styles from './styles.module.scss';
+import likeIcon from '@/assets/icons/ic_heart.svg';
+import CommentList from './components/commentList';
 
 const ArticleDetailPage = () => {
   const router = useRouter();
@@ -22,7 +22,7 @@ const ArticleDetailPage = () => {
             getArticleDetail(Number(id)),
             getArticleComments(Number(id)),
           ]);
-          articleData.content = articleData.content.replace(/<img.*?>/g, "");
+          articleData.content = articleData.content.replace(/<img.*?>/g, '');
           setArticle(articleData);
           setComments(commentsData.list);
         } catch (error) {
@@ -36,7 +36,7 @@ const ArticleDetailPage = () => {
   }, [id]);
 
   const handleBackButtonClick = () => {
-    router.push("/boards");
+    router.push('/boards');
   };
 
   if (loading) {
@@ -48,37 +48,37 @@ const ArticleDetailPage = () => {
   }
 
   return (
-    <div className={styles["article"]}>
-      <div className={styles["article-container"]}>
-        <div className={styles["article-header"]}>
-          <div className={styles["header-wrapper"]}>
-            <div className={styles["article-title"]}>{article.title}</div>
-            <div className={styles["header-button-wrapper"]}>
+    <div className={styles['article']}>
+      <div className={styles['article-container']}>
+        <div className={styles['article-header']}>
+          <div className={styles['header-wrapper']}>
+            <div className={styles['article-title']}>{article.title}</div>
+            <div className={styles['header-button-wrapper']}>
               <button
-                className={`${styles["header-button"]} ${styles["edit"]}`}
+                className={`${styles['header-button']} ${styles['edit']}`}
               >
                 수정하기
               </button>
               <button
-                className={`${styles["header-button"]} ${styles["delete"]}`}
+                className={`${styles['header-button']} ${styles['delete']}`}
               >
                 삭제하기
               </button>
             </div>
           </div>
-          <div className={styles["article-info"]}>
-            <div className={styles["article-description"]}>
+          <div className={styles['article-info']}>
+            <div className={styles['article-description']}>
               <span>{article.writer.name}</span>
               <span>{new Date(article.createdAt).toLocaleDateString()}</span>
             </div>
-            <div className={styles["like-count"]}>
-              <Image src={likeIcon} alt='likeIcon' width={18} />
+            <div className={styles['like-count']}>
+              <Image src={likeIcon} alt="likeIcon" width={18} />
               <span>{article.likeCount}</span>
             </div>
           </div>
         </div>
 
-        <div className={styles["image"]}>
+        <div className={styles['image']}>
           {article.image && (
             <Image
               src={article.image}
@@ -89,11 +89,11 @@ const ArticleDetailPage = () => {
           )}
         </div>
         <div
-          className={styles["content"]}
+          className={styles['content']}
           dangerouslySetInnerHTML={{ __html: article.content }}
         ></div>
       </div>
-      <button className={styles["button-back"]} onClick={handleBackButtonClick}>
+      <button className={styles['button-back']} onClick={handleBackButtonClick}>
         목록으로
       </button>
       <CommentList comments={comments} />

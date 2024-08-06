@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from "react";
-import styles from "./styles.module.scss";
-import { getArticles } from "@/services/api/article";
-import { Article } from "@/types/article";
-import BestBoardCard from "./bestArticleCard";
+import React, { useState, useEffect } from 'react';
+import styles from './styles.module.scss';
+import { getArticles } from '@/services/api/article';
+import { Article } from '@/types/article';
+import BestBoardCard from './bestArticleCard';
 
 const BestArticleList = () => {
   const [bestBoards, setBestBoards] = useState<Article[]>([]);
@@ -10,7 +10,7 @@ const BestArticleList = () => {
 
   const fetchArticles = async () => {
     try {
-      const response = await getArticles(1, 4, "like");
+      const response = await getArticles(1, 4, 'like');
       setBestBoards(response.list);
       setLoading(false);
     } catch (error) {
@@ -28,12 +28,12 @@ const BestArticleList = () => {
   }
 
   return (
-    <div className={styles["best-board-list"]}>
-      <div className={styles["best-board-header"]}>
-        <div className={styles["header"]}>베스트 게시글</div>
-        <button className={styles["add-board-button"]}>게시물 등록하기</button>
+    <div className={styles['best-board-list']}>
+      <div className={styles['best-board-header']}>
+        <div className={styles['header']}>베스트 게시글</div>
+        <button className={styles['add-board-button']}>게시물 등록하기</button>
       </div>
-      <div className={styles["board-grid"]}>
+      <div className={styles['board-grid']}>
         {bestBoards.map((board) => (
           <BestBoardCard key={board.id} board={board} />
         ))}

@@ -23,6 +23,17 @@ const nextConfig = {
       },
     ],
   },
+  /**
+   * @svgr/webpack 사용하기 위해 추가해야하는 설정
+   */
+  // webpack(config) {
+  //   config.module.rules.push({
+  //     test: /\.svg$/,
+  //     use: ['@svgr/webpack'],
+  //   });
+
+  //   return config;
+  // },
 };
 
 export default nextConfig;

@@ -2,13 +2,27 @@
 
 .user-list-container {
   @include Flex(column, center, center);
+  @include Size(100%, "");
   row-gap: 20px;
-  width: 100%;
-  margin-top: 50px;
+  margin-top: 60px;
 
   .user-list {
     @include Flex(column, flex-start, flex-start);
     row-gap: 16px;
     width: 100%;
+  }
+}
+
+@media screen and (max-width: $tablet-max-width) {
+  .user-list-container {
+    @include Size(100%, "");
+    margin-top: 40px;
+  }
+}
+
+@media screen and (max-width: $mobile-max-width) {
+  .user-list-container {
+    @include Size(100%, "");
+    margin-top: 20px;
   }
 }

@@ -1,7 +1,12 @@
-import WikilistUI from './components/wikiListUI';
+import UserList from './components/userList';
+import styles from '@/pages/wikilist/styles.module.scss';
 
 const Wikilist = () => {
-  return <WikilistUI />;
+  return (
+    <div className={styles['wikilist-ui']}>
+      <UserList />
+    </div>
+  );
 };
 
 export default Wikilist;
