@@ -37,13 +37,19 @@ const Quiz = ({ size = 'large' }: QuizProps) => {
     <div className={clsx(styles['container'], styles[size])}>
       <Image className={styles['close-image']} src={closeIcon} alt="닫기" />
       <div className={styles['title-wrapper']}>
-        <Image src={lockIcon} alt="자물쇠" width={20} height={20} />
+        <div className={styles['lock-icon-wrapper']}>
+          <Image src={lockIcon} alt="자물쇠" width={20} height={20} />
+        </div>
         <div className={styles['title']}>
           <p>다음 퀴즈를 맞추고</p>
           <p>위키를 작성해보세요.</p>
         </div>
       </div>
-      <div className={styles['input-wrapper']}>
+      <div
+        className={clsx(styles['input-wrapper'], {
+          [styles['error']]: errorMessage,
+        })}
+      >
         <label className={styles['label']}>특별히 싫어하는 음식은?</label>
         <Input
           id="answer"
