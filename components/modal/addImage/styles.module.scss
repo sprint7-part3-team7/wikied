@@ -1,0 +1,82 @@
+@import '@/styles/index.scss';
+
+.container {
+  @include Flex(column, null, null);
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0px 4px 20px 0px $color-shadow;
+  margin-bottom: 10px;
+
+  .close-image {
+    align-self: flex-end;
+  }
+
+  &.large {
+    @include Size(394px, 336px);
+  }
+
+  &.small {
+    @include Size(278px, 338px);
+  }
+
+  .image-wrapper {
+    @include Flex(column, center, center);
+    row-gap: 20px;
+    position: relative;
+
+    .image-label {
+      @include Font(
+        $font-size-2lg,
+        $line-height-2lg,
+        $font-weight-2lg-semibold,
+        $color-grayscale-500
+      );
+    }
+
+    .image-input-box {
+      @include Size(354px, 160px);
+      background-color: $color-grayscale-100;
+      border-radius: 10px;
+
+      .image-input {
+        display: none;
+      }
+    }
+
+    .preview-image {
+      @include Size(100%, 100%);
+      object-fit: contain;
+    }
+
+    .image {
+      position: absolute;
+      top: 52%;
+      left: 46%;
+    }
+  }
+
+  .button {
+    margin-top: 20px;
+    padding: 8px 20px;
+  }
+
+  &.small {
+    .image {
+      top: 53%;
+      left: 43%;
+    }
+
+    .image-label {
+      @include Font(
+        $font-size-lg,
+        $line-height-lg,
+        $font-weight-lg-semibold,
+        $color-grayscale-500
+      );
+    }
+
+    .image-input-box {
+      @include Size(240px, 160px);
+    }
+  }
+}

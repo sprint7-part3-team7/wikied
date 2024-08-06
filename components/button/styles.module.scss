@@ -35,12 +35,22 @@
 
   &.outline {
     border: 1px solid $color-primary-green-200;
-    background-color: none;
+    background-color: $color-grayscale-50;
     @include Font(
       $font-size-md,
       $line-height-md,
       $font-weight-md-semibold,
       $color-primary-green-200
+    );
+  }
+
+  &.disabled {
+    background-color: $color-grayscale-300;
+    @include Font(
+      $font-size-md,
+      $line-height-md,
+      $font-weight-md-semibold,
+      $color-grayscale-50
     );
   }
 }

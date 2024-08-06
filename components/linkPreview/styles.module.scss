@@ -25,15 +25,6 @@
 
 .height-small {
   height: 26px;
-
-  .url {
-    @include Font(
-      $font-size-xs,
-      $line-height-xs-18,
-      $font-weight-xs-regular,
-      $color-primary-green-200
-    );
-  }
 }
 
 .height-large {
