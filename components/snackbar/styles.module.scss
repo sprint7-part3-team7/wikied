@@ -12,7 +12,7 @@
   &.info {
     background-color: $color-grayscale-50;
     border: 1px solid $color-grayscale-200;
-    box-shadow: 0px 4px 20px 0px #0000000d;
+    box-shadow: 0px 4px 20px 0px $color-shadow;
 
     &.small {
       @include Font(
@@ -46,7 +46,7 @@
   &.success {
     background-color: $color-primary-green-100;
     border: 1px solid $color-primary-green-200;
-    box-shadow: 0px 4px 20px 0px #0000000d;
+    box-shadow: 0px 4px 20px 0px $color-shadow;
 
     &.small {
       @include Font(
@@ -66,7 +66,7 @@
       @include Font(
         $font-size-md,
         $line-height-md,
-        $font-weight-md-regular,
+        $font-weight-md-semibold,
         $color-primary-green-300
       );
 
@@ -80,7 +80,7 @@
   &.error {
     background-color: $color-secondary-red-100;
     border: 1px solid $color-secondary-red-200;
-    box-shadow: 0px 4px 20px 0px #0000000d;
+    box-shadow: 0px 4px 20px 0px $color-shadow;
 
     &.small {
       @include Font(
@@ -100,7 +100,7 @@
       @include Font(
         $font-size-md,
         $line-height-md,
-        $font-weight-md-regular,
+        $font-weight-md-semibold,
         $color-secondary-red-200
       );
 
