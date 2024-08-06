@@ -1,7 +1,6 @@
 import React from 'react';
 import styles from '@/pages/wikilist/components/UserList/UserCard/styles.module.scss';
 import { ProfileSummary } from '@/types/wiki';
-import Image from 'next/image';
 import DefaultProfileImg from '@/assets/icons/ic_profile.svg';
 import UserLink from './userLink';
 
