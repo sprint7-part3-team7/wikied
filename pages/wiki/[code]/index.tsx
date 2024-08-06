@@ -1,7 +1,7 @@
 import { useState, useEffect, useCallback } from 'react';
 import { useRouter } from 'next/router';
 import clsx from 'clsx';
-import { getProfiles } from '@/services/api/wiki';
+import { getProfileByCode } from '@/services/api/profile';
 import { Profile, Section } from '@/types/wiki';
 import WikiHeader from '@/pages/wiki/[code]/components/wikiHeader';
 import WikiArticle from '@/pages/wiki/[code]/components/wikiArticle';
@@ -23,7 +23,8 @@ const Wiki = (props: WikiProps) => {
 
   const getList = useCallback(async (code: string) => {
     try {
-      const data = await getProfiles(code);
+      const response = await getProfileByCode(code);
+      const data = response.data;
 
       const userId = localStorage.getItem('userId');
       const userProfileCode = localStorage.getItem('userProfileCode');
