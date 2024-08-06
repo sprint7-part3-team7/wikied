@@ -1,5 +1,5 @@
-import axios from 'axios';
-import { Profile } from '@/types/wiki';
+import axios from "axios";
+import { Profile } from "@/types/wiki";
 
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL;
 

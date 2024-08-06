@@ -1,0 +1,46 @@
+@import "@/styles/index.scss";
+
+.user-card {
+  @include Flex(row, flex-start, flex-start);
+  padding: 24px 36px;
+  border: 1px solid $color-grayscale-100;
+  border-radius: 8px;
+  background-color: $color-grayscale-50;
+  margin-bottom: 12px;
+  position: relative;
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.profile-image {
+  @include Size(85px, 85px);
+  border-radius: 50%;
+}
+
+.user-info {
+  margin-left: 24px;
+  @include Flex(column, flex-start, flex-start);
+}
+
+.user-name {
+  @include Font(
+    $font-size-2xl,
+    $line-height-2xl,
+    $font-weight-2xl-semibold,
+    $color-grayscale-600);
+  border: none;
+}
+
+.user-details {
+  @include Font(
+    $font-size-md,
+    $line-height-md,
+    $font-weight-md-regular,
+    $color-grayscale-400);
+  margin-top: 12px;
+}
+
+.user-link-container {
+  position: absolute;
+  right: 16px;
+  bottom: 16px;
+}
