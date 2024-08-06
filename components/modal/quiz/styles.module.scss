@@ -20,7 +20,14 @@
 
   .title-wrapper {
     @include Flex(column, center, center);
-    row-gap: 20px;
+    row-gap: 10px;
+
+    .lock-icon-wrapper {
+      @include Size(42px, 42px);
+      @include Flex(column, center, center);
+      border-radius: 50%;
+      background-color: $color-grayscale-100;
+    }
 
     .title {
       @include Font(
