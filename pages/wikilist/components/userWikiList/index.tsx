@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback } from 'react';
 import styles from '@/pages/wikilist/components/UserList/styles.module.scss';
-import UserCard from './userCard';
+import UserCard from './userWikiCard';
 import Pagination from '@/components/pagination';
 import SearchForm from '@/components/searchForm';
 import NotFound from '@/pages/wikilist/components/notFound';
@@ -14,16 +14,16 @@ const UserList = () => {
   const [totalPages, setTotalPages] = useState(1);
   const [searchTerm, setSearchTerm] = useState('');
 
-  const fetchUsers = useCallback(async (page: number, name: string) => {
+  const fetchUsers = useCallback(async (page: number, search: string) => {
     setLoading(true);
     try {
-      const response = await getProfiles({ page, pageSize: 3, name });
+      const response = await getProfiles({ page, pageSize: 3, name: search });
       const data = response.data;
       setUsers(data.list);
       setTotalPages(Math.ceil(data.totalCount / 3));
+      setLoading(false);
     } catch (error) {
       console.error(error);
-    } finally {
       setLoading(false);
     }
   }, []);
