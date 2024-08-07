@@ -1,0 +1,31 @@
+@import '@/styles/index.scss';
+
+.editor-container {
+  @include Flex('', '', center);
+
+  .editor-wrapper {
+    @include Flex('', '', center);
+    gap: 20px;
+    white-space: nowrap;
+
+    .editor-btn {
+      @include Size('', 24px);
+      padding: 0;
+    }
+    .dividing-line {
+      @include Size('', 20px);
+      border: 1px solid $color-grayscale-200;
+    }
+  }
+}
+
+@media screen and (max-width: $tablet-max-width) {
+}
+
+@media screen and (max-width: $mobile-max-width) {
+  .editor-container {
+    .editor-wrapper {
+      @include Size(532.46px, '');
+    }
+  }
+}

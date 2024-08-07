@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import styles from './styles.module.scss';
 import { getArticles } from '@/services/api/article';
 import { Article } from '@/types/article';
 import BestBoardCard from './bestArticleCard';
+import Button from '@/components/button';
 
 const BestArticleList = () => {
   const [bestBoards, setBestBoards] = useState<Article[]>([]);
@@ -10,7 +11,12 @@ const BestArticleList = () => {
 
   const fetchArticles = async () => {
     try {
-      const response = await getArticles(1, 4, 'like');
+      const data = await getArticles({
+        page: 1,
+        pageSize: 4,
+        orderBy: 'like',
+      });
+      const response = data.data;
       setBestBoards(response.list);
       setLoading(false);
     } catch (error) {
@@ -31,7 +37,7 @@ const BestArticleList = () => {
     <div className={styles['best-board-list']}>
       <div className={styles['best-board-header']}>
         <div className={styles['header']}>베스트 게시글</div>
-        <button className={styles['add-board-button']}>게시물 등록하기</button>
+        <Button className={styles['add-board-button']}>게시물 등록하기</Button>
       </div>
       <div className={styles['board-grid']}>
         {bestBoards.map((board) => (
