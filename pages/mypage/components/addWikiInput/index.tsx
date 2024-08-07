@@ -1,3 +1,4 @@
+import Button from '@/components/button';
 import Input from '@/components/input';
 import styles from '@/pages/mypage/components/addWikiInput/styles.module.scss';
 import { useState } from 'react';
@@ -38,9 +39,9 @@ const AddWikiInput = () => {
           fullWidth
         />
       </div>
-      <button type="submit" className={styles['button']}>
+      <Button color="primary" size="small" alignEnd defaultPadding>
         생성하기
-      </button>
+      </Button>
     </form>
   );
 };

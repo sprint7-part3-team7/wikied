@@ -1,10 +1,10 @@
-import styles from '@/pages/wiki/components/wikiArticle/components/blockquote/styles.module.scss';
+import styles from '@/pages/wiki/[code]/components/wikiArticle/components/blockquote/styles.module.scss';
 
 interface BlockquoteProps {
   children: React.ReactNode;
 }
 
-const Blockquote: React.FC<BlockquoteProps> = ({ children }) => {
+const Blockquote = ({ children }: BlockquoteProps) => {
   return (
     <div className={styles['blockquote-container']}>
       <div className={styles['prefix']}></div>

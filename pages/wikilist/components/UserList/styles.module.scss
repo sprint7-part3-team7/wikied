@@ -1,8 +1,8 @@
-@import "@/styles/index.scss";
+@import '@/styles/index.scss';
 
 .user-list-container {
   @include Flex(column, center, center);
-  @include Size(100%, "");
+  @include Size(100%, '');
   row-gap: 20px;
   margin-top: 60px;
 
@@ -24,3 +24,4 @@
     margin-top: 20px;
   }
 }
+

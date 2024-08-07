@@ -1,7 +1,7 @@
-@import "@/styles/index.scss";
+@import '@/styles/index.scss';
 
 .link-container {
-  @include Flex(row, "", center);
+  @include Flex(row, '', center);
   padding: 5px 10px;
   border-radius: 10px;
   background-color: $color-primary-green-100;
@@ -13,7 +13,8 @@
     $font-size-md,
     $line-height-md,
     $font-weight-md-regular,
-    $color-primary-green-200);
+    $color-primary-green-200
+  );
   text-decoration: none;
 
   &:hover {
