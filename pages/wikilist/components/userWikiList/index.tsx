@@ -1,14 +1,14 @@
 import { useState, useEffect, useCallback } from 'react';
 import styles from '@/pages/wikilist/components/UserList/styles.module.scss';
-import { User } from '@/types/user';
-import UserCard from './userCard';
-import { getUsers } from '@/services/api/user';
+import UserCard from './userWikiCard';
 import Pagination from '@/components/pagination';
 import SearchForm from '@/components/searchForm';
 import NotFound from '@/pages/wikilist/components/notFound';
+import { getProfiles } from '@/services/api/profile';
+import { ProfileSummary } from '@/types/wiki';
 
 const UserList = () => {
-  const [users, setUsers] = useState<User[]>([]);
+  const [users, setUsers] = useState<ProfileSummary[]>([]);
   const [loading, setLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
@@ -17,7 +17,8 @@ const UserList = () => {
   const fetchUsers = useCallback(async (page: number, search: string) => {
     setLoading(true);
     try {
-      const data = await getUsers(page, 3, search);
+      const response = await getProfiles({ page, pageSize: 3, name: search });
+      const data = response.data;
       setUsers(data.list);
       setTotalPages(Math.ceil(data.totalCount / 3));
       setLoading(false);
