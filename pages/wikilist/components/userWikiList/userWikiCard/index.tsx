@@ -3,7 +3,7 @@ import styles from '@/pages/wikilist/components/UserList/UserCard/styles.module.
 import { User } from '@/types/user';
 import Image from 'next/image';
 import DefaultProfileImg from '@/assets/icons/ic_profile.svg';
-import UserLink from './userLink';
+import UserLink from './userWikiLink';
 
 interface UserCardProps {
   user: User;
