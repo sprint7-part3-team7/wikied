@@ -1,0 +1,36 @@
+@import '@/styles/index.scss';
+
+.alert-container {
+  @include Flex(column, null, null);
+  border: 1px solid $color-primary-green-100;
+  border-radius: 5px;
+  background-color: $color-grayscale-50;
+  padding: 16px 12px;
+
+  .alert-header {
+    @include Flex(row, space-between, center);
+
+    .circle-icon {
+      margin-bottom: 15px;
+    }
+  }
+
+  .description {
+    @include Font(
+      $font-size-md,
+      $line-height-sm,
+      $font-weight-md-regular,
+      $color-grayscale-650
+    );
+    margin-bottom: 4px;
+  }
+
+  .time-stamp {
+    @include Font(
+      $font-size-xs,
+      $line-height-xs-16,
+      $font-weight-xs-regular,
+      $color-grayscale-350
+    );
+  }
+}
