@@ -3,6 +3,7 @@ import closeIcon from '@/assets/icons/ic_close.svg';
 import styles from '@/components/modal/alert/styles.module.scss';
 import Button from '@/components/button';
 import clsx from 'clsx';
+import Modal from '..';
 
 interface AlertProps {
   title: string;
@@ -21,7 +22,7 @@ const Alert = ({
     title === '저장하지 않고 나가시겠어요?' ? 'alert' : 'primary';
 
   return (
-    <div className={clsx(styles.container, styles[size])}>
+    <Modal size={size}>
       <Image
         className={styles['close-image']}
         src={closeIcon}
@@ -38,7 +39,7 @@ const Alert = ({
       <Button color={buttonColor} size="small" defaultPadding alignEnd>
         {content}
       </Button>
-    </div>
+    </Modal>
   );
 };
 
