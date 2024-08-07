@@ -1,9 +1,11 @@
-import Button from '@/components/button';
+import { useState, useRef, ChangeEvent } from 'react';
+import clsx from 'clsx';
 import Image from 'next/image';
+import Button from '@/components/button';
 import styles from '@/components/modal/addImage/styles.module.scss';
+import Modal from '..';
 import closeIcon from '@/assets/icons/ic_close.svg';
 import cameraIcon from '@/assets/icons/ic_camera.svg';
-import { useState, useRef, ChangeEvent } from 'react';
 
 interface AddImageProps {
   size?: 'small' | 'large';
@@ -33,47 +35,49 @@ const AddImage = ({ size = 'large' }: AddImageProps): JSX.Element => {
   };
 
   return (
-    <div className={`${styles['container']} ${styles[size]}`}>
-      <Image className={styles['close-image']} src={closeIcon} alt="닫기" />
-      <div className={styles['image-wrapper']}>
-        <label htmlFor="file-input" className={styles['image-label']}>
-          이미지
-        </label>
-        <div className={styles['image-input-box']} onClick={handleInputClick}>
-          <input
-            id="file-input"
-            type="file"
-            ref={fileInputRef}
-            className={styles['image-input']}
-            onChange={handleImageChange}
-            accept="image/*"
-          />
-          {imagePreview ? (
-            <img
-              src={imagePreview}
-              alt="미리보기"
-              className={styles['preview-image']}
+    <Modal size={size}>
+      <div className={clsx(styles['container'], styles[size])}>
+        <Image className={styles['close-image']} src={closeIcon} alt="닫기" />
+        <div className={styles['image-wrapper']}>
+          <label htmlFor="file-input" className={styles['image-label']}>
+            이미지
+          </label>
+          <div className={styles['image-input-box']} onClick={handleInputClick}>
+            <input
+              id="file-input"
+              type="file"
+              ref={fileInputRef}
+              className={styles['image-input']}
+              onChange={handleImageChange}
+              accept="image/*"
             />
-          ) : (
-            <Image
-              className={styles['image']}
-              src={cameraIcon}
-              alt="카메라"
-              width={36}
-              height={36}
-            />
-          )}
+            {imagePreview ? (
+              <img
+                src={imagePreview}
+                alt="미리보기"
+                className={styles['preview-image']}
+              />
+            ) : (
+              <Image
+                className={styles['image']}
+                src={cameraIcon}
+                alt="카메라"
+                width={36}
+                height={36}
+              />
+            )}
+          </div>
         </div>
+        <Button
+          size="small"
+          color="disabled"
+          alignEnd
+          className={styles['button']}
+        >
+          삽입하기
+        </Button>
       </div>
-      <Button
-        size="small"
-        color="disabled"
-        alignEnd
-        className={styles['button']}
-      >
-        삽입하기
-      </Button>
-    </div>
+    </Modal>
   );
 };
 
