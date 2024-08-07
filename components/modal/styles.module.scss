@@ -1,0 +1,16 @@
+@import '@/styles/index.scss';
+
+.container {
+  @include Flex(column, null, null);
+  border-radius: 10px;
+  box-shadow: 0px 4px 20px 0px $color-shadow;
+  padding: 20px;
+
+  &.large {
+    @include Size(395px, auto);
+  }
+
+  &.small {
+    @include Size(335px, auto);
+  }
+}
