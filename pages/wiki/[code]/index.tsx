@@ -1,8 +1,9 @@
 import { useState, useEffect, useCallback } from 'react';
 import { useRouter } from 'next/router';
 import clsx from 'clsx';
-import { getProfiles } from '@/services/api/wiki';
-import { Profile, Section } from '@/types/wiki';
+
+import { getProfileByCode } from '@/services/api/profile';
+import { ProfileDetail, Section } from '@/types/wiki';
 import WikiHeader from '@/pages/wiki/[code]/components/wikiHeader';
 import WikiArticle from '@/pages/wiki/[code]/components/wikiArticle';
 import WikiAside from '@/pages/wiki/[code]/components/wikiAside';
@@ -10,7 +11,7 @@ import styles from '@/pages/wiki/[code]/styles.module.scss';
 
 interface WikiProps {
   className: string;
-  profile: Profile;
+  profile: ProfileDetail;
 }
 
 const Wiki = (props: WikiProps) => {
@@ -23,7 +24,8 @@ const Wiki = (props: WikiProps) => {
 
   const getList = useCallback(async (code: string) => {
     try {
-      const data = await getProfiles(code);
+      const response = await getProfileByCode(code);
+      const data = response.data;
 
       const userId = localStorage.getItem('userId');
       const userProfileCode = localStorage.getItem('userProfileCode');

@@ -1,3 +1,4 @@
+import Button from '@/components/button';
 import Input from '@/components/input';
 import styles from '@/pages/mypage/components/changePasswordInput/styles.module.scss';
 import { useState } from 'react';
@@ -54,9 +55,9 @@ const ChangePasswordInput = () => {
         fullWidth
         errorMessage={error}
       />
-      <button type="submit" className={styles['button']}>
+      <Button color="primary" size="small" alignEnd defaultPadding>
         변경하기
-      </button>
+      </Button>
     </form>
   );
 };
