@@ -19,6 +19,10 @@ const CommentList = ({ comments, articleId }: CommentListProps) => {
   const maxLength = 500;
 
   useEffect(() => {
+    if (comments.length === 0) {
+      setIsCommentAuthor(false);
+      return;
+    }
     const currentUserId = localStorage.getItem('userId');
     setIsCommentAuthor(currentUserId === comments[0].writer.id.toString());
   }, [comments]);
