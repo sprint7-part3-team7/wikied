@@ -19,7 +19,7 @@ export const getArticleById = (articleId: number) => {
   return axiosInstance.get<Article>(`/articles/${articleId}`);
 };
 
-export const createArticle = (article: {
+export const postArticle = (article: {
   title: string;
   content: string;
   image: string | null;
