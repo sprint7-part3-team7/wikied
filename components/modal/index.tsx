@@ -3,12 +3,25 @@ import clsx from 'clsx';
 
 interface ModalProps {
   children: React.ReactNode;
-  size?: 'small' | 'large';
+  size?: 'small' | 'middle' | 'large';
+  bgColor?: 'gray';
 }
 
-const Modal = ({ children, size = 'large' }: ModalProps): JSX.Element => {
+const Modal = ({
+  children,
+  size = 'large',
+  bgColor,
+}: ModalProps): JSX.Element => {
   return (
-    <div className={clsx(styles['container'], styles[size])}>{children}</div>
+    <div
+      className={clsx(
+        styles['container'],
+        styles[size],
+        bgColor && styles[`bg-${bgColor}`],
+      )}
+    >
+      {children}
+    </div>
   );
 };
 

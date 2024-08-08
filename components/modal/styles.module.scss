@@ -10,7 +10,15 @@
     @include Size(395px, auto);
   }
 
-  &.small {
+  &.middle {
     @include Size(335px, auto);
   }
+
+  &.small {
+    @include Size(275px, auto);
+  }
+}
+
+.bg-gray {
+  background-color: $color-grayscale-250;
 }
