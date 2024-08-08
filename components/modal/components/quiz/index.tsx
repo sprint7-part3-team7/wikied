@@ -2,14 +2,14 @@ import Image from 'next/image';
 import closeIcon from '@/assets/icons/ic_close.svg';
 import lockIcon from '@/assets/icons/ic_lock.svg';
 import Input from '@/components/input';
-import styles from '@/components/modal/quiz/styles.module.scss';
+import styles from '@/components/modal/components/quiz/styles.module.scss';
 import Button from '@/components/button';
 import { useState } from 'react';
 import clsx from 'clsx';
-import Modal from '..';
+import Modal from '../..';
 
 interface QuizProps {
-  size?: 'large' | 'small';
+  size?: 'middle' | 'large';
 }
 
 const Quiz = ({ size = 'large' }: QuizProps) => {

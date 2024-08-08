@@ -50,8 +50,10 @@
     padding: 8px 20px;
   }
 
-  &.small {
+  &.middle {
     .image-wrapper {
+      row-gap: 22px;
+
       .image-label {
         @include Font(
           $font-size-lg,

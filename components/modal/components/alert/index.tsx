@@ -1,15 +1,15 @@
 import Image from 'next/image';
 import closeIcon from '@/assets/icons/ic_close.svg';
-import styles from '@/components/modal/alert/styles.module.scss';
+import styles from '@/components/modal/components/alert/styles.module.scss';
 import Button from '@/components/button';
 import clsx from 'clsx';
-import Modal from '..';
+import Modal from '../..';
 
 interface AlertProps {
   title: string;
   description: string;
   content: string;
-  size?: 'small' | 'large';
+  size?: 'middle' | 'large';
 }
 
 const Alert = ({

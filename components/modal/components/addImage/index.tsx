@@ -2,13 +2,13 @@ import { useState, useRef, ChangeEvent } from 'react';
 import clsx from 'clsx';
 import Image from 'next/image';
 import Button from '@/components/button';
-import styles from '@/components/modal/addImage/styles.module.scss';
-import Modal from '..';
+import styles from '@/components/modal/components/addImage/styles.module.scss';
+import Modal from '../..';
 import closeIcon from '@/assets/icons/ic_close.svg';
 import cameraIcon from '@/assets/icons/ic_camera.svg';
 
 interface AddImageProps {
-  size?: 'small' | 'large';
+  size?: 'middle' | 'large';
 }
 
 const AddImage = ({ size = 'large' }: AddImageProps): JSX.Element => {

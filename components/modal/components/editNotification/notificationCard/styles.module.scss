@@ -13,6 +13,24 @@
     .circle-icon {
       margin-bottom: 15px;
     }
+
+    .close-button {
+      @include Size(24px, 24px);
+      padding: 0;
+      background-color: $color-grayscale-50;
+
+      &.small {
+        @include Size(20px, 20px);
+      }
+
+      .close-icon {
+        @include Size(24px, 24px);
+
+        &.small {
+          @include Size(20px, 20px);
+        }
+      }
+    }
   }
 
   .description {
@@ -23,6 +41,15 @@
       $color-grayscale-650
     );
     margin-bottom: 4px;
+
+    &.small {
+      @include Font(
+        $font-size-xs,
+        $line-height-xs-20,
+        $font-weight-xs-regular,
+        $color-grayscale-650
+      );
+    }
   }
 
   .time-stamp {
@@ -32,5 +59,14 @@
       $font-weight-xs-regular,
       $color-grayscale-350
     );
+
+    &.small {
+      @include Font(
+        $font-size-timestamp,
+        $line-height-timestamp,
+        $font-weight-timestamp,
+        $color-grayscale-350
+      );
+    }
   }
 }
