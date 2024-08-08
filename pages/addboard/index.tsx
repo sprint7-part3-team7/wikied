@@ -1,6 +1,6 @@
 import Editor from '@/components/editor';
 
-const EditorTest = () => {
+const AddBoard = () => {
   return (
     <div>
       <Editor />
@@ -8,4 +8,4 @@ const EditorTest = () => {
   );
 };
 
-export default EditorTest;
+export default AddBoard;
