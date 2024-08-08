@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState, useEffect } from 'react';
 import styles from './styles.module.scss';
 import { Comment } from '@/types/article';
 import Image from 'next/image';
@@ -6,19 +6,43 @@ import defaultProfile from '@/assets/icons/ic_profile.svg';
 import editImage from '@/assets/icons/ic_edit.svg';
 import deleteImage from '@/assets/icons/ic_delete.svg';
 import Button from '@/components/button';
+import { postComment } from '@/services/api/comment';
 
 interface CommentListProps {
   comments: Comment[];
+  articleId: number;
 }
 
-const CommentList = ({ comments }: CommentListProps) => {
+const CommentList = ({ comments, articleId }: CommentListProps) => {
   const [newComment, setNewComment] = useState('');
+  const [isCommentAuthor, setIsCommentAuthor] = useState(false);
   const maxLength = 500;
 
-  const handleCommentChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+  useEffect(() => {
+    const currentUserId = localStorage.getItem('userId');
+    setIsCommentAuthor(currentUserId === comments[0].writer.id.toString());
+  }, [comments]);
+
+  const handleChangeComment = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     const input = e.target.value;
     if (input.length <= maxLength) {
       setNewComment(input);
+    }
+  };
+
+  const handleCommentSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (newComment.trim() === '') {
+      alert('댓글을 입력해 주세요');
+      return;
+    } else {
+      try {
+        await postComment(articleId, newComment);
+        setNewComment('');
+      } catch (error) {
+        console.error(error);
+        alert('댓글 등록 실패');
+      }
     }
   };
 
@@ -31,7 +55,7 @@ const CommentList = ({ comments }: CommentListProps) => {
         <textarea
           className={styles['comment-textarea']}
           value={newComment}
-          onChange={handleCommentChange}
+          onChange={handleChangeComment}
           placeholder="댓글을 입력해 주세요"
           maxLength={maxLength}
         />
@@ -43,6 +67,7 @@ const CommentList = ({ comments }: CommentListProps) => {
             color="primary"
             size="large"
             className={styles['submit-button']}
+            onClick={handleCommentSubmit}
           >
             댓글 등록
           </Button>
@@ -73,19 +98,26 @@ const CommentList = ({ comments }: CommentListProps) => {
                 <span className={styles['comment-author-name']}>
                   {comment.writer.name}
                 </span>
-                <div className={styles['comment-button-wrapper']}>
-                  <button className={styles['comment-button']}>
-                    <Image src={editImage} alt="수정" width={24} height={24} />
-                  </button>
-                  <button className={styles['comment-button']}>
-                    <Image
-                      src={deleteImage}
-                      alt="삭제"
-                      width={24}
-                      height={24}
-                    />
-                  </button>
-                </div>
+                {isCommentAuthor && (
+                  <div className={styles['comment-button-wrapper']}>
+                    <button className={styles['comment-button']}>
+                      <Image
+                        src={editImage}
+                        alt="수정"
+                        width={24}
+                        height={24}
+                      />
+                    </button>
+                    <button className={styles['comment-button']}>
+                      <Image
+                        src={deleteImage}
+                        alt="삭제"
+                        width={24}
+                        height={24}
+                      />
+                    </button>
+                  </div>
+                )}
               </div>
               <p className={styles['comment-content']}>{comment.content}</p>
               <span className={styles['comment-date']}>
