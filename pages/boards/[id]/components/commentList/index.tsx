@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import styles from './styles.module.scss';
 import { Comment } from '@/types/article';
 import Image from 'next/image';
@@ -13,28 +13,41 @@ interface CommentListProps {
 
 const CommentList = ({ comments }: CommentListProps) => {
   const [newComment, setNewComment] = useState('');
+  const maxLength = 500;
+
+  const handleCommentChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    const input = e.target.value;
+    if (input.length <= maxLength) {
+      setNewComment(input);
+    }
+  };
 
   return (
     <div className={styles['comment-container']}>
       <div className={styles['comment-title']}>
         댓글 <span className={styles['comment-count']}>{comments.length}</span>
       </div>
-
-      <form className={styles['comment-input']}>
+      <form className={styles['comment-input-container']}>
         <textarea
+          className={styles['comment-textarea']}
           value={newComment}
-          onChange={(e) => setNewComment(e.target.value)}
+          onChange={handleCommentChange}
           placeholder="댓글을 입력해 주세요"
+          maxLength={maxLength}
         />
-        <Button
-          color="primary"
-          size="large"
-          className={styles['submit-button']}
-        >
-          댓글 등록
-        </Button>
+        <div className={styles['comment-input-footer']}>
+          <span className={styles['character-count']}>
+            {newComment.length}/{maxLength}
+          </span>
+          <Button
+            color="primary"
+            size="large"
+            className={styles['submit-button']}
+          >
+            댓글 등록
+          </Button>
+        </div>
       </form>
-
       <div className={styles['comment-list']}>
         {comments.map((comment) => (
           <div key={comment.id} className={styles['comment-box']}>

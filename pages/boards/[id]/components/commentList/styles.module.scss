@@ -19,30 +19,47 @@
   }
 }
 
-.comment-input {
+.comment-input-container {
   margin-bottom: 42px;
-  position: relative;
+  background-color: $color-grayscale-100;
+  border-radius: 10px;
+  overflow: hidden;
+}
 
-  textarea {
-    @include Size(100%, 133px);
-    @include Font(
-      $font-size-md,
-      $line-height-md,
-      $font-weight-md-regular,
-      $color-grayscale-500
-    );
-    padding: 13px 15px 40px;
-    border: none;
-    border-radius: 10px;
-    background-color: $color-grayscale-100;
-    resize: none;
+.comment-textarea {
+  @include Size(100%, 80px);
+  @include Font(
+    $font-size-md,
+    $line-height-md,
+    $font-weight-md-regular,
+    $color-grayscale-500
+  );
+  padding: 13px 15px;
+  border: none;
+  background-color: transparent;
+  resize: none;
+
+  &:focus {
+    outline: none;
   }
 }
 
+.comment-input-footer {
+  @include Flex(col, space-between, end);
+  padding: 10px 15px;
+  background-color: transparent;
+}
+
+.character-count {
+  @include Font(
+    $font-size-md,
+    $line-height-md,
+    $font-weight-md-regular,
+    $color-grayscale-400
+  );
+}
+
 .submit-button {
-  position: absolute;
-  bottom: 15px;
-  right: 13px;
   width: 120px;
 }
 
@@ -125,7 +142,7 @@
 }
 
 @media (max-width: $tablet-max-width) {
-  .comment-input {
+  .comment-input-container {
     margin-bottom: 24px;
   }
 
