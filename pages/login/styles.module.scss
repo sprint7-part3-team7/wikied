@@ -8,9 +8,6 @@
 
   .login-wrapper {
     @include Flex(column, '', '');
-    row-gap: 24px;
-
-    
 
     .title {
       @include Font(
@@ -23,34 +20,18 @@
       margin-bottom: 50px;
     }
 
-    .email-input-wrapper {
-      @include Flex(column, '', '');
-      row-gap: 8px;
+    .form {
+      @include Flex(column, center, '');
+      row-gap: 32px;
 
-      .email-input {
-        @include Size(100%, 45px);
-        background-color: $color-grayscale-100;
-        border-radius: 10px;
-        padding: 14px 20px;
+
+      .input-wrapper {
+        @include Flex(column, center, '');
+      row-gap: 24px;
+
       }
     }
 
-    .password-input-wrapper {
-      @include Flex(column, '', '');
-      row-gap: 8px;
-      margin-top: 24px;
-
-      .password-input {
-        @include Size(100%, 45px);
-        background-color: $color-grayscale-100;
-        border-radius: 10px;
-        padding: 14px 20px;
-      }
-    }
-  }
-  .login-bts {
-    @include Size(100%, 45px);
-    margin-top: 32px;
   }
 
   .signup {

@@ -1,12 +1,12 @@
 export type SignupInputId =
   | "email"
-  | "nickname"
+  | "name"
   | "password"
   | "passwordConfirmation";
 
 export type LoginInputId =
   | "email"
-  | "nickname"
+  | "name"
   | "password"
   | "passwordConfirmation";
 
@@ -16,7 +16,7 @@ export const isValidEmail = (email: string) => {
 };
 
 export const getErrorMessage = (
-  type: "email" | "nickname" | "password" | "passwordConfirmation",
+  type: "email" | "name" | "password" | "passwordConfirmation",
   value: string,
   password?: string
 ): string => {
@@ -26,8 +26,8 @@ export const getErrorMessage = (
       if (!trimmedValue) return "이메일을 입력해 주세요";
       if (!isValidEmail(trimmedValue)) return "잘못된 이메일 형식입니다";
       return "";
-    case "nickname":
-      return trimmedValue ? "" : "닉네임을 입력해 주세요";
+    case "name":
+      return trimmedValue ? "" : "이름을 입력해 주세요";
     case "password":
       if (!trimmedValue) return "비밀번호를 입력해 주세요";
       if (trimmedValue.length < 8) return "비밀번호를 8자 이상 입력해 주세요";

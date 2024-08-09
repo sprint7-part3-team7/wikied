@@ -1,12 +1,11 @@
 import { useState, ChangeEvent, FocusEvent, useEffect } from 'react';
 import styles from '@/pages/signup/styles.module.scss';
 import Link from 'next/link';
-import Input from '@/components/input';
 import Button from '@/components/button';
-import InputItem from './components/inputitem.tsx/inputItem';
-import PasswordInput from './components/passwordInput/passwordInput';
+import Input from '@/components/input';
 import { SignupInputId, getErrorMessage } from './authUtils';
 import useDebounce from '@/hooks/useDebounce/useDebounce';
+import axiosInstance from '@/services/api/axiosInstance';
 
 interface FormState {
   email: string;
@@ -74,7 +73,7 @@ const SignupPage = () => {
     setErrors((prevErrors) => ({ ...prevErrors, [id]: errorMessage }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
     const newErrors = {
@@ -93,9 +92,35 @@ const SignupPage = () => {
     const isValid = Object.values(newErrors).every((error) => !error);
 
     if (isValid) {
-      // TODO: 회원가입 API
+      try {
+        const response = await axiosInstance.post('/auth/signUp', {
+          email: formState.email,
+          name: formState.name,
+          password: formState.password,
+          passwordConfirmation: formState.passwordConfirmation,
+        });
+        console.log('회원가입 성공:', response.data);
+      } catch (error) {
+        console.error('회원가입 실패:', error);
+      }
     }
   };
+
+  //   const { name, email, password, passwordConfirmation } = formState;
+  //   if (isValid) {
+  //     try {
+  //       const response = await axiosInstance.post('/auth/signUp', {
+  //         email,
+  //         name,
+  //         password,
+  //         passwordConfirmation,
+  //       });
+  //       console.log('회원가입 성공:', response.data);
+  //     } catch (error) {
+  //       console.error('회원가입 실패:', error);
+  //     }
+  //   }
+  // };
 
   return (
     <div className={styles['signup-container']}>
@@ -106,9 +131,8 @@ const SignupPage = () => {
         method="post"
         onSubmit={handleSubmit}
       >
-        <div className={styles['name-input-wrapper']}>
-          <InputItem
-            className={styles['name-input']}
+        <div className={styles['input-wrapper']}>
+          <Input
             id="name"
             label="이름"
             value={formState.name}
@@ -116,10 +140,9 @@ const SignupPage = () => {
             onBlur={handleBlur}
             placeholder="이름을 입력해 주세요"
             errorMessage={errors.name}
-          ></InputItem>
+          ></Input>
 
-          <InputItem
-            className={styles['email-input']}
+          <Input
             id="email"
             label="이메일"
             value={formState.email}
@@ -127,11 +150,8 @@ const SignupPage = () => {
             onBlur={handleBlur}
             placeholder="이메일을 입력해 주세요"
             errorMessage={errors.email}
-          ></InputItem>
-        </div>
-
-        <div className={styles['password-input-wrapper']}>
-          <PasswordInput
+          ></Input>
+          <Input
             className={styles['password-input']}
             id="password"
             label="비밀번호"
@@ -141,10 +161,22 @@ const SignupPage = () => {
             placeholder="비밀번호를 입력해 주세요"
             errorMessage={errors.password}
             type="password"
-          ></PasswordInput>
+          ></Input>
+          <Input
+            id="passwordConfirmation"
+            label="비밀번호 확인"
+            value={formState.passwordConfirmation}
+            onChange={handleChange}
+            onBlur={handleBlur}
+            placeholder="비밀번호를 입력해 주세요"
+            errorMessage={errors.passwordConfirmation}
+            type="password"
+          ></Input>
+          <Button color="primary" size="large">
+            가입하기
+          </Button>
         </div>
       </form>
-      <Button className={styles['signup-bts']}>가입하기</Button>
       <div className={styles['logon-wrapper']}>
         <strong>이미 회원이신가요?</strong>
         <Link className={styles['login']} href="/login">
