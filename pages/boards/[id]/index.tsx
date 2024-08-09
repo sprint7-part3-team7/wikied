@@ -22,14 +22,15 @@ const ArticleDetailPage = () => {
   const [comments, setComments] = useState<Comment[]>([]);
   const [loading, setLoading] = useState(true);
   const [isAuthor, setIsAuthor] = useState(false);
+  const articleId = Number(Array.isArray(id) ? id[0] : id);
 
   useEffect(() => {
     if (id) {
       const fetchArticleAndComments = async () => {
         try {
           const [articleResponse, commentsResponse] = await Promise.all([
-            getArticleById(Number(id)),
-            getArticleComments(Number(id)),
+            getArticleById(articleId),
+            getArticleComments(articleId),
           ]);
 
           const articleData = articleResponse.data;
@@ -163,7 +164,7 @@ const ArticleDetailPage = () => {
       >
         목록으로
       </Button>
-      <CommentList comments={comments} />
+      <CommentList comments={comments} articleId={articleId} />
     </div>
   );
 };

@@ -1,5 +1,5 @@
-import axiosInstance from './axiosInstance';
 import { ProfileDetail, ProfileSummary } from '@/types/wiki';
+import { publicAxiosInstance } from './axiosInstance';
 
 interface ProfileResponse {
   totalCount: number;
@@ -11,9 +11,9 @@ export const getProfiles = (params: {
   pageSize?: number;
   name?: string;
 }) => {
-  return axiosInstance.get<ProfileResponse>('/profiles', { params });
+  return publicAxiosInstance.get<ProfileResponse>('/profiles', { params });
 };
 
 export const getProfileByCode = (code: string) => {
-  return axiosInstance.get<ProfileDetail>(`/profiles/${code}`);
+  return publicAxiosInstance.get<ProfileDetail>(`/profiles/${code}`);
 };
