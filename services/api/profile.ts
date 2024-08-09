@@ -1,5 +1,5 @@
 import axiosInstance from './axiosInstance';
-import { ProfileDetail, ProfileSummary } from '@/types/wiki';
+import { ProfileDetail, ProfileEditStatus, ProfileSummary } from '@/types/wiki';
 
 interface ProfileResponse {
   totalCount: number;
@@ -16,4 +16,22 @@ export const getProfiles = (params: {
 
 export const getProfileByCode = (code: string) => {
   return axiosInstance.get<ProfileDetail>(`/profiles/${code}`);
+};
+
+export const checkProfileEditStatus = (code: string) => {
+  return axiosInstance.get<{ registeredAt: string; userId: number }>(
+    `/profiles/${code}/ping`,
+  );
+};
+
+export const updateProfileEditStatus = (
+  code: string,
+  payload: { securityAnswer: string },
+  config?: object,
+) => {
+  return axiosInstance.post<ProfileEditStatus>(
+    `/profiles/${code}/ping`,
+    payload,
+    config,
+  );
 };

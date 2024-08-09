@@ -60,6 +60,10 @@
   box-sizing: border-box;
   padding-top: 40px;
 
+  .quiz-modal-close {
+    display: none;
+  }
+
   .wiki-main {
     display: grid;
     grid-template-columns: minmax(60px, 1fr) minmax(0, 1120px) 120px 400px 80px !important;
@@ -103,6 +107,27 @@
 // 컨텐츠 없음
 .no-data {
   padding-top: 40px;
+}
+
+// 모달
+.quiz-modal-container {
+  @include Size(100%, 100vh);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+
+  .modal-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+// 모달이 열려 있을 때
+.quiz-modal-open {
+  background: #474d664d;
+  z-index: 10;
 }
 
 @media screen and (max-width: $tablet-max-width) {

@@ -18,10 +18,15 @@ export interface ProfileDetail extends ProfileSummary {
   family: string;
   content: string;
   securityQuestion: string;
+  securityAnswer: string;
   teamId: string;
   isMyProfile?: boolean;
 }
 
+export interface ProfileEditStatus {
+  registeredAt: string;
+  userId: number;
+}
 export interface Section {
   title: string;
   content: string;

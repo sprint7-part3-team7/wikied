@@ -1,17 +1,24 @@
 import { useState, useEffect, useCallback } from 'react';
 import { useRouter } from 'next/router';
 import clsx from 'clsx';
-
-import { getProfileByCode } from '@/services/api/profile';
-import { ProfileDetail, Section } from '@/types/wiki';
+import {
+  getProfileByCode,
+  checkProfileEditStatus,
+  updateProfileEditStatus,
+} from '@/services/api/profile';
+import { ProfileDetail, ProfileEditStatus, Section } from '@/types/wiki';
 import WikiHeader from '@/pages/wiki/[code]/components/wikiHeader';
 import WikiArticle from '@/pages/wiki/[code]/components/wikiArticle';
 import WikiAside from '@/pages/wiki/[code]/components/wikiAside';
+// import AccessControl from '@/pages/wiki/[code]/components/accessControl';
+import QuizModal from '@/components/modal/quiz';
 import styles from '@/pages/wiki/[code]/styles.module.scss';
+import Alert from '@/components/modal/alert';
 
 interface WikiProps {
   className: string;
   profile: ProfileDetail;
+  securityAnswer: string;
 }
 
 const Wiki = (props: WikiProps) => {
@@ -21,6 +28,12 @@ const Wiki = (props: WikiProps) => {
   const [profile, setProfile] = useState<any>(null);
   const [sectionsData, setSectionsData] = useState<Section[]>([]);
   const [isEditable, setIsEditable] = useState<boolean>(false);
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+
+  // 모달 토글 함수
+  const handleModalToggle = () => {
+    setIsModalOpen(!isModalOpen);
+  };
 
   const getList = useCallback(async (code: string) => {
     try {
@@ -73,12 +86,17 @@ const Wiki = (props: WikiProps) => {
 
   useEffect(() => {
     // 하드코딩된 값 저장 (추후 삭제)
+    localStorage.setItem('email', 'dongil@gmail.com');
+    localStorage.setItem('password', '12341234');
     localStorage.setItem('userId', '801');
     localStorage.setItem(
       'userProfileCode',
       'c9dbd714-cd72-4427-b982-ba44dc15ec91',
     );
-    localStorage.setItem('accessToken', 'your-access-token');
+    localStorage.setItem(
+      'accessToken',
+      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ODAxLCJ0ZWFtSWQiOiI3LTciLCJzY29wZSI6ImFjY2VzcyIsImlhdCI6MTcyMzE0Njg2OSwiZXhwIjoxNzIzMTQ4NjY5LCJpc3MiOiJzcC13aWtpZWQifQ.PeiAq-TUxOrsApeSiwwMP8b7_D_sCUmyQb3rJcwzC_4',
+    );
 
     if (typeof code === 'string') {
       getList(code);
@@ -91,6 +109,22 @@ const Wiki = (props: WikiProps) => {
 
   return (
     <>
+      {!isEditable && isModalOpen && (
+        <div
+          className={clsx(styles['quiz-modal-container'], {
+            [styles['quiz-modal-open']]: isModalOpen,
+            [styles['quiz-modal-close']]: !isModalOpen,
+          })}
+        >
+          <QuizModal
+            size="large"
+            code={typeof code === 'string' ? code : ''}
+            setIsEditable={setIsEditable}
+            setIsModalOpen={setIsModalOpen}
+            securityQuestion={profile.securityQuestion}
+          />
+        </div>
+      )}
       <div
         className={clsx(styles['container'], {
           [styles['non-editable']]: !isEditable,
@@ -105,6 +139,7 @@ const Wiki = (props: WikiProps) => {
             profile={profile}
             sections={sectionsData}
             isEditable={isEditable}
+            onParticipateClick={handleModalToggle}
           />
           <div className={styles['space1']}></div>
           <WikiArticle

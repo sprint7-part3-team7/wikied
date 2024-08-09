@@ -5,6 +5,8 @@
   box-shadow: 0px 4px 20px 0px $color-shadow;
   padding: 20px;
   border-radius: 10px;
+  background-color: #ffffff; // 추가
+  z-index: 1; // 추가
 
   &.large {
     @include Size(395px, auto);
@@ -16,6 +18,7 @@
 
   .close-image {
     align-self: flex-end;
+    cursor: pointer; // 추가
   }
 
   .title-wrapper {

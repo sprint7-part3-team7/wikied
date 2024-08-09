@@ -1,15 +1,16 @@
 import Link from 'next/link';
-import { Profile, Section } from '@/types/wiki';
+import { ProfileDetail, Section } from '@/types/wiki';
 import styles from '@/pages/wiki/[code]/components/wikiHeader/styles.module.scss';
-import link from '@/assets/icons/ic_link.svg';
+import EditorBtn from '@/pages/wiki/[code]/components/wikiHeader/components/editorBtn';
 import Button from '@/components/button';
-import EditorBtn from './components/editorBtn';
+import link from '@/assets/icons/ic_link.svg';
 
 interface WikiHeaderProps {
   className?: string;
-  profile: Profile;
+  profile: ProfileDetail;
   sections: Section[];
   isEditable: boolean;
+  onParticipateClick: () => void;
 }
 
 const WikiHeader = ({
@@ -17,6 +18,7 @@ const WikiHeader = ({
   profile,
   sections,
   isEditable,
+  onParticipateClick,
 }: WikiHeaderProps) => {
   const hasSections = sections.length > 0;
 
@@ -40,6 +42,7 @@ const WikiHeader = ({
                 className={styles['participate-btn']}
                 color="primary"
                 size="large"
+                onClick={onParticipateClick}
               >
                 위키 참여하기
               </Button>
