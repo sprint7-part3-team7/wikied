@@ -35,3 +35,24 @@ export const updateProfileEditStatus = (
     config,
   );
 };
+
+export const updateProfile = (
+  code: string,
+  profile: {
+    securityAnswer: string;
+    securityQuestion: string;
+    nationality: string;
+    family: string;
+    bloodType: string;
+    nickname: string;
+    birthday: string;
+    sns: string;
+    job: string;
+    mbti: string;
+    city: string;
+    image: string | null;
+    content: string;
+  },
+) => {
+  return axiosInstance.patch<ProfileDetail>(`/profiles/${code}`);
+};

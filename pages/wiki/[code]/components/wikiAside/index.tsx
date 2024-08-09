@@ -1,15 +1,16 @@
 import { useState, useRef, useEffect } from 'react';
 import clsx from 'clsx';
-import { Profile } from '@/types/wiki';
+import { ProfileDetail } from '@/types/wiki';
 import UserAttribute from '@/pages/wiki/[code]/components/wikiAside/components/userAttribute';
 import Button from '@/components/button';
 import styles from '@/pages/wiki/[code]/components/wikiAside/styles.module.scss';
 import expandIcon from '@/assets/icons/ic_expand.svg';
 import fileUploadIcon from '@/assets/icons/ic_camera.svg';
+import basicProfileImg from '@/assets/icons/basic_profile_img.svg';
 
 interface WikiAsideProps {
   className: string;
-  profile: Profile;
+  profile: ProfileDetail;
   isEditable: boolean;
 }
 
@@ -97,11 +98,17 @@ const WikiAside = ({ className, profile, isEditable }: WikiAsideProps) => {
                 />
               )}
             </div>
+          ) : profile.image ? (
+            <img
+              src={profile.image}
+              className={styles['image']}
+              alt="프로필 이미지"
+            />
           ) : (
             <img
+              src={basicProfileImg.src}
               className={styles['image']}
-              src={profile.image}
-              alt="프로필 이미지"
+              alt="기본 프로필 이미지"
             />
           )}
         </div>
