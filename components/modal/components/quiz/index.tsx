@@ -36,7 +36,6 @@ const Quiz = ({ size = 'large' }: QuizProps) => {
 
   return (
     <Modal size={size}>
-      <Image className={styles['close-image']} src={closeIcon} alt="닫기" />
       <div className={styles['title-wrapper']}>
         <div className={styles['lock-icon-wrapper']}>
           <Image src={lockIcon} alt="자물쇠" width={20} height={20} />

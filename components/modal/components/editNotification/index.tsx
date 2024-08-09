@@ -59,7 +59,7 @@ const EditNotification = ({ size = 'large' }: EditNotificationProps) => {
   }, [notifications]);
 
   return (
-    <Modal size={size} bgColor="gray">
+    <Modal size={size} bgColor="gray" hideCloseIcon>
       <div className={styles['container']}>
         <div className={styles['header']}>
           <strong className={clsx(styles['title'], styles[size])}>

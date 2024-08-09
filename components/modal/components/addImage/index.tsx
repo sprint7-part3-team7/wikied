@@ -37,7 +37,6 @@ const AddImage = ({ size = 'large' }: AddImageProps): JSX.Element => {
   return (
     <Modal size={size}>
       <div className={clsx(styles['container'], styles[size])}>
-        <Image className={styles['close-image']} src={closeIcon} alt="닫기" />
         <div className={styles['image-wrapper']}>
           <label htmlFor="file-input" className={styles['image-label']}>
             이미지

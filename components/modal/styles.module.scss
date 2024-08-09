@@ -6,6 +6,12 @@
   box-shadow: 0px 4px 20px 0px $color-shadow;
   padding: 20px;
 
+  .close-image {
+    @include Size(20px, 20px);
+    align-self: flex-end;
+    margin-bottom: 10px;
+  }
+
   &.large {
     @include Size(395px, auto);
   }

@@ -23,13 +23,6 @@ const Alert = ({
 
   return (
     <Modal size={size}>
-      <Image
-        className={styles['close-image']}
-        src={closeIcon}
-        alt="닫기"
-        width={20}
-        height={20}
-      />
       <div className={clsx(styles['contents-wrapper'], styles[size])}>
         <strong className={clsx(styles['title'], styles[size])}>{title}</strong>
         <p className={clsx(styles['description'], styles[size])}>
