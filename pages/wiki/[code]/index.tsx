@@ -95,7 +95,7 @@ const Wiki = (props: WikiProps) => {
     );
     localStorage.setItem(
       'accessToken',
-      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ODAxLCJ0ZWFtSWQiOiI3LTciLCJzY29wZSI6ImFjY2VzcyIsImlhdCI6MTcyMzE0Njg2OSwiZXhwIjoxNzIzMTQ4NjY5LCJpc3MiOiJzcC13aWtpZWQifQ.PeiAq-TUxOrsApeSiwwMP8b7_D_sCUmyQb3rJcwzC_4',
+      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ODAxLCJ0ZWFtSWQiOiI3LTciLCJzY29wZSI6ImFjY2VzcyIsImlhdCI6MTcyMzE4NjIwMiwiZXhwIjoxNzIzMTg4MDAyLCJpc3MiOiJzcC13aWtpZWQifQ.CMNFPWGau9FKvRspEQAsD4V-hwqENjjqO3cutvpHR2E',
     );
 
     if (typeof code === 'string') {

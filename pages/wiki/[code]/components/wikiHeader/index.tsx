@@ -1,7 +1,9 @@
+import { useState } from 'react';
 import { ProfileDetail, Section } from '@/types/wiki';
-import styles from '@/pages/wiki/[code]/components/wikiHeader/styles.module.scss';
 import EditorBtn from '@/pages/wiki/[code]/components/wikiHeader/components/editorBtn';
 import Button from '@/components/button';
+import SnackBar from '@/components/snackbar';
+import styles from '@/pages/wiki/[code]/components/wikiHeader/styles.module.scss';
 import link from '@/assets/icons/ic_link.svg';
 
 interface WikiHeaderProps {
@@ -19,6 +21,9 @@ const WikiHeader = ({
   isEditable,
   onParticipateClick,
 }: WikiHeaderProps) => {
+  const [snackBarMessage, setSnackBarMessage] = useState('');
+  const [showSnackBar, setShowSnackBar] = useState(false);
+
   const hasSections = sections.length > 0;
 
   const handleCopyClick = () => {
@@ -26,10 +31,14 @@ const WikiHeader = ({
     navigator.clipboard
       .writeText(linkToCopy)
       .then(() => {
-        alert('링크가 복사되었습니다.');
+        setSnackBarMessage('내 위키 링크가 복사되었습니다.');
+        setShowSnackBar(true);
+        setTimeout(() => setShowSnackBar(false), 3000);
       })
       .catch((err) => {
-        console.error('복사 실패:', err);
+        setSnackBarMessage('복사에 실패했습니다.');
+        setShowSnackBar(true);
+        setTimeout(() => setShowSnackBar(false), 3000);
       });
   };
 
@@ -73,6 +82,16 @@ const WikiHeader = ({
             </section>
           </section>
         </section>
+      )}
+      {showSnackBar && (
+        <>
+          <div className={styles['snackbar-container-large']}>
+            <SnackBar message={snackBarMessage} type="success" size="large" />
+          </div>
+          <div className={styles['snackbar-container-small']}>
+            <SnackBar message={snackBarMessage} type="success" size="small" />
+          </div>
+        </>
       )}
     </>
   );

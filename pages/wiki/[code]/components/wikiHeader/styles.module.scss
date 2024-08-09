@@ -81,6 +81,18 @@
   }
 }
 
+.snackbar-container-large {
+  position: fixed;
+  top: 120px;
+  left: 50%;
+  transform: translate(-50%, 0);
+  z-index: 1;
+}
+
+.snackbar-container-small {
+  display: none;
+}
+
 @media (max-width: $tablet-max-width) {
   .header-container {
     display: flex;
@@ -92,11 +104,13 @@
       }
     }
   }
+
+  .snackbar-container-large {
+    top: 100px;
+  }
 }
 
 @media screen and (max-width: $mobile-max-width) {
-  .header-container {
-  }
   .wiki-actions {
     gap: 24px;
     .name-and-btn {
@@ -113,5 +127,17 @@
         @include Size(120px, 43px);
       }
     }
+  }
+
+  .snackbar-container-large {
+    display: none;
+  }
+
+  .snackbar-container-small {
+    display: block;
+    position: fixed;
+    bottom: 80px;
+    left: 50%;
+    transform: translate(-50%, 0);
   }
 }
