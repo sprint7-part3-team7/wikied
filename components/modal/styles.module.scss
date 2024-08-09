@@ -1,0 +1,30 @@
+@import '@/styles/index.scss';
+
+.container {
+  @include Flex(column, null, null);
+  border-radius: 10px;
+  box-shadow: 0px 4px 20px 0px $color-shadow;
+  padding: 20px;
+
+  .close-image {
+    @include Size(20px, 20px);
+    align-self: flex-end;
+    margin-bottom: 10px;
+  }
+
+  &.large {
+    @include Size(395px, auto);
+  }
+
+  &.middle {
+    @include Size(335px, auto);
+  }
+
+  &.small {
+    @include Size(275px, auto);
+  }
+}
+
+.bg-gray {
+  background-color: $color-grayscale-250;
+}
