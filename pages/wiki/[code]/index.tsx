@@ -2,18 +2,15 @@ import { useState, useEffect, useCallback } from 'react';
 import { useRouter } from 'next/router';
 import clsx from 'clsx';
 import {
-  getProfileByCode,
   checkProfileEditStatus,
-  updateProfileEditStatus,
+  getProfileByCode,
 } from '@/services/api/profile';
-import { ProfileDetail, ProfileEditStatus, Section } from '@/types/wiki';
+import { ProfileDetail, Section } from '@/types/wiki';
 import WikiHeader from '@/pages/wiki/[code]/components/wikiHeader';
 import WikiArticle from '@/pages/wiki/[code]/components/wikiArticle';
 import WikiAside from '@/pages/wiki/[code]/components/wikiAside';
-// import AccessControl from '@/pages/wiki/[code]/components/accessControl';
 import QuizModal from '@/components/modal/quiz';
 import styles from '@/pages/wiki/[code]/styles.module.scss';
-import Alert from '@/components/modal/alert';
 
 interface WikiProps {
   className: string;
@@ -29,12 +26,14 @@ const Wiki = (props: WikiProps) => {
   const [sectionsData, setSectionsData] = useState<Section[]>([]);
   const [isEditable, setIsEditable] = useState<boolean>(false);
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+  const [showParticipateBtn, setShowParticipateBtn] = useState<boolean>(false);
 
-  // 모달 토글 함수
+  // 모달 토글
   const handleModalToggle = () => {
     setIsModalOpen(!isModalOpen);
   };
 
+  // 데이터 조회
   const getList = useCallback(async (code: string) => {
     try {
       const response = await getProfileByCode(code);
@@ -43,6 +42,7 @@ const Wiki = (props: WikiProps) => {
       const userId = localStorage.getItem('userId');
       const userProfileCode = localStorage.getItem('userProfileCode');
 
+      // 참여 가능 여부 확인
       if (
         userId !== null &&
         data.id === Number(userId) &&
@@ -54,7 +54,7 @@ const Wiki = (props: WikiProps) => {
       }
 
       setProfile(data);
-      console.log('profile: ' + profile);
+      console.log('profile: ' + profile); // null
 
       // Mock 데이터 사용 (추후 삭제)
       setSectionsData([
@@ -84,6 +84,24 @@ const Wiki = (props: WikiProps) => {
     }
   }, []);
 
+  // 현재 수정중 여부 확인
+  const checkEditStatus = useCallback(async (code: string) => {
+    try {
+      const response = await checkProfileEditStatus(code);
+      const data = response.data; // registeredAt, userId
+      console.log('data' + data);
+
+      if (response.status === 200) {
+        setShowParticipateBtn(true);
+      } else {
+        setShowParticipateBtn(false);
+        console.log('response.status: ', response.status);
+      }
+    } catch (err) {
+      console.error(err);
+    }
+  }, []);
+
   useEffect(() => {
     // 하드코딩된 값 저장 (추후 삭제)
     localStorage.setItem('email', 'dongil@gmail.com');
@@ -95,13 +113,14 @@ const Wiki = (props: WikiProps) => {
     );
     localStorage.setItem(
       'accessToken',
-      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ODAxLCJ0ZWFtSWQiOiI3LTciLCJzY29wZSI6ImFjY2VzcyIsImlhdCI6MTcyMzE4NjIwMiwiZXhwIjoxNzIzMTg4MDAyLCJpc3MiOiJzcC13aWtpZWQifQ.CMNFPWGau9FKvRspEQAsD4V-hwqENjjqO3cutvpHR2E',
+      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ODAxLCJ0ZWFtSWQiOiI3LTciLCJzY29wZSI6ImFjY2VzcyIsImlhdCI6MTcyMzIyNTg3OSwiZXhwIjoxNzIzMjI3Njc5LCJpc3MiOiJzcC13aWtpZWQifQ.G8c_BB3BW0LCUFxCMER2xmph0ls0xNwbYicueTN0JhA',
     );
 
     if (typeof code === 'string') {
       getList(code);
+      checkEditStatus(code);
     }
-  }, [code, getList]);
+  }, [code, getList, checkEditStatus]);
 
   if (!profile) {
     return <div>Loading...</div>;
@@ -140,6 +159,9 @@ const Wiki = (props: WikiProps) => {
             sections={sectionsData}
             isEditable={isEditable}
             onParticipateClick={handleModalToggle}
+            checkEditStatus={checkEditStatus}
+            showParticipateBtn={showParticipateBtn}
+            code={typeof code === 'string' ? code : ''}
           />
           <div className={styles['space1']}></div>
           <WikiArticle

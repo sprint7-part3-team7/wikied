@@ -40,7 +40,8 @@
       white-space: nowrap;
     }
 
-    .participate-btn {
+    .participate-btn,
+    .Editing-btn {
       @include Size(160px, '');
       white-space: nowrap;
     }
