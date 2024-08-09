@@ -1,0 +1,23 @@
+
+POST https://wikied-api.vercel.app/7-7/auth/signUp
+Content-Type: application/json
+
+
+{
+  "name":"김똥똥",
+  "email":"123333333333@naver.com",
+  "password":"p@ssword",
+  "passwordConfirmation": "p@ssword"
+}
+
+###
+
+
+POST https://wikied-api.vercel.app/7-7/auth/signIn
+Content-Type: application/json
+
+
+{
+  "email":"12333333@naver.com",
+  "password":"p@ssword"
+}

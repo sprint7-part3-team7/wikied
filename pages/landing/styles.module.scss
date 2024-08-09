@@ -13,17 +13,21 @@
   font-weight: 400;
   font-style: normal;
 }
-.ellipse-img {
-  width: 2000px;
-  position: absolute;
-  top: 713px;
-}
 
 .landing-container {
   width: 1920px;
   @include Size(100%, auto);
   overflow-x: hidden;
   position: relative;
+
+  .ellipse-img {
+    width: 2000px;
+    @include Size(100%, 400px);
+    position: absolute;
+    top: 713px;
+    left: 50%;
+    transform: translateX(-50%);
+  }
 
   .header {
     background-color: #f1f4fd;
@@ -313,6 +317,7 @@
     }
     .ellipse-img {
       top: 784px;
+      @include Size(100%, 233px);
     }
 
     .write-container {
@@ -441,6 +446,11 @@
 @media (max-width: $mobile-max-width) {
   .landing-container {
     min-width: 375px;
+
+    .ellipse-img {
+      @include Size(100%, 180px);
+      top: 502px;
+    }
 
     .wikid-banner {
       @include Size(100%, 592px);
