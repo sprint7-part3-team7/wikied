@@ -34,7 +34,7 @@
     $font-weight-md-regular,
     $color-grayscale-500
   );
-  padding: 20px 20px 0;
+  padding: 13px 15px 0;
   border: none;
   background-color: transparent;
   resize: none;
@@ -46,7 +46,7 @@
 
 .comment-input-footer {
   @include Flex(col, space-between, end);
-  padding: 0 15px 15px 20px;
+  padding: 0 15px 13px;
   background-color: transparent;
 }
 
@@ -146,6 +146,14 @@
     margin-bottom: 24px;
   }
 
+  .comment-textarea {
+    padding: 20px 15px 0 20px;
+  }
+
+  .comment-input-footer {
+    padding: 0 15px 15px 20px;
+  }
+
   .comment-box {
     margin-bottom: 16px;
     padding: 21px 30px;
@@ -156,6 +164,14 @@
   .comment-title {
     font-size: 16px;
     margin-bottom: 8px;
+  }
+
+  .comment-textarea {
+    padding: 16px 14px 0 20px;
+  }
+
+  .comment-input-footer {
+    padding: 0 14px 16px 20px;
   }
 
   .comment-author-image {
