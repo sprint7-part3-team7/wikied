@@ -10,6 +10,7 @@ export type SignUpFormDataType = {
   passwordConfirmation: string;
 };
 
+
 export type ChangePasswordFormDataType = {
   currentPassword: string;
   password: string;
@@ -26,6 +27,7 @@ export type User = {
   updatedAt: string;
   createdAt: string;
 };
+
 
 export type UserInfo = {
   profile: {

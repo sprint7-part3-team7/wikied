@@ -1,12 +1,14 @@
 import { useState, ChangeEvent, FocusEvent, useEffect } from 'react';
+import { useRouter } from 'next/router';
+import axiosInstance from '@/services/api/axiosInstance';
 import styles from '@/pages/login/styles.module.scss';
 import Link from 'next/link';
-import { useRouter } from 'next/router';
-import Button from '@/components/button';
+import { useAuth } from '@/contexts/AuthProvider';
 import { LoginInputId, getErrorMessage } from './authUtils';
-import useDebounce from '@/hooks/useDebounce/useDebounce';
-import axiosInstance from '@/services/api/axiosInstance';
+import Button from '@/components/button';
 import Input from '@/components/input';
+import useDebounce from '@/hooks/useDebounce/useDebounce';
+import { AuthResponseType } from '@/types/auth';
 
 interface FormState {
   email: string;
@@ -26,6 +28,7 @@ const LoginPage: React.FC = () => {
   });
 
   const [errors, setErrors] = useState<ErrorState>({});
+  const { login } = useAuth();
 
   const debouncedPassword = useDebounce(formState.password, 500);
 
@@ -69,14 +72,14 @@ const LoginPage: React.FC = () => {
 
     if (isValid) {
       try {
-        const response = await axiosInstance.post(
-          '/auth/signIn',
-          {
-            email: formState.email,
-            password: formState.password,
-          }
-        );
+        const response = await axiosInstance.post('/auth/signIn', {
+          email: formState.email,
+          password: formState.password,
+        });
+        const authResponse: AuthResponseType = response.data;
+        login(authResponse);
         console.log('로그인 성공:', response.data);
+        alert('로그인이 완료되었습니다.');
         router.push('/landing');
       } catch (error) {
         console.error('로그인 실패:', error);
@@ -115,7 +118,7 @@ const LoginPage: React.FC = () => {
               type="password"
             ></Input>
           </div>
-          <Button  color="primary" size="large" fullWidth>
+          <Button color="primary" size="large" fullWidth>
             로그인
           </Button>
         </form>
