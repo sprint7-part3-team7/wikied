@@ -65,6 +65,7 @@
         white-space: nowrap;
         text-decoration: none;
         text-overflow: ellipsis;
+        background-color: transparent;
 
         .link-address {
           @include Font(

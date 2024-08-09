@@ -1,4 +1,3 @@
-import Link from 'next/link';
 import { ProfileDetail, Section } from '@/types/wiki';
 import styles from '@/pages/wiki/[code]/components/wikiHeader/styles.module.scss';
 import EditorBtn from '@/pages/wiki/[code]/components/wikiHeader/components/editorBtn';
@@ -21,6 +20,18 @@ const WikiHeader = ({
   onParticipateClick,
 }: WikiHeaderProps) => {
   const hasSections = sections.length > 0;
+
+  const handleCopyClick = () => {
+    const linkToCopy = `https://www.wikied.kr/${profile.code}`;
+    navigator.clipboard
+      .writeText(linkToCopy)
+      .then(() => {
+        alert('링크가 복사되었습니다.');
+      })
+      .catch((err) => {
+        console.error('복사 실패:', err);
+      });
+  };
 
   return (
     <>
@@ -51,11 +62,14 @@ const WikiHeader = ({
           <section className={styles['link']}>
             <section className={styles['link-wrapper']}>
               <img src={link.src} width={20} height={20} alt="링크 아이콘" />
-              <Link href="#" className={styles['link-copy-btn']}>
+              <button
+                onClick={handleCopyClick}
+                className={styles['link-copy-btn']}
+              >
                 <section className={styles['link-address']}>
                   https://www.wikied.kr/{profile.code}
                 </section>
-              </Link>
+              </button>
             </section>
           </section>
         </section>
