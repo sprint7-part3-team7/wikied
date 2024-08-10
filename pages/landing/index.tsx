@@ -11,6 +11,7 @@ import landing_10 from '@/assets/images/landing/landing_10.png';
 import landing_11 from '@/assets/images/landing/landing_11.png';
 import landing_12 from '@/assets/images/landing/landing_12.png';
 import Ellipse from '@/assets/icons/ic_Ellipse 22.svg';
+import Button from '@/components/button';
 
 const Landing = () => {
   return (
@@ -23,9 +24,13 @@ const Landing = () => {
               <div className={styles['heading']}>나만의 위키</div>
             </div>
             <div className={styles['btn-wrapper']}>
-              <button className={styles['wikidMain-page-bts']}>
-                <strong>위키 만들기</strong>
-              </button>
+              <Button
+                color="main-top"
+                size="x-large"
+                className={styles['main-page-top-button']}
+              >
+                위키 만들기
+              </Button>
             </div>
             <Image
               className={styles['landing-img1']}
@@ -155,9 +160,13 @@ const Landing = () => {
               <div className={styles['start-title']}>
                 나만의 위키 만들어 보기
               </div>
-              <button className={styles['strat-bts']}>
-                <strong>지금 시작하기</strong>
-              </button>
+              <Button
+                color="main-bottom"
+                size="x-large"
+                className={styles['main-page-bottom-button']}
+              >
+                지금 시작하기
+              </Button>
             </div>
           </section>
         </main>
