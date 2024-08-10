@@ -5,7 +5,7 @@ import Button from '@/components/button';
 import Input from '@/components/input';
 import { SignupInputId, getErrorMessage } from './authUtils';
 import useDebounce from '@/hooks/useDebounce/useDebounce';
-import axiosInstance from '@/services/api/axiosInstance';
+import { publicAxiosInstance } from '@/services/api/axiosInstance';
 
 interface FormState {
   email: string;
@@ -93,7 +93,7 @@ const SignupPage = () => {
 
     if (isValid) {
       try {
-        const response = await axiosInstance.post('/auth/signUp', {
+        const response = await publicAxiosInstance.post('/auth/signUp', {
           email: formState.email,
           name: formState.name,
           password: formState.password,

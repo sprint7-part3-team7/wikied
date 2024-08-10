@@ -1,4 +1,3 @@
-import axiosInstance from '@/services/api/axiosInstance';
 import {
   createContext,
   useEffect,
@@ -8,18 +7,14 @@ import {
 } from 'react';
 import { useRouter } from 'next/router';
 import axios, { AxiosError, AxiosResponse } from 'axios';
-import {
-  AuthResponseType,
-  UserInfo,
-} from '@/types/auth';
-
-
+import { AuthResponseType, UserInfo } from '@/types/auth';
+import { authAxiosInstance } from '@/services/api/axiosInstance';
 
 interface AuthContextType {
   isLoggedIn: boolean;
-  login: (authResponse: AuthResponseType) => void; 
+  user: UserInfo | null;
+  login: (authResponse: AuthResponseType) => void;
   logout: () => void;
-  
 }
 
 interface AuthProviderProps {
@@ -28,6 +23,7 @@ interface AuthProviderProps {
 
 const AuthContext = createContext<AuthContextType>({
   isLoggedIn: false,
+  user: null,
   login: () => {},
   logout: () => {},
 });
@@ -36,29 +32,21 @@ export const useAuth = (): AuthContextType => {
   return useContext(AuthContext);
 };
 
-
-
-
 export const AuthProvider = ({ children }: AuthProviderProps) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [logInData, setLogInData] = useState<AuthResponseType | null>(null);
   const [user, setUser] = useState<UserInfo | null>(null);
   const router = useRouter();
 
-
-
-useEffect(() => {
-  const accessToken = localStorage.getItem('accessToken');
-  if (accessToken) {
-    setIsLoggedIn(true);
-    getUserMe(accessToken)
-      .then(setUser)
-      .catch(console.error);
-  } else {
-    router.push('/login'); 
-  }
-}, [router]);
-
+  useEffect(() => {
+    const accessToken = localStorage.getItem('accessToken');
+    if (accessToken) {
+      setIsLoggedIn(true);
+      getUserMe(accessToken).then(setUser).catch(console.error);
+    } else {
+      // 수정 필요
+    }
+  }, [router]);
 
   const login = (authResponse: AuthResponseType) => {
     setIsLoggedIn(true);
@@ -67,14 +55,17 @@ useEffect(() => {
     localStorage.setItem('refreshToken', authResponse.refreshToken);
   };
 
-
   const getUserMe = async (accessToken: string | undefined) => {
     try {
       if (accessToken) {
-        const response: AxiosResponse<UserInfo> =
-          await axiosInstance.get('/users/me',{headers: {
-            'Authorization': `Bearer ${accessToken}`
-          }});
+        const response: AxiosResponse<UserInfo> = await authAxiosInstance.get(
+          '/users/me',
+          {
+            headers: {
+              Authorization: `Bearer ${accessToken}`,
+            },
+          },
+        );
         return response.data;
       } else {
         {
@@ -99,13 +90,11 @@ useEffect(() => {
     setUser(null);
     localStorage.removeItem('accessToken');
     localStorage.removeItem('refreshToken');
-    router.push('/login'); 
+    router.push('/login');
   };
 
-
-
   return (
-    <AuthContext.Provider value={{ isLoggedIn, login, logout }}>
+    <AuthContext.Provider value={{ isLoggedIn, user, login, logout }}>
       {children}
     </AuthContext.Provider>
   );

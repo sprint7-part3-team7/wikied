@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback } from 'react';
-import styles from '@/pages/wikilist/components/UserList/styles.module.scss';
+import styles from './styles.module.scss';
 import UserCard from './userWikiCard';
 import Pagination from '@/components/pagination';
 import SearchForm from '@/components/searchForm';
@@ -7,7 +7,7 @@ import NotFound from '@/pages/wikilist/components/notFound';
 import { getProfiles } from '@/services/api/profile';
 import { ProfileSummary } from '@/types/wiki';
 
-const UserList = () => {
+const UserWikiList = () => {
   const [users, setUsers] = useState<ProfileSummary[]>([]);
   const [loading, setLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
@@ -70,4 +70,4 @@ const UserList = () => {
   );
 };
 
-export default UserList;
+export default UserWikiList;
