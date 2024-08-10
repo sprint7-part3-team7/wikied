@@ -55,6 +55,10 @@
 
   .max-count {
     color: $color-primary-green-200;
+  
+    &.over-max {
+      color: $color-secondary-red-200;
+    }
   }
 }
 
@@ -98,6 +102,8 @@
 
 .editor-container {
   min-height: 200px;
+  max-height: 300px;
+  overflow-y: auto;
   margin-bottom: 10px;
 
   :global {
