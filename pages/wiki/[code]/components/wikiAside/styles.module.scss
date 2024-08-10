@@ -241,6 +241,13 @@
         margin: 20px 0 32px 0;
 
         .file-input-wrapper {
+          @include Size(71px, 71px);
+
+          .overlay,
+          .image,
+          .preview-image {
+            @include Size(71px, 71px);
+          }
         }
       }
       .user-attribute-container {
