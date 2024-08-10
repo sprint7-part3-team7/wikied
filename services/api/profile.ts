@@ -21,6 +21,8 @@ export const getProfileByCode = (code: string) => {
 
 export const addProfiles = (profileData: ProfileRequest) => {
   return authAxiosInstance.post<Profile>('/profiles', profileData);
+}
+
 export const checkProfileEditStatus = (code: string) => {
   return authAxiosInstance.get<{ registeredAt: string; userId: number }>(
     `/profiles/${code}/ping`,
