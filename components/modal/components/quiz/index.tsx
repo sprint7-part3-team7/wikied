@@ -12,6 +12,10 @@ import { updateProfileEditStatus } from '@/services/api/profile';
 
 interface QuizProps {
   size?: 'middle' | 'large';
+  code: string;
+  setIsEditable: (editable: boolean) => void;
+  setIsModalOpen: (open: boolean) => void;
+  securityQuestion: string;
 }
 
 const Quiz = ({

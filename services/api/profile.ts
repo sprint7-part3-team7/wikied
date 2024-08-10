@@ -1,5 +1,5 @@
-import { ProfileDetail, ProfileSummary } from '@/types/wiki';
-import { publicAxiosInstance } from './axiosInstance';
+import { ProfileDetail, ProfileEditStatus, ProfileSummary } from '@/types/wiki';
+import { authAxiosInstance, publicAxiosInstance } from './axiosInstance';
 
 interface ProfileResponse {
   totalCount: number;
@@ -19,7 +19,7 @@ export const getProfileByCode = (code: string) => {
 };
 
 export const checkProfileEditStatus = (code: string) => {
-  return axiosInstance.get<{ registeredAt: string; userId: number }>(
+  return authAxiosInstance.get<{ registeredAt: string; userId: number }>(
     `/profiles/${code}/ping`,
   );
 };
@@ -29,7 +29,7 @@ export const updateProfileEditStatus = (
   payload: { securityAnswer: string },
   config?: object,
 ) => {
-  return axiosInstance.post<ProfileEditStatus>(
+  return authAxiosInstance.post<ProfileEditStatus>(
     `/profiles/${code}/ping`,
     payload,
     config,
@@ -54,5 +54,5 @@ export const updateProfile = (
     content: string;
   },
 ) => {
-  return axiosInstance.patch<ProfileDetail>(`/profiles/${code}`);
+  return authAxiosInstance.patch<ProfileDetail>(`/profiles/${code}`);
 };
