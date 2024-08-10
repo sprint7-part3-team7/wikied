@@ -1,14 +1,23 @@
 @import '@/styles/index.scss';
 
+.user-card-container {
+  width: 100%;
+  position: relative;
+}
+
 .user-card {
   @include Flex(row, flex-start, flex-start);
-  width: 100%;
   padding: 24px 36px;
   border: 1px solid $color-grayscale-100;
   border-radius: 10px;
   background-color: $color-grayscale-50;
-  position: relative;
   box-shadow: 0px 4px 20px 0px rgba(0, 0, 0, 0.08);
+  cursor: pointer;
+  text-decoration: none;
+
+  &:hover {
+    background-color: $color-grayscale-100;
+  }
 }
 
 .profile-image {
