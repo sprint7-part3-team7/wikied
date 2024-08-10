@@ -1,4 +1,3 @@
-import React from 'react';
 import styles from './styles.module.scss';
 import { ProfileSummary } from '@/types/wiki';
 import DefaultProfileImg from '@/assets/icons/ic_profile.svg';
@@ -13,7 +12,7 @@ const UserWikiCard = ({ user }: UserCardProps) => {
     <div className={styles['user-card']}>
       <img
         src={user.image || DefaultProfileImg}
-        alt="User profile"
+        alt="프로필 이미지"
         width={85}
         height={85}
         className={styles['profile-image']}
