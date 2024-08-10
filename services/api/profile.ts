@@ -1,5 +1,6 @@
 import { ProfileDetail, ProfileSummary } from '@/types/wiki';
-import { publicAxiosInstance } from './axiosInstance';
+import { Profile, ProfileRequest } from '@/types/profile';
+import { authAxiosInstance, publicAxiosInstance } from './axiosInstance';
 
 interface ProfileResponse {
   totalCount: number;
@@ -16,4 +17,8 @@ export const getProfiles = (params: {
 
 export const getProfileByCode = (code: string) => {
   return publicAxiosInstance.get<ProfileDetail>(`/profiles/${code}`);
+};
+
+export const addProfiles = (profileData: ProfileRequest) => {
+  return authAxiosInstance.post<Profile>('/profiles', profileData);
 };
