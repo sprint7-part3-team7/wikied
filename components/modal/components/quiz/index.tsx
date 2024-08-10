@@ -12,7 +12,7 @@ interface QuizProps {
   size?: 'small' | 'large';
   code: string;
   setIsEditable: (editable: boolean) => void;
-  setIsModalOpen: (open: boolean) => void; // 여기도 setModalVisible로 변경
+  setIsModalOpen: (open: boolean) => void;
   securityQuestion: string;
 }
 
@@ -20,7 +20,7 @@ const Quiz = ({
   size = 'large',
   code,
   setIsEditable,
-  setIsModalOpen, // 여기도 setModalVisible로 변경
+  setIsModalOpen,
   securityQuestion,
 }: QuizProps) => {
   const [answer, setAnswer] = useState<string>('');
@@ -46,7 +46,7 @@ const Quiz = ({
         },
       );
       setIsEditable(true);
-      setIsModalOpen(false); // 여기도 setModalVisible로 변경
+      setIsModalOpen(false);
       setErrorMessage('');
     } catch (error) {
       setIsEditable(false);
@@ -56,7 +56,6 @@ const Quiz = ({
 
   return (
     <div className={clsx(styles['container'], styles[size])}>
-      <Image className={styles['close-image']} src={closeIcon} alt="닫기" />
       <div className={styles['title-wrapper']}>
         <div className={styles['lock-icon-wrapper']}>
           <Image src={lockIcon} alt="자물쇠" width={20} height={20} />
