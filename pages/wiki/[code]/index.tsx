@@ -56,7 +56,7 @@ const Wiki = (props: WikiProps) => {
       setProfile(data);
 
       // 섹션 데이터가 존재하는 경우 설정
-      setSectionsData(profile.content || []); // 섹션 데이터가 프로필에 존재한다고 가정
+      setSectionsData(profile.content || []);
     } catch (err) {
       console.error(err);
     }
@@ -79,26 +79,6 @@ const Wiki = (props: WikiProps) => {
       console.error(err);
     }
   }, []);
-
-  // useEffect(() => {
-  //   // 하드코딩된 값 저장 (추후 삭제)
-  //   localStorage.setItem('email', 'dongil@gmail.com');
-  //   localStorage.setItem('password', '12341234');
-  //   localStorage.setItem('userId', '801');
-  //   localStorage.setItem(
-  //     'userProfileCode',
-  //     'c9dbd714-cd72-4427-b982-ba44dc15ec91',
-  //   );
-  //   localStorage.setItem(
-  //     'accessToken',
-  //     'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTA0OSwidGVhbUlkIjoiNy03Iiwic2NvcGUiOiJhY2Nlc3MiLCJpYXQiOjE3MjMyNDI0NjcsImV4cCI6MTcyMzI0NDI2NywiaXNzIjoic3Atd2lraWVkIn0.0PbdEWGlv-cmq-R4uVOGzpD6chjaWspkFUtVsEtKZUU',
-  //   );
-
-  //   if (typeof code === 'string') {
-  //     getList(code);
-  //     checkEditStatus(code);
-  //   }
-  // }, [code, getList, checkEditStatus]);
 
   useEffect(() => {
     if (typeof code === 'string') {
@@ -141,7 +121,6 @@ const Wiki = (props: WikiProps) => {
           <WikiHeader
             className={styles['wiki-header']}
             profile={profile}
-            sections={sectionsData}
             isEditable={isEditable}
             onParticipateClick={handleModalToggle}
             checkEditStatus={checkEditStatus}

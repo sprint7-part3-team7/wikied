@@ -14,13 +14,10 @@ interface WikiArticleProps {
 
 const WikiArticle = ({
   className,
-  sections,
   profile,
   onParticipateClick,
   checkEditStatus,
 }: WikiArticleProps) => {
-  const hasSections = sections.length > 0;
-
   const checkParticipationStatus = useCallback(async () => {
     try {
       // 위키 참여 클릭 후 상태 확인
@@ -32,30 +29,12 @@ const WikiArticle = ({
 
   return (
     <div className={`${styles['grid-container']} ${className}`}>
-      {hasSections ? (
-        sections.map((section, index) => (
-          <div key={index} className={styles['grid-item']}>
-            <span className={styles['wiki-article-title']}>
-              {section.title}
-            </span>
-            <div className={styles['separator']} />
-            <span className={styles['wiki-article-content']}>
-              {section.content}
-            </span>
-            {index === 1 && (
-              <Blockquote>
-                여기는 Block Quote를 나타내는 영역이에요.
-                <p />
-                이런 식으로 텍스트가 늘어나면 영역도 같이 늘어나게 됩니다.
-                <p />
-                여기는 Block Quote를 나타내는 영역이에요.
-                <p />
-                이런 식으로 텍스트가 늘어나면 영역도 같이 늘어나게 됩니다.
-                <p />
-              </Blockquote>
-            )}
-          </div>
-        ))
+      {profile.content ? (
+        <div className={styles['grid-item']}>
+          <span className={styles['wiki-article-content']}>
+            {profile.content}
+          </span>
+        </div>
       ) : (
         <div className={styles['empty-wiki-container']}>
           <div className={styles['span-btn-wrapper']}>

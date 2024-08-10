@@ -15,6 +15,7 @@
     max-width: 1920px;
     display: grid;
     grid-template-columns: minmax(60px, 1fr) minmax(0, 860px) 80px 320px 200px;
+    grid-template-rows: 190px auto;
     position: relative;
 
     .wiki-padding {

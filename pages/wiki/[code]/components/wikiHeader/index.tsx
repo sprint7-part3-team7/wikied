@@ -10,7 +10,6 @@ import loadingIcon from '@/assets/icons/ic_loading.svg';
 interface WikiHeaderProps {
   className?: string;
   profile: ProfileDetail;
-  sections: Section[];
   isEditable: boolean;
   onParticipateClick: () => void;
   checkEditStatus: (code: string) => Promise<any>;
@@ -21,7 +20,6 @@ interface WikiHeaderProps {
 const WikiHeader = ({
   className,
   profile,
-  sections,
   isEditable,
   onParticipateClick,
   checkEditStatus,
@@ -33,8 +31,6 @@ const WikiHeader = ({
     'success',
   );
   const [showSnackBar, setShowSnackBar] = useState(false);
-
-  const hasSections = sections.length > 0;
 
   // 링크 복사 함수
   const handleCopyClick = () => {
@@ -97,7 +93,7 @@ const WikiHeader = ({
         <section className={`${styles['wiki-actions']} ${className}`}>
           <section className={styles['name-and-btn']}>
             <span className={styles['user-name']}>{profile.name}</span>
-            {hasSections &&
+            {profile.content &&
               (showParticipateBtn ? (
                 <Button
                   className={styles['participate-btn']}
