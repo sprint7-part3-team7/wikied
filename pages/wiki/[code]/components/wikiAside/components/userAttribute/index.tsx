@@ -6,6 +6,7 @@ interface UserAttributeProps {
   attributeName: string;
   value: string;
   isEditable: boolean;
+  onChange?: (name: string, value: string) => void;
   className?: string;
 }
 
@@ -13,12 +14,18 @@ const UserAttribute = ({
   attributeName,
   value,
   isEditable = false,
+  onChange,
   className,
 }: UserAttributeProps) => {
   const [attributeValue, setAttributeValue] = useState(value);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setAttributeValue(e.target.value);
+    const newValue = e.target.value;
+    console.log(`UserAttribute changed: ${attributeName} = ${newValue}`); // 로그 추가
+    setAttributeValue(newValue);
+    if (onChange) {
+      onChange(attributeName, newValue);
+    }
   };
 
   return (

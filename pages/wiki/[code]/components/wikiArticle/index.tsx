@@ -1,8 +1,7 @@
+import { useCallback } from 'react';
 import { ProfileDetail, Section } from '@/types/wiki';
-import Blockquote from '@/pages/wiki/[code]/components/wikiArticle/components/blockquote';
 import Button from '@/components/button';
 import styles from '@/pages/wiki/[code]/components/wikiArticle/styles.module.scss';
-import { useCallback } from 'react';
 
 interface WikiArticleProps {
   className: string;

@@ -38,7 +38,7 @@ export const updateProfileEditStatus = (
 
 export const updateProfile = (
   code: string,
-  profile: {
+  payload: {
     securityAnswer: string;
     securityQuestion: string;
     nationality: string;
@@ -54,5 +54,5 @@ export const updateProfile = (
     content: string;
   },
 ) => {
-  return authAxiosInstance.patch<ProfileDetail>(`/profiles/${code}`);
+  return authAxiosInstance.patch<ProfileDetail>(`/profiles/${code}`, payload);
 };
