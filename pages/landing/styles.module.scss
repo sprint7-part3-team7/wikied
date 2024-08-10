@@ -17,15 +17,19 @@
 .landing-container {
   width: 1920px;
   @include Size(100%, auto);
-  overflow-x: hidden;
+  overflow: hidden;
   position: relative;
 
+  &::-webkit-scrollbar  {
+    width: 0px;
+  }
+
   .ellipse-img {
-    width: 2000px;
+    // width: 2000px;
     @include Size(100%, 400px);
-    position: absolute;
     top: 713px;
     left: 50%;
+    position: absolute;
     transform: translateX(-50%);
   }
 
@@ -128,6 +132,7 @@
   .share-container {
     @include Size(100%, 1051px);
     @include Flex(column, center, center);
+    overflow: hidden;
 
     .share-wrapper {
       @include Flex(column, center, center);
