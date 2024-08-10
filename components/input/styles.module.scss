@@ -22,6 +22,7 @@
   padding: 14px 20px;
   border-radius: 10px;
   background-color: $color-grayscale-100;
+  border: 1px solid transparent;
 
   &.error {
     background-color: $color-secondary-red-100;
@@ -29,7 +30,12 @@
   }
 
   &:focus {
-    outline: 1px solid $color-primary-green-200;
+    outline: none;
+    border-color: $color-primary-green-200;
+
+    &.error {
+      border-color: $color-secondary-red-200;
+    }
   }
 }
 
