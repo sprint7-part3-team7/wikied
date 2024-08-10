@@ -1,63 +1,82 @@
 @import '@/styles/index.scss';
 
-.container {
-  @include Flex(column, null, null);
-  row-gap: 16px;
+.overlay {
+  @include Flex(column, center, center);
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1000;
+  background: $color-modal-background;
+  
+  .container {
+    @include Flex(column, null, null);
+    @include Size(395px, auto);
+    background-color: $color-grayscale-250;
+    border-radius: 10px;
+    padding: 20px;
+    row-gap: 16px;
 
-  .header {
-    @include Flex(row, space-between, center);
+    &.small {
+      @include Size(275px, auto);
+    }
 
-    .title {
-      @include Font(
-        $font-size-xl,
-        $line-height-2lg,
-        $font-weight-xl-bold,
-        $color-grayscale-650
-      );
+    .header {
+      @include Flex(row, space-between, center);
 
-      &.small {
+      .title {
         @include Font(
-          $font-size-2lg,
-          $line-height-lg,
+          $font-size-xl,
+          $line-height-2lg,
           $font-weight-xl-bold,
           $color-grayscale-650
         );
+
+        &.small {
+          @include Font(
+            $font-size-2lg,
+            $line-height-lg,
+            $font-weight-xl-bold,
+            $color-grayscale-650
+          );
+        }
       }
-    }
 
-    .close-button {
-      @include Size(24px, 24px);
-      padding: 0;
-      background-color: $color-grayscale-250;
-
-      .close-icon {
+      .close-button {
         @include Size(24px, 24px);
+        padding: 0;
+        background-color: $color-grayscale-250;
+
+        .close-icon {
+          @include Size(24px, 24px);
+
+          &.small {
+            @include Size(20px, 20px);
+          }
+        }
 
         &.small {
           @include Size(20px, 20px);
         }
       }
+    }
 
-      &.small {
-        @include Size(20px, 20px);
+    .notification-card-wrapper {
+      @include Flex(column, null, null);
+      row-gap: 8px;
+      max-height: 340px;
+      overflow-y: auto;
+
+      &:not(:empty):before {
+        display: block;
+        height: calc(100% + 1px);
+        min-height: 1px;
       }
-    }
-  }
 
-  .notification-card-wrapper {
-    @include Flex(column, null, null);
-    row-gap: 8px;
-    max-height: 340px;
-    overflow-y: auto;
-
-    &:not(:empty):before {
-      display: block;
-      height: calc(100% + 1px);
-      min-height: 1px;
-    }
-
-    &:before {
-      display: none;
+      &:before {
+        display: none;
+      }
     }
   }
 }
