@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from '@/pages/wikilist/components/UserList/UserCard/styles.module.scss';
+import styles from './styles.module.scss';
 import { ProfileSummary } from '@/types/wiki';
 import DefaultProfileImg from '@/assets/icons/ic_profile.svg';
 import UserLink from './userWikiLink';
@@ -8,7 +8,7 @@ interface UserCardProps {
   user: ProfileSummary;
 }
 
-const UserCard = ({ user }: UserCardProps) => {
+const UserWikiCard = ({ user }: UserCardProps) => {
   return (
     <div className={styles['user-card']}>
       <img
@@ -21,15 +21,15 @@ const UserCard = ({ user }: UserCardProps) => {
       <div className={styles['user-info']}>
         <div className={styles['user-name']}>{user.name}</div>
         <div className={styles['user-details']}>
-          <div>{user.city}</div>
+          <div>{user.city}, {user.nationality}</div>
           <div>{user.job}</div>
         </div>
       </div>
       <div className={styles['user-link-container']}>
-        <UserLink url={`/profiles/${user.code}`} />
+        <UserLink url={`/wiki/${user.code}`} />
       </div>
     </div>
   );
 };
 
-export default UserCard;
+export default UserWikiCard;

@@ -1,9 +1,9 @@
-import Button from '@/components/button';
-import Image from 'next/image';
-import styles from '@/components/modal/addImage/styles.module.scss';
-import closeIcon from '@/assets/icons/ic_close.svg';
-import cameraIcon from '@/assets/icons/ic_camera.svg';
 import { useState, useRef, ChangeEvent } from 'react';
+import clsx from 'clsx';
+import Image from 'next/image';
+import Button from '@/components/button';
+import styles from '@/components/modal/components/addImage/styles.module.scss';
+import cameraIcon from '@/assets/icons/ic_camera.svg';
 
 interface AddImageProps {
   size?: 'small' | 'large';
@@ -33,8 +33,7 @@ const AddImage = ({ size = 'large' }: AddImageProps): JSX.Element => {
   };
 
   return (
-    <div className={`${styles['container']} ${styles[size]}`}>
-      <Image className={styles['close-image']} src={closeIcon} alt="닫기" />
+    <div className={clsx(styles['container'], styles[size])}>
       <div className={styles['image-wrapper']}>
         <label htmlFor="file-input" className={styles['image-label']}>
           이미지

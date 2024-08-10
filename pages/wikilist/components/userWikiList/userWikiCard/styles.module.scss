@@ -2,13 +2,13 @@
 
 .user-card {
   @include Flex(row, flex-start, flex-start);
+  width: 100%;
   padding: 24px 36px;
   border: 1px solid $color-grayscale-100;
-  border-radius: 8px;
+  border-radius: 10px;
   background-color: $color-grayscale-50;
-  margin-bottom: 12px;
   position: relative;
-  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+  box-shadow: 0px 4px 20px 0px rgba(0, 0, 0, 0.08);
 }
 
 .profile-image {
@@ -26,7 +26,7 @@
     $font-size-2xl,
     $line-height-2xl,
     $font-weight-2xl-semibold,
-    $color-grayscale-600
+    $color-grayscale-500
   );
   border: none;
 }
@@ -43,6 +43,6 @@
 
 .user-link-container {
   position: absolute;
-  right: 16px;
-  bottom: 16px;
+  right: 36px;
+  bottom: 24px;
 }

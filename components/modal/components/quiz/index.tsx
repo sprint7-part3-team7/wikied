@@ -1,14 +1,15 @@
 import Image from 'next/image';
-import closeIcon from '@/assets/icons/ic_close.svg';
 import lockIcon from '@/assets/icons/ic_lock.svg';
 import Input from '@/components/input';
-import styles from '@/components/modal/quiz/styles.module.scss';
+import styles from '@/components/modal/components/quiz/styles.module.scss';
 import Button from '@/components/button';
 import { useState } from 'react';
 import clsx from 'clsx';
+import Modal from '../..';
 
 interface QuizProps {
-  size?: 'large' | 'small';
+  size?: 'small' | 'large';
+  onSubmit: (answer: string) => void;
 }
 
 const Quiz = ({ size = 'large' }: QuizProps) => {
@@ -34,8 +35,7 @@ const Quiz = ({ size = 'large' }: QuizProps) => {
   };
 
   return (
-    <div className={clsx(styles['container'], styles[size])}>
-      <Image className={styles['close-image']} src={closeIcon} alt="닫기" />
+    <>
       <div className={styles['title-wrapper']}>
         <div className={styles['lock-icon-wrapper']}>
           <Image src={lockIcon} alt="자물쇠" width={20} height={20} />
@@ -68,7 +68,7 @@ const Quiz = ({ size = 'large' }: QuizProps) => {
         <p>위키드는 지인들과 함께하는 즐거운 공간입니다.</p>
         <p>지인에게 상처를 주지 않도록 작성해 주세요.</p>
       </div>
-    </div>
+    </>
   );
 };
 
