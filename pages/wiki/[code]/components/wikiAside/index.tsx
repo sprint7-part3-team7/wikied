@@ -1,5 +1,6 @@
 import { useState, useRef } from 'react';
 import clsx from 'clsx';
+import { v4 as uuidv4 } from 'uuid';
 import { ProfileDetail } from '@/types/wiki';
 import UserAttribute from '@/pages/wiki/[code]/components/wikiAside/components/userAttribute';
 import { updateProfile, imageFileToUrl } from '@/services/api/profile';
@@ -46,7 +47,11 @@ const WikiAside = ({
     if (file) {
       const nextPreview = URL.createObjectURL(file);
       setPreview(nextPreview);
-      setImageFile(file); // 파일 상태 업데이트
+
+      // 파일명 영어로 변환
+      const newFileName = `${uuidv4()}.${file.name.split('.').pop()}`;
+      const newFile = new File([file], newFileName, { type: file.type });
+      setImageFile(newFile); // 파일 상태 업데이트
 
       // 파일 URL을 해제 (클린업)
       return () => {
