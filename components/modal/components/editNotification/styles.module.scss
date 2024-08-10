@@ -9,7 +9,7 @@
   height: 100%;
   z-index: 1000;
   background: $color-modal-background;
-  
+
   .container {
     @include Flex(column, null, null);
     @include Size(395px, auto);
@@ -76,6 +76,19 @@
 
       &:before {
         display: none;
+      }
+
+      &::-webkit-scrollbar {
+        width: 8px;
+      }
+
+      &::-webkit-scrollbar-thumb {
+        background-color: $color-grayscale-350;
+        border-radius: 10px;
+      }
+
+      &::-webkit-scrollbar-track {
+        background-color: transparent;
       }
     }
   }
