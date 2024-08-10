@@ -381,6 +381,16 @@
       .image-container {
         @include Size(100%, '');
         margin: 24px 0;
+
+        .file-input-wrapper {
+          @include Size(62px, 62px);
+
+          .overlay,
+          .image,
+          .preview-image {
+            @include Size(62px, 62px);
+          }
+        }
       }
 
       .user-attribute-container {
