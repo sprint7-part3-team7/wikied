@@ -3,12 +3,10 @@ import clsx from 'clsx';
 import Image from 'next/image';
 import Button from '@/components/button';
 import styles from '@/components/modal/components/addImage/styles.module.scss';
-import Modal from '../..';
-import closeIcon from '@/assets/icons/ic_close.svg';
 import cameraIcon from '@/assets/icons/ic_camera.svg';
 
 interface AddImageProps {
-  size?: 'middle' | 'large';
+  size?: 'small' | 'large';
 }
 
 const AddImage = ({ size = 'large' }: AddImageProps): JSX.Element => {
@@ -35,48 +33,46 @@ const AddImage = ({ size = 'large' }: AddImageProps): JSX.Element => {
   };
 
   return (
-    <Modal size={size}>
-      <div className={clsx(styles['container'], styles[size])}>
-        <div className={styles['image-wrapper']}>
-          <label htmlFor="file-input" className={styles['image-label']}>
-            이미지
-          </label>
-          <div className={styles['image-input-box']} onClick={handleInputClick}>
-            <input
-              id="file-input"
-              type="file"
-              ref={fileInputRef}
-              className={styles['image-input']}
-              onChange={handleImageChange}
-              accept="image/*"
+    <div className={clsx(styles['container'], styles[size])}>
+      <div className={styles['image-wrapper']}>
+        <label htmlFor="file-input" className={styles['image-label']}>
+          이미지
+        </label>
+        <div className={styles['image-input-box']} onClick={handleInputClick}>
+          <input
+            id="file-input"
+            type="file"
+            ref={fileInputRef}
+            className={styles['image-input']}
+            onChange={handleImageChange}
+            accept="image/*"
+          />
+          {imagePreview ? (
+            <img
+              src={imagePreview}
+              alt="미리보기"
+              className={styles['preview-image']}
             />
-            {imagePreview ? (
-              <img
-                src={imagePreview}
-                alt="미리보기"
-                className={styles['preview-image']}
-              />
-            ) : (
-              <Image
-                className={styles['image']}
-                src={cameraIcon}
-                alt="카메라"
-                width={36}
-                height={36}
-              />
-            )}
-          </div>
+          ) : (
+            <Image
+              className={styles['image']}
+              src={cameraIcon}
+              alt="카메라"
+              width={36}
+              height={36}
+            />
+          )}
         </div>
-        <Button
-          size="small"
-          color="disabled"
-          alignEnd
-          className={styles['button']}
-        >
-          삽입하기
-        </Button>
       </div>
-    </Modal>
+      <Button
+        size="small"
+        color="disabled"
+        alignEnd
+        className={styles['button']}
+      >
+        삽입하기
+      </Button>
+    </div>
   );
 };
 
