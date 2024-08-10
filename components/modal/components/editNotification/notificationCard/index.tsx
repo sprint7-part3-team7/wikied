@@ -8,14 +8,12 @@ interface NotificationCardProps {
   timeStamp: string;
   size: 'small' | 'large';
   onDelete: () => void;
-  notifications: { id: number; timeStamp: string }[];
 }
 
 const NotificationCard = ({
   timeStamp,
   size,
   onDelete,
-  notifications,
 }: NotificationCardProps) => {
   const handleDelete = () => {
     onDelete();
