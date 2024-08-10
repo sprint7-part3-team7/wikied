@@ -25,6 +25,7 @@
 
   &.error {
     background-color: $color-secondary-red-100;
+    border: 1px solid $color-secondary-red-200;
   }
 
   &:focus { 
