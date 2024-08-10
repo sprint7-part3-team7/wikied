@@ -1,4 +1,4 @@
-import React, { useState, useRef, ChangeEvent } from 'react';
+import { useState, useRef, ChangeEvent } from 'react';
 import clsx from 'clsx';
 import Image from 'next/image';
 import Button from '@/components/button';
