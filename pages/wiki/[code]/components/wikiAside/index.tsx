@@ -1,21 +1,30 @@
 import { useState, useRef, useEffect } from 'react';
 import clsx from 'clsx';
-import { Profile } from '@/types/wiki';
+import { ProfileDetail } from '@/types/wiki';
 import UserAttribute from '@/pages/wiki/[code]/components/wikiAside/components/userAttribute';
 import Button from '@/components/button';
 import styles from '@/pages/wiki/[code]/components/wikiAside/styles.module.scss';
 import expandIcon from '@/assets/icons/ic_expand.svg';
 import fileUploadIcon from '@/assets/icons/ic_camera.svg';
+import basicProfileImg from '@/assets/icons/ic_profile.svg';
+import Link from 'next/link';
 
 interface WikiAsideProps {
   className: string;
-  profile: Profile;
+  profile: ProfileDetail;
   isEditable: boolean;
+  onEditComplete?: () => void;
 }
 
-const WikiAside = ({ className, profile, isEditable }: WikiAsideProps) => {
+const WikiAside = ({
+  className,
+  profile,
+  isEditable,
+  onEditComplete,
+}: WikiAsideProps) => {
   const [isExpanded, setIsExpanded] = useState(false);
   const [preview, setPreview] = useState<string | null>(null);
+  const [editedProfile, setEditedProfile] = useState<ProfileDetail>(profile);
   const inputRef = useRef<HTMLInputElement | null>(null);
 
   const handleToggle = () => {
@@ -38,15 +47,30 @@ const WikiAside = ({ className, profile, isEditable }: WikiAsideProps) => {
     inputRef.current?.click();
   };
 
+  const handleInputChange = (name: string, value: string) => {
+    console.log(`Updating ${name} to ${value}`); // 로그 추가
+    setEditedProfile((prevProfile) => ({
+      ...prevProfile,
+      [name]: value,
+    }));
+  };
+
+  const handleSave = () => {
+    console.log('Saving profile:', editedProfile); // Save 전에 프로필 데이터 로그 출력
+    if (onEditComplete) {
+      onEditComplete();
+    }
+  };
+
   const attributes = [
-    { name: '거주 도시', value: profile.city },
-    { name: 'MBTI', value: profile.mbti },
-    { name: '직업', value: profile.job },
-    { name: 'SNS 계정', value: profile.sns },
-    { name: '생일', value: profile.birthday },
-    { name: '별명', value: profile.nickname },
-    { name: '혈액형', value: profile.bloodType },
-    { name: '국적', value: profile.nationality },
+    { name: '거주 도시', value: editedProfile.city, key: 'city' },
+    { name: 'MBTI', value: editedProfile.mbti, key: 'mbti' },
+    { name: '직업', value: editedProfile.job, key: 'job' },
+    { name: 'SNS 계정', value: editedProfile.sns, key: 'sns' },
+    { name: '생일', value: editedProfile.birthday, key: 'birthday' },
+    { name: '별명', value: editedProfile.nickname, key: 'nickname' },
+    { name: '혈액형', value: editedProfile.bloodType, key: 'bloodType' },
+    { name: '국적', value: editedProfile.nationality, key: 'nationality' },
   ];
 
   return (
@@ -97,11 +121,17 @@ const WikiAside = ({ className, profile, isEditable }: WikiAsideProps) => {
                 />
               )}
             </div>
+          ) : profile.image ? (
+            <img
+              src={profile.image}
+              className={styles['image']}
+              alt="프로필 이미지"
+            />
           ) : (
             <img
+              src={basicProfileImg.src}
               className={styles['image']}
-              src={profile.image}
-              alt="프로필 이미지"
+              alt="기본 프로필 이미지"
             />
           )}
         </div>
@@ -118,6 +148,7 @@ const WikiAside = ({ className, profile, isEditable }: WikiAsideProps) => {
                     attributeName={attr.name}
                     value={attr.value}
                     isEditable={isEditable}
+                    onChange={handleInputChange}
                   />
                 ))}
               </div>
@@ -177,10 +208,21 @@ const WikiAside = ({ className, profile, isEditable }: WikiAsideProps) => {
       {/* 취소/저장 버튼 */}
       {isEditable && (
         <div className={styles['profile-save-btn']}>
-          <Button className={styles['cancel-btn']} color="outline" size="small">
-            취소
-          </Button>
-          <Button className={styles['save-btn']} color="primary" size="small">
+          <Link href={`/wiki/${profile.code}`}>
+            <Button
+              className={styles['cancel-btn']}
+              color="outline"
+              size="small"
+            >
+              취소
+            </Button>
+          </Link>
+          <Button
+            className={styles['save-btn']}
+            color="primary"
+            size="small"
+            onClick={handleSave}
+          >
             저장
           </Button>
         </div>
