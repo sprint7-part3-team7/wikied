@@ -152,7 +152,7 @@ const Editor = () => {
         />
         <span className={styles['title-count']}>
           <span className={styles['current-count']}>{title.length}/</span>
-          <span className={styles['max-count']}>30</span>
+          <span className={`${styles['max-count']} ${title.length > 29 ? styles['over-max'] : ''}`}>30</span>
         </span>
       </div>
       <div className={styles['content-count']}>
