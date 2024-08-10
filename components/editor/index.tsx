@@ -14,6 +14,7 @@ import { blockStyleFn, initialStyleMap } from 'contenido';
 import { colorPalette } from '@/components/editor/components/colorPalette';
 import Media from '@/components/editor/components/media';
 import AddImage from '@/components/modal/components/addImage';
+import Modal from '../modal';
 
 const Editor = () => {
   const [editorState, setEditorState] = useState<EditorState | null>(null);
@@ -181,9 +182,12 @@ const Editor = () => {
         />
       </div>
       {isImageModalOpen && (
-        <AddImage
-          onImageUpload={handleImageUpload}
+        <Modal
+          size="large"
           onClose={() => setIsImageModalOpen(false)}
+          contents={({ size }) => (
+            <AddImage size={size} onImageUpload={handleImageUpload} />
+          )}
         />
       )}
     </div>

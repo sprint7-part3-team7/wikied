@@ -1,25 +1,7 @@
 @import '@/styles/index.scss';
 
-.modal-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(0, 0, 0, 0.5);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 1000;
-}
-
 .container {
   @include Flex(column, null, null);
-  background-color: $color-grayscale-50;
-  padding: 20px;
-  border-radius: 10px;
-  max-width: 400px;
-  width: 90%;
 
   .image-wrapper {
     @include Flex(column, center, center);
@@ -39,6 +21,7 @@
       @include Size(354px, 160px);
       background-color: $color-grayscale-100;
       border-radius: 10px;
+      cursor: pointer;
 
       .image-input {
         display: none;
@@ -54,7 +37,6 @@
       position: absolute;
       top: 52%;
       left: 46%;
-      cursor: pointer;
     }
   }
 
