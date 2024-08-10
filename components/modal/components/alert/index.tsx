@@ -6,7 +6,7 @@ interface AlertProps {
   title: string;
   description: string;
   content: string;
-  size?: 'small' | 'large';
+  size?: 'middle' | 'large';
 }
 
 const Alert = ({

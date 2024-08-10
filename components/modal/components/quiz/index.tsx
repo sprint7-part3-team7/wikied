@@ -5,6 +5,7 @@ import styles from '@/components/modal/components/quiz/styles.module.scss';
 import Button from '@/components/button';
 import { useState } from 'react';
 import clsx from 'clsx';
+import Modal from '../..';
 
 interface QuizProps {
   size?: 'small' | 'large';

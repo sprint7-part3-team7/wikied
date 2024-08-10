@@ -1,29 +1,29 @@
 import { useState, useEffect, useCallback } from 'react';
-import styles from '@/pages/wikilist/components/UserList/styles.module.scss';
-import UserCard from './userCard';
+import styles from './styles.module.scss';
+import UserCard from './userWikiCard';
 import Pagination from '@/components/pagination';
 import SearchForm from '@/components/searchForm';
 import NotFound from '@/pages/wikilist/components/notFound';
 import { getProfiles } from '@/services/api/profile';
 import { ProfileSummary } from '@/types/wiki';
 
-const UserList = () => {
+const UserWikiList = () => {
   const [users, setUsers] = useState<ProfileSummary[]>([]);
   const [loading, setLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
   const [searchTerm, setSearchTerm] = useState('');
 
-  const fetchUsers = useCallback(async (page: number, name: string) => {
+  const fetchUsers = useCallback(async (page: number, search: string) => {
     setLoading(true);
     try {
-      const response = await getProfiles({ page, pageSize: 3, name });
+      const response = await getProfiles({ page, pageSize: 3, name: search });
       const data = response.data;
       setUsers(data.list);
       setTotalPages(Math.ceil(data.totalCount / 3));
+      setLoading(false);
     } catch (error) {
       console.error(error);
-    } finally {
       setLoading(false);
     }
   }, []);
@@ -70,4 +70,4 @@ const UserList = () => {
   );
 };
 
-export default UserList;
+export default UserWikiList;
