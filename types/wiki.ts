@@ -27,6 +27,24 @@ export interface ProfileEditStatus {
   registeredAt: string;
   userId: number;
 }
+
+export interface updatedProfileData {
+  securityAnswer?: string;
+  securityQuestion?: string;
+  nationality?: string;
+  family?: string;
+  bloodType?: string;
+  nickname?: string;
+  birthday?: string;
+  sns?: string;
+  job?: string;
+  mbti?: string;
+  city?: string;
+  image?: string | null;
+  content?: string;
+  url: string;
+}
+
 export interface Section {
   title: string;
   content: string;

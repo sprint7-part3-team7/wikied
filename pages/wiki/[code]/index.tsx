@@ -28,7 +28,7 @@ const Wiki = (props: WikiProps) => {
   const [sectionsData, setSectionsData] = useState<Section[]>([]);
   const [isEditable, setIsEditable] = useState<boolean>(false);
   const [showParticipateBtn, setShowParticipateBtn] = useState<boolean>(false);
-  const [isErrorModalOpen, setIsErrorModalOpen] = useState<boolean>(false); // 오류 모달 상태
+  const [isErrorModalOpen, setIsErrorModalOpen] = useState<boolean>(false);
   const [editTimeout, setEditTimeout] = useState<NodeJS.Timeout | null>(null);
   const [isModalVisible, setModalVisible] = useState(false);
 
@@ -60,8 +60,6 @@ const Wiki = (props: WikiProps) => {
       }
 
       setProfile(data);
-
-      // 섹션 데이터가 존재하는 경우 설정
       setSectionsData(profile.content || []);
     } catch (err) {
       console.error(err);
@@ -100,27 +98,27 @@ const Wiki = (props: WikiProps) => {
   };
 
   // 수정 완료 처리
-  const handleEditComplete = async () => {
+  const handleEditComplete = async (updatedProfile: ProfileDetail) => {
     if (editTimeout) {
       clearTimeout(editTimeout);
     }
 
     try {
-      if (profile) {
+      if (updatedProfile) {
         await updateProfile(profile.code, {
           securityAnswer: props.securityAnswer,
-          securityQuestion: profile.securityQuestion,
-          nationality: profile.nationality,
-          family: profile.family,
-          bloodType: profile.bloodType,
-          nickname: profile.nickname,
-          birthday: profile.birthday,
-          sns: profile.sns,
-          job: profile.job,
-          mbti: profile.mbti,
-          city: profile.city,
-          image: profile.image,
-          content: profile.content,
+          securityQuestion: updatedProfile.securityQuestion,
+          nationality: updatedProfile.nationality,
+          family: updatedProfile.family,
+          bloodType: updatedProfile.bloodType,
+          nickname: updatedProfile.nickname,
+          birthday: updatedProfile.birthday,
+          sns: updatedProfile.sns,
+          job: updatedProfile.job,
+          mbti: updatedProfile.mbti,
+          city: updatedProfile.city,
+          image: updatedProfile.image,
+          content: updatedProfile.content,
         });
       }
     } catch (err) {
@@ -171,6 +169,7 @@ const Wiki = (props: WikiProps) => {
           <WikiAside
             className={styles['wiki-aside']}
             profile={profile}
+            setProfile={setProfile}
             isEditable={isEditable}
             setIsEditable={setIsEditable}
             onEditComplete={handleEditComplete}

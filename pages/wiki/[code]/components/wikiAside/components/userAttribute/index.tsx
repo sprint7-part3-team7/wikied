@@ -5,6 +5,7 @@ import styles from '@/pages/wiki/[code]/components/wikiAside/styles.module.scss'
 interface UserAttributeProps {
   attributeName: string;
   value: string;
+  name: string;
   isEditable: boolean;
   onChange?: (name: string, value: string) => void;
   className?: string;
@@ -13,6 +14,7 @@ interface UserAttributeProps {
 const UserAttribute = ({
   attributeName,
   value,
+  name,
   isEditable = false,
   onChange,
   className,
@@ -21,10 +23,9 @@ const UserAttribute = ({
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newValue = e.target.value;
-    console.log(`UserAttribute changed: ${attributeName} = ${newValue}`); // 로그 추가
     setAttributeValue(newValue);
     if (onChange) {
-      onChange(attributeName, newValue);
+      onChange(name, newValue);
     }
   };
 

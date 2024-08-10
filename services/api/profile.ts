@@ -36,23 +36,12 @@ export const updateProfileEditStatus = (
   );
 };
 
-export const updateProfile = (
-  code: string,
-  payload: {
-    securityAnswer: string;
-    securityQuestion: string;
-    nationality: string;
-    family: string;
-    bloodType: string;
-    nickname: string;
-    birthday: string;
-    sns: string;
-    job: string;
-    mbti: string;
-    city: string;
-    image: string | null;
-    content: string;
-  },
-) => {
-  return authAxiosInstance.patch<ProfileDetail>(`/profiles/${code}`, payload);
+export const updateProfile = (code: string, formData: FormData) => {
+  return authAxiosInstance.patch<ProfileDetail>(`/profiles/${code}`, formData);
+};
+
+export const imageFileToUrl = (image: File) => {
+  const formData = new FormData();
+  formData.append('image', image);
+  return authAxiosInstance.post<{ url: string }>('/images/upload', formData);
 };

@@ -1,26 +1,27 @@
-import { useState, useRef, useEffect } from 'react';
-import Link from 'next/link';
+import { useState, useRef } from 'react';
 import clsx from 'clsx';
 import { ProfileDetail } from '@/types/wiki';
 import UserAttribute from '@/pages/wiki/[code]/components/wikiAside/components/userAttribute';
+import { updateProfile, imageFileToUrl } from '@/services/api/profile';
 import Button from '@/components/button';
 import styles from '@/pages/wiki/[code]/components/wikiAside/styles.module.scss';
 import expandIcon from '@/assets/icons/ic_expand.svg';
 import fileUploadIcon from '@/assets/icons/ic_camera.svg';
 import basicProfileImg from '@/assets/icons/ic_profile.svg';
-import { useRouter } from 'next/router';
 
 interface WikiAsideProps {
   className: string;
   profile: ProfileDetail;
+  setProfile: React.Dispatch<React.SetStateAction<ProfileDetail>>;
   isEditable: boolean;
   setIsEditable: (isEditable: boolean) => void;
-  onEditComplete?: () => void;
+  onEditComplete?: (updatedProfile: ProfileDetail) => void;
 }
 
 const WikiAside = ({
   className,
   profile,
+  setProfile,
   isEditable,
   setIsEditable,
   onEditComplete,
@@ -29,10 +30,11 @@ const WikiAside = ({
   const [preview, setPreview] = useState<string | null>(null);
   const [editedProfile, setEditedProfile] = useState<ProfileDetail>(profile);
   const inputRef = useRef<HTMLInputElement | null>(null);
-  const router = useRouter();
+  const [imageFile, setImageFile] = useState<File | null>(null);
 
   const handleCancelClick = () => {
     setIsEditable(false);
+    setEditedProfile(profile); // 취소 시 원래 프로필로 복원
   };
 
   const handleToggle = () => {
@@ -44,7 +46,9 @@ const WikiAside = ({
     if (file) {
       const nextPreview = URL.createObjectURL(file);
       setPreview(nextPreview);
+      setImageFile(file); // 파일 상태 업데이트
 
+      // 파일 URL을 해제 (클린업)
       return () => {
         URL.revokeObjectURL(nextPreview);
       };
@@ -56,17 +60,46 @@ const WikiAside = ({
   };
 
   const handleInputChange = (name: string, value: string) => {
-    console.log(`Updating ${name} to ${value}`); // 로그 추가
     setEditedProfile((prevProfile) => ({
       ...prevProfile,
       [name]: value,
     }));
   };
 
-  const handleSave = () => {
-    console.log('Saving profile:', editedProfile); // Save 전에 프로필 데이터 로그 출력
-    if (onEditComplete) {
-      onEditComplete();
+  const handleSave = async () => {
+    try {
+      if (imageFile) {
+        const response = await imageFileToUrl(imageFile);
+        const imageUrl = response.data.url;
+
+        const updatedProfile = {
+          ...editedProfile,
+          image: imageUrl,
+        };
+
+        // FormData 객체 생성
+        const formData = new FormData();
+
+        // updatedProfile의 각 필드를 FormData에 추가
+        Object.keys(updatedProfile).forEach((key) => {
+          const value = updatedProfile[key as keyof typeof updatedProfile];
+
+          if (typeof value === 'string' || typeof value === 'number') {
+            formData.append(key, String(value)); // string으로 변환하여 추가
+          } else if (value instanceof Blob) {
+            formData.append(key, value); // Blob일 경우 직접 추가
+          }
+        });
+
+        await updateProfile(profile.code, formData);
+
+        if (onEditComplete) {
+          onEditComplete(updatedProfile); // 업데이트된 프로필 전달
+        }
+        setIsEditable(false);
+      }
+    } catch (err) {
+      console.error(err);
     }
   };
 
@@ -110,15 +143,21 @@ const WikiAside = ({
                     className={styles['file-upload-icon']}
                     alt="파일 업로드 아이콘"
                   />
-                  {profile.image && (
+                  {profile.image || !isEditable ? (
                     <>
                       <div className={styles['overlay']}></div>
                       <img
-                        src={profile.image}
+                        src={profile.image || basicProfileImg.src}
                         className={styles['image']}
                         alt="프로필 이미지"
                       />
                     </>
+                  ) : (
+                    <img
+                      src={basicProfileImg.src}
+                      className={styles['image']}
+                      alt="기본 프로필 이미지"
+                    />
                   )}
                 </>
               ) : (
@@ -147,51 +186,50 @@ const WikiAside = ({
         {/* 프로필 내용 관련 부분 */}
         <div className={styles['user-attribute-container']}>
           {isEditable ? (
-            // 수정중: 모든 속성이 보임
             <>
               <div className={styles['attribute-wrapper']}>
                 {attributes.map((attr, index) => (
                   <UserAttribute
                     key={index}
                     attributeName={attr.name}
+                    name={attr.key}
                     value={attr.value}
                     isEditable={isEditable}
-                    onChange={handleInputChange}
+                    onChange={(name, value) => handleInputChange(name, value)}
                   />
                 ))}
               </div>
             </>
           ) : (
-            // 수정중X
             <div className={styles['non-editable-attribute-container']}>
-              {/* 화면 너비에 상관 없이 모두 보이는 속성 3개 */}
               <div className={styles['always-show-user-attribute']}>
                 {attributes.slice(0, 3).map((attr, index) => (
                   <UserAttribute
                     key={index}
+                    name={attr.key}
                     attributeName={attr.name}
                     value={attr.value}
                     isEditable={isEditable}
                   />
                 ))}
               </div>
-              {/* 그 외 속성: 데스크탑에서 보여질 부분 */}
               <div className={styles['desktop-user-attribute']}>
                 {attributes.slice(3, 8).map((attr, index) => (
                   <UserAttribute
                     key={index}
+                    name={attr.key}
                     attributeName={attr.name}
                     value={attr.value}
                     isEditable={isEditable}
                   />
                 ))}
               </div>
-              {/* 그 외 속성: 태블릿, 모바일에서 보여질 부분 */}
               {isExpanded && (
                 <div className={styles['tablet-mobile-expanded']}>
                   {attributes.slice(3, 8).map((attr, index) => (
                     <UserAttribute
                       key={index}
+                      name={attr.key}
                       attributeName={attr.name}
                       value={attr.value}
                       isEditable={isEditable}
@@ -202,7 +240,6 @@ const WikiAside = ({
             </div>
           )}
         </div>
-        {/* 토글 버튼 */}
         {!isEditable && (
           <button className={styles['expand-btn']} onClick={handleToggle}>
             <img
@@ -213,7 +250,6 @@ const WikiAside = ({
           </button>
         )}
       </div>
-      {/* 취소/저장 버튼 */}
       {isEditable && (
         <div className={styles['profile-save-btn']}>
           <Button
