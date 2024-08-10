@@ -1,15 +1,34 @@
-import { Section } from '@/types/wiki';
+import { ProfileDetail, Section } from '@/types/wiki';
 import Blockquote from '@/pages/wiki/[code]/components/wikiArticle/components/blockquote';
 import Button from '@/components/button';
 import styles from '@/pages/wiki/[code]/components/wikiArticle/styles.module.scss';
+import { useCallback } from 'react';
 
 interface WikiArticleProps {
   className: string;
   sections: Section[];
+  profile: ProfileDetail;
+  onParticipateClick: () => void;
+  checkEditStatus: (code: string) => Promise<any>;
 }
 
-const WikiArticle = ({ className, sections }: WikiArticleProps) => {
+const WikiArticle = ({
+  className,
+  sections,
+  profile,
+  onParticipateClick,
+  checkEditStatus,
+}: WikiArticleProps) => {
   const hasSections = sections.length > 0;
+
+  const checkParticipationStatus = useCallback(async () => {
+    try {
+      // 위키 참여 클릭 후 상태 확인
+      await checkEditStatus(profile.code);
+    } catch (error) {
+      console.error('Error during checkEditStatus:', error);
+    }
+  }, [checkEditStatus, profile.code]);
 
   return (
     <div className={`${styles['grid-container']} ${className}`}>
@@ -50,6 +69,10 @@ const WikiArticle = ({ className, sections }: WikiArticleProps) => {
               color="primary"
               size="small"
               defaultPadding={true}
+              onClick={() => {
+                checkParticipationStatus(); // 현재 수정중 여부 재확인
+                onParticipateClick(); // 퀴즈 모달 호출
+              }}
             >
               시작하기
             </Button>

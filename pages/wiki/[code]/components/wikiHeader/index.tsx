@@ -104,7 +104,7 @@ const WikiHeader = ({
                   color="primary"
                   size="large"
                   onClick={() => {
-                    checkParticipationStatus(); // 현재 수정중 여부 재확인
+                    checkParticipationStatus(); // 현재 수정중 여부 확인
                     onParticipateClick(); // 퀴즈 모달 호출
                   }}
                 >

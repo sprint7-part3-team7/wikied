@@ -6,7 +6,7 @@ import Button from '@/components/button';
 import styles from '@/pages/wiki/[code]/components/wikiAside/styles.module.scss';
 import expandIcon from '@/assets/icons/ic_expand.svg';
 import fileUploadIcon from '@/assets/icons/ic_camera.svg';
-import basicProfileImg from '@/assets/icons/basic_profile_img.svg';
+import basicProfileImg from '@/assets/icons/ic_profile.svg';
 
 interface WikiAsideProps {
   className: string;
