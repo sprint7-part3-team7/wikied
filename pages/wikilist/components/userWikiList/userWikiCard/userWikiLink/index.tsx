@@ -35,14 +35,14 @@ const UserWikiLink = ({ url }: UserLinkProps) => {
       {showSnackBar && (
         <div className={styles['snackbar-wrapper']}>
           <SnackBar
-            message="링크가 클립보드에 복사되었습니다."
+            message="내 위키 링크가 복사되었습니다."
             type="success"
             size="small"
           />
         </div>
       )}
       <div className={styles['link-container']} onClick={copyToClipboard}>
-        <Image src={LinkIcon} alt="Link icon" width={20} height={20} />
+        <Image src={LinkIcon} alt="링크" width={20} height={20} />
         <span className={styles['link-text']}>{url}</span>
       </div>
     </div>

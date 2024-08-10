@@ -12,6 +12,7 @@ const UserWikiList = () => {
   const [loading, setLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
+  const [totalCount, setTotalCount] = useState(0);
   const [searchTerm, setSearchTerm] = useState('');
 
   const fetchUsers = useCallback(async (page: number, search: string) => {
@@ -21,6 +22,7 @@ const UserWikiList = () => {
       const data = response.data;
       setUsers(data.list);
       setTotalPages(Math.ceil(data.totalCount / 3));
+      setTotalCount(data.totalCount);
       setLoading(false);
     } catch (error) {
       console.error(error);
@@ -54,6 +56,14 @@ const UserWikiList = () => {
         <NotFound searchTerm={searchTerm} />
       ) : (
         <>
+          <div className={styles['search-result-info']}>
+            {searchTerm && (
+              <>
+                "{searchTerm}"님을 총{' '}
+                <span className={styles['total-count']}>{totalCount}</span>명 찾았습니다.
+              </>
+            )}
+          </div>
           <div className={styles['user-list']}>
             {users.map((user) => (
               <UserCard key={user.id} user={user} />
