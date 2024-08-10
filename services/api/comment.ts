@@ -1,5 +1,5 @@
-import axiosInstance from './axiosInstance';
 import { Comment } from '@/types/article';
+import { authAxiosInstance, publicAxiosInstance } from './axiosInstance';
 
 interface CommentResponse {
   list: Comment[];
@@ -7,7 +7,26 @@ interface CommentResponse {
 }
 
 export const getArticleComments = (articleId: number, limit: number = 99) => {
-  return axiosInstance.get<CommentResponse>(`/articles/${articleId}/comments`, {
-    params: { limit },
+  return publicAxiosInstance.get<CommentResponse>(
+    `/articles/${articleId}/comments`,
+    {
+      params: { limit },
+    },
+  );
+};
+
+export const postComment = (articleId: number, content: string) => {
+  return authAxiosInstance.post<Comment>(`/articles/${articleId}/comments`, {
+    content,
   });
+};
+
+export const patchComment = (commentId: number, content: string) => {
+  return authAxiosInstance.patch<Comment>(`/comments/${commentId}`, {
+    content,
+  });
+};
+
+export const deleteComment = (commentId: number) => {
+  return authAxiosInstance.delete(`/comments/${commentId}`);
 };
