@@ -4,13 +4,16 @@ import clsx from 'clsx';
 import {
   checkProfileEditStatus,
   getProfileByCode,
+  updateProfile,
 } from '@/services/api/profile';
 import { ProfileDetail, Section } from '@/types/wiki';
 import WikiHeader from '@/pages/wiki/[code]/components/wikiHeader';
 import WikiArticle from '@/pages/wiki/[code]/components/wikiArticle';
 import WikiAside from '@/pages/wiki/[code]/components/wikiAside';
-import QuizModal from '@/components/modal/components/quiz';
+import Quiz from '@/components/modal/components/quiz';
 import styles from '@/pages/wiki/[code]/styles.module.scss';
+import Button from '@/components/button';
+import Modal from '@/components/modal';
 
 interface WikiProps {
   className: string;
@@ -25,12 +28,16 @@ const Wiki = (props: WikiProps) => {
   const [profile, setProfile] = useState<any>(null);
   const [sectionsData, setSectionsData] = useState<Section[]>([]);
   const [isEditable, setIsEditable] = useState<boolean>(false);
-  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [showParticipateBtn, setShowParticipateBtn] = useState<boolean>(false);
+  const [isErrorModalOpen, setIsErrorModalOpen] = useState<boolean>(false); // 오류 모달 상태
+  const [editTimeout, setEditTimeout] = useState<NodeJS.Timeout | null>(null);
+  const [isModalVisible, setModalVisible] = useState(false);
+
+  const closeModal = () => setModalVisible(false);
 
   // 모달 토글
   const handleModalToggle = () => {
-    setIsModalOpen(!isModalOpen);
+    setModalVisible(!isModalVisible);
   };
 
   // 데이터 조회
@@ -80,6 +87,48 @@ const Wiki = (props: WikiProps) => {
     }
   }, []);
 
+  // 수정 타이머 시작
+  const startEditTimer = () => {
+    if (editTimeout) {
+      clearTimeout(editTimeout);
+    }
+
+    const timer = setTimeout(() => {
+      setIsErrorModalOpen(true); // 5분 후 오류 모달 띄우기
+    }, 300000); // 5분 = 300,000ms
+
+    setEditTimeout(timer);
+  };
+
+  // 수정 완료 처리
+  const handleEditComplete = async () => {
+    if (editTimeout) {
+      clearTimeout(editTimeout);
+    }
+
+    try {
+      if (profile) {
+        await updateProfile(profile.code, {
+          securityAnswer: props.securityAnswer,
+          securityQuestion: profile.securityQuestion,
+          nationality: profile.nationality,
+          family: profile.family,
+          bloodType: profile.bloodType,
+          nickname: profile.nickname,
+          birthday: profile.birthday,
+          sns: profile.sns,
+          job: profile.job,
+          mbti: profile.mbti,
+          city: profile.city,
+          image: profile.image,
+          content: profile.content,
+        });
+      }
+    } catch (err) {
+      console.error('Error updating profile:', err);
+    }
+  };
+
   useEffect(() => {
     if (typeof code === 'string') {
       getList(code);
@@ -93,22 +142,6 @@ const Wiki = (props: WikiProps) => {
 
   return (
     <>
-      {!isEditable && isModalOpen && (
-        <div
-          className={clsx(styles['quiz-modal-container'], {
-            [styles['quiz-modal-open']]: isModalOpen,
-            [styles['quiz-modal-close']]: !isModalOpen,
-          })}
-        >
-          <QuizModal
-            size="large"
-            code={typeof code === 'string' ? code : ''}
-            setIsEditable={setIsEditable}
-            setIsModalOpen={setIsModalOpen}
-            securityQuestion={profile.securityQuestion}
-          />
-        </div>
-      )}
       <div
         className={clsx(styles['container'], {
           [styles['non-editable']]: !isEditable,
@@ -140,9 +173,26 @@ const Wiki = (props: WikiProps) => {
             className={styles['wiki-aside']}
             profile={profile}
             isEditable={isEditable}
+            onEditComplete={handleEditComplete}
           />
         </main>
       </div>
+
+      {!isEditable && isModalVisible && (
+        <Modal
+          size="large"
+          contents={({ size }) => (
+            <Quiz
+              code={typeof code === 'string' ? code : ''}
+              setIsEditable={setIsEditable}
+              setIsModalOpen={setModalVisible}
+              securityQuestion={profile.securityQuestion}
+              size={size}
+            />
+          )}
+          onClose={closeModal}
+        />
+      )}
     </>
   );
 };

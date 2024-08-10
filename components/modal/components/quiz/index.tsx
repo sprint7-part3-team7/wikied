@@ -9,10 +9,10 @@ import clsx from 'clsx';
 import { updateProfileEditStatus } from '@/services/api/profile';
 
 interface QuizProps {
-  size?: 'large' | 'small';
+  size?: 'small' | 'large';
   code: string;
   setIsEditable: (editable: boolean) => void;
-  setIsModalOpen: (open: boolean) => void;
+  setIsModalOpen: (open: boolean) => void; // 여기도 setModalVisible로 변경
   securityQuestion: string;
 }
 
@@ -20,7 +20,7 @@ const Quiz = ({
   size = 'large',
   code,
   setIsEditable,
-  setIsModalOpen,
+  setIsModalOpen, // 여기도 setModalVisible로 변경
   securityQuestion,
 }: QuizProps) => {
   const [answer, setAnswer] = useState<string>('');
@@ -46,7 +46,7 @@ const Quiz = ({
         },
       );
       setIsEditable(true);
-      setIsModalOpen(false);
+      setIsModalOpen(false); // 여기도 setModalVisible로 변경
       setErrorMessage('');
     } catch (error) {
       setIsEditable(false);
