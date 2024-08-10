@@ -1,4 +1,5 @@
 import { useState, useRef, useEffect } from 'react';
+import Link from 'next/link';
 import clsx from 'clsx';
 import { ProfileDetail } from '@/types/wiki';
 import UserAttribute from '@/pages/wiki/[code]/components/wikiAside/components/userAttribute';
@@ -7,12 +8,13 @@ import styles from '@/pages/wiki/[code]/components/wikiAside/styles.module.scss'
 import expandIcon from '@/assets/icons/ic_expand.svg';
 import fileUploadIcon from '@/assets/icons/ic_camera.svg';
 import basicProfileImg from '@/assets/icons/ic_profile.svg';
-import Link from 'next/link';
+import { useRouter } from 'next/router';
 
 interface WikiAsideProps {
   className: string;
   profile: ProfileDetail;
   isEditable: boolean;
+  setIsEditable: (isEditable: boolean) => void;
   onEditComplete?: () => void;
 }
 
@@ -20,12 +22,18 @@ const WikiAside = ({
   className,
   profile,
   isEditable,
+  setIsEditable,
   onEditComplete,
 }: WikiAsideProps) => {
   const [isExpanded, setIsExpanded] = useState(false);
   const [preview, setPreview] = useState<string | null>(null);
   const [editedProfile, setEditedProfile] = useState<ProfileDetail>(profile);
   const inputRef = useRef<HTMLInputElement | null>(null);
+  const router = useRouter();
+
+  const handleCancelClick = () => {
+    setIsEditable(false);
+  };
 
   const handleToggle = () => {
     setIsExpanded((prevState) => !prevState);
@@ -208,15 +216,14 @@ const WikiAside = ({
       {/* 취소/저장 버튼 */}
       {isEditable && (
         <div className={styles['profile-save-btn']}>
-          <Link href={`/wiki/${profile.code}`}>
-            <Button
-              className={styles['cancel-btn']}
-              color="outline"
-              size="small"
-            >
-              취소
-            </Button>
-          </Link>
+          <Button
+            className={styles['cancel-btn']}
+            color="outline"
+            size="small"
+            onClick={handleCancelClick}
+          >
+            취소
+          </Button>
           <Button
             className={styles['save-btn']}
             color="primary"

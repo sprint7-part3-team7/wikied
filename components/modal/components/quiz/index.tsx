@@ -55,7 +55,7 @@ const Quiz = ({
   };
 
   return (
-    <div className={clsx(styles['container'], styles[size])}>
+    <>
       <div className={styles['title-wrapper']}>
         <div className={styles['lock-icon-wrapper']}>
           <Image src={lockIcon} alt="자물쇠" width={20} height={20} />
@@ -88,7 +88,7 @@ const Quiz = ({
         <p>위키드는 지인들과 함께하는 즐거운 공간입니다.</p>
         <p>지인에게 상처를 주지 않도록 작성해 주세요.</p>
       </div>
-    </div>
+    </>
   );
 };
 

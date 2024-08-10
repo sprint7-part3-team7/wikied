@@ -12,7 +12,6 @@ import WikiArticle from '@/pages/wiki/[code]/components/wikiArticle';
 import WikiAside from '@/pages/wiki/[code]/components/wikiAside';
 import Quiz from '@/components/modal/components/quiz';
 import styles from '@/pages/wiki/[code]/styles.module.scss';
-import Button from '@/components/button';
 import Modal from '@/components/modal';
 
 interface WikiProps {
@@ -173,6 +172,7 @@ const Wiki = (props: WikiProps) => {
             className={styles['wiki-aside']}
             profile={profile}
             isEditable={isEditable}
+            setIsEditable={setIsEditable}
             onEditComplete={handleEditComplete}
           />
         </main>
