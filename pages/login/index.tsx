@@ -1,6 +1,6 @@
 import { useState, ChangeEvent, FocusEvent, useEffect } from 'react';
 import { useRouter } from 'next/router';
-import axiosInstance from '@/services/api/axiosInstance';
+import { publicAxiosInstance } from '@/services/api/axiosInstance';
 import styles from '@/pages/login/styles.module.scss';
 import Link from 'next/link';
 import { useAuth } from '@/contexts/AuthProvider';
@@ -72,7 +72,7 @@ const LoginPage: React.FC = () => {
 
     if (isValid) {
       try {
-        const response = await axiosInstance.post('/auth/signIn', {
+        const response = await publicAxiosInstance.post('/auth/signIn', {
           email: formState.email,
           password: formState.password,
         });
