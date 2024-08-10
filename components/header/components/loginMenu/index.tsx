@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react';
-import styles from '@/components/header/components/menu/styles.module.scss';
+import styles from '@/components/header/components/loginMenu/styles.module.scss';
 import { useRouter } from 'next/router';
 import { useAuth } from '@/contexts/AuthProvider';
 
@@ -7,7 +7,7 @@ type MenuProps = {
   handleMenuClose: () => void;
 };
 
-const Menu = ({ handleMenuClose }: MenuProps) => {
+const LoginMenu = ({ handleMenuClose }: MenuProps) => {
   const router = useRouter();
   const menuRef = useRef<HTMLDivElement>(null);
 
@@ -23,7 +23,6 @@ const Menu = ({ handleMenuClose }: MenuProps) => {
     handleMenuClose();
   };
 
-  // Click outside the menu to close it
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
@@ -42,23 +41,15 @@ const Menu = ({ handleMenuClose }: MenuProps) => {
     <div className={styles['container']} ref={menuRef}>
       <button
         className={styles['menu-list']}
-        onClick={() => handleNavigation('/wikilist')}
-      >
-        위키목록
-      </button>
-      <button
-        className={styles['menu-list']}
-        onClick={() => handleNavigation('/boards')}
-      >
-        자유게시판
-      </button>
-      <button className={styles['menu-list']}>알림</button>
-      {/* 알림창 나오는 부분은 추가 구현 필요 */}
-      <button
-        className={styles['menu-list']}
         onClick={() => handleNavigation('/mypage')}
       >
-        마이페이지
+        계정설정
+      </button>
+      <button
+        className={styles['menu-list']}
+        onClick={() => handleNavigation('/wiki/{code}')}
+      >
+        내위키
       </button>
       <button className={styles['menu-list']} onClick={handleLogoutClick}>
         로그아웃
@@ -67,4 +58,4 @@ const Menu = ({ handleMenuClose }: MenuProps) => {
   );
 };
 
-export default Menu;
+export default LoginMenu;

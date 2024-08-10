@@ -6,15 +6,16 @@ import menu from '@/assets/icons/ic_menu.svg';
 
 type UserProfileProps = {
   toggleMenu: () => void;
+  toggleLoginMenu: () => void;
 };
 
-const UserProfile = ({ toggleMenu }: UserProfileProps) => {
+const UserProfile = ({ toggleMenu,toggleLoginMenu }: UserProfileProps) => {
   return (
     <div className={styles['container']}>
       <button className={styles['alarm']}>
         <Image src={alarm} alt="알림" width={32} height={32} />
       </button>
-      <button className={styles['profile']}>
+      <button className={styles['profile']} onClick={toggleLoginMenu}>
         <Image src={profile} alt="프로필" width={32} height={32} />
       </button>
       <button className={styles['menu']} onClick={toggleMenu}>
