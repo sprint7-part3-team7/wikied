@@ -1,3 +1,4 @@
+import { Profile, ProfileRequest } from '@/types/profile';
 import { ProfileDetail, ProfileEditStatus, ProfileSummary } from '@/types/wiki';
 import { authAxiosInstance, publicAxiosInstance } from './axiosInstance';
 
@@ -18,6 +19,10 @@ export const getProfileByCode = (code: string) => {
   return publicAxiosInstance.get<ProfileDetail>(`/profiles/${code}`);
 };
 
+export const addProfiles = (profileData: ProfileRequest) => {
+  return authAxiosInstance.post<Profile>('/profiles', profileData);
+};
+
 export const checkProfileEditStatus = (code: string) => {
   return authAxiosInstance.get<{ registeredAt: string; userId: number }>(
     `/profiles/${code}/ping`,
@@ -34,7 +39,28 @@ export const updateProfileEditStatus = (
   );
 };
 
-export const updateProfile = (code: string, formData: FormData) => {
+export const updateProfile = (
+  code: string,
+  payload: {
+    securityAnswer: string;
+    securityQuestion: string;
+    nationality: string;
+    family: string;
+    bloodType: string;
+    nickname: string;
+    birthday: string;
+    sns: string;
+    job: string;
+    mbti: string;
+    city: string;
+    image: string | null;
+    content: string;
+  },
+) => {
+  return authAxiosInstance.patch<ProfileDetail>(`/profiles/${code}`, payload);
+};
+
+export const updateProfiles = (code: string, formData: FormData) => {
   return authAxiosInstance.patch<ProfileDetail>(`/profiles/${code}`, formData);
 };
 

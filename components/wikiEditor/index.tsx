@@ -9,14 +9,14 @@ import {
 import { Editor as DraftEditor } from 'draft-js';
 import 'draft-js/dist/Draft.css';
 import styles from './styles.module.scss';
-import ToolBar from '@/components/editor/components/toolBar';
+import ToolBar from '@/components/wikiEditor/components/toolBar';
 import { blockStyleFn, initialStyleMap } from 'contenido';
-import { colorPalette } from '@/components/editor/components/colorPalette';
-import Media from '@/components/editor/components/media';
+import { colorPalette } from '@/components/wikiEditor/components/colorPalette';
+import Media from '@/components/wikiEditor/components/media';
 import AddImage from '@/components/modal/components/addImage';
 import Modal from '../modal';
 
-const Editor = () => {
+const WikiEditor = () => {
   const [editorState, setEditorState] = useState<EditorState | null>(null);
   const [title, setTitle] = useState('');
   const [isSubmitEnabled, setIsSubmitEnabled] = useState(false);
@@ -120,49 +120,12 @@ const Editor = () => {
 
   return (
     <div className={styles['editor-wrapper']}>
-      <div className={styles['editor-header']}>
-        <div className={styles['heading']}>게시물 등록하기</div>
-        <button
-          className={`${styles['submit-button']} ${
-            isSubmitEnabled ? '' : styles['disabled']
-          }`}
-          onClick={handleSubmit}
-          disabled={!isSubmitEnabled}
-        >
-          등록하기
-        </button>
-      </div>
-      <div className={styles['date-wrapper']}>
-        <span className={styles['date-post']}>등록일</span>
-        <span>{new Date().toISOString().split('T')[0].replace(/-/g, '.')}</span>
-      </div>
-      <div className={styles['title-wrapper']}>
-        <input
-          className={styles['title-input']}
-          type="text"
-          placeholder="제목을 입력해주세요"
-          value={title}
-          onChange={(e) => {
-            setTitle(e.target.value);
-            checkSubmitEnabled();
-          }}
-          maxLength={30}
-        />
-        <span className={styles['title-count']}>
-          <span className={styles['current-count']}>{title.length}/</span>
-          <span className={`${styles['max-count']} ${title.length > 29 ? styles['over-max'] : ''}`}>30</span>
-        </span>
-      </div>
-      <div className={styles['content-count']}>
-        <span className={styles['content-count-text']}>
-          공백포함 : 총 {characterCount}자 | 공백제외 : 총{' '}
-          {characterCount -
-            editorState.getCurrentContent().getPlainText().split(' ').length +
-            1}
-          자
-        </span>
-      </div>
       <div className={styles['editor-outer-container']}>
+        <ToolBar
+          editorState={editorState}
+          onEditorChange={handleEditorChange}
+          onImageUpload={() => setIsImageModalOpen(true)}
+        />
         <div className={styles['editor-container']} onClick={focusEditor}>
           <DraftEditor
             ref={editorRef}
@@ -175,11 +138,6 @@ const Editor = () => {
             customStyleMap={styleMap}
           />
         </div>
-        <ToolBar
-          editorState={editorState}
-          onEditorChange={handleEditorChange}
-          onImageUpload={() => setIsImageModalOpen(true)}
-        />
       </div>
       {isImageModalOpen && (
         <Modal
@@ -194,4 +152,4 @@ const Editor = () => {
   );
 };
 
-export default Editor;
+export default WikiEditor;
