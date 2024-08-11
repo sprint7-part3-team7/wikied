@@ -81,13 +81,12 @@ const WikiHeader = ({
   return (
     <>
       {isEditable ? (
-        <div className={styles['header-container']}>
-          <div className={styles['user-name-wrapper']}>
+        <div className={styles['header-container3']}>
+          {/* <div className={styles['user-name-wrapper']}>
             <span className={styles['user-name']}>{profile.name}</span>
           </div>
           <div></div>
-          {/* 임시 사용 */}
-          <EditorBtn />
+          <EditorBtn /> */}
         </div>
       ) : (
         <section className={`${styles['wiki-actions']} ${className}`}>
