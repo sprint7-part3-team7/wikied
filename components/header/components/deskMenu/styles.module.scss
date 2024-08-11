@@ -1,0 +1,32 @@
+@import '@/styles/index.scss';
+
+.container {
+  @include Size(120px, 176px);
+  @include Flex(column, center, center);
+  border-radius: 10px;
+  text-align: center;
+  position: absolute;
+  top: 60px;
+  right: 20px;
+  background-color: $color-grayscale-50;
+  z-index: 1000;
+
+  .menu-list {
+    @include Size(100%, 44px);
+    @include Flex(column, center, center);
+    @include Font(
+      $font-size-md,
+      $line-height-md,
+      $font-weight-md-regular,
+      $color-grayscale-500
+    );
+    background-color: $color-grayscale-50;
+    border-radius: 10px;
+  }
+}
+
+@media screen and (min-width: $mobile-max-width) {
+  .container {
+    display: flex;
+  }
+}
