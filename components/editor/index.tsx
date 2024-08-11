@@ -15,12 +15,17 @@ import { colorPalette } from '@/components/editor/components/colorPalette';
 import Media from '@/components/editor/components/media';
 import AddImage from '@/components/modal/components/addImage';
 import Modal from '../modal';
+import { useRouter } from 'next/router';
+import { postArticle } from '@/services/api/article';
+import { AxiosError } from 'axios';
 
 const Editor = () => {
   const [editorState, setEditorState] = useState<EditorState | null>(null);
   const [title, setTitle] = useState('');
+  const [imageUrl, setImageUrl] = useState('');
   const [isSubmitEnabled, setIsSubmitEnabled] = useState(false);
   const [isImageModalOpen, setIsImageModalOpen] = useState(false);
+  const router = useRouter();
   const editorRef = useRef<DraftEditor | null>(null);
 
   useEffect(() => {
@@ -71,6 +76,7 @@ const Editor = () => {
       const reader = new FileReader();
       reader.onload = (e) => {
         const src = e.target?.result as string;
+        setImageUrl(src);
         const contentState = editorState!.getCurrentContent();
         const contentStateWithEntity = contentState.createEntity(
           'IMAGE',
@@ -101,12 +107,30 @@ const Editor = () => {
     return null;
   };
 
-  const handleSubmit = () => {
-    if (editorState) {
+  const handleSubmit = async () => {
+    if (editorState && isSubmitEnabled) {
       const contentState = editorState.getCurrentContent();
       const rawContent = convertToRaw(contentState);
-      console.log('Title:', title);
-      console.log('Content:', JSON.stringify(rawContent));
+
+      const articleData = {
+        title: title.trim(),
+        content: editorState.getCurrentContent().getPlainText(),
+        image: imageUrl || 'http://example.com',
+      };
+
+      console.log('Sending data:', articleData);
+
+      try {
+        const response = await postArticle(articleData);
+        console.log('Response:', response);
+        // ... 성공 처리
+      } catch (error) {
+        console.error('Error details:', error);
+        const axiosError = error as AxiosError;
+        console.error('Error details:', axiosError.response?.data);
+        console.error('Error status:', axiosError.response?.status);
+        console.error('Error headers:', axiosError.response?.headers);
+      }
     }
   };
 
@@ -150,7 +174,11 @@ const Editor = () => {
         />
         <span className={styles['title-count']}>
           <span className={styles['current-count']}>{title.length}/</span>
-          <span className={`${styles['max-count']} ${title.length > 29 ? styles['over-max'] : ''}`}>30</span>
+          <span
+            className={`${styles['max-count']} ${title.length > 29 ? styles['over-max'] : ''}`}
+          >
+            30
+          </span>
         </span>
       </div>
       <div className={styles['content-count']}>
