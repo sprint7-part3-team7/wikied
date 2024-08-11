@@ -11,10 +11,10 @@ import { useAuth } from '@/contexts/AuthProvider';
 
 interface CommentListProps {
   comments: Comment[];
-  articleId: number;
+  onAddComment: (newComment: string) => Promise<void>;
 }
 
-const CommentList = ({ comments, articleId }: CommentListProps) => {
+const CommentList = ({ comments, onAddComment }: CommentListProps) => {
   const [newComment, setNewComment] = useState('');
   const maxLength = 500;
   const { user } = useAuth();
@@ -30,20 +30,17 @@ const CommentList = ({ comments, articleId }: CommentListProps) => {
     }
   };
 
-  const handleCommentSubmit = async (e: React.FormEvent) => {
+  const handleCommentSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (newComment.trim() === '') {
       alert('댓글을 입력해 주세요');
       return;
-    } else {
-      try {
-        await postComment(articleId, newComment);
-        setNewComment('');
-      } catch (error) {
-        console.error(error);
-        alert('댓글 등록 실패');
-      }
     }
+    onAddComment(newComment).catch((error) => {
+      console.error('댓글 등록 실패:', error);
+      alert('댓글 등록에 실패했습니다.');
+    });
+    setNewComment('');
   };
 
   return (

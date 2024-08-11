@@ -3,7 +3,7 @@ import {
   updateArticle,
   deleteArticle,
 } from '@/services/api/article';
-import { getArticleComments } from '@/services/api/comment';
+import { getArticleComments, postComment } from '@/services/api/comment';
 import { Article, Comment } from '@/types/article';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
@@ -25,6 +25,15 @@ const ArticleDetailPage = () => {
   const [isAuthor, setIsAuthor] = useState(false);
   const articleId = Number(Array.isArray(id) ? id[0] : id);
   const { user } = useAuth();
+
+  const fetchComments = async () => {
+    try {
+      const commentsResponse = await getArticleComments(articleId);
+      setComments(commentsResponse.data.list);
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   useEffect(() => {
     if (id) {
@@ -53,6 +62,16 @@ const ArticleDetailPage = () => {
       fetchArticleAndComments();
     }
   }, [id, user]);
+
+  const handleAddComment = async (newComment: string) => {
+    try {
+      await postComment(articleId, newComment);
+      await fetchComments();
+    } catch (error) {
+      console.error('Failed to add comment:', error);
+      alert('댓글 등록에 실패했습니다.');
+    }
+  };
 
   const handleBackButtonClick = () => {
     router.push('/boards');
@@ -165,7 +184,7 @@ const ArticleDetailPage = () => {
       >
         목록으로
       </Button>
-      <CommentList comments={comments} articleId={articleId} />
+      <CommentList comments={comments} onAddComment={handleAddComment} />
     </div>
   );
 };
