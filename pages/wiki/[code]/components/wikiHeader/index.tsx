@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from 'react';
-import { ProfileDetail, Section } from '@/types/wiki';
+import { ProfileDetail } from '@/types/wiki';
 import EditorBtn from '@/pages/wiki/[code]/components/wikiHeader/components/editorBtn';
 import Button from '@/components/button';
 import SnackBar from '@/components/snackbar';

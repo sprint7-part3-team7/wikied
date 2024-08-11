@@ -5,6 +5,7 @@ import {
   checkProfileEditStatus,
   getProfileByCode,
   updateProfile,
+  updateProfileEditStatus,
 } from '@/services/api/profile';
 import { ProfileDetail, Section } from '@/types/wiki';
 import WikiHeader from '@/pages/wiki/[code]/components/wikiHeader';
@@ -13,6 +14,7 @@ import WikiAside from '@/pages/wiki/[code]/components/wikiAside';
 import Quiz from '@/components/modal/components/quiz';
 import styles from '@/pages/wiki/[code]/styles.module.scss';
 import Modal from '@/components/modal';
+import Alert from '@/components/modal/components/alert';
 
 interface WikiProps {
   className: string;
@@ -32,7 +34,13 @@ const Wiki = (props: WikiProps) => {
   const [editTimeout, setEditTimeout] = useState<NodeJS.Timeout | null>(null);
   const [isModalVisible, setModalVisible] = useState(false);
 
-  const closeModal = () => setModalVisible(false);
+  const closeModal = (type: 'error' | 'quiz') => {
+    if (type === 'error') {
+      setIsErrorModalOpen(false);
+    } else if (type === 'quiz') {
+      setModalVisible(false);
+    }
+  };
 
   // 모달 토글
   const handleModalToggle = () => {
@@ -44,23 +52,7 @@ const Wiki = (props: WikiProps) => {
     try {
       const response = await getProfileByCode(code);
       const data = response.data;
-
-      const userId = localStorage.getItem('userId');
-      const userProfileCode = localStorage.getItem('userProfileCode');
-
-      // 참여 가능 여부 확인
-      if (
-        userId !== null &&
-        data.id === Number(userId) &&
-        data.code === userProfileCode
-      ) {
-        setIsEditable(true);
-      } else {
-        setIsEditable(false);
-      }
-
       setProfile(data);
-      setSectionsData(profile.content || []);
     } catch (err) {
       console.error(err);
     }
@@ -92,7 +84,8 @@ const Wiki = (props: WikiProps) => {
 
     const timer = setTimeout(() => {
       setIsErrorModalOpen(true); // 5분 후 오류 모달 띄우기
-    }, 300000); // 5분 = 300,000ms
+      setIsEditable(false);
+    }, 60000); // 5분 = 300,000ms
 
     setEditTimeout(timer);
   };
@@ -120,9 +113,12 @@ const Wiki = (props: WikiProps) => {
           image: updatedProfile.image,
           content: updatedProfile.content,
         });
+        await updateProfileEditStatus(profile.code, profile.securityAnswer); // 프로필 수정 상태 업데이트
+
+        setIsEditable(false);
       }
     } catch (err) {
-      console.error('Error updating profile:', err);
+      console.error(err);
     }
   };
 
@@ -132,6 +128,14 @@ const Wiki = (props: WikiProps) => {
       checkEditStatus(code);
     }
   }, [code, getList, checkEditStatus]);
+
+  useEffect(() => {
+    if (isEditable) {
+      startEditTimer();
+    } else if (editTimeout) {
+      clearTimeout(editTimeout);
+    }
+  }, [isEditable]);
 
   if (!profile) {
     return <div>Loading...</div>;
@@ -161,7 +165,6 @@ const Wiki = (props: WikiProps) => {
           <WikiArticle
             className={styles['wiki-article']}
             profile={profile}
-            sections={sectionsData}
             onParticipateClick={handleModalToggle}
             checkEditStatus={checkEditStatus}
           />
@@ -189,7 +192,22 @@ const Wiki = (props: WikiProps) => {
               size={size}
             />
           )}
-          onClose={closeModal}
+          onClose={() => closeModal('quiz')}
+        />
+      )}
+
+      {isErrorModalOpen && (
+        <Modal
+          size="large"
+          contents={({ size }) => (
+            <Alert
+              title="5분 이상 글을 쓰지 않아 접속이 끊어졌어요."
+              description="위키 참여하기를 통해 다시 위키를 수정해 주세요."
+              content="확인"
+              size={size}
+            />
+          )}
+          onClose={() => closeModal('error')}
         />
       )}
     </>

@@ -27,12 +27,10 @@ export const checkProfileEditStatus = (code: string) => {
 export const updateProfileEditStatus = (
   code: string,
   payload: { securityAnswer: string },
-  config?: object,
 ) => {
   return authAxiosInstance.post<ProfileEditStatus>(
     `/profiles/${code}/ping`,
     payload,
-    config,
   );
 };
 
