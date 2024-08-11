@@ -7,6 +7,7 @@ import editImage from '@/assets/icons/ic_edit.svg';
 import deleteImage from '@/assets/icons/ic_delete.svg';
 import Button from '@/components/button';
 import { postComment } from '@/services/api/comment';
+import { useAuth } from '@/contexts/AuthProvider';
 
 interface CommentListProps {
   comments: Comment[];
@@ -15,17 +16,12 @@ interface CommentListProps {
 
 const CommentList = ({ comments, articleId }: CommentListProps) => {
   const [newComment, setNewComment] = useState('');
-  const [isCommentAuthor, setIsCommentAuthor] = useState(false);
   const maxLength = 500;
+  const { user } = useAuth();
 
-  useEffect(() => {
-    if (comments.length === 0) {
-      setIsCommentAuthor(false);
-      return;
-    }
-    const currentUserId = localStorage.getItem('userId');
-    setIsCommentAuthor(currentUserId === comments[0].writer.id.toString());
-  }, [comments]);
+  const isCommentAuthor = (comment: Comment) => {
+    return user?.id === comment.writer.id;
+  };
 
   const handleChangeComment = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     const input = e.target.value;
@@ -102,7 +98,7 @@ const CommentList = ({ comments, articleId }: CommentListProps) => {
                 <span className={styles['comment-author-name']}>
                   {comment.writer.name}
                 </span>
-                {isCommentAuthor && (
+                {isCommentAuthor(comment) && (
                   <div className={styles['comment-button-wrapper']}>
                     <button className={styles['comment-button']}>
                       <Image

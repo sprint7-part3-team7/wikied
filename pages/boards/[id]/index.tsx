@@ -14,6 +14,7 @@ import CommentList from './components/commentList';
 import Button from '@/components/button';
 import editIcon from '@/assets/icons/ic_edit.svg';
 import deleteIcon from '@/assets/icons/ic_delete.svg';
+import { useAuth } from '@/contexts/AuthProvider';
 
 const ArticleDetailPage = () => {
   const router = useRouter();
@@ -23,6 +24,7 @@ const ArticleDetailPage = () => {
   const [loading, setLoading] = useState(true);
   const [isAuthor, setIsAuthor] = useState(false);
   const articleId = Number(Array.isArray(id) ? id[0] : id);
+  const { user } = useAuth();
 
   useEffect(() => {
     if (id) {
@@ -40,8 +42,7 @@ const ArticleDetailPage = () => {
           setArticle(articleData);
           setComments(commentsData.list);
 
-          const currentUserId = localStorage.getItem('userId');
-          setIsAuthor(currentUserId === articleData.writer.id.toString());
+          setIsAuthor(user?.id === articleData.writer.id);
         } catch (error) {
           console.log(error);
           alert('게시글을 불러오는데 실패했습니다.');
@@ -51,7 +52,7 @@ const ArticleDetailPage = () => {
       };
       fetchArticleAndComments();
     }
-  }, [id]);
+  }, [id, user]);
 
   const handleBackButtonClick = () => {
     router.push('/boards');
