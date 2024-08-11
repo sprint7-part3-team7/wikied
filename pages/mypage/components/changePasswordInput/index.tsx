@@ -1,12 +1,16 @@
 import Button from '@/components/button';
 import Input from '@/components/input';
 import styles from '@/pages/mypage/components/changePasswordInput/styles.module.scss';
+import { ChangePasswordRequest } from '@/types/user';
 import { useState } from 'react';
 
-const ChangePasswordInput = () => {
-  /**
-   * @ 임시로 만든 비밀번호 로직
-   */
+interface ChangePasswordInputProps {
+  onChangePassword: (requestData: ChangePasswordRequest) => void;
+}
+
+const ChangePasswordInput = ({
+  onChangePassword,
+}: ChangePasswordInputProps) => {
   const [currentPassword, setCurrentPassword] = useState('');
   const [newPassword, setNewPassword] = useState('');
   const [verifyNewPassword, setVerifyNewPassword] = useState('');
@@ -17,9 +21,16 @@ const ChangePasswordInput = () => {
 
     if (newPassword !== verifyNewPassword) {
       setError('비밀번호가 일치하지 않습니다.');
-    } else {
-      setError('');
+      return;
     }
+
+    const requestData: ChangePasswordRequest = {
+      currentPassword,
+      password: newPassword,
+      passwordConfirmation: verifyNewPassword,
+    };
+
+    onChangePassword(requestData);
   };
 
 

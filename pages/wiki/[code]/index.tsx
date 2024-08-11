@@ -1,16 +1,24 @@
 import { useState, useEffect, useCallback } from 'react';
 import { useRouter } from 'next/router';
 import clsx from 'clsx';
-import { getProfileByCode } from '@/services/api/profile';
+import {
+  checkProfileEditStatus,
+  getProfileByCode,
+  updateProfile,
+} from '@/services/api/profile';
 import { ProfileDetail, Section } from '@/types/wiki';
 import WikiHeader from '@/pages/wiki/[code]/components/wikiHeader';
 import WikiArticle from '@/pages/wiki/[code]/components/wikiArticle';
 import WikiAside from '@/pages/wiki/[code]/components/wikiAside';
+import Quiz from '@/components/modal/components/quiz';
 import styles from '@/pages/wiki/[code]/styles.module.scss';
+import Button from '@/components/button';
+import Modal from '@/components/modal';
 
 interface WikiProps {
   className: string;
   profile: ProfileDetail;
+  securityAnswer: string;
 }
 
 const Wiki = (props: WikiProps) => {
@@ -20,7 +28,19 @@ const Wiki = (props: WikiProps) => {
   const [profile, setProfile] = useState<any>(null);
   const [sectionsData, setSectionsData] = useState<Section[]>([]);
   const [isEditable, setIsEditable] = useState<boolean>(false);
+  const [showParticipateBtn, setShowParticipateBtn] = useState<boolean>(false);
+  const [isErrorModalOpen, setIsErrorModalOpen] = useState<boolean>(false); // 오류 모달 상태
+  const [editTimeout, setEditTimeout] = useState<NodeJS.Timeout | null>(null);
+  const [isModalVisible, setModalVisible] = useState(false);
 
+  const closeModal = () => setModalVisible(false);
+
+  // 모달 토글
+  const handleModalToggle = () => {
+    setModalVisible(!isModalVisible);
+  };
+
+  // 데이터 조회
   const getList = useCallback(async (code: string) => {
     try {
       const response = await getProfileByCode(code);
@@ -29,6 +49,7 @@ const Wiki = (props: WikiProps) => {
       const userId = localStorage.getItem('userId');
       const userProfileCode = localStorage.getItem('userProfileCode');
 
+      // 참여 가능 여부 확인
       if (
         userId !== null &&
         data.id === Number(userId) &&
@@ -40,49 +61,80 @@ const Wiki = (props: WikiProps) => {
       }
 
       setProfile(data);
-      console.log('profile: ' + profile);
 
-      // Mock 데이터 사용 (추후 삭제)
-      setSectionsData([
-        {
-          title: '01. 개요',
-          content:
-            '코드잇의 콘텐츠 프로듀서이자, 프론트엔드 엔지니어. 포도마켓의 프론트엔드 엔지니어 출신이다.',
-        },
-        {
-          title: '02. 취미',
-          content:
-            '식물을 키우는 것을 좋아한다. 바질이나 로즈마리 같은 허브류부터, 파, 당근 같은 채소류까지 다양하게 키우는 것으로 알려져 있다.',
-        },
-        {
-          title: '03. 여담',
-          content:
-            '걸어다니는 사전이라고 불릴 정도로 다양한 분야의 지식을 두루 소유하고 있다.',
-        },
-        {
-          title: '04. 취향',
-          content:
-            '가위바위보를 좋아한다. 후식을 먹는다거나, 점심에 추가 금액을 내야 한다거나, 편의점에서 뭘 사 와야 하는 경우, 거의 항상 가위바위보를 제안한다. 제안을 많이 하다 보니 자신이 걸리는 경우도 꽤 많은데, 크게 개의치 않아 하는 것 같다. 영국에서 살았던 영향인지, 근본을 중시하는 것으로 보인다. 예를 들어 피자는 근본 토핑으로만 이루어진 피자(치즈 피자, 페퍼로니 피자)를 가장 선호한다. 근본에 어울리지 않는 토핑(불고기, 파인애플, 새우 등)이 추가된 피자는 선호하지 않는다.',
-        },
-      ]);
+      // 섹션 데이터가 존재하는 경우 설정
+      setSectionsData(profile.content || []);
     } catch (err) {
       console.error(err);
     }
   }, []);
 
-  useEffect(() => {
-    // 하드코딩된 값 저장 (추후 삭제)
-    localStorage.setItem('userId', '801');
-    localStorage.setItem(
-      'userProfileCode',
-      'c9dbd714-cd72-4427-b982-ba44dc15ec91',
-    );
-    localStorage.setItem('accessToken', 'your-access-token');
+  // 현재 수정중 여부 확인
+  const checkEditStatus = useCallback(async (code: string) => {
+    try {
+      const response = await checkProfileEditStatus(code);
+      const data = response.data; // registeredAt, userId
+      console.log('data' + data);
 
+      if (response.status === 200) {
+        setShowParticipateBtn(true);
+      } else {
+        setShowParticipateBtn(false);
+        console.log('response.status: ', response.status);
+      }
+    } catch (err) {
+      console.error(err);
+    }
+  }, []);
+
+  // 수정 타이머 시작
+  const startEditTimer = () => {
+    if (editTimeout) {
+      clearTimeout(editTimeout);
+    }
+
+    const timer = setTimeout(() => {
+      setIsErrorModalOpen(true); // 5분 후 오류 모달 띄우기
+    }, 300000); // 5분 = 300,000ms
+
+    setEditTimeout(timer);
+  };
+
+  // 수정 완료 처리
+  const handleEditComplete = async () => {
+    if (editTimeout) {
+      clearTimeout(editTimeout);
+    }
+
+    try {
+      if (profile) {
+        await updateProfile(profile.code, {
+          securityAnswer: props.securityAnswer,
+          securityQuestion: profile.securityQuestion,
+          nationality: profile.nationality,
+          family: profile.family,
+          bloodType: profile.bloodType,
+          nickname: profile.nickname,
+          birthday: profile.birthday,
+          sns: profile.sns,
+          job: profile.job,
+          mbti: profile.mbti,
+          city: profile.city,
+          image: profile.image,
+          content: profile.content,
+        });
+      }
+    } catch (err) {
+      console.error('Error updating profile:', err);
+    }
+  };
+
+  useEffect(() => {
     if (typeof code === 'string') {
       getList(code);
+      checkEditStatus(code);
     }
-  }, [code, getList]);
+  }, [code, getList, checkEditStatus]);
 
   if (!profile) {
     return <div>Loading...</div>;
@@ -102,22 +154,46 @@ const Wiki = (props: WikiProps) => {
           <WikiHeader
             className={styles['wiki-header']}
             profile={profile}
-            sections={sectionsData}
             isEditable={isEditable}
+            onParticipateClick={handleModalToggle}
+            checkEditStatus={checkEditStatus}
+            showParticipateBtn={showParticipateBtn}
+            code={typeof code === 'string' ? code : ''}
           />
           <div className={styles['space1']}></div>
           <WikiArticle
             className={styles['wiki-article']}
+            profile={profile}
             sections={sectionsData}
+            onParticipateClick={handleModalToggle}
+            checkEditStatus={checkEditStatus}
+            isEditable={isEditable}
           />
           <div className={styles['space2']}></div>
           <WikiAside
             className={styles['wiki-aside']}
             profile={profile}
             isEditable={isEditable}
+            onEditComplete={handleEditComplete}
           />
         </main>
       </div>
+
+      {!isEditable && isModalVisible && (
+        <Modal
+          size="large"
+          contents={({ size }) => (
+            <Quiz
+              code={typeof code === 'string' ? code : ''}
+              setIsEditable={setIsEditable}
+              setIsModalOpen={setModalVisible}
+              securityQuestion={profile.securityQuestion}
+              size={size}
+            />
+          )}
+          onClose={closeModal}
+        />
+      )}
     </>
   );
 };

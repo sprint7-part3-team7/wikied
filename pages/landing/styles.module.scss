@@ -17,15 +17,19 @@
 .landing-container {
   width: 1920px;
   @include Size(100%, auto);
-  overflow-x: hidden;
+  overflow: hidden;
   position: relative;
 
+  &::-webkit-scrollbar  {
+    width: 0px;
+  }
+
   .ellipse-img {
-    width: 2000px;
+    // width: 2000px;
     @include Size(100%, 400px);
-    position: absolute;
     top: 713px;
     left: 50%;
+    position: absolute;
     transform: translateX(-50%);
   }
 
@@ -60,21 +64,10 @@
     }
   }
 
-  .wikidMain-page-bts {
-    @include Size(170px, 59px);
-    @include Flex(column, center, center);
-    margin-top: 40px;
-    background: $color-grayscale-500;
+  .main-page-top-button {
+    padding: 15px 30px;
     border-radius: 15px;
-    padding: 15px 30px 15px 30px;
-    gap: 10px;
-
-    strong {
-      @include Size(110px, 29px);
-      font-size: 20px;
-      font-weight: 700;
-      color: $color-grayscale-50;
-    }
+    margin-top: 40px;
   }
 
   .landing-img1 {
@@ -128,6 +121,7 @@
   .share-container {
     @include Size(100%, 1051px);
     @include Flex(column, center, center);
+    overflow: hidden;
 
     .share-wrapper {
       @include Flex(column, center, center);
@@ -258,21 +252,10 @@
       color: $color-grayscale-50;
     }
 
-    .strat-bts {
-      @include Size(190px, 59px);
-      background: $color-grayscale-50;
+    .main-page-bottom-button {
+      padding: 15px 30px;
       border-radius: 15px;
-      padding: 15px 30px 15px 30px;
-
-      strong {
-        @include Size(130px, 29px);
-        @include Font(
-          $font-size-xl,
-          $line-height-xl,
-          $font-weight-xl-bold,
-          $color-grayscale-500
-        );
-      }
+      margin-top: 40px;
     }
   }
 
@@ -471,8 +454,13 @@
       }
     }
 
-    .wikidMain-page-bts {
-      @include Size(152px, 54px);
+    .main-page-top-button {
+      @include Font(
+        $font-size-xl,
+        $line-height-md,
+        $font-weight-2xl-bold,
+        $color-grayscale-50
+      );
     }
 
     .landing-img1 {
@@ -611,19 +599,13 @@
         line-height: 34.5px;
       }
 
-      .strat-bts {
-        @include Size(169px, 54px);
-        padding: 15px 20px 15px 20px;
-
-        strong {
-          @include Size(130px, 29px);
-          @include Font(
-            $font-size-xl,
-            $line-height-xl,
-            $font-weight-xl-bold,
-            $color-grayscale-500
-          );
-        }
+      .main-page-bottom-button {
+        @include Font(
+          $font-size-xl,
+          $line-height-md,
+          $font-weight-2xl-bold,
+          $color-grayscale-500
+        );
       }
     }
 
