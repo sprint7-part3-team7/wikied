@@ -19,6 +19,7 @@
     "clsx": "^2.1.1",
     "contenido": "^1.3.0",
     "draft-js": "^0.11.7",
+    "draft-js-export-html": "^1.4.1",
     "next": "14.2.5",
     "react": "^18",
     "react-dom": "^18",

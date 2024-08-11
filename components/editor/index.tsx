@@ -18,19 +18,18 @@ import Modal from '../modal';
 import { useRouter } from 'next/router';
 import { postArticle } from '@/services/api/article';
 import { AxiosError } from 'axios';
+import { Options, RenderConfig, stateToHTML } from 'draft-js-export-html';
 
 const Editor = () => {
-  const [editorState, setEditorState] = useState<EditorState | null>(null);
+  const [editorState, setEditorState] = useState(() =>
+    EditorState.createEmpty(),
+  );
   const [title, setTitle] = useState('');
   const [imageUrl, setImageUrl] = useState('');
   const [isSubmitEnabled, setIsSubmitEnabled] = useState(false);
   const [isImageModalOpen, setIsImageModalOpen] = useState(false);
   const router = useRouter();
   const editorRef = useRef<DraftEditor | null>(null);
-
-  useEffect(() => {
-    setEditorState(EditorState.createEmpty());
-  }, []);
 
   const styleMap = {
     ...initialStyleMap,
@@ -39,9 +38,16 @@ const Editor = () => {
     ),
   };
 
+  const inlineStyles = Object.entries(styleMap).reduce<
+    Record<string, RenderConfig>
+  >((acc, [key, value]) => {
+    acc[key] = { style: value as React.CSSProperties };
+    return acc;
+  }, {});
+
   const checkSubmitEnabled = useCallback(() => {
-    const contentState = editorState?.getCurrentContent();
-    const hasText = contentState ? contentState.hasText() : false;
+    const contentState = editorState.getCurrentContent();
+    const hasText = contentState.hasText();
     const isTitleValid = title.trim().length > 0;
     setIsSubmitEnabled(isTitleValid && hasText);
   }, [editorState, title]);
@@ -77,19 +83,22 @@ const Editor = () => {
       reader.onload = (e) => {
         const src = e.target?.result as string;
         setImageUrl(src);
-        const contentState = editorState!.getCurrentContent();
+        const contentState = editorState.getCurrentContent();
         const contentStateWithEntity = contentState.createEntity(
           'IMAGE',
           'IMMUTABLE',
           { src },
         );
         const entityKey = contentStateWithEntity.getLastCreatedEntityKey();
-        const newEditorState = EditorState.set(editorState!, {
+        const newEditorState = EditorState.set(editorState, {
           currentContent: contentStateWithEntity,
         });
-        handleEditorChange(
-          AtomicBlockUtils.insertAtomicBlock(newEditorState, entityKey, ' '),
+        const newState = AtomicBlockUtils.insertAtomicBlock(
+          newEditorState,
+          entityKey,
+          ' ',
         );
+        handleEditorChange(newState);
       };
       reader.readAsDataURL(file);
       setIsImageModalOpen(false);
@@ -108,22 +117,30 @@ const Editor = () => {
   };
 
   const handleSubmit = async () => {
-    if (editorState && isSubmitEnabled) {
+    if (isSubmitEnabled) {
       const contentState = editorState.getCurrentContent();
-      const rawContent = convertToRaw(contentState);
+      const htmlContent = stateToHTML(contentState, {
+        inlineStyles: inlineStyles,
+        blockStyleFn: (block) => {
+          const alignment = block.getData().get('text-align');
+          if (alignment) {
+            return { style: { textAlign: alignment } };
+          }
+        },
+      });
 
       const articleData = {
         title: title.trim(),
-        content: editorState.getCurrentContent().getPlainText(),
-        image: imageUrl || 'http://example.com',
+        content: htmlContent,
+        image:
+          imageUrl ||
+          'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRVoYGmUnYaMQR-BxOTuHivxnVnTK8ZPjzACw&s',
       };
-
-      console.log('Sending data:', articleData);
-
       try {
         const response = await postArticle(articleData);
         console.log('Response:', response);
-        // ... 성공 처리
+        alert('게시물이 등록되었습니다.');
+        router.push(`/boards/${response.data.id}`);
       } catch (error) {
         console.error('Error details:', error);
         const axiosError = error as AxiosError;
@@ -135,12 +152,8 @@ const Editor = () => {
   };
 
   const characterCount = editorState
-    ? editorState.getCurrentContent().getPlainText('').length
-    : 0;
-
-  if (!editorState) {
-    return <div>Loading editor...</div>;
-  }
+    .getCurrentContent()
+    .getPlainText('').length;
 
   return (
     <div className={styles['editor-wrapper']}>
