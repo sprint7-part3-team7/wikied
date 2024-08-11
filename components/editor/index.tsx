@@ -5,6 +5,7 @@ import {
   convertToRaw,
   AtomicBlockUtils,
   ContentBlock,
+  RawDraftContentBlock,
 } from 'draft-js';
 import { Editor as DraftEditor } from 'draft-js';
 import 'draft-js/dist/Draft.css';
@@ -119,23 +120,73 @@ const Editor = () => {
   const handleSubmit = async () => {
     if (isSubmitEnabled) {
       const contentState = editorState.getCurrentContent();
-      const htmlContent = stateToHTML(contentState, {
+      const rawContentState = convertToRaw(contentState);
+
+      const options: Options = {
         inlineStyles: inlineStyles,
         blockStyleFn: (block) => {
           const alignment = block.getData().get('text-align');
           if (alignment) {
-            return { style: { textAlign: alignment } };
+            return {
+              style: `text-align: ${alignment};`,
+            };
+          }
+          return {};
+        },
+        entityStyleFn: (entity: any) => {
+          const entityType = entity.get('type').toLowerCase();
+          if (entityType === 'image') {
+            const data = entity.getData();
+            return {
+              element: 'img',
+              attributes: {
+                src: data.src,
+                alt: data.alt || '',
+              },
+              style: {
+                maxWidth: '100%',
+                height: 'auto',
+              },
+            };
           }
         },
+      };
+
+      let htmlContent = stateToHTML(contentState, options);
+
+      htmlContent = htmlContent.replace(/<(ol|ul)>[\s\S]*?<\/\1>/g, (match) => {
+        return match.replace(
+          /<li([^>]*)>([\s\S]*?)<\/li>/g,
+          (liMatch, liAttributes, liContent) => {
+            const block = (
+              rawContentState.blocks as RawDraftContentBlock[]
+            ).find((b) => b.text.trim() === liContent.trim());
+            const alignment = block?.data?.['text-align'];
+            return alignment
+              ? `<li${liAttributes} style="text-align: ${alignment};">${liContent}</li>`
+              : liMatch;
+          },
+        );
       });
+
+      const styledHtmlContent = htmlContent
+        .replace(
+          /<ul>/g,
+          '<ul style="list-style-type: disc; padding-left: 20px;">',
+        )
+        .replace(
+          /<ol>/g,
+          '<ol style="list-style-type: decimal; padding-left: 20px;">',
+        );
 
       const articleData = {
         title: title.trim(),
-        content: htmlContent,
+        content: styledHtmlContent,
         image:
           imageUrl ||
           'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRVoYGmUnYaMQR-BxOTuHivxnVnTK8ZPjzACw&s',
       };
+
       try {
         const response = await postArticle(articleData);
         console.log('Response:', response);

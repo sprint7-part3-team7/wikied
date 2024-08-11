@@ -150,7 +150,8 @@ const CommentList = ({
                     <div className={styles['comment-button-wrapper']}>
                       <button
                         className={styles['comment-button']}
-                        onClick={() => handleEditClick(comment)}                      >
+                        onClick={() => handleEditClick(comment)}
+                      >
                         <Image
                           src={editImage}
                           alt="수정"

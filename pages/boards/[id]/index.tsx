@@ -20,6 +20,7 @@ import Button from '@/components/button';
 import editIcon from '@/assets/icons/ic_edit.svg';
 import deleteIcon from '@/assets/icons/ic_delete.svg';
 import { useAuth } from '@/contexts/AuthProvider';
+import DOMPurify from 'dompurify';
 
 const ArticleDetailPage = () => {
   const router = useRouter();
@@ -198,7 +199,9 @@ const ArticleDetailPage = () => {
         </div>
         <div
           className={styles['content']}
-          dangerouslySetInnerHTML={{ __html: article.content }}
+          dangerouslySetInnerHTML={{
+            __html: DOMPurify.sanitize(article.content),
+          }}
         ></div>
       </div>
       <Button
