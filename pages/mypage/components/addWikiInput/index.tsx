@@ -1,17 +1,26 @@
 import Button from '@/components/button';
 import Input from '@/components/input';
 import styles from '@/pages/mypage/components/addWikiInput/styles.module.scss';
+import { ProfileRequest } from '@/types/profile';
 import { useState } from 'react';
 
-const AddWikiInput = () => {
-  /**
-   * @ 임시로 만든 질문 로직
-   */
+interface AddWikiInputProps {
+  onAddWiki: (profileData: ProfileRequest) => Promise<void>;
+}
+
+const AddWikiInput = ({ onAddWiki }: AddWikiInputProps) => {
   const [question, setQuestion] = useState('');
   const [answer, setAnswer] = useState('');
 
-  const handleSubmit = (event: React.FormEvent) => {
+  const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
+    try {
+      await onAddWiki({ securityAnswer: answer, securityQuestion: question });
+      setQuestion('');
+      setAnswer('');
+    } catch (error) {
+      console.error('위키를 생성하는 데 실패했어요 🙁', error);
+    }
   };
 
   return (
