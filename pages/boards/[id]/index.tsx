@@ -3,7 +3,12 @@ import {
   updateArticle,
   deleteArticle,
 } from '@/services/api/article';
-import { getArticleComments, postComment } from '@/services/api/comment';
+import {
+  deleteComment,
+  getArticleComments,
+  patchComment,
+  postComment,
+} from '@/services/api/comment';
 import { Article, Comment } from '@/types/article';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
@@ -70,6 +75,26 @@ const ArticleDetailPage = () => {
     } catch (error) {
       console.error('Failed to add comment:', error);
       alert('댓글 등록에 실패했습니다.');
+    }
+  };
+
+  const handleDeleteComment = async (commentId: number) => {
+    try {
+      await deleteComment(commentId);
+      await fetchComments();
+    } catch (error) {
+      console.error('Failed to delete comment:', error);
+      alert('댓글 삭제에 실패했습니다.');
+    }
+  };
+
+  const handleEditComment = async (commentId: number, newContent: string) => {
+    try {
+      await patchComment(commentId, newContent);
+      await fetchComments();
+    } catch (error) {
+      console.error('Failed to edit comment:', error);
+      alert('댓글 수정에 실패했습니다.');
     }
   };
 
@@ -184,7 +209,12 @@ const ArticleDetailPage = () => {
       >
         목록으로
       </Button>
-      <CommentList comments={comments} onAddComment={handleAddComment} />
+      <CommentList
+        comments={comments}
+        onAddComment={handleAddComment}
+        onDeleteComment={handleDeleteComment}
+        onEditComment={handleEditComment}
+      />
     </div>
   );
 };
