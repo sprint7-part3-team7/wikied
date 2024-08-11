@@ -22,6 +22,9 @@ const ChangePasswordInput = () => {
     }
   };
 
+
+  
+
   return (
     <form className={styles['container']} onSubmit={handleSubmit}>
       <label htmlFor="password" className={styles['label']}>
