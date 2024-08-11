@@ -13,11 +13,14 @@ import ToolBar from '@/components/editor/components/toolBar';
 import { blockStyleFn, initialStyleMap } from 'contenido';
 import { colorPalette } from '@/components/editor/components/colorPalette';
 import Media from '@/components/editor/components/media';
+import AddImage from '@/components/modal/components/addImage';
+import Modal from '../modal';
 
 const Editor = () => {
   const [editorState, setEditorState] = useState<EditorState | null>(null);
   const [title, setTitle] = useState('');
   const [isSubmitEnabled, setIsSubmitEnabled] = useState(false);
+  const [isImageModalOpen, setIsImageModalOpen] = useState(false);
   const editorRef = useRef<DraftEditor | null>(null);
 
   useEffect(() => {
@@ -63,35 +66,30 @@ const Editor = () => {
     [],
   );
 
-  const handleImageUpload = useCallback(() => {
-    const input = document.createElement('input');
-    input.type = 'file';
-    input.accept = 'image/*';
-    input.onchange = (e) => {
-      const file = (e.target as HTMLInputElement).files?.[0];
-      if (file) {
-        const reader = new FileReader();
-        reader.onload = (e) => {
-          const src = e.target?.result as string;
-          const contentState = editorState!.getCurrentContent();
-          const contentStateWithEntity = contentState.createEntity(
-            'IMAGE',
-            'IMMUTABLE',
-            { src },
-          );
-          const entityKey = contentStateWithEntity.getLastCreatedEntityKey();
-          const newEditorState = EditorState.set(editorState!, {
-            currentContent: contentStateWithEntity,
-          });
-          handleEditorChange(
-            AtomicBlockUtils.insertAtomicBlock(newEditorState, entityKey, ' '),
-          );
-        };
-        reader.readAsDataURL(file);
-      }
-    };
-    input.click();
-  }, [editorState]);
+  const handleImageUpload = useCallback(
+    (file: File) => {
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        const src = e.target?.result as string;
+        const contentState = editorState!.getCurrentContent();
+        const contentStateWithEntity = contentState.createEntity(
+          'IMAGE',
+          'IMMUTABLE',
+          { src },
+        );
+        const entityKey = contentStateWithEntity.getLastCreatedEntityKey();
+        const newEditorState = EditorState.set(editorState!, {
+          currentContent: contentStateWithEntity,
+        });
+        handleEditorChange(
+          AtomicBlockUtils.insertAtomicBlock(newEditorState, entityKey, ' '),
+        );
+      };
+      reader.readAsDataURL(file);
+      setIsImageModalOpen(false);
+    },
+    [editorState],
+  );
 
   const blockRendererFn = (contentBlock: ContentBlock) => {
     if (contentBlock.getType() === 'atomic') {
@@ -180,9 +178,18 @@ const Editor = () => {
         <ToolBar
           editorState={editorState}
           onEditorChange={handleEditorChange}
-          onImageUpload={handleImageUpload}
+          onImageUpload={() => setIsImageModalOpen(true)}
         />
       </div>
+      {isImageModalOpen && (
+        <Modal
+          size="large"
+          onClose={() => setIsImageModalOpen(false)}
+          contents={({ size }) => (
+            <AddImage size={size} onImageUpload={handleImageUpload} />
+          )}
+        />
+      )}
     </div>
   );
 };

@@ -21,6 +21,7 @@
       @include Size(354px, 160px);
       background-color: $color-grayscale-100;
       border-radius: 10px;
+      cursor: pointer;
 
       .image-input {
         display: none;
