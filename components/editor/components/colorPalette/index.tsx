@@ -1,6 +1,5 @@
-import { useState } from 'react';
-import { EditorState } from 'draft-js';
-import { RichUtils } from 'draft-js';
+import React, { useState, useEffect, useRef } from 'react';
+import { EditorState, Modifier } from 'draft-js';
 import styles from './styles.module.scss';
 import Image from 'next/image';
 import coloringIcon from '@/assets/icons/ic_coloring.svg';
@@ -25,23 +24,58 @@ const ColorPalette: React.FC<ColorPaletteProps> = ({
   onEditorChange,
 }) => {
   const [showPalette, setShowPalette] = useState(false);
-  const [activeColor, setActiveColor] = useState<string | null>(null);
+  const paletteRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        paletteRef.current &&
+        !paletteRef.current.contains(event.target as Node)
+      ) {
+        setShowPalette(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
+
+  const getCurrentColor = () => {
+    const selection = editorState.getSelection();
+    const currentStyle = editorState.getCurrentInlineStyle();
+
+    return (
+      colorPalette.find((color) => currentStyle.has(color.name))?.name || null
+    );
+  };
 
   const handleToggleColor = (colorStyle: string) => {
-    let newState = editorState;
+    const selection = editorState.getSelection();
+    let nextContentState = editorState.getCurrentContent();
 
-    if (activeColor) {
-      newState = RichUtils.toggleInlineStyle(newState, activeColor);
-    }
+    // Remove all color styles
+    colorPalette.forEach((color) => {
+      nextContentState = Modifier.removeInlineStyle(
+        nextContentState,
+        selection,
+        color.name,
+      );
+    });
 
-    newState = RichUtils.toggleInlineStyle(newState, colorStyle);
+    // Apply the selected color style
+    const nextEditorState = EditorState.push(
+      editorState,
+      Modifier.applyInlineStyle(nextContentState, selection, colorStyle),
+      'change-inline-style',
+    );
 
-    onEditorChange(newState);
-    setActiveColor(colorStyle);
+    onEditorChange(nextEditorState);
   };
 
   return (
-    <div className={styles['color-palette-container']}>
+    <div className={styles['color-palette-container']} ref={paletteRef}>
       <button
         className={styles['color-toggle']}
         onClick={() => setShowPalette(!showPalette)}
@@ -55,7 +89,7 @@ const ColorPalette: React.FC<ColorPaletteProps> = ({
               key={color.name}
               onClick={() => handleToggleColor(color.name)}
               className={`${styles['color-button']} ${
-                activeColor === color.name ? styles['active'] : ''
+                getCurrentColor() === color.name ? styles['active'] : ''
               }`}
               style={{ backgroundColor: color.color }}
             >

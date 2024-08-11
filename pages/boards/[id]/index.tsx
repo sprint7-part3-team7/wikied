@@ -3,7 +3,12 @@ import {
   updateArticle,
   deleteArticle,
 } from '@/services/api/article';
-import { getArticleComments } from '@/services/api/comment';
+import {
+  deleteComment,
+  getArticleComments,
+  patchComment,
+  postComment,
+} from '@/services/api/comment';
 import { Article, Comment } from '@/types/article';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
@@ -14,6 +19,8 @@ import CommentList from './components/commentList';
 import Button from '@/components/button';
 import editIcon from '@/assets/icons/ic_edit.svg';
 import deleteIcon from '@/assets/icons/ic_delete.svg';
+import { useAuth } from '@/contexts/AuthProvider';
+import DOMPurify from 'dompurify';
 
 const ArticleDetailPage = () => {
   const router = useRouter();
@@ -23,6 +30,16 @@ const ArticleDetailPage = () => {
   const [loading, setLoading] = useState(true);
   const [isAuthor, setIsAuthor] = useState(false);
   const articleId = Number(Array.isArray(id) ? id[0] : id);
+  const { user } = useAuth();
+
+  const fetchComments = async () => {
+    try {
+      const commentsResponse = await getArticleComments(articleId);
+      setComments(commentsResponse.data.list);
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   useEffect(() => {
     if (id) {
@@ -40,8 +57,7 @@ const ArticleDetailPage = () => {
           setArticle(articleData);
           setComments(commentsData.list);
 
-          const currentUserId = localStorage.getItem('userId');
-          setIsAuthor(currentUserId === articleData.writer.id.toString());
+          setIsAuthor(user?.id === articleData.writer.id);
         } catch (error) {
           console.log(error);
           alert('게시글을 불러오는데 실패했습니다.');
@@ -51,7 +67,37 @@ const ArticleDetailPage = () => {
       };
       fetchArticleAndComments();
     }
-  }, [id]);
+  }, [id, user]);
+
+  const handleAddComment = async (newComment: string) => {
+    try {
+      await postComment(articleId, newComment);
+      await fetchComments();
+    } catch (error) {
+      console.error('Failed to add comment:', error);
+      alert('댓글 등록에 실패했습니다.');
+    }
+  };
+
+  const handleDeleteComment = async (commentId: number) => {
+    try {
+      await deleteComment(commentId);
+      await fetchComments();
+    } catch (error) {
+      console.error('Failed to delete comment:', error);
+      alert('댓글 삭제에 실패했습니다.');
+    }
+  };
+
+  const handleEditComment = async (commentId: number, newContent: string) => {
+    try {
+      await patchComment(commentId, newContent);
+      await fetchComments();
+    } catch (error) {
+      console.error('Failed to edit comment:', error);
+      alert('댓글 수정에 실패했습니다.');
+    }
+  };
 
   const handleBackButtonClick = () => {
     router.push('/boards');
@@ -153,7 +199,9 @@ const ArticleDetailPage = () => {
         </div>
         <div
           className={styles['content']}
-          dangerouslySetInnerHTML={{ __html: article.content }}
+          dangerouslySetInnerHTML={{
+            __html: DOMPurify.sanitize(article.content),
+          }}
         ></div>
       </div>
       <Button
@@ -164,7 +212,12 @@ const ArticleDetailPage = () => {
       >
         목록으로
       </Button>
-      <CommentList comments={comments} articleId={articleId} />
+      <CommentList
+        comments={comments}
+        onAddComment={handleAddComment}
+        onDeleteComment={handleDeleteComment}
+        onEditComment={handleEditComment}
+      />
     </div>
   );
 };
