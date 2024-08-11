@@ -33,7 +33,7 @@ const WikiAside = ({
   const [editedProfile, setEditedProfile] = useState<ProfileDetail>(profile);
   const [imageFile, setImageFile] = useState<File | null>(null);
   const [currentUserId, setCurrentUserId] = useState<string | null>(null); // 현재 사용자 ID 상태 추가
-  const [isCurrentUser, setIsCurrentUser] = useState<boolean>(false); // 현재 사용자인지 여부를 저장하는 상태 추가
+  const [isCurrentUser, setIsCurrentUser] = useState<boolean>(false);
   const inputRef = useRef<HTMLInputElement | null>(null);
 
   useEffect(() => {
@@ -159,7 +159,7 @@ const WikiAside = ({
       >
         {/* 프로필 이미지 부분 */}
         <div className={styles['image-container']}>
-          {isEditable ? (
+          {isEditable && isCurrentUser ? (
             <div
               className={styles['file-input-wrapper']}
               onClick={handleDivClick}
