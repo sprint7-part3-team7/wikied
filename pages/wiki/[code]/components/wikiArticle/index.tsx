@@ -1,6 +1,5 @@
 import { useCallback } from 'react';
 import { ProfileDetail } from '@/types/wiki';
-
 import Button from '@/components/button';
 import styles from '@/pages/wiki/[code]/components/wikiArticle/styles.module.scss';
 import Editor from '@/components/editor';
@@ -8,7 +7,6 @@ import WikiEditor from '@/components/wikiEditor';
 
 interface WikiArticleProps {
   className: string;
-  sections: Section[];
   profile: ProfileDetail;
   onParticipateClick: () => void;
   checkEditStatus: (code: string) => Promise<any>;

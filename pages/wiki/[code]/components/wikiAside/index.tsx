@@ -1,14 +1,15 @@
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import clsx from 'clsx';
 import { v4 as uuidv4 } from 'uuid';
 import { ProfileDetail } from '@/types/wiki';
 import UserAttribute from '@/pages/wiki/[code]/components/wikiAside/components/userAttribute';
-import { updateProfile, imageFileToUrl } from '@/services/api/profile';
+import { updateProfiles, imageFileToUrl } from '@/services/api/profile';
 import Button from '@/components/button';
 import styles from '@/pages/wiki/[code]/components/wikiAside/styles.module.scss';
 import expandIcon from '@/assets/icons/ic_expand.svg';
 import fileUploadIcon from '@/assets/icons/ic_camera.svg';
 import basicProfileImg from '@/assets/icons/ic_profile.svg';
+import { getUsers } from '@/services/api/user';
 
 interface WikiAsideProps {
   className: string;
@@ -30,8 +31,37 @@ const WikiAside = ({
   const [isExpanded, setIsExpanded] = useState(false);
   const [preview, setPreview] = useState<string | null>(null);
   const [editedProfile, setEditedProfile] = useState<ProfileDetail>(profile);
-  const inputRef = useRef<HTMLInputElement | null>(null);
   const [imageFile, setImageFile] = useState<File | null>(null);
+  const [currentUserId, setCurrentUserId] = useState<string | null>(null); // 현재 사용자 ID 상태 추가
+  const [isCurrentUser, setIsCurrentUser] = useState<boolean>(false); // 현재 사용자인지 여부를 저장하는 상태 추가
+  const inputRef = useRef<HTMLInputElement | null>(null);
+
+  useEffect(() => {
+    setEditedProfile(profile);
+  }, [profile]);
+
+  useEffect(() => {
+    const fetchCurrentUser = async () => {
+      try {
+        const response = await getUsers();
+        console.log('API Response:', response);
+
+        const { data } = response; // 응답에서 데이터 추출
+        const userId = String(data.profile.id); // 현재 사용자 ID 추출
+        const profileIdStr = String(profile.id); // 프로필 ID 문자열로 변환
+
+        console.log('profile.id:', profileIdStr);
+        console.log('userId:', userId);
+
+        // 현재 사용자인지 여부를 설정
+        setIsCurrentUser(profileIdStr === userId);
+      } catch (err) {
+        console.error('Error fetching user:', err);
+      }
+    };
+
+    fetchCurrentUser();
+  }, [profile.id]);
 
   const handleCancelClick = () => {
     setIsEditable(false);
@@ -96,7 +126,7 @@ const WikiAside = ({
           }
         });
 
-        await updateProfile(profile.code, formData);
+        await updateProfiles(profile.code, formData);
 
         if (onEditComplete) {
           onEditComplete(updatedProfile); // 업데이트된 프로필 전달
@@ -200,6 +230,7 @@ const WikiAside = ({
                     name={attr.key}
                     value={attr.value}
                     isEditable={isEditable}
+                    isCurrentUser={isCurrentUser}
                     onChange={(name, value) => handleInputChange(name, value)}
                   />
                 ))}

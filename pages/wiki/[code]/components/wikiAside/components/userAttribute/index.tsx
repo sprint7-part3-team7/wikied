@@ -7,6 +7,7 @@ interface UserAttributeProps {
   value: string;
   name: string;
   isEditable: boolean;
+  isCurrentUser?: boolean;
   onChange?: (name: string, value: string) => void;
   className?: string;
 }
@@ -16,6 +17,7 @@ const UserAttribute = ({
   value,
   name,
   isEditable = false,
+  isCurrentUser,
   onChange,
   className,
 }: UserAttributeProps) => {
@@ -32,7 +34,7 @@ const UserAttribute = ({
   return (
     <div className={clsx(styles['user-attribute'], className)}>
       <span className={styles['attribute-name']}>{attributeName}</span>
-      {isEditable ? (
+      {isEditable && isCurrentUser ? (
         <input
           className={clsx(styles['attribute-value'], {
             [styles['non-editable']]: !isEditable,

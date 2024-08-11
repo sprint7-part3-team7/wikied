@@ -4,7 +4,7 @@ import clsx from 'clsx';
 import {
   checkProfileEditStatus,
   getProfileByCode,
-  updateProfile,
+  updateProfiles,
   updateProfileEditStatus,
 } from '@/services/api/profile';
 import { ProfileDetail, Section } from '@/types/wiki';
@@ -29,7 +29,7 @@ const Wiki = (props: WikiProps) => {
   const [profile, setProfile] = useState<any>(null);
   const [sectionsData, setSectionsData] = useState<Section[]>([]);
   const [isEditable, setIsEditable] = useState<boolean>(false);
-  const [showParticipateBtn, setShowParticipateBtn] = useState<boolean>(false);
+  const [showParticipateBtn, setShowParticipateBtn] = useState<boolean>('');
   const [isErrorModalOpen, setIsErrorModalOpen] = useState<boolean>(false);
   const [editTimeout, setEditTimeout] = useState<NodeJS.Timeout | null>(null);
   const [isModalVisible, setModalVisible] = useState(false);
@@ -62,15 +62,11 @@ const Wiki = (props: WikiProps) => {
   const checkEditStatus = useCallback(async (code: string) => {
     try {
       const response = await checkProfileEditStatus(code);
-      const data = response.data; // registeredAt, userId
-      console.log('data' + data);
-
-      if (response.status === 200) {
-        setShowParticipateBtn(true);
-      } else {
-        setShowParticipateBtn(false);
-        console.log('response.status: ', response.status);
-      }
+      // if (response.status === 200) {
+      //   setShowParticipateBtn(true);
+      // } else {
+      //   setShowParticipateBtn(false);
+      // }
     } catch (err) {
       console.error(err);
     }
@@ -98,8 +94,8 @@ const Wiki = (props: WikiProps) => {
 
     try {
       if (updatedProfile) {
-        await updateProfile(profile.code, {
-          securityAnswer: props.securityAnswer,
+        await updateProfiles(profile.code, {
+          securityAnswer: updatedProfile.securityAnswer,
           securityQuestion: updatedProfile.securityQuestion,
           nationality: updatedProfile.nationality,
           family: updatedProfile.family,
@@ -123,11 +119,21 @@ const Wiki = (props: WikiProps) => {
   };
 
   useEffect(() => {
-    if (typeof code === 'string') {
-      getList(code);
-      checkEditStatus(code);
-    }
-  }, [code, getList, checkEditStatus]);
+    const fetchData = async () => {
+      if (typeof code === 'string') {
+        await getList(code);
+        const response = await checkProfileEditStatus(code);
+        console.log('checkProfileEditStatus API Response:', response);
+        if (response.status === 200) {
+          setShowParticipateBtn(true);
+          console.log('showParticipateBtn', showParticipateBtn);
+        } else {
+          setShowParticipateBtn(false);
+        }
+      }
+    };
+    fetchData();
+  }, [code, showParticipateBtn]);
 
   useEffect(() => {
     if (isEditable) {
@@ -167,6 +173,7 @@ const Wiki = (props: WikiProps) => {
             profile={profile}
             onParticipateClick={handleModalToggle}
             checkEditStatus={checkEditStatus}
+            isEditable={isEditable}
           />
           <div className={styles['space2']}></div>
           <WikiAside

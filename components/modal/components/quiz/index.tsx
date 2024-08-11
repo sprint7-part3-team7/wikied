@@ -33,18 +33,9 @@ const Quiz = ({
 
   const handleSubmit = async () => {
     try {
-      const accessToken = localStorage.getItem('accessToken');
-      const response = await updateProfileEditStatus(
-        code,
-        {
-          securityAnswer: answer,
-        },
-        {
-          headers: {
-            Authorization: `Bearer ${accessToken}`,
-          },
-        },
-      );
+      const response = await updateProfileEditStatus(code, {
+        securityAnswer: answer,
+      });
       setIsEditable(true);
       setIsModalOpen(false);
       setErrorMessage('');
