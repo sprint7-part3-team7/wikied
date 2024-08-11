@@ -4,7 +4,7 @@ import { publicAxiosInstance } from '@/services/api/axiosInstance';
 import styles from '@/pages/login/styles.module.scss';
 import Link from 'next/link';
 import { useAuth } from '@/contexts/AuthProvider';
-import { LoginInputId, getErrorMessage } from './authUtils';
+import { LoginInputId, getErrorMessage } from '@/types/authUtils';
 import Button from '@/components/button';
 import Input from '@/components/input';
 import useDebounce from '@/hooks/useDebounce/useDebounce';
