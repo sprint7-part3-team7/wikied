@@ -167,6 +167,7 @@ const Wiki = (props: WikiProps) => {
             sections={sectionsData}
             onParticipateClick={handleModalToggle}
             checkEditStatus={checkEditStatus}
+            isEditable={isEditable}
           />
           <div className={styles['space2']}></div>
           <WikiAside

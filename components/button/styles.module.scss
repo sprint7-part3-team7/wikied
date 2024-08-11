@@ -88,6 +88,26 @@
       $color-grayscale-500
     );
   }
+
+  &.main-top {
+    background-color: $color-grayscale-500;
+    @include Font(
+      $font-size-2xl,
+      $line-height-2lg,
+      $font-weight-2xl-bold,
+      $color-grayscale-50
+    );
+  }
+
+  &.main-bottom {
+    background-color: $color-grayscale-50;
+    @include Font(
+      $font-size-2xl,
+      $line-height-2lg,
+      $font-weight-2xl-bold,
+      $color-grayscale-500
+    );
+  }
 }
 
 .icon {
