@@ -5,32 +5,48 @@ import styles from '@/components/modal/components/quiz/styles.module.scss';
 import Button from '@/components/button';
 import { useState } from 'react';
 import clsx from 'clsx';
-import Modal from '../..';
+import { updateProfileEditStatus } from '@/services/api/profile';
 
 interface QuizProps {
   size?: 'small' | 'large';
   onSubmit: (answer: string) => void;
 }
 
-const Quiz = ({ size = 'large' }: QuizProps) => {
+const Quiz = ({
+  size = 'large',
+  code,
+  setIsEditable,
+  setIsModalOpen,
+  securityQuestion,
+}: QuizProps) => {
   const [answer, setAnswer] = useState<string>('');
   const [errorMessage, setErrorMessage] = useState<string>('');
-  /**
-   * @ 임시로 답안 설정 (추후 삭제)
-   */
-  const correctAnswer = '마라탕';
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setAnswer(event.target.value);
     setErrorMessage('');
   };
 
-  const handleSubmit = () => {
-    if (answer !== correctAnswer) {
+  const handleSubmit = async () => {
+    try {
+      const accessToken = localStorage.getItem('accessToken');
+      const response = await updateProfileEditStatus(
+        code,
+        {
+          securityAnswer: answer,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+        },
+      );
+      setIsEditable(true);
+      setIsModalOpen(false);
+      setErrorMessage('');
+    } catch (error) {
+      setIsEditable(false);
       setErrorMessage('정답이 아닙니다. 다시 시도해 주세요.');
-    } else {
-      // 정답 시 실행되는 로직 추가하는 자리 (추후 변경)
-      alert('정답');
     }
   };
 
@@ -50,7 +66,7 @@ const Quiz = ({ size = 'large' }: QuizProps) => {
           [styles['error']]: errorMessage,
         })}
       >
-        <label className={styles['label']}>특별히 싫어하는 음식은?</label>
+        <label className={styles['label']}>{securityQuestion}</label>
         <Input
           id="answer"
           name="answer"

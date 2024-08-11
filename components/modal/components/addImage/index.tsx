@@ -7,10 +7,15 @@ import cameraIcon from '@/assets/icons/ic_camera.svg';
 
 interface AddImageProps {
   size?: 'small' | 'large';
+  onImageUpload: (file: File) => void;
 }
 
-const AddImage = ({ size = 'large' }: AddImageProps): JSX.Element => {
+const AddImage = ({
+  size = 'large',
+  onImageUpload,
+}: AddImageProps): JSX.Element => {
   const [imagePreview, setImagePreview] = useState<string | null>(null);
+  const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const fileInputRef = useRef<HTMLInputElement | null>(null);
 
   const handleInputClick = () => {
@@ -22,6 +27,7 @@ const AddImage = ({ size = 'large' }: AddImageProps): JSX.Element => {
   const handleImageChange = (e: ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
+      setSelectedFile(file);
       const reader = new FileReader();
       reader.onloadend = () => {
         if (typeof reader.result === 'string') {
@@ -29,6 +35,12 @@ const AddImage = ({ size = 'large' }: AddImageProps): JSX.Element => {
         }
       };
       reader.readAsDataURL(file);
+    }
+  };
+
+  const handleInsert = () => {
+    if (selectedFile) {
+      onImageUpload(selectedFile);
     }
   };
 
@@ -66,9 +78,10 @@ const AddImage = ({ size = 'large' }: AddImageProps): JSX.Element => {
       </div>
       <Button
         size="small"
-        color="disabled"
+        color={selectedFile ? 'primary' : 'disabled'}
         alignEnd
         className={styles['button']}
+        onClick={handleInsert}
       >
         삽입하기
       </Button>
