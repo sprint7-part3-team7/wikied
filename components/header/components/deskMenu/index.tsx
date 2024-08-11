@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react';
-import styles from '@/components/header/components/loginMenu/styles.module.scss';
+import styles from '@/components/header/components/DeskMenu/styles.module.scss';
 import { useRouter } from 'next/router';
 import { useAuth } from '@/contexts/AuthProvider';
 
@@ -7,7 +7,7 @@ type MenuProps = {
   handleMenuClose: () => void;
 };
 
-const LoginMenu = ({ handleMenuClose }: MenuProps) => {
+const DeskMenu = ({ handleMenuClose }: MenuProps) => {
   const router = useRouter();
   const menuRef = useRef<HTMLDivElement>(null);
 
@@ -43,13 +43,13 @@ const LoginMenu = ({ handleMenuClose }: MenuProps) => {
         className={styles['menu-list']}
         onClick={() => handleNavigation('/mypage')}
       >
-        계정설정
+        계정 설정
       </button>
       <button
         className={styles['menu-list']}
-        onClick={() => handleNavigation('/wiki/{code}')}
+        onClick={() => handleNavigation('/wiki/${code}')}
       >
-        내위키
+        내 위키
       </button>
       <button className={styles['menu-list']} onClick={handleLogoutClick}>
         로그아웃
@@ -58,4 +58,4 @@ const LoginMenu = ({ handleMenuClose }: MenuProps) => {
   );
 };
 
-export default LoginMenu;
+export default DeskMenu;

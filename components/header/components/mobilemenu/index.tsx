@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react';
-import styles from '@/components/header/components/menu/styles.module.scss';
+import styles from '@/components/header/components/MobileMenu/styles.module.scss';
 import { useRouter } from 'next/router';
 import { useAuth } from '@/contexts/AuthProvider';
 
@@ -7,7 +7,7 @@ type MenuProps = {
   handleMenuClose: () => void;
 };
 
-const Menu = ({ handleMenuClose }: MenuProps) => {
+const MobileMenu = ({ handleMenuClose }: MenuProps) => {
   const router = useRouter();
   const menuRef = useRef<HTMLDivElement>(null);
 
@@ -67,4 +67,4 @@ const Menu = ({ handleMenuClose }: MenuProps) => {
   );
 };
 
-export default Menu;
+export default MobileMenu;

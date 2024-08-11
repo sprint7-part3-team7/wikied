@@ -5,20 +5,20 @@ import profile from '@/assets/icons/ic_profile.svg';
 import menu from '@/assets/icons/ic_menu.svg';
 
 type UserProfileProps = {
-  toggleMenu: () => void;
-  toggleLoginMenu: () => void;
+  mobileMenu: () => void;
+  deskMenu: () => void;
 };
 
-const UserProfile = ({ toggleMenu,toggleLoginMenu }: UserProfileProps) => {
+const UserProfile = ({ mobileMenu,deskMenu }: UserProfileProps) => {
   return (
     <div className={styles['container']}>
       <button className={styles['alarm']}>
         <Image src={alarm} alt="알림" width={32} height={32} />
       </button>
-      <button className={styles['profile']} onClick={toggleLoginMenu}>
+      <button className={styles['profile']} onClick={deskMenu}>
         <Image src={profile} alt="프로필" width={32} height={32} />
       </button>
-      <button className={styles['menu']} onClick={toggleMenu}>
+      <button className={styles['menu']} onClick={mobileMenu}>
         <Image src={menu} alt="메뉴" width={24} height={24} />
       </button>
     </div>
@@ -26,3 +26,4 @@ const UserProfile = ({ toggleMenu,toggleLoginMenu }: UserProfileProps) => {
 };
 
 export default UserProfile;
+
