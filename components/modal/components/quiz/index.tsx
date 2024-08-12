@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import closeIcon from '@/assets/icons/ic_close.svg';
 import lockIcon from '@/assets/icons/ic_lock.svg';
 import Input from '@/components/input';
 import styles from '@/components/modal/components/quiz/styles.module.scss';
