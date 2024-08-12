@@ -101,7 +101,6 @@ interface LogInData {
   password: string;
 }
 
-
 interface ChangePasswordInputProps {
   onChangePassword: (requestData: ChangePasswordRequest) => void;
 }
@@ -114,11 +113,10 @@ const ChangePasswordInput = ({
     newPassword: '',
     verifyNewPassword: '',
   });
-  
 
   const [errors, setErrors] = useState<ErrorState>({});
 
-  const { logInData }  = useAuth();
+  const { logInData } = useAuth();
 
   const debouncedNewPassword = useDebounce(formState.newPassword, 500);
   const debouncedverifyNewPassword = useDebounce(
@@ -145,7 +143,10 @@ const ChangePasswordInput = ({
   useEffect(() => {
     // 새 비밀번호 필드의 유효성 검사
     if (debouncedNewPassword) {
-      const newPasswordError = getErrorMessage('password', debouncedNewPassword);
+      const newPasswordError = getErrorMessage(
+        'password',
+        debouncedNewPassword,
+      );
       setErrors((prevErrors) => ({
         ...prevErrors,
         newPassword: newPasswordError,
@@ -165,8 +166,6 @@ const ChangePasswordInput = ({
       }));
     }
   }, [debouncedNewPassword, debouncedverifyNewPassword]);
-
-
 
   const handleChange = (
     e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,

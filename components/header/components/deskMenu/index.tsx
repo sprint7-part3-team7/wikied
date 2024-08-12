@@ -13,24 +13,20 @@ const DeskMenu = ({ handleMenuClose }: MenuProps) => {
   const { logout } = useAuth();
   const { user } = useAuth();
   const code = user && user?.profile?.code;
-  
 
   const handleNavigation = (path: string) => {
     router.push(path);
     handleMenuClose();
   };
 
-
   const handleNavigationWiki = (path: string) => {
-    if(user && user?.profile?.code) {
+    if (user && user?.profile?.code) {
       router.push(path);
     } else {
       router.push('/mypage');
     }
     handleMenuClose();
   };
-
-
 
   const handleLogoutClick = () => {
     logout();

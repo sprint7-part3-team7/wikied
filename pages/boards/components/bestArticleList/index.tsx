@@ -12,7 +12,6 @@ const BestArticleList = () => {
   const [loading, setLoading] = useState(true);
   const { isLoggedIn } = useAuth();
 
-
   const fetchArticles = async () => {
     try {
       const data = await getArticles({
@@ -41,11 +40,13 @@ const BestArticleList = () => {
     <div className={styles['best-board-list']}>
       <div className={styles['best-board-header']}>
         <div className={styles['header']}>베스트 게시글</div>
-        { isLoggedIn && (<Link href="/addboard">
-          <Button className={styles['add-board-button']} color="primary">
-            게시물 등록하기
-          </Button>
-        </Link>)}
+        {isLoggedIn && (
+          <Link href="/addboard">
+            <Button className={styles['add-board-button']} color="primary">
+              게시물 등록하기
+            </Button>
+          </Link>
+        )}
       </div>
       <div className={styles['board-grid']}>
         {bestBoards.map((board) => (

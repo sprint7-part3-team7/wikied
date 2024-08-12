@@ -24,14 +24,11 @@
       @include Flex(column, center, '');
       row-gap: 32px;
 
-
       .input-wrapper {
         @include Flex(column, center, '');
-      row-gap: 24px;
-
+        row-gap: 24px;
       }
     }
-
   }
 
   .signup {

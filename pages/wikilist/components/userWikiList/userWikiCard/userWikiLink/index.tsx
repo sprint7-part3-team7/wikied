@@ -13,11 +13,12 @@ const UserWikiLink = ({ url }: UserLinkProps) => {
   const [snackBarSize, setSnackBarSize] = useState<'small' | 'large'>('large');
 
   const copyToClipboard = () => {
-    navigator.clipboard.writeText(url)
+    navigator.clipboard
+      .writeText(url)
       .then(() => {
         setShowSnackBar(true);
       })
-      .catch(err => {
+      .catch((err) => {
         console.error('링크 복사에 실패했습니다.', err);
       });
   };

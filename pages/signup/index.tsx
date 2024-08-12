@@ -109,7 +109,6 @@ const SignupPage = () => {
     }
   };
 
-
   return (
     <div className={styles['signup-container']}>
       <p className={styles['title']}>회원가입</p>

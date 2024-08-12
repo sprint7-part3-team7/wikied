@@ -35,7 +35,7 @@
   z-index: 1000;
 }
 
-@media screen and (max-width: $mobile-max-width){
+@media screen and (max-width: $mobile-max-width) {
   .link-text {
     @include Font(
       $font-size-xs,
