@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import styles from '@/components/header/styles.module.scss';
-import MobileMenu from './components/mobilemenu';
+import MobileMenu from './components/mobileMenu';
 import Logo from './components/logo';
 import List from './components/list';
 import GuestProfile from './components/guestProfile';
@@ -36,7 +36,6 @@ const Header = () => {
       </div>
       <div className={styles['login-wrapper']}>
         {isLoggedIn ? (
-          // <UserProfile toggleMenu={toggleLoginMenu} />
           <UserProfile deskMenu={deskMenu} mobileMenu={mobileMenu} />
         ) : (
           <GuestProfile />

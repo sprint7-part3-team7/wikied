@@ -42,7 +42,7 @@ const WikiArticle = ({
       <div className={styles['grid-item']}>
         <span className={styles['wiki-article-content']}>
         {/* 여기에 에디터 컴포넌트 추가 */}
-         <WikiEditor />
+         <WikiEditor profile={profile} />
         </span>
       </div>
     ) : (

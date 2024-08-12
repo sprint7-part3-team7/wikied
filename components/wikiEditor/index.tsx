@@ -15,8 +15,13 @@ import { colorPalette } from '@/components/wikiEditor/components/colorPalette';
 import Media from '@/components/wikiEditor/components/media';
 import AddImage from '@/components/modal/components/addImage';
 import Modal from '../modal';
+import { ProfileDetail } from '@/types/wiki';
 
-const WikiEditor = () => {
+interface WikiEditorProps {
+  profile: ProfileDetail;
+}
+
+const WikiEditor = ({profile}: WikiEditorProps) => {
   const [editorState, setEditorState] = useState<EditorState | null>(null);
   const [title, setTitle] = useState('');
   const [isSubmitEnabled, setIsSubmitEnabled] = useState(false);
@@ -35,7 +40,7 @@ const WikiEditor = () => {
   };
 
   const checkSubmitEnabled = useCallback(() => {
-    const contentState = editorState?.getCurrentContent();
+    const contentState = editorState?.getCurrentContent(); // 여기
     const hasText = contentState ? contentState.hasText() : false;
     const isTitleValid = title.trim().length > 0;
     setIsSubmitEnabled(isTitleValid && hasText);
@@ -101,19 +106,6 @@ const WikiEditor = () => {
     return null;
   };
 
-  const handleSubmit = () => {
-    if (editorState) {
-      const contentState = editorState.getCurrentContent();
-      const rawContent = convertToRaw(contentState);
-      console.log('Title:', title);
-      console.log('Content:', JSON.stringify(rawContent));
-    }
-  };
-
-  const characterCount = editorState
-    ? editorState.getCurrentContent().getPlainText('').length
-    : 0;
-
   if (!editorState) {
     return <div>Loading editor...</div>;
   }
@@ -125,6 +117,7 @@ const WikiEditor = () => {
           editorState={editorState}
           onEditorChange={handleEditorChange}
           onImageUpload={() => setIsImageModalOpen(true)}
+          profile={profile}
         />
         <div className={styles['editor-container']} onClick={focusEditor}>
           <DraftEditor
@@ -132,7 +125,7 @@ const WikiEditor = () => {
             editorState={editorState}
             handleKeyCommand={handleKeyCommand}
             onChange={handleEditorChange}
-            placeholder="본문을 입력해주세요"
+            placeholder="자유롭게 위키를 작성해주세요😃"
             blockRendererFn={blockRendererFn}
             blockStyleFn={blockStyleFn}
             customStyleMap={styleMap}
