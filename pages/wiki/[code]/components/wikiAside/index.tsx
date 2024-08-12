@@ -3,13 +3,12 @@ import clsx from 'clsx';
 import { v4 as uuidv4 } from 'uuid';
 import { ProfileDetail } from '@/types/wiki';
 import UserAttribute from '@/pages/wiki/[code]/components/wikiAside/components/userAttribute';
-import { updateProfiles, imageFileToUrl } from '@/services/api/profile';
+import { imageFileToUrl, getUserInfo } from '@/services/api/profile';
 import Button from '@/components/button';
 import styles from '@/pages/wiki/[code]/components/wikiAside/styles.module.scss';
 import expandIcon from '@/assets/icons/ic_expand.svg';
 import fileUploadIcon from '@/assets/icons/ic_camera.svg';
 import basicProfileImg from '@/assets/icons/ic_profile.svg';
-import { getUsers } from '@/services/api/user';
 
 interface WikiAsideProps {
   className: string;
@@ -43,15 +42,17 @@ const WikiAside = ({
   useEffect(() => {
     const fetchCurrentUser = async () => {
       try {
-        const response = await getUsers();
+        const response = await getUserInfo();
         console.log('API Response:', response);
 
         const { data } = response; // 응답에서 데이터 추출
+        console.log('response: ', response);
+        console.log('Response Data:', response.data);
         const userId = String(data.profile.id); // 현재 사용자 ID 추출
         const profileIdStr = String(profile.id); // 프로필 ID 문자열로 변환
 
-        console.log('profile.id:', profileIdStr);
         console.log('userId:', userId);
+        console.log('profile.id:', profileIdStr);
 
         // 현재 사용자인지 여부를 설정
         setIsCurrentUser(profileIdStr === userId);
@@ -121,8 +122,8 @@ const WikiAside = ({
 
           if (typeof value === 'string' || typeof value === 'number') {
             formData.append(key, String(value)); // string으로 변환하여 추가
-          } else if (value instanceof Blob) {
-            formData.append(key, value); // Blob일 경우 직접 추가
+          } else if ((value as any) instanceof Blob) {
+            formData.append(key, value as any); // Blob일 경우 직접 추가
           }
         });
 
@@ -145,7 +146,6 @@ const WikiAside = ({
     { name: '별명', value: editedProfile.nickname, key: 'nickname' },
     { name: '혈액형', value: editedProfile.bloodType, key: 'bloodType' },
     { name: '국적', value: editedProfile.nationality, key: 'nationality' },
-    { name: '내용', value: editedProfile.content, key: 'content' },
   ];
 
   return (

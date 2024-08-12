@@ -11,7 +11,6 @@ interface WikiArticleProps {
   onParticipateClick: () => void;
   checkEditStatus: (code: string) => Promise<any>;
   isEditable: boolean;
-  onContentStateChange: (contentState: any) => void;
 }
 
 const WikiArticle = ({
@@ -21,7 +20,6 @@ const WikiArticle = ({
   onParticipateClick,
   checkEditStatus,
   isEditable,
-  onContentStateChange,
 }: WikiArticleProps) => {
   const checkParticipationStatus = useCallback(async () => {
     try {

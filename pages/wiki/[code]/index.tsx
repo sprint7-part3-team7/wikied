@@ -31,6 +31,7 @@ const Wiki = (props: WikiProps) => {
   const [editTimeout, setEditTimeout] = useState<NodeJS.Timeout | null>(null);
   const [isModalVisible, setModalVisible] = useState(false);
   const [securityAnswer, setSecurityAnswer] = useState<string>('');
+  const [responseState, setResponseState] = useState<boolean>(true);
 
   const router = useRouter();
   const { code } = router.query;
@@ -97,22 +98,33 @@ const Wiki = (props: WikiProps) => {
 
     try {
       if (updatedProfile) {
-        await updateProfiles(profile.code, {
-          // patch api
-          securityAnswer: profile.securityAnswer,
-          securityQuestion: updatedProfile.securityQuestion,
-          nationality: updatedProfile.nationality,
-          family: updatedProfile.family,
-          bloodType: updatedProfile.bloodType,
-          nickname: updatedProfile.nickname,
-          birthday: updatedProfile.birthday,
-          sns: updatedProfile.sns,
-          job: updatedProfile.job,
-          mbti: updatedProfile.mbti,
-          city: updatedProfile.city,
-          image: updatedProfile.image,
-          content: updatedProfile.content,
-        });
+        // FormData 객체 생성
+        const formData = new FormData();
+
+        // 프로필 데이터를 FormData에 추가
+        formData.append('securityAnswer', securityAnswer); // securityAnswer 추가
+        formData.append(
+          'securityQuestion',
+          updatedProfile.securityQuestion || '',
+        );
+        formData.append('nationality', updatedProfile.nationality || '');
+        formData.append('family', updatedProfile.family || '');
+        formData.append('bloodType', updatedProfile.bloodType || '');
+        formData.append('nickname', updatedProfile.nickname || '');
+        formData.append('birthday', updatedProfile.birthday || '');
+        formData.append('sns', updatedProfile.sns || '');
+        formData.append('job', updatedProfile.job || '');
+        formData.append('mbti', updatedProfile.mbti || '');
+        formData.append('city', updatedProfile.city || '');
+        if (updatedProfile.image) {
+          formData.append('image', updatedProfile.image);
+        }
+        if (updatedProfile.content) {
+          formData.append('content', JSON.stringify(updatedProfile.content));
+        }
+
+        // FormData로 API 호출
+        await updateProfiles(profile.code, formData);
 
         console.log('wiki updateProfiles', updatedProfile);
 
@@ -139,9 +151,11 @@ const Wiki = (props: WikiProps) => {
         const response = await checkProfileEditStatus(code);
         console.log('checkProfileEditStatus API Response:', response);
         if (response.status === 200) {
+          setResponseState(true);
           setShowParticipateBtn(true);
           console.log('showParticipateBtn', showParticipateBtn);
         } else {
+          setResponseState(false);
           setShowParticipateBtn(false);
         }
       }
@@ -182,11 +196,10 @@ const Wiki = (props: WikiProps) => {
           <WikiHeader
             className={styles['wiki-header']}
             profile={profile}
-            sections={sectionsData}
             isEditable={isEditable}
             onParticipateClick={handleModalToggle}
             checkEditStatus={checkEditStatus}
-            showParticipateBtn={showParticipateBtn}
+            showParticipateBtn={showParticipateBtn ?? false}
             code={typeof code === 'string' ? code : ''}
           />
           <div className={styles['space1']}></div>
@@ -206,12 +219,11 @@ const Wiki = (props: WikiProps) => {
             isEditable={isEditable}
             setIsEditable={setIsEditable}
             onEditComplete={handleEditComplete}
-            contentState={contentState}
           />
         </main>
       </div>
 
-      {!isEditable && isModalVisible && (
+      {!isEditable && isModalVisible && responseState && (
         <Modal
           size="large"
           contents={({ size }) => (
