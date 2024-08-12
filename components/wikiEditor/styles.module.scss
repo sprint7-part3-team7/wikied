@@ -13,12 +13,16 @@
 .editor-container {
   min-height: 200px;
   max-height: 700px;
+  overflow-x: hidden;
   overflow-y: auto;
   margin-top: 60px;
+  word-wrap: break-word;
 
   :global {
     .public-DraftEditor-content {
       min-height: 200px;
+      white-space: pre-wrap;
+      word-wrap: break-word;
     }
 
     .public-DraftEditorPlaceholder-root {
@@ -46,6 +50,8 @@
 @media screen and (max-width: $tablet-max-width) {
   .editor-outer-container {
     width: 100%;
+    overflow-x: hidden;
+    overflow-y: auto;
   }
 
   .editor-container {
@@ -57,7 +63,9 @@
 
 @media screen and (max-width: $mobile-max-width) {
   .editor-container {
+    width: 100%;
     min-height: 200px;
+    overflow-x: hidden;
     overflow-y: auto;
   }
 }
