@@ -73,4 +73,4 @@ export const imageFileToUrl = (image: File) => {
 
 export const getUserInfo = () => {
   return authAxiosInstance.get<UserInfo>('/users/me');
-};
+}; 
