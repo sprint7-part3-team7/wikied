@@ -12,6 +12,7 @@ import { authAxiosInstance } from '@/services/api/axiosInstance';
 
 interface AuthContextType {
   isLoggedIn: boolean;
+  logInData: AuthResponseType | null;
   user: UserInfo | null;
   login: (authResponse: AuthResponseType) => void;
   logout: () => void;
@@ -23,6 +24,7 @@ interface AuthProviderProps {
 
 const AuthContext = createContext<AuthContextType>({
   isLoggedIn: false,
+  logInData: null,
   user: null,
   login: () => {},
   logout: () => {},
@@ -94,7 +96,9 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
   };
 
   return (
-    <AuthContext.Provider value={{ isLoggedIn, user, login, logout }}>
+    <AuthContext.Provider
+      value={{ isLoggedIn, logInData, user, login, logout }}
+    >
       {children}
     </AuthContext.Provider>
   );

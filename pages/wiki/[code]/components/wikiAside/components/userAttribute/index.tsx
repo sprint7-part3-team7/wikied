@@ -5,7 +5,9 @@ import styles from '@/pages/wiki/[code]/components/wikiAside/styles.module.scss'
 interface UserAttributeProps {
   attributeName: string;
   value: string;
+  name: string;
   isEditable: boolean;
+  isCurrentUser?: boolean;
   onChange?: (name: string, value: string) => void;
   className?: string;
 }
@@ -13,7 +15,9 @@ interface UserAttributeProps {
 const UserAttribute = ({
   attributeName,
   value,
+  name,
   isEditable = false,
+  isCurrentUser,
   onChange,
   className,
 }: UserAttributeProps) => {
@@ -21,17 +25,16 @@ const UserAttribute = ({
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newValue = e.target.value;
-    console.log(`UserAttribute changed: ${attributeName} = ${newValue}`); // 로그 추가
     setAttributeValue(newValue);
     if (onChange) {
-      onChange(attributeName, newValue);
+      onChange(name, newValue);
     }
   };
 
   return (
     <div className={clsx(styles['user-attribute'], className)}>
       <span className={styles['attribute-name']}>{attributeName}</span>
-      {isEditable ? (
+      {isEditable && isCurrentUser ? (
         <input
           className={clsx(styles['attribute-value'], {
             [styles['non-editable']]: !isEditable,

@@ -10,16 +10,33 @@ interface UserLinkProps {
 
 const UserWikiLink = ({ url }: UserLinkProps) => {
   const [showSnackBar, setShowSnackBar] = useState(false);
+  const [snackBarSize, setSnackBarSize] = useState<'small' | 'large'>('large');
 
   const copyToClipboard = () => {
-    navigator.clipboard.writeText(url)
+    navigator.clipboard
+      .writeText(url)
       .then(() => {
         setShowSnackBar(true);
       })
-      .catch(err => {
+      .catch((err) => {
         console.error('링크 복사에 실패했습니다.', err);
       });
   };
+
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth <= 768) {
+        setSnackBarSize('small');
+      } else {
+        setSnackBarSize('large');
+      }
+    };
+
+    window.addEventListener('resize', handleResize);
+    handleResize();
+
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   useEffect(() => {
     if (showSnackBar) {
@@ -37,7 +54,7 @@ const UserWikiLink = ({ url }: UserLinkProps) => {
           <SnackBar
             message="내 위키 링크가 복사되었습니다."
             type="success"
-            size="small"
+            size={snackBarSize}
           />
         </div>
       )}
@@ -48,6 +65,5 @@ const UserWikiLink = ({ url }: UserLinkProps) => {
     </div>
   );
 };
-
 
 export default UserWikiLink;

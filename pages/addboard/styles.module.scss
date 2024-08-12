@@ -1,35 +1,44 @@
 @import '@/styles/index.scss';
 
 .add-board-container {
-    @include Flex(column, center, center);
-    height: 100vh;
+  @include Flex(column, center, center);
+  margin-top: 54px;
+}
 
-    .editor-container {
-        @include Size(100%, auto);;
-        max-width: 1060px;
-        box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
-        border-radius: 8px;
-        background-color: $color-grayscale-50;
-        margin-bottom: 23px;
-    }
+.editor-container {
+  @include Size(100%, auto);
+  max-width: 1060px;
+  max-height: 846px;
+  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  background-color: $color-grayscale-50;
+  margin-bottom: 23px;
+}
 
-    @media screen and (max-width: $tablet-max-width) {
-        .editor-container {
-            @include Size(100%, auto);;
-            max-width: 624px;
-        }
-      }
-      
-      @media screen and (max-width: $mobile-max-width) {
-        .editor-container {
-            @include Size(100%, auto);;
-            max-width: 335px;
-        }
-      }
+@media screen and (max-width: $tablet-max-width) {
+  .add-board-container {
+    margin-top: 40px;
+  }
+
+  .editor-container {
+    @include Size(100%, auto);
+    max-width: 624px;
+  }
+}
+
+@media screen and (max-width: $mobile-max-width) {
+  .add-board-container {
+    margin-top: 32px;
+  }
+
+  .editor-container {
+    @include Size(100%, auto);
+    box-shadow: none;
+  }
 }
 
 .button-back {
-    @include Size(140px, 45px);
-    display: block;
-    margin: 0 auto 60px;
+  @include Size(140px, 45px);
+  display: block;
+  margin: 0 auto 60px;
 }

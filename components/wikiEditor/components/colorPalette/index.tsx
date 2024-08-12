@@ -4,6 +4,7 @@ import { RichUtils } from 'draft-js';
 import styles from './styles.module.scss';
 import Image from 'next/image';
 import coloringIcon from '@/assets/icons/ic_coloring.svg';
+import clsx from 'clsx';
 
 const colorPalette = [
   { name: 'RED', color: '#FF0000' },
@@ -18,11 +19,13 @@ const colorPalette = [
 interface ColorPaletteProps {
   editorState: EditorState;
   onEditorChange: (editorState: EditorState) => void;
+  className?: string;
 }
 
 const ColorPalette: React.FC<ColorPaletteProps> = ({
   editorState,
   onEditorChange,
+  className = '',
 }) => {
   const [showPalette, setShowPalette] = useState(false);
   const [activeColor, setActiveColor] = useState<string | null>(null);
@@ -41,7 +44,7 @@ const ColorPalette: React.FC<ColorPaletteProps> = ({
   };
 
   return (
-    <div className={styles['color-palette-container']}>
+    <div className={clsx(styles['color-palette-container'], className)}>
       <button
         className={styles['color-toggle']}
         onClick={() => setShowPalette(!showPalette)}

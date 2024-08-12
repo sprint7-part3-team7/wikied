@@ -26,8 +26,8 @@
 }
 
 .user-info {
-  margin-left: 24px;
   @include Flex(column, flex-start, flex-start);
+  margin-left: 32px;
 }
 
 .user-name {
@@ -47,11 +47,60 @@
     $font-weight-md-regular,
     $color-grayscale-400
   );
-  margin-top: 12px;
+  margin-top: 14px;
 }
 
 .user-link-container {
   position: absolute;
   right: 36px;
   bottom: 24px;
+}
+
+@media screen and (max-width: $mobile-max-width) {
+  .user-card {
+    padding: 21px 25px;
+  }
+
+  .user-name {
+    @include Font(
+      $font-size-xl,
+      $line-height-md,
+      $font-weight-xl-semibold,
+      $color-grayscale-500
+    );
+    border: none;
+  }
+
+  .user-details {
+    @include Font(
+      $font-size-xs,
+      $line-height-xs-16,
+      $font-weight-xs-regular,
+      $color-grayscale-400
+    );
+  }
+
+  .profile-image {
+    margin-bottom: 16px;
+    width: 60px;
+    height: 60px;
+  }
+
+  .user-info {
+    margin-left: 20px;
+  }
+
+  .user-details {
+    margin-top: 10px;
+    margin-bottom: 40px;
+  }
+
+  .user-link-container {
+    right: auto;
+    left: 105px;
+    bottom: 21px;
+    max-width: calc(100% - 125px);
+    overflow: hidden;
+    white-space: nowrap;
+  }
 }

@@ -1,12 +1,23 @@
 @import '@/styles/index.scss';
 
 .toolbar {
-  @include Flex(row, center, center);
+  @include Flex(row, space-between, center);
   border: 1px solid $color-grayscale-200;
   background-color: $color-grayscale-100;
   border-radius: 10px;
-  padding: 16px 0;
-  margin-top: 10px;
+  padding: 16px 30px;
+
+  .user-name {
+    @include Font(
+      $font-size-xl,
+      $line-height-xl,
+      $font-weight-xl-medium,
+      $color-grayscale-500
+    );
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
 
   .left-buttons {
     display: flex;
@@ -15,7 +26,6 @@
     .button-wrapper {
       display: flex;
       column-gap: 10px;
-
 
       .heading {
         @include Size(80px, auto);
@@ -58,5 +68,35 @@
     background-color: $color-grayscale-100;
     border-radius: 50%;
     padding: 2px;
+  }
+}
+
+@media screen and (max-width: $tablet-max-width) {
+  .toolbar {
+    @include Flex(row, center, center);
+  }
+
+  .user-name {
+    display: none;
+  }
+}
+
+@media screen and (max-width: $mobile-max-width) {
+  .button-wrapper {
+    .bullet-button {
+      display: none;
+    }
+
+    .number-button {
+      display: none;
+    }
+
+    .color-palette-button {
+      display: none;
+    }
+
+    .link-button {
+      display: none;
+    }
   }
 }

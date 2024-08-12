@@ -1,13 +1,12 @@
 import { useState } from 'react';
 import styles from '@/components/header/styles.module.scss';
-import MobileMenu from './components/mobilemenu';
+import MobileMenu from './components/mobileMenu';
 import Logo from './components/logo';
 import List from './components/list';
 import GuestProfile from './components/guestProfile';
 import UserProfile from './components/userProfile';
 import { useAuth } from '@/contexts/AuthProvider';
 import DeskMenu from './components/deskMenu';
-
 
 const Header = () => {
   const [isMobileMenu, setIsMobileMenu] = useState(false);
@@ -20,7 +19,7 @@ const Header = () => {
 
   const deskMenu = () => {
     setIsDeskMenuOpen((prev) => !prev);
-    console.log(isDeskMenuOpen)
+    console.log(isDeskMenuOpen);
   };
 
   const handleMenuClose = () => {
@@ -36,7 +35,6 @@ const Header = () => {
       </div>
       <div className={styles['login-wrapper']}>
         {isLoggedIn ? (
-          // <UserProfile toggleMenu={toggleLoginMenu} />
           <UserProfile deskMenu={deskMenu} mobileMenu={mobileMenu} />
         ) : (
           <GuestProfile />

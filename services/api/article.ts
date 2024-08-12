@@ -16,7 +16,7 @@ export const getArticles = (params: {
 };
 
 export const getArticleById = (articleId: number) => {
-  return publicAxiosInstance.get<Article>(`/articles/${articleId}`);
+  return authAxiosInstance.get<Article>(`/articles/${articleId}`);
 };
 
 export const postArticle = (article: {
@@ -40,4 +40,16 @@ export const updateArticle = (
 
 export const deleteArticle = (articleId: number) => {
   return authAxiosInstance.delete<void>(`/articles/${articleId}`);
+};
+
+export const imageUpload = (formData: FormData) => {
+  return authAxiosInstance.post<{ url: string }>('/images/upload', formData);
+};
+
+export const postLike = (articleId: number) => {
+  return authAxiosInstance.post<void>(`/articles/${articleId}/like`);
+};
+
+export const deleteLike = (articleId: number) => {
+  return authAxiosInstance.delete<void>(`/articles/${articleId}/like`);
 };

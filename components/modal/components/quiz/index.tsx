@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import closeIcon from '@/assets/icons/ic_close.svg';
 import lockIcon from '@/assets/icons/ic_lock.svg';
 import Input from '@/components/input';
 import styles from '@/components/modal/components/quiz/styles.module.scss';
@@ -9,7 +10,11 @@ import { updateProfileEditStatus } from '@/services/api/profile';
 
 interface QuizProps {
   size?: 'small' | 'large';
-  onSubmit: (answer: string) => void;
+  code: string;
+  setIsEditable: (editable: boolean) => void;
+  setIsModalOpen: (open: boolean) => void;
+  securityQuestion: string;
+  onAnswerSubmit: (answer: string) => void;
 }
 
 const Quiz = ({
@@ -18,6 +23,7 @@ const Quiz = ({
   setIsEditable,
   setIsModalOpen,
   securityQuestion,
+  onAnswerSubmit,
 }: QuizProps) => {
   const [answer, setAnswer] = useState<string>('');
   const [errorMessage, setErrorMessage] = useState<string>('');
@@ -29,21 +35,14 @@ const Quiz = ({
 
   const handleSubmit = async () => {
     try {
-      const accessToken = localStorage.getItem('accessToken');
-      const response = await updateProfileEditStatus(
-        code,
-        {
-          securityAnswer: answer,
-        },
-        {
-          headers: {
-            Authorization: `Bearer ${accessToken}`,
-          },
-        },
-      );
+      const response = await updateProfileEditStatus(code, {
+        securityAnswer: answer,
+      });
       setIsEditable(true);
       setIsModalOpen(false);
       setErrorMessage('');
+
+      onAnswerSubmit(answer);
     } catch (error) {
       setIsEditable(false);
       setErrorMessage('정답이 아닙니다. 다시 시도해 주세요.');

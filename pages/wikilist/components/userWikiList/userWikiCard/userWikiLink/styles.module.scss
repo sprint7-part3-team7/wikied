@@ -13,7 +13,7 @@
 }
 
 .link-text {
-  margin-left: 8px;
+  margin-left: 7px;
   @include Font(
     $font-size-md,
     $line-height-md,
@@ -33,4 +33,20 @@
   left: 50%;
   transform: translateX(-50%);
   z-index: 1000;
+}
+
+@media screen and (max-width: $mobile-max-width) {
+  .link-text {
+    @include Font(
+      $font-size-xs,
+      $line-height-xs-18,
+      $font-weight-xs-regular,
+      $color-primary-green-200
+    );
+  }
+
+  .snackbar-wrapper {
+    top: auto;
+    bottom: 80px;
+  }
 }
