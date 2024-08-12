@@ -20,17 +20,20 @@ import listNumberIcon from '@/assets/icons/ic_number.svg';
 import linkIcon from '@/assets/icons/link_gray.svg';
 import imageIcon from '@/assets/icons/ic_image.svg';
 import HeadingDropdown from '@/components/wikiEditor/components/headingDropdown';
+import { ProfileDetail } from '@/types/wiki';
 
 interface ToolBarProps {
   editorState: EditorState;
   onEditorChange: (editorState: EditorState) => void;
   onImageUpload: () => void;
+  profile: ProfileDetail;
 }
 
 const ToolBar = ({
   editorState,
   onEditorChange,
   onImageUpload,
+  profile,
 }: ToolBarProps) => {
   const toggleInlineStyle = (style: string) => {
     onEditorChange(RichUtils.toggleInlineStyle(editorState, style));
@@ -62,6 +65,7 @@ const ToolBar = ({
 
   return (
     <div className={styles['toolbar']}>
+      <span className={styles['user-name']}>{profile.name}</span>
       <div className={styles['left-buttons']}>
         <div className={styles['button-wrapper']}>
           <button onClick={() => toggleInlineStyle('BOLD')}>
@@ -116,7 +120,10 @@ const ToolBar = ({
           </button>
         </div>
         <div className={styles['button-wrapper']}>
-          <button onClick={() => toggleBlockType('unordered-list-item')}>
+          <button
+            className={styles['bullet-button']}
+            onClick={() => toggleBlockType('unordered-list-item')}
+          >
             <Image
               src={listBulletIcon}
               alt="불릿 정렬"
@@ -124,7 +131,10 @@ const ToolBar = ({
               height={24}
             />
           </button>
-          <button onClick={() => toggleBlockType('ordered-list-item')}>
+          <button
+            className={styles['number-button']}
+            onClick={() => toggleBlockType('ordered-list-item')}
+          >
             <Image
               src={listNumberIcon}
               alt="숫자 정렬"
@@ -135,17 +145,17 @@ const ToolBar = ({
           <ColorPalette
             editorState={editorState}
             onEditorChange={onEditorChange}
+            className={styles['color-palette-button']}
           />
           <button onClick={onImageUpload}>
             <Image src={imageIcon} alt="Image" width={24} height={24} />
           </button>
-          <button
-            className={styles['link-button']}
-          >
+          <button className={styles['link-button']}>
             <Image src={linkIcon} alt="Link" width={24} height={24} />
           </button>
         </div>
       </div>
+      <div className={styles['pseudo-box']}></div>
     </div>
   );
 };
