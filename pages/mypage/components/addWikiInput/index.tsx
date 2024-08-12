@@ -1,5 +1,5 @@
-import Button from '@/components/button';
-import Input from '@/components/input';
+import Button from '@/components/common/button';
+import Input from '@/components/common/input';
 import styles from '@/pages/mypage/components/addWikiInput/styles.module.scss';
 import { ProfileRequest } from '@/types/profile';
 import { useState } from 'react';

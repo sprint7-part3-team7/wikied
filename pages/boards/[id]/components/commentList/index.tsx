@@ -5,7 +5,7 @@ import Image from 'next/image';
 import defaultProfile from '@/assets/icons/ic_profile.svg';
 import editImage from '@/assets/icons/ic_edit.svg';
 import deleteImage from '@/assets/icons/ic_delete.svg';
-import Button from '@/components/button';
+import Button from '@/components/common/button';
 import { useAuth } from '@/contexts/AuthProvider';
 
 interface CommentListProps {

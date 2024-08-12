@@ -1,5 +1,5 @@
-import Button from '@/components/button';
-import Input from '@/components/input';
+import Button from '@/components/common/button';
+import Input from '@/components/common/input';
 import styles from '@/pages/mypage/components/changePasswordInput/styles.module.scss';
 import { ChangePasswordRequest } from '@/types/user';
 import { useState, ChangeEvent, useEffect } from 'react';
@@ -32,8 +32,6 @@ const ChangePasswordInput = ({
   });
 
   const [errors, setErrors] = useState<ErrorState>({});
-
-  
 
   const debouncedNewPassword = useDebounce(formState.newPassword, 500);
   const debouncedverifyNewPassword = useDebounce(

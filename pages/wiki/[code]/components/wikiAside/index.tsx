@@ -3,8 +3,12 @@ import clsx from 'clsx';
 import { v4 as uuidv4 } from 'uuid';
 import { ProfileDetail } from '@/types/wiki';
 import UserAttribute from '@/pages/wiki/[code]/components/wikiAside/components/userAttribute';
-import { updateProfiles, imageFileToUrl, getUserInfo } from '@/services/api/profile';
-import Button from '@/components/button';
+import {
+  updateProfiles,
+  imageFileToUrl,
+  getUserInfo,
+} from '@/services/api/profile';
+import Button from '@/components/common/button';
 import styles from '@/pages/wiki/[code]/components/wikiAside/styles.module.scss';
 import expandIcon from '@/assets/icons/ic_expand.svg';
 import fileUploadIcon from '@/assets/icons/ic_camera.svg';
@@ -65,7 +69,6 @@ const WikiAside = ({
     fetchCurrentUser();
   }, [profile.id]);
 
-
   const handleCancelClick = () => {
     setIsEditable(false);
     setEditedProfile(profile); // 취소 시 원래 프로필로 복원
@@ -124,7 +127,7 @@ const WikiAside = ({
 
           if (typeof value === 'string' || typeof value === 'number') {
             formData.append(key, String(value)); // string으로 변환하여 추가
-          } else if (value as any instanceof Blob) {
+          } else if ((value as any) instanceof Blob) {
             formData.append(key, value as any); // Blob일 경우 직접 추가
           }
         });
