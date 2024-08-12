@@ -1,6 +1,6 @@
 import Button from '@/components/common/button';
 import Input from '@/components/common/input';
-import styles from '@/pages/mypage/components/changePasswordInput/styles.module.scss';
+import styles from '@/components/mypage/changePasswordInput/styles.module.scss';
 import { ChangePasswordRequest } from '@/types/user';
 import { useState, ChangeEvent, useEffect } from 'react';
 import useDebounce from '@/hooks/useDebounce/useDebounce';
