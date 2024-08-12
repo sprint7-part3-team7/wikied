@@ -14,6 +14,7 @@ interface QuizProps {
   setIsEditable: (editable: boolean) => void;
   setIsModalOpen: (open: boolean) => void;
   securityQuestion: string;
+  onAnswerSubmit: (answer: string) => Promise<void>; // 추가
 }
 
 const Quiz = ({
@@ -22,6 +23,7 @@ const Quiz = ({
   setIsEditable,
   setIsModalOpen,
   securityQuestion,
+  onAnswerSubmit, // 추가
 }: QuizProps) => {
   const [answer, setAnswer] = useState<string>('');
   const [errorMessage, setErrorMessage] = useState<string>('');
@@ -39,6 +41,8 @@ const Quiz = ({
       setIsEditable(true);
       setIsModalOpen(false);
       setErrorMessage('');
+
+      onAnswerSubmit(answer);
     } catch (error) {
       setIsEditable(false);
       setErrorMessage('정답이 아닙니다. 다시 시도해 주세요.');

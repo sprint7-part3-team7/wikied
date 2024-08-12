@@ -33,6 +33,12 @@ const Wiki = (props: WikiProps) => {
   const [isErrorModalOpen, setIsErrorModalOpen] = useState<boolean>(false);
   const [editTimeout, setEditTimeout] = useState<NodeJS.Timeout | null>(null);
   const [isModalVisible, setModalVisible] = useState(false);
+  const [securityAnswer, setSecurityAnswer] = useState<string>('');
+
+  // 모달 토글
+  const handleModalToggle = () => {
+    setModalVisible(!isModalVisible);
+  };
 
   const closeModal = (type: 'error' | 'quiz') => {
     if (type === 'error') {
@@ -40,11 +46,6 @@ const Wiki = (props: WikiProps) => {
     } else if (type === 'quiz') {
       setModalVisible(false);
     }
-  };
-
-  // 모달 토글
-  const handleModalToggle = () => {
-    setModalVisible(!isModalVisible);
   };
 
   // 데이터 조회
@@ -86,6 +87,11 @@ const Wiki = (props: WikiProps) => {
     setEditTimeout(timer);
   };
 
+  // Quiz 컴포넌트에서 securityAnswer 받아오기
+  const handleAnswerSubmit = (answer: string) => {
+    setSecurityAnswer(answer);
+  };
+
   // 수정 완료 처리
   const handleEditComplete = async (updatedProfile: ProfileDetail) => {
     if (editTimeout) {
@@ -95,7 +101,8 @@ const Wiki = (props: WikiProps) => {
     try {
       if (updatedProfile) {
         await updateProfiles(profile.code, {
-          securityAnswer: updatedProfile.securityAnswer,
+          // patch api
+          securityAnswer: profile.securityAnswer,
           securityQuestion: updatedProfile.securityQuestion,
           nationality: updatedProfile.nationality,
           family: updatedProfile.family,
@@ -109,7 +116,13 @@ const Wiki = (props: WikiProps) => {
           image: updatedProfile.image,
           content: updatedProfile.content,
         });
-        await updateProfileEditStatus(profile.code, profile.securityAnswer); // 프로필 수정 상태 업데이트
+
+        // 업데이트가 완료된 후, answer를 사용하여 updateProfileEditStatus 호출
+        const response = await updateProfileEditStatus(profile.code, {
+          securityAnswer: securityAnswer,
+        });
+
+        console.log('API Response:', response.data);
 
         setIsEditable(false);
       }
@@ -197,6 +210,7 @@ const Wiki = (props: WikiProps) => {
               setIsModalOpen={setModalVisible}
               securityQuestion={profile.securityQuestion}
               size={size}
+              onAnswerSubmit={handleAnswerSubmit}
             />
           )}
           onClose={() => closeModal('quiz')}

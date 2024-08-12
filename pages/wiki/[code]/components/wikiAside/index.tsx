@@ -127,6 +127,7 @@ const WikiAside = ({
         });
 
         await updateProfiles(profile.code, formData);
+        console.log('wikiAside updatedProfile', updatedProfile);
 
         if (onEditComplete) {
           onEditComplete(updatedProfile); // 업데이트된 프로필 전달
