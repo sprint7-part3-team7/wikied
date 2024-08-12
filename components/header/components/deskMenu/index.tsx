@@ -17,6 +17,8 @@ const DeskMenu = ({ handleMenuClose }: MenuProps) => {
   };
 
   const { logout } = useAuth();
+  const { user } = useAuth();
+  const code = user?.profile?.code
 
   const handleLogoutClick = () => {
     logout();
@@ -47,7 +49,7 @@ const DeskMenu = ({ handleMenuClose }: MenuProps) => {
       </button>
       <button
         className={styles['menu-list']}
-        onClick={() => handleNavigation('/wiki/${code}')}
+        onClick={() => handleNavigation(`/wiki/${code}`)}
       >
         내 위키
       </button>
