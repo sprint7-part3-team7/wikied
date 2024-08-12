@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react';
-import styles from '@/components/header/components/DeskMenu/styles.module.scss';
+import styles from '@/components/header/components/deskToggle/styles.module.scss';
 import { useRouter } from 'next/router';
 import { useAuth } from '@/contexts/AuthProvider';
 

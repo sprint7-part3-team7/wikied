@@ -1,12 +1,12 @@
 import { useState } from 'react';
 import styles from '@/components/header/styles.module.scss';
-import MobileMenu from './components/mobilemenu';
+import MobileMenu from './components/mobileToggle';
 import Logo from './components/logo';
 import List from './components/list';
 import GuestProfile from './components/guestProfile';
 import UserProfile from './components/userProfile';
 import { useAuth } from '@/contexts/AuthProvider';
-import DeskMenu from './components/deskMenu';
+import DeskMenu from './components/deskToggle';
 
 const Header = () => {
   const [isMobileMenu, setIsMobileMenu] = useState(false);
