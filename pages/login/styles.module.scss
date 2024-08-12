@@ -4,7 +4,7 @@
   @include Size(400px, auto);
   @include Flex(column, center, '');
   margin: 0 auto;
-  margin-top: 261px;
+  padding: 140px 0;
 
   .login-wrapper {
     @include Flex(column, '', '');
@@ -24,14 +24,11 @@
       @include Flex(column, center, '');
       row-gap: 32px;
 
-
       .input-wrapper {
         @include Flex(column, center, '');
-      row-gap: 24px;
-
+        row-gap: 24px;
       }
     }
-
   }
 
   .signup {

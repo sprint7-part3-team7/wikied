@@ -10,14 +10,16 @@ export type SignUpFormDataType = {
   passwordConfirmation: string;
 };
 
-
 export type ChangePasswordFormDataType = {
   currentPassword: string;
   password: string;
   passwordConfirmation: string;
 };
 
-export type ErrorsType = LoginFormDataType | SignUpFormDataType | ChangePasswordFormDataType;
+export type ErrorsType =
+  | LoginFormDataType
+  | SignUpFormDataType
+  | ChangePasswordFormDataType;
 
 export type User = {
   id: number;
@@ -27,7 +29,6 @@ export type User = {
   updatedAt: string;
   createdAt: string;
 };
-
 
 export type UserInfo = {
   profile: {
@@ -45,4 +46,5 @@ export type AuthResponseType = {
   user: User;
   accessToken: string;
   refreshToken: string;
+  password?: string;
 };

@@ -4,14 +4,12 @@
   @include Size(400px, 100%);
   @include Flex(column, '', '');
   margin: 0 auto;
-  margin-top: 153px;
+  padding: 140px 0;
 
   .form {
-
     .input-wrapper {
       @include Flex(column, center, '');
-    row-gap: 24px;
-
+      row-gap: 24px;
     }
   }
 
@@ -25,7 +23,6 @@
     text-align: center;
     margin-bottom: 50px;
   }
-
 
   .logon-wrapper {
     @include Flex(row, center, center);

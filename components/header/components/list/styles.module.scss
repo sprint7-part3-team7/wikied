@@ -4,7 +4,7 @@
   display: flex;
   column-gap: 40px;
 
-  .wiki {
+  .link {
     @include Font(
       $font-size-md,
       $line-height-md,
@@ -14,14 +14,8 @@
     text-decoration: none;
   }
 
-  .boards {
-    @include Font(
-      $font-size-md,
-      $line-height-md,
-      $font-weight-md-regular,
-      $color-grayscale-500
-    );
-    text-decoration: none;
+  .active {
+    color: $color-primary-green-200;
   }
 }
 

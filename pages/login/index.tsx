@@ -83,6 +83,7 @@ const LoginPage: React.FC = () => {
         router.push('/landing');
       } catch (error) {
         console.error('로그인 실패:', error);
+        alert('로그인이 실패되었습니다.');
       }
     }
   };
