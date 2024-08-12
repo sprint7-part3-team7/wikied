@@ -2,14 +2,14 @@ import axios from 'axios';
 
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL;
 
-const axiosInstance = axios.create({
+const authAxiosInstance = axios.create({
   baseURL: API_BASE_URL,
   timeout: 5000,
 });
 
-axiosInstance.interceptors.request.use(
+authAxiosInstance.interceptors.request.use(
   (config) => {
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem('accessToken');
     if (token) {
       config.headers['Authorization'] = `Bearer ${token}`;
     }
@@ -18,14 +18,19 @@ axiosInstance.interceptors.request.use(
   (error) => Promise.reject(error),
 );
 
-axiosInstance.interceptors.response.use(
+authAxiosInstance.interceptors.response.use(
   (response) => response,
   async (error) => {
-    if (error.response.status === 401) {
-      error.message = '로그인 필요';
+    if (error.response && error.response.status === 401) {
+      error.message = '로그인이 필요한 서비스입니다.';
     }
     return Promise.reject(error);
   },
 );
 
-export default axiosInstance;
+const publicAxiosInstance = axios.create({
+  baseURL: API_BASE_URL,
+  timeout: 5000,
+});
+
+export { authAxiosInstance, publicAxiosInstance };

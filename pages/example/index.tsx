@@ -1,16 +1,33 @@
-import styles from '@/pages/example/styles.module.scss';
-import ExampleComponents from './components/exampleComponents';
-import Button from '@/components/button';
+import Toast from '@/components/toast';
+import { useState } from 'react';
+
+/**
+ * @ 토스트 컴포넌트 사용법 (
+ */
 
 const Example = () => {
+  const [isToastVisible, setIsToastVisible] = useState(false);
+
+  const handleShowToast = () => {
+    setIsToastVisible(true);
+  };
+
+  const handleCloseToast = () => {
+    setIsToastVisible(false);
+  };
+
   return (
-    <div className={styles['container']}>
-      <Button className="abc" color="primary" size="small" defaultPadding>
-        내 위키 만들기
-      </Button>
-      <p className={styles['fighting']}>7팀 파이팅!!!</p>
-      <ExampleComponents />
-    </div>
+    <>
+      <button onClick={handleShowToast}>토스트 UI 보기</button>
+      {isToastVisible && (
+        <Toast
+          message="로그인에 성공했습니다!"
+          type="success"
+          duration={3000}
+          onClose={handleCloseToast}
+        />
+      )}
+    </>
   );
 };
 

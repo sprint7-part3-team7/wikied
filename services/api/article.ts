@@ -1,4 +1,4 @@
-import axiosInstance from './axiosInstance';
+import { authAxiosInstance, publicAxiosInstance } from './axiosInstance';
 import { Article } from '@/types/article';
 
 interface ArticleResponse {
@@ -12,19 +12,19 @@ export const getArticles = (params: {
   orderBy?: string;
   keyword?: string;
 }) => {
-  return axiosInstance.get<ArticleResponse>('/articles', { params });
+  return publicAxiosInstance.get<ArticleResponse>('/articles', { params });
 };
 
 export const getArticleById = (articleId: number) => {
-  return axiosInstance.get<Article>(`/articles/${articleId}`);
+  return publicAxiosInstance.get<Article>(`/articles/${articleId}`);
 };
 
-export const createArticle = (article: {
+export const postArticle = (article: {
   title: string;
   content: string;
   image: string | null;
 }) => {
-  return axiosInstance.post<Article>('/articles', article);
+  return authAxiosInstance.post<Article>('/articles', article);
 };
 
 export const updateArticle = (
@@ -35,9 +35,16 @@ export const updateArticle = (
     image: string | null;
   },
 ) => {
-  return axiosInstance.patch<Article>(`/articles/${articleId}`, article);
+  return authAxiosInstance.patch<Article>(`/articles/${articleId}`, article);
 };
 
 export const deleteArticle = (articleId: number) => {
-  return axiosInstance.delete<void>(`/articles/${articleId}`);
+  return authAxiosInstance.delete<void>(`/articles/${articleId}`);
+};
+
+export const imageUpload = (formData: FormData) => {
+  return authAxiosInstance.post<{ url: string }>(
+    '/images/upload',
+    formData,
+  );
 };
