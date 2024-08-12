@@ -36,7 +36,6 @@ const Header = () => {
       </div>
       <div className={styles['login-wrapper']}>
         {isLoggedIn ? (
-          // <UserProfile toggleMenu={toggleLoginMenu} />
           <UserProfile deskMenu={deskMenu} mobileMenu={mobileMenu} />
         ) : (
           <GuestProfile />
