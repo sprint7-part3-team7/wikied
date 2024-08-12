@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import styles from '@/components/header/components/MobileMenu/styles.module.scss';
+import styles from '@/components/header/components/mobileToggle/styles.module.scss';
 import { useRouter } from 'next/router';
 import { useAuth } from '@/contexts/AuthProvider';
 import EditNotification from '@/components/modal/components/editNotification';
