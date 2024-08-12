@@ -84,6 +84,7 @@ const Wiki = (props: WikiProps) => {
     setEditTimeout(timer);
   };
 
+  // Quiz 컴포넌트에서 securityAnswer 받아오기
   const handleAnswerSubmit = (answer: string) => {
     setSecurityAnswer(answer);
   };

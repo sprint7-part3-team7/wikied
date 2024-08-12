@@ -10,7 +10,6 @@ import expandIcon from '@/assets/icons/ic_expand.svg';
 import fileUploadIcon from '@/assets/icons/ic_camera.svg';
 import basicProfileImg from '@/assets/icons/ic_profile.svg';
 import { getUsers } from '@/services/api/user';
-import { EditorState } from 'draft-js';
 
 interface WikiAsideProps {
   className: string;
@@ -19,7 +18,6 @@ interface WikiAsideProps {
   isEditable: boolean;
   setIsEditable: (isEditable: boolean) => void;
   onEditComplete?: (updatedProfile: ProfileDetail) => void;
-  contentState: EditorState | null;
 }
 
 const WikiAside = ({
@@ -29,7 +27,6 @@ const WikiAside = ({
   isEditable,
   setIsEditable,
   onEditComplete,
-  contentState,
 }: WikiAsideProps) => {
   const [isExpanded, setIsExpanded] = useState(false);
   const [preview, setPreview] = useState<string | null>(null);
@@ -106,16 +103,6 @@ const WikiAside = ({
 
   const handleSave = async () => {
     try {
-      let updatedProfile = { ...editedProfile };
-
-      // contentState를 updatedProfile에 추가
-      if (contentState) {
-        updatedProfile = {
-          ...updatedProfile,
-          contentState: JSON.stringify(contentState), // JSON 문자열로 변환하여 저장
-        };
-      }
-
       if (imageFile) {
         const response = await imageFileToUrl(imageFile);
         const imageUrl = response.data.url;

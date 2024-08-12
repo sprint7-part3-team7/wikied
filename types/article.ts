@@ -13,7 +13,7 @@ export interface Article {
   writer: Writer;
   content: string;
   likeCount: number;
-  isLiked: boolean | null;
+  isLiked: boolean;
 }
 
 export interface Comment {

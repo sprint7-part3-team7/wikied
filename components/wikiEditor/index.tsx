@@ -2,15 +2,20 @@ import { useState, useRef, useCallback, useEffect } from 'react';
 import {
   EditorState,
   RichUtils,
-  convertToRaw,
   AtomicBlockUtils,
   ContentBlock,
+  genKey,
+  Modifier,
+  SelectionState,
 } from 'draft-js';
 import { Editor as DraftEditor } from 'draft-js';
 import 'draft-js/dist/Draft.css';
 import styles from './styles.module.scss';
 import ToolBar from '@/components/wikiEditor/components/toolBar';
-import { blockStyleFn, initialStyleMap } from 'contenido';
+import {
+  blockStyleFn as contenidoBlockStyleFn,
+  initialStyleMap,
+} from 'contenido';
 import { colorPalette } from '@/components/wikiEditor/components/colorPalette';
 import Media from '@/components/wikiEditor/components/media';
 import AddImage from '@/components/modal/components/addImage';
@@ -106,6 +111,56 @@ const WikiEditor = ({ profile }: WikiEditorProps) => {
     return null;
   };
 
+  const customBlockStyleFn = (contentBlock: ContentBlock) => {
+    const type = contentBlock.getType();
+    if (type.startsWith('header-')) {
+      return styles[type];
+    }
+    return contenidoBlockStyleFn(contentBlock);
+  };
+
+  const handleReturn = (e: React.KeyboardEvent, editorState: EditorState) => {
+    const currentContent = editorState.getCurrentContent();
+    const selection = editorState.getSelection();
+    const currentBlock = currentContent.getBlockForKey(selection.getStartKey());
+
+    if (currentBlock.getType().startsWith('header-')) {
+      if (currentBlock.getLength() > 0) {
+        const newBlockKey = genKey();
+
+        const newBlockSelection = new SelectionState({
+          anchorKey: newBlockKey,
+          anchorOffset: 0,
+          focusKey: newBlockKey,
+          focusOffset: 0,
+        });
+
+        let newContentState = Modifier.splitBlock(currentContent, selection);
+        newContentState = Modifier.setBlockType(
+          newContentState,
+          newContentState.getSelectionAfter(),
+          'unstyled',
+        );
+
+        const newEditorState = EditorState.push(
+          editorState,
+          newContentState,
+          'insert-fragment',
+        );
+
+        handleEditorChange(
+          EditorState.forceSelection(
+            newEditorState,
+            newContentState.getSelectionAfter(),
+          ),
+        );
+        return 'handled';
+      }
+    }
+
+    return 'not-handled';
+  };
+
   if (!editorState) {
     return <div>Loading editor...</div>;
   }
@@ -127,8 +182,9 @@ const WikiEditor = ({ profile }: WikiEditorProps) => {
             onChange={handleEditorChange}
             placeholder="자유롭게 위키를 작성해주세요😃"
             blockRendererFn={blockRendererFn}
-            blockStyleFn={blockStyleFn}
+            blockStyleFn={customBlockStyleFn}
             customStyleMap={styleMap}
+            handleReturn={handleReturn}
           />
         </div>
       </div>
