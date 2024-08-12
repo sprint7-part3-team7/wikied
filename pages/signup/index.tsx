@@ -6,6 +6,7 @@ import Input from '@/components/input';
 import { SignupInputId, getErrorMessage } from '@/types/authUtils';
 import useDebounce from '@/hooks/useDebounce/useDebounce';
 import { publicAxiosInstance } from '@/services/api/axiosInstance';
+import { useRouter } from 'next/router';
 
 interface FormState {
   email: string;
@@ -29,6 +30,7 @@ const SignupPage = () => {
     passwordConfirmation: '',
   });
   const [errors, setErrors] = useState<ErrorState>({});
+  const router = useRouter();
 
   const debouncedPassword = useDebounce(formState.password, 500);
   const debouncedPasswordConfirmation = useDebounce(
@@ -99,6 +101,7 @@ const SignupPage = () => {
           password: formState.password,
           passwordConfirmation: formState.passwordConfirmation,
         });
+        router.push('/login');
         console.log('회원가입 성공:', response.data);
       } catch (error) {
         console.error('회원가입 실패:', error);
