@@ -1,4 +1,4 @@
-import styles from '@/components/header/components/userProfile/styles.module.scss';
+import styles from '@/components/common/header/components/userProfile/styles.module.scss';
 import Image from 'next/image';
 import alarm from '@/assets/icons/ic_alarm_32.svg';
 import profile from '@/assets/icons/ic_profile.svg';

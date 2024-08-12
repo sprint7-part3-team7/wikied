@@ -2,7 +2,7 @@ import Image from 'next/image';
 import closeIcon from '@/assets/icons/ic_close.svg';
 import lockIcon from '@/assets/icons/ic_lock.svg';
 import Input from '@/components/common/input';
-import styles from '@/components/modal/components/quiz/styles.module.scss';
+import styles from '@/components/common/modal/components/quiz/styles.module.scss';
 import Button from '@/components/common/button';
 import { useState } from 'react';
 import clsx from 'clsx';

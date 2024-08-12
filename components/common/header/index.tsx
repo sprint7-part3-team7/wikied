@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import styles from '@/components/header/styles.module.scss';
+import styles from '@/components/common/header/styles.module.scss';
 import MobileMenu from './components/mobileToggle';
 import Logo from './components/logo';
 import List from './components/list';

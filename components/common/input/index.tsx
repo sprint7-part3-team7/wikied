@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import styles from '@/components/input/styles.module.scss';
+import styles from '@/components/common/input/styles.module.scss';
 
 interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   label?: string;

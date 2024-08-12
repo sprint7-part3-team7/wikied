@@ -2,7 +2,7 @@ import { useState, useRef, ChangeEvent } from 'react';
 import clsx from 'clsx';
 import Image from 'next/image';
 import Button from '@/components/common/button';
-import styles from '@/components/modal/components/addImage/styles.module.scss';
+import styles from '@/components/common/modal/components/addImage/styles.module.scss';
 import cameraIcon from '@/assets/icons/ic_camera.svg';
 
 interface AddImageProps {

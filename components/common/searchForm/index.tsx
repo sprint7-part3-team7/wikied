@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import styles from '@/components/searchForm/styles.module.scss';
+import styles from '@/components/common/searchForm/styles.module.scss';
 import Button from '@/components/common/button';
 import Image from 'next/image';
 import searchIcon from '@/assets/icons/ic_search.svg';

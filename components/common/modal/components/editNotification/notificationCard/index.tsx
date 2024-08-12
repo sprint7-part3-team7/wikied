@@ -1,6 +1,6 @@
 import bottomCloseIcon from '@/assets/icons/ic_close.svg';
 import circleIcon from '@/assets/icons/circle.svg';
-import styles from '@/components/modal/components/editNotification/notificationCard/styles.module.scss';
+import styles from '@/components/common/modal/components/editNotification/notificationCard/styles.module.scss';
 import Image from 'next/image';
 import clsx from 'clsx';
 

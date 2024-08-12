@@ -1,4 +1,4 @@
-import styles from '@/components/modal/components/alert/styles.module.scss';
+import styles from '@/components/common/modal/components/alert/styles.module.scss';
 import Button from '@/components/common/button';
 import clsx from 'clsx';
 

@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import styles from '@/components/linkPreview/styles.module.scss';
+import styles from '@/components/common/linkPreview/styles.module.scss';
 import Image from 'next/image';
 import link from '@/assets/icons/ic_link.svg';
 

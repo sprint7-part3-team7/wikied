@@ -1,4 +1,4 @@
-import styles from '@/components/header/components/list/styles.module.scss';
+import styles from '@/components/common/header/components/list/styles.module.scss';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import clsx from 'clsx';

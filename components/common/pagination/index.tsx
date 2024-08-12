@@ -1,4 +1,4 @@
-import styles from '@/components/pagination/styles.module.scss';
+import styles from '@/components/common/pagination/styles.module.scss';
 import rightArrow from '@/assets/icons/pg_right.svg';
 import leftArrow from '@/assets/icons/pg_left.svg';
 import Image from 'next/image';

@@ -1,4 +1,4 @@
-import styles from '@/components/modal/styles.module.scss';
+import styles from '@/components/common/modal/styles.module.scss';
 import closeIcon from '@/assets/icons/ic_close.svg';
 import clsx from 'clsx';
 import Image from 'next/image';

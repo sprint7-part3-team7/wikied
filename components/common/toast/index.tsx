@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import styles from '@/components/toast/styles.module.scss';
+import styles from '@/components/common/toast/styles.module.scss';
 import clsx from 'clsx';
 
 interface ToastProps {

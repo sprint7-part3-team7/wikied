@@ -1,4 +1,4 @@
-import styles from '@/components/header/components/guestProfile/styles.module.scss';
+import styles from '@/components/common/header/components/guestProfile/styles.module.scss';
 import Link from 'next/link';
 
 const GuestProfile = () => {
