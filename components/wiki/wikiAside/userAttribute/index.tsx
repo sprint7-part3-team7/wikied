@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import clsx from 'clsx';
-import styles from '@/pages/wiki/[code]/components/wikiAside/styles.module.scss';
+import styles from '@/components/wiki/wikiAside/styles.module.scss';
 
 interface UserAttributeProps {
   attributeName: string;

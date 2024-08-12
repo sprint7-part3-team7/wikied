@@ -1,4 +1,4 @@
-import styles from '@/pages/wiki/[code]/components/wikiArticle/components/blockquote/styles.module.scss';
+import styles from '@/components/wiki/wikiArticle/blockquote/styles.module.scss';
 
 interface BlockquoteProps {
   children: React.ReactNode;
