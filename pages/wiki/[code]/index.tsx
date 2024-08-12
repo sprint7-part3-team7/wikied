@@ -23,17 +23,17 @@ interface WikiProps {
 }
 
 const Wiki = (props: WikiProps) => {
-  const router = useRouter();
-  const { code } = router.query;
-
   const [profile, setProfile] = useState<any>(null);
   const [sectionsData, setSectionsData] = useState<Section[]>([]);
   const [isEditable, setIsEditable] = useState<boolean>(false);
-  const [showParticipateBtn, setShowParticipateBtn] = useState<boolean>('');
+  const [showParticipateBtn, setShowParticipateBtn] = useState<boolean>();
   const [isErrorModalOpen, setIsErrorModalOpen] = useState<boolean>(false);
   const [editTimeout, setEditTimeout] = useState<NodeJS.Timeout | null>(null);
   const [isModalVisible, setModalVisible] = useState(false);
   const [securityAnswer, setSecurityAnswer] = useState<string>('');
+
+  const router = useRouter();
+  const { code } = router.query;
 
   // 모달 토글
   const handleModalToggle = () => {
@@ -54,6 +54,8 @@ const Wiki = (props: WikiProps) => {
       const response = await getProfileByCode(code);
       const data = response.data;
       setProfile(data);
+      setSectionsData(profile.content || []);
+      console.log('sectionsData', sectionsData);
     } catch (err) {
       console.error(err);
     }
@@ -63,11 +65,6 @@ const Wiki = (props: WikiProps) => {
   const checkEditStatus = useCallback(async (code: string) => {
     try {
       const response = await checkProfileEditStatus(code);
-      // if (response.status === 200) {
-      //   setShowParticipateBtn(true);
-      // } else {
-      //   setShowParticipateBtn(false);
-      // }
     } catch (err) {
       console.error(err);
     }
@@ -82,7 +79,7 @@ const Wiki = (props: WikiProps) => {
     const timer = setTimeout(() => {
       setIsErrorModalOpen(true); // 5분 후 오류 모달 띄우기
       setIsEditable(false);
-    }, 60000); // 5분 = 300,000ms
+    }, 300000); // 5분 = 300,000ms
 
     setEditTimeout(timer);
   };
@@ -117,7 +114,11 @@ const Wiki = (props: WikiProps) => {
           content: updatedProfile.content,
         });
 
-        // 업데이트가 완료된 후, answer를 사용하여 updateProfileEditStatus 호출
+        console.log('wiki updateProfiles', updatedProfile);
+
+        setProfile(updatedProfile);
+
+        // 수정 후 answer를 사용해 post api 호출
         const response = await updateProfileEditStatus(profile.code, {
           securityAnswer: securityAnswer,
         });
@@ -156,6 +157,12 @@ const Wiki = (props: WikiProps) => {
     }
   }, [isEditable]);
 
+  useEffect(() => {
+    if (profile) {
+      console.log('Profile updated:', profile);
+    }
+  }, [profile]);
+
   if (!profile) {
     return <div>Loading...</div>;
   }
@@ -165,8 +172,9 @@ const Wiki = (props: WikiProps) => {
       <div
         className={clsx(styles['container'], {
           [styles['non-editable']]: !isEditable,
+          [styles['non-editable-no-data']]:
+            !isEditable && sectionsData.length === 0,
           [styles['editable']]: isEditable,
-          [styles['no-data']]: sectionsData.length === 0,
         })}
       >
         <main className={styles['wiki-main']}>
@@ -174,6 +182,7 @@ const Wiki = (props: WikiProps) => {
           <WikiHeader
             className={styles['wiki-header']}
             profile={profile}
+            sections={sectionsData}
             isEditable={isEditable}
             onParticipateClick={handleModalToggle}
             checkEditStatus={checkEditStatus}
@@ -184,6 +193,7 @@ const Wiki = (props: WikiProps) => {
           <WikiArticle
             className={styles['wiki-article']}
             profile={profile}
+            sections={sectionsData}
             onParticipateClick={handleModalToggle}
             checkEditStatus={checkEditStatus}
             isEditable={isEditable}

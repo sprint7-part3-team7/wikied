@@ -126,9 +126,6 @@ const WikiAside = ({
           }
         });
 
-        await updateProfiles(profile.code, formData);
-        console.log('wikiAside updatedProfile', updatedProfile);
-
         if (onEditComplete) {
           onEditComplete(updatedProfile); // 업데이트된 프로필 전달
         }
@@ -206,6 +203,7 @@ const WikiAside = ({
             </div>
           ) : profile.image ? (
             <img
+              key={profile.image}
               src={profile.image}
               className={styles['image']}
               alt="프로필 이미지"

@@ -1,5 +1,5 @@
 import { useCallback } from 'react';
-import { ProfileDetail } from '@/types/wiki';
+import { ProfileDetail, Section } from '@/types/wiki';
 import Button from '@/components/button';
 import styles from '@/pages/wiki/[code]/components/wikiArticle/styles.module.scss';
 import Editor from '@/components/editor';
@@ -8,6 +8,7 @@ import WikiEditor from '@/components/wikiEditor';
 interface WikiArticleProps {
   className: string;
   profile: ProfileDetail;
+  sections: Section[];
   onParticipateClick: () => void;
   checkEditStatus: (code: string) => Promise<any>;
   isEditable: boolean;
@@ -16,6 +17,7 @@ interface WikiArticleProps {
 const WikiArticle = ({
   className,
   profile,
+  sections,
   onParticipateClick,
   checkEditStatus,
   isEditable,

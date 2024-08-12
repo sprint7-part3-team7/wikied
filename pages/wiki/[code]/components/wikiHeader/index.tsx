@@ -88,13 +88,7 @@ const WikiHeader = ({
   return (
     <>
       {isEditable ? (
-        <div className={styles['header-container3']}>
-          {/* <div className={styles['user-name-wrapper']}>
-            <span className={styles['user-name']}>{profile.name}</span>
-          </div>
-          <div></div>
-          <EditorBtn /> */}
-        </div>
+        <div className={styles['header-container3']}></div>
       ) : (
         <section className={`${styles['wiki-actions']} ${className}`}>
           <section className={styles['name-and-btn']}>
