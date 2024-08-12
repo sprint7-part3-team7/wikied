@@ -2,18 +2,13 @@ import { useState, useRef, useEffect } from 'react';
 import clsx from 'clsx';
 import { v4 as uuidv4 } from 'uuid';
 import { ProfileDetail } from '@/types/wiki';
-import UserAttribute from '@/pages/wiki/[code]/components/wikiAside/components/userAttribute';
-import {
-  updateProfiles,
-  imageFileToUrl,
-  getUserInfo,
-} from '@/services/api/profile';
+import UserAttribute from '@/components/wiki/wikiAside/userAttribute';
+import { imageFileToUrl, getUserInfo } from '@/services/api/profile';
 import Button from '@/components/common/button';
-import styles from '@/pages/wiki/[code]/components/wikiAside/styles.module.scss';
+import styles from '@/components/wiki/wikiAside/styles.module.scss';
 import expandIcon from '@/assets/icons/ic_expand.svg';
 import fileUploadIcon from '@/assets/icons/ic_camera.svg';
 import basicProfileImg from '@/assets/icons/ic_profile.svg';
-import { getUsers } from '@/services/api/user';
 
 interface WikiAsideProps {
   className: string;

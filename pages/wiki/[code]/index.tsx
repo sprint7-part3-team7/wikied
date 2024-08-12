@@ -4,13 +4,13 @@ import clsx from 'clsx';
 import {
   checkProfileEditStatus,
   getProfileByCode,
-  updateProfiles,
+  updateProfile,
   updateProfileEditStatus,
 } from '@/services/api/profile';
 import { ProfileDetail, Section } from '@/types/wiki';
-import WikiHeader from '@/pages/wiki/[code]/components/wikiHeader';
-import WikiArticle from '@/pages/wiki/[code]/components/wikiArticle';
-import WikiAside from '@/pages/wiki/[code]/components/wikiAside';
+import WikiHeader from '@/components/wiki/wikiHeader';
+import WikiArticle from '@/components/wiki/wikiArticle';
+import WikiAside from '@/components/wiki/wikiAside';
 import Quiz from '@/components/common/modal/components/quiz';
 import styles from '@/pages/wiki/[code]/styles.module.scss';
 import Modal from '@/components/common/modal';
@@ -31,6 +31,7 @@ const Wiki = (props: WikiProps) => {
   const [editTimeout, setEditTimeout] = useState<NodeJS.Timeout | null>(null);
   const [isModalVisible, setModalVisible] = useState(false);
   const [securityAnswer, setSecurityAnswer] = useState<string>('');
+  const [responseState, setResponseState] = useState<boolean>(true);
 
   const router = useRouter();
   const { code } = router.query;
@@ -95,41 +96,41 @@ const Wiki = (props: WikiProps) => {
       clearTimeout(editTimeout);
     }
 
-    //   try {
-    //     if (updatedProfile) {
-    //       await updateProfiles(profile.code, {
-    //         // patch api
-    //         securityAnswer: profile.securityAnswer,
-    //         securityQuestion: updatedProfile.securityQuestion,
-    //         nationality: updatedProfile.nationality,
-    //         family: updatedProfile.family,
-    //         bloodType: updatedProfile.bloodType,
-    //         nickname: updatedProfile.nickname,
-    //         birthday: updatedProfile.birthday,
-    //         sns: updatedProfile.sns,
-    //         job: updatedProfile.job,
-    //         mbti: updatedProfile.mbti,
-    //         city: updatedProfile.city,
-    //         image: updatedProfile.image,
-    //         content: updatedProfile.content,
-    //       });
+    try {
+      if (updatedProfile) {
+        await updateProfile(profile.code, {
+          // patch api
+          securityAnswer: securityAnswer,
+          securityQuestion: updatedProfile.securityQuestion,
+          nationality: updatedProfile.nationality,
+          family: updatedProfile.family,
+          bloodType: updatedProfile.bloodType,
+          nickname: updatedProfile.nickname,
+          birthday: updatedProfile.birthday,
+          sns: updatedProfile.sns,
+          job: updatedProfile.job,
+          mbti: updatedProfile.mbti,
+          city: updatedProfile.city,
+          image: updatedProfile.image,
+          content: updatedProfile.content,
+        });
 
-    //       console.log('wiki updateProfiles', updatedProfile);
+        console.log('wiki updateProfile', updatedProfile);
 
-    //       setProfile(updatedProfile);
+        setProfile(updatedProfile);
 
-    //       // 수정 후 answer를 사용해 post api 호출
-    //       const response = await updateProfileEditStatus(profile.code, {
-    //         securityAnswer: securityAnswer,
-    //       });
+        // 수정 후 answer를 사용해 post api 호출
+        const response = await updateProfileEditStatus(profile.code, {
+          securityAnswer: securityAnswer,
+        });
 
-    //       console.log('API Response:', response.data);
+        console.log('API Response:', response.data);
 
-    //       setIsEditable(false);
-    //     }
-    //   } catch (err) {
-    //     console.error(err);
-    //   }
+        setIsEditable(false);
+      }
+    } catch (err) {
+      console.error(err);
+    }
   };
 
   useEffect(() => {
@@ -139,9 +140,11 @@ const Wiki = (props: WikiProps) => {
         const response = await checkProfileEditStatus(code);
         console.log('checkProfileEditStatus API Response:', response);
         if (response.status === 200) {
+          setResponseState(true);
           setShowParticipateBtn(true);
           console.log('showParticipateBtn', showParticipateBtn);
         } else {
+          setResponseState(false);
           setShowParticipateBtn(false);
         }
       }
@@ -209,7 +212,7 @@ const Wiki = (props: WikiProps) => {
         </main>
       </div>
 
-      {!isEditable && isModalVisible && (
+      {!isEditable && isModalVisible && responseState && (
         <Modal
           size="large"
           contents={({ size }) => (

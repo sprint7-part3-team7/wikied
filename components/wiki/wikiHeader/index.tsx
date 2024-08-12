@@ -1,9 +1,9 @@
 import { useCallback, useEffect, useState } from 'react';
 import { ProfileDetail } from '@/types/wiki';
-import EditorBtn from '@/pages/wiki/[code]/components/wikiHeader/components/editorBtn';
+import EditorBtn from '@/components/wiki/wikiHeader/editorBtn';
 import Button from '@/components/common/button';
 import SnackBar from '@/components/common/snackbar';
-import styles from '@/pages/wiki/[code]/components/wikiHeader/styles.module.scss';
+import styles from '@/components/wiki/wikiHeader/styles.module.scss';
 import link from '@/assets/icons/ic_link.svg';
 import loadingIcon from '@/assets/icons/ic_loading.svg';
 
@@ -75,7 +75,7 @@ const WikiHeader = ({
       await checkEditStatus(profile.code);
     } catch (error) {
       console.error('Error during checkEditStatus:', error);
-      handleError(); // Handle errors here if needed
+      handleError();
     }
   }, [checkEditStatus, profile.code]);
 

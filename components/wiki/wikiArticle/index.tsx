@@ -1,7 +1,7 @@
 import { useCallback } from 'react';
 import { ProfileDetail, Section } from '@/types/wiki';
 import Button from '@/components/common/button';
-import styles from '@/pages/wiki/[code]/components/wikiArticle/styles.module.scss';
+import styles from '@/components/wiki/wikiArticle/styles.module.scss';
 import Editor from '@/components/common/editor';
 import WikiEditor from '@/components/common/wikiEditor';
 

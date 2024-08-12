@@ -60,17 +60,12 @@ export const updateProfile = (
   return authAxiosInstance.patch<ProfileDetail>(`/profiles/${code}`, payload);
 };
 
-export const updateProfiles = (code: string, formData: FormData) => {
-  return authAxiosInstance.patch<ProfileDetail>(`/profiles/${code}`, formData);
-};
-
 export const imageFileToUrl = (image: File) => {
   const formData = new FormData();
   formData.append('image', image);
   return authAxiosInstance.post<{ url: string }>('/images/upload', formData);
 };
 
-
 export const getUserInfo = () => {
   return authAxiosInstance.get<UserInfo>('/users/me');
-}; 
+};
