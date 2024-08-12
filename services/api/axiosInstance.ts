@@ -22,7 +22,7 @@ authAxiosInstance.interceptors.response.use(
   (response) => response,
   async (error) => {
     if (error.response && error.response.status === 401) {
-      error.message = '로그인 필요';
+      error.message = '로그인이 필요한 서비스입니다.';
     }
     return Promise.reject(error);
   },

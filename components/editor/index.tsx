@@ -17,7 +17,7 @@ import Media from '@/components/editor/components/media';
 import AddImage from '@/components/modal/components/addImage';
 import Modal from '../modal';
 import { useRouter } from 'next/router';
-import { postArticle } from '@/services/api/article';
+import { imageUpload, postArticle } from '@/services/api/article';
 import { AxiosError } from 'axios';
 import { Options, RenderConfig, stateToHTML } from 'draft-js-export-html';
 
@@ -79,16 +79,21 @@ const Editor = () => {
   );
 
   const handleImageUpload = useCallback(
-    (file: File) => {
-      const reader = new FileReader();
-      reader.onload = (e) => {
-        const src = e.target?.result as string;
-        setImageUrl(src);
+    async (file: File) => {
+      const formData = new FormData();
+      formData.append('image', file);
+
+      try {
+        const response = await imageUpload(formData);
+        const uploadedImageUrl = response.data.url;
+        setImageUrl(response.data.url);
+        console.log('Image uploaded:', response.data.url);
+
         const contentState = editorState.getCurrentContent();
         const contentStateWithEntity = contentState.createEntity(
           'IMAGE',
           'IMMUTABLE',
-          { src },
+          { src: uploadedImageUrl },
         );
         const entityKey = contentStateWithEntity.getLastCreatedEntityKey();
         const newEditorState = EditorState.set(editorState, {
@@ -100,12 +105,14 @@ const Editor = () => {
           ' ',
         );
         handleEditorChange(newState);
-      };
-      reader.readAsDataURL(file);
-      setIsImageModalOpen(false);
+        setIsImageModalOpen(false);
+      } catch (error) {
+        console.error('Image upload failed:', error);
+      }
     },
     [editorState],
   );
+
 
   const blockRendererFn = (contentBlock: ContentBlock) => {
     if (contentBlock.getType() === 'atomic') {
