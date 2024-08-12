@@ -113,7 +113,6 @@ const Editor = () => {
     [editorState],
   );
 
-
   const blockRendererFn = (contentBlock: ContentBlock) => {
     if (contentBlock.getType() === 'atomic') {
       return {

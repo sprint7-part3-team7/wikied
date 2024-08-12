@@ -55,7 +55,7 @@
 
   .max-count {
     color: $color-primary-green-200;
-  
+
     &.over-max {
       color: $color-secondary-red-200;
     }
@@ -168,17 +168,17 @@
   }
 
   .editor-container {
-      height: 317px;
+    height: 317px;
   }
 }
-    
+
 @media screen and (max-width: $mobile-max-width) {
   .editor-wrapper {
     width: 100%;
     margin: 0 auto;
     padding: 0px 15px;
   }
-  
+
   .heading {
     @include Font(
       $font-size-lg,
@@ -196,7 +196,7 @@
       $font-weight-xs-regular,
       $color-grayscale-400
     );
-  
+
     .date-post {
       margin-right: 10px;
     }
@@ -235,6 +235,6 @@
   }
 
   .editor-container {
-      height: 285px;
+    height: 285px;
   }
 }

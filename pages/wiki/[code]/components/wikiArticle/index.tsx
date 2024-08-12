@@ -42,7 +42,7 @@ const WikiArticle = ({
       ) : isEditable ? (
         <div className={styles['grid-item']}>
           <span className={styles['wiki-article-content']}>
-            <WikiEditor />
+            <WikiEditor profile={profile} />
           </span>
         </div>
       ) : (

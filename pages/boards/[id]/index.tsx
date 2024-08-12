@@ -222,7 +222,12 @@ const ArticleDetailPage = () => {
                 className={styles['like-button']}
                 onClick={handleLikeButtonClick}
               >
-                <Image src={isLiked ? filledLikeIcon : likeIcon } alt="likeIcon" width={18} height={18} />
+                <Image
+                  src={isLiked ? filledLikeIcon : likeIcon}
+                  alt="likeIcon"
+                  width={18}
+                  height={18}
+                />
               </button>
               <span>{article.likeCount}</span>
             </div>
