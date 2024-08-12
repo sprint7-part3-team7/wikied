@@ -241,6 +241,13 @@
         margin: 20px 0 32px 0;
 
         .file-input-wrapper {
+          @include Size(71px, 71px);
+
+          .overlay,
+          .image,
+          .preview-image {
+            @include Size(71px, 71px);
+          }
         }
       }
       .user-attribute-container {
@@ -374,6 +381,16 @@
       .image-container {
         @include Size(100%, '');
         margin: 24px 0;
+
+        .file-input-wrapper {
+          @include Size(62px, 62px);
+
+          .overlay,
+          .image,
+          .preview-image {
+            @include Size(62px, 62px);
+          }
+        }
       }
 
       .user-attribute-container {

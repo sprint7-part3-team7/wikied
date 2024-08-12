@@ -4,7 +4,8 @@ import clsx from 'clsx';
 import {
   checkProfileEditStatus,
   getProfileByCode,
-  updateProfile,
+  updateProfiles,
+  updateProfileEditStatus,
 } from '@/services/api/profile';
 import { ProfileDetail, Section } from '@/types/wiki';
 import WikiHeader from '@/pages/wiki/[code]/components/wikiHeader';
@@ -12,8 +13,8 @@ import WikiArticle from '@/pages/wiki/[code]/components/wikiArticle';
 import WikiAside from '@/pages/wiki/[code]/components/wikiAside';
 import Quiz from '@/components/modal/components/quiz';
 import styles from '@/pages/wiki/[code]/styles.module.scss';
-import Button from '@/components/button';
 import Modal from '@/components/modal';
+import Alert from '@/components/modal/components/alert';
 
 interface WikiProps {
   className: string;
@@ -22,23 +23,29 @@ interface WikiProps {
 }
 
 const Wiki = (props: WikiProps) => {
-  const router = useRouter();
-  const { code } = router.query;
-
   const [profile, setProfile] = useState<any>(null);
   const [sectionsData, setSectionsData] = useState<Section[]>([]);
   const [isEditable, setIsEditable] = useState<boolean>(false);
-  const [showParticipateBtn, setShowParticipateBtn] = useState<boolean>(false);
-  const [isErrorModalOpen, setIsErrorModalOpen] = useState<boolean>(false); // 오류 모달 상태
+  const [showParticipateBtn, setShowParticipateBtn] = useState<boolean>();
+  const [isErrorModalOpen, setIsErrorModalOpen] = useState<boolean>(false);
   const [editTimeout, setEditTimeout] = useState<NodeJS.Timeout | null>(null);
   const [isModalVisible, setModalVisible] = useState(false);
   const [securityAnswer, setSecurityAnswer] = useState<string>('');
 
-  const closeModal = () => setModalVisible(false);
+  const router = useRouter();
+  const { code } = router.query;
 
   // 모달 토글
   const handleModalToggle = () => {
     setModalVisible(!isModalVisible);
+  };
+
+  const closeModal = (type: 'error' | 'quiz') => {
+    if (type === 'error') {
+      setIsErrorModalOpen(false);
+    } else if (type === 'quiz') {
+      setModalVisible(false);
+    }
   };
 
   // 데이터 조회
@@ -46,25 +53,9 @@ const Wiki = (props: WikiProps) => {
     try {
       const response = await getProfileByCode(code);
       const data = response.data;
-
-      const userId = localStorage.getItem('userId');
-      const userProfileCode = localStorage.getItem('userProfileCode');
-
-      // 참여 가능 여부 확인
-      if (
-        userId !== null &&
-        data.id === Number(userId) &&
-        data.code === userProfileCode
-      ) {
-        setIsEditable(true);
-      } else {
-        setIsEditable(false);
-      }
-
       setProfile(data);
-
-      // 섹션 데이터가 존재하는 경우 설정
       setSectionsData(profile.content || []);
+      console.log('sectionsData', sectionsData);
     } catch (err) {
       console.error(err);
     }
@@ -74,15 +65,6 @@ const Wiki = (props: WikiProps) => {
   const checkEditStatus = useCallback(async (code: string) => {
     try {
       const response = await checkProfileEditStatus(code);
-      const data = response.data; // registeredAt, userId
-      console.log('data' + data);
-
-      if (response.status === 200) {
-        setShowParticipateBtn(true);
-      } else {
-        setShowParticipateBtn(false);
-        console.log('response.status: ', response.status);
-      }
     } catch (err) {
       console.error(err);
     }
@@ -96,50 +78,90 @@ const Wiki = (props: WikiProps) => {
 
     const timer = setTimeout(() => {
       setIsErrorModalOpen(true); // 5분 후 오류 모달 띄우기
+      setIsEditable(false);
     }, 300000); // 5분 = 300,000ms
 
     setEditTimeout(timer);
   };
 
+  // Quiz 컴포넌트에서 securityAnswer 받아오기
   const handleAnswerSubmit = (answer: string) => {
     setSecurityAnswer(answer);
   };
 
   // 수정 완료 처리
-  const handleEditComplete = async () => {
+  const handleEditComplete = async (updatedProfile: ProfileDetail) => {
     if (editTimeout) {
       clearTimeout(editTimeout);
     }
 
     try {
-      if (profile) {
-        await updateProfile(profile.code, {
-          securityAnswer: props.securityAnswer,
-          securityQuestion: profile.securityQuestion,
-          nationality: profile.nationality,
-          family: profile.family,
-          bloodType: profile.bloodType,
-          nickname: profile.nickname,
-          birthday: profile.birthday,
-          sns: profile.sns,
-          job: profile.job,
-          mbti: profile.mbti,
-          city: profile.city,
-          image: profile.image,
-          content: profile.content,
+      if (updatedProfile) {
+        await updateProfiles(profile.code, {
+          // patch api
+          securityAnswer: profile.securityAnswer,
+          securityQuestion: updatedProfile.securityQuestion,
+          nationality: updatedProfile.nationality,
+          family: updatedProfile.family,
+          bloodType: updatedProfile.bloodType,
+          nickname: updatedProfile.nickname,
+          birthday: updatedProfile.birthday,
+          sns: updatedProfile.sns,
+          job: updatedProfile.job,
+          mbti: updatedProfile.mbti,
+          city: updatedProfile.city,
+          image: updatedProfile.image,
+          content: updatedProfile.content,
         });
+
+        console.log('wiki updateProfiles', updatedProfile);
+
+        setProfile(updatedProfile);
+
+        // 수정 후 answer를 사용해 post api 호출
+        const response = await updateProfileEditStatus(profile.code, {
+          securityAnswer: securityAnswer,
+        });
+
+        console.log('API Response:', response.data);
+
+        setIsEditable(false);
       }
     } catch (err) {
-      console.error('Error updating profile:', err);
+      console.error(err);
     }
   };
 
   useEffect(() => {
-    if (typeof code === 'string') {
-      getList(code);
-      checkEditStatus(code);
+    const fetchData = async () => {
+      if (typeof code === 'string') {
+        await getList(code);
+        const response = await checkProfileEditStatus(code);
+        console.log('checkProfileEditStatus API Response:', response);
+        if (response.status === 200) {
+          setShowParticipateBtn(true);
+          console.log('showParticipateBtn', showParticipateBtn);
+        } else {
+          setShowParticipateBtn(false);
+        }
+      }
+    };
+    fetchData();
+  }, [code, showParticipateBtn]);
+
+  useEffect(() => {
+    if (isEditable) {
+      startEditTimer();
+    } else if (editTimeout) {
+      clearTimeout(editTimeout);
     }
-  }, [code, getList, checkEditStatus]);
+  }, [isEditable]);
+
+  useEffect(() => {
+    if (profile) {
+      console.log('Profile updated:', profile);
+    }
+  }, [profile]);
 
   if (!profile) {
     return <div>Loading...</div>;
@@ -150,8 +172,9 @@ const Wiki = (props: WikiProps) => {
       <div
         className={clsx(styles['container'], {
           [styles['non-editable']]: !isEditable,
+          [styles['non-editable-no-data']]:
+            !isEditable && sectionsData.length === 0,
           [styles['editable']]: isEditable,
-          [styles['no-data']]: sectionsData.length === 0,
         })}
       >
         <main className={styles['wiki-main']}>
@@ -159,6 +182,7 @@ const Wiki = (props: WikiProps) => {
           <WikiHeader
             className={styles['wiki-header']}
             profile={profile}
+            sections={sectionsData}
             isEditable={isEditable}
             onParticipateClick={handleModalToggle}
             checkEditStatus={checkEditStatus}
@@ -178,7 +202,9 @@ const Wiki = (props: WikiProps) => {
           <WikiAside
             className={styles['wiki-aside']}
             profile={profile}
+            setProfile={setProfile}
             isEditable={isEditable}
+            setIsEditable={setIsEditable}
             onEditComplete={handleEditComplete}
           />
         </main>
@@ -197,7 +223,22 @@ const Wiki = (props: WikiProps) => {
               onAnswerSubmit={handleAnswerSubmit}
             />
           )}
-          onClose={closeModal}
+          onClose={() => closeModal('quiz')}
+        />
+      )}
+
+      {isErrorModalOpen && (
+        <Modal
+          size="large"
+          contents={({ size }) => (
+            <Alert
+              title="5분 이상 글을 쓰지 않아 접속이 끊어졌어요."
+              description="위키 참여하기를 통해 다시 위키를 수정해 주세요."
+              content="확인"
+              size={size}
+            />
+          )}
+          onClose={() => closeModal('error')}
         />
       )}
     </>

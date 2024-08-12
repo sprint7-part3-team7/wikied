@@ -33,6 +33,7 @@
       margin-top: 40px;
       margin-bottom: 56px;
       box-sizing: border-box;
+      gap: 31px;
     }
 
     .wiki-article {
@@ -93,7 +94,8 @@
       grid-column: 2;
       grid-row: 2;
       box-sizing: border-box;
-      margin-top: 60px;
+      // margin-top: 60px;
+      grid-row: 1 / span 2;
     }
 
     .wiki-aside {
@@ -105,9 +107,17 @@
   }
 }
 
-// 컨텐츠 없음
-.no-data {
+// 비수정 모드 + 컨텐츠 없음
+.non-editable-no-data {
   padding-top: 40px;
+
+  .wiki-main {
+    grid-template-columns: minmax(60px, 1fr) minmax(0, 859px) 81px 320px 200px;
+
+    .space1 {
+      height: 16px;
+    }
+  }
 }
 
 // 모달
@@ -154,6 +164,7 @@
       .wiki-header {
         grid-area: header;
         margin: 0 auto;
+        gap: 20px;
       }
 
       .space1 {
@@ -182,7 +193,7 @@
 
   // 수정 모드
   .editable {
-    padding: 47px 60px 0 47px;
+    padding: 47px 60px 0 60px;
 
     .wiki-main {
       display: grid;
@@ -230,13 +241,20 @@
         grid-area: article;
         grid-row: 6;
         margin-top: 0;
+        grid-row: 4 / span3;
       }
     }
   }
 
-  // 컨텐츠 없음
-  .no-data {
-    padding-top: 60px;
+  // 비수정 모드 + 컨텐츠 없음
+  .non-editable-no-data {
+    .wiki-main {
+      grid-template-rows: 111px 16px auto 60px 192px;
+
+      .space1 {
+        height: 16px;
+      }
+    }
   }
 }
 
@@ -278,9 +296,14 @@
     }
   }
 
-  // 컨텐츠 없음
-  .no-data {
-    margin-top: 40px;
-    padding-top: 0;
+  // 비수정 모드 + 컨텐츠 없음
+  .non-editable-no-data {
+    .wiki-main {
+      grid-template-rows: 97px 16px auto 40px 184px;
+
+      .space1 {
+        height: 16px;
+      }
+    }
   }
 }

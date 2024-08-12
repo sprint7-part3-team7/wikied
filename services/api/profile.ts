@@ -21,7 +21,7 @@ export const getProfileByCode = (code: string) => {
 
 export const addProfiles = (profileData: ProfileRequest) => {
   return authAxiosInstance.post<Profile>('/profiles', profileData);
-}
+};
 
 export const checkProfileEditStatus = (code: string) => {
   return authAxiosInstance.get<{ registeredAt: string; userId: number }>(
@@ -32,12 +32,10 @@ export const checkProfileEditStatus = (code: string) => {
 export const updateProfileEditStatus = (
   code: string,
   payload: { securityAnswer: string },
-  config?: object,
 ) => {
   return authAxiosInstance.post<ProfileEditStatus>(
     `/profiles/${code}/ping`,
     payload,
-    config,
   );
 };
 
@@ -60,4 +58,14 @@ export const updateProfile = (
   },
 ) => {
   return authAxiosInstance.patch<ProfileDetail>(`/profiles/${code}`, payload);
+};
+
+export const updateProfiles = (code: string, formData: FormData) => {
+  return authAxiosInstance.patch<ProfileDetail>(`/profiles/${code}`, formData);
+};
+
+export const imageFileToUrl = (image: File) => {
+  const formData = new FormData();
+  formData.append('image', image);
+  return authAxiosInstance.post<{ url: string }>('/images/upload', formData);
 };
