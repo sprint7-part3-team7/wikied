@@ -47,6 +47,28 @@
     }
   }
 }
+
+.header-one {
+  font-size: 2em;
+  font-weight: bold;
+  margin-top: 0.67em;
+  margin-bottom: 0.67em;
+}
+
+.header-two {
+  font-size: 1.5em;
+  font-weight: bold;
+  margin-top: 0.83em;
+  margin-bottom: 0.83em;
+}
+
+.header-three {
+  font-size: 1.17em;
+  font-weight: bold;
+  margin-top: 1em;
+  margin-bottom: 1em;
+}
+
 @media screen and (max-width: $tablet-max-width) {
   .editor-outer-container {
     width: 100%;

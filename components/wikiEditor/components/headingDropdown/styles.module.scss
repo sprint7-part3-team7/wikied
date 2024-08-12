@@ -10,14 +10,13 @@
   background: none;
   border: none;
   padding: 0;
-  @include Flex(row, center, center); // 추가: 수평 중앙 정렬
-
+  @include Flex(row, center, center);
 }
 
 .dropdown-title {
   @include Size(80px, auto);
-  white-space: nowrap; // 추가: 텍스트가 줄 바꿈 없이 한 줄로 유지되도록 설정
-  margin-right: 8px; // 추가: 화살표 아이콘과의 간격 조정
+  white-space: nowrap;
+  margin-right: 8px;
 }
 
 .dropdown-menu {
