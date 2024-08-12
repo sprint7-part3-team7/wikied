@@ -21,7 +21,7 @@ interface WikiEditorProps {
   profile: ProfileDetail;
 }
 
-const WikiEditor = ({profile}: WikiEditorProps) => {
+const WikiEditor = ({ profile }: WikiEditorProps) => {
   const [editorState, setEditorState] = useState<EditorState | null>(null);
   const [title, setTitle] = useState('');
   const [isSubmitEnabled, setIsSubmitEnabled] = useState(false);

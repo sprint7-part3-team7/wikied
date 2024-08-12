@@ -11,6 +11,7 @@ interface WikiArticleProps {
   onParticipateClick: () => void;
   checkEditStatus: (code: string) => Promise<any>;
   isEditable: boolean;
+  onContentStateChange: (contentState: any) => void;
 }
 
 const WikiArticle = ({
@@ -20,6 +21,7 @@ const WikiArticle = ({
   onParticipateClick,
   checkEditStatus,
   isEditable,
+  onContentStateChange,
 }: WikiArticleProps) => {
   const checkParticipationStatus = useCallback(async () => {
     try {
@@ -42,7 +44,12 @@ const WikiArticle = ({
         <div className={styles['grid-item']}>
           <span className={styles['wiki-article-content']}>
             {/* 여기에 에디터 컴포넌트 추가 */}
-            <WikiEditor profile={profile} />
+            <WikiEditor
+              profile={profile}
+              onContentStateChange={(contentState) => {
+                console.log('contentState', contentState);
+              }
+            />
           </span>
         </div>
       ) : (

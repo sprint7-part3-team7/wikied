@@ -15,6 +15,7 @@ import Quiz from '@/components/modal/components/quiz';
 import styles from '@/pages/wiki/[code]/styles.module.scss';
 import Modal from '@/components/modal';
 import Alert from '@/components/modal/components/alert';
+import { EditorState } from 'draft-js';
 
 interface WikiProps {
   className: string;
@@ -31,9 +32,12 @@ const Wiki = (props: WikiProps) => {
   const [editTimeout, setEditTimeout] = useState<NodeJS.Timeout | null>(null);
   const [isModalVisible, setModalVisible] = useState(false);
   const [securityAnswer, setSecurityAnswer] = useState<string>('');
+  const [contentState, setContentState] = useState<any>(null);
 
   const router = useRouter();
   const { code } = router.query;
+
+  console.log('contentState', contentState);
 
   // 모달 토글
   const handleModalToggle = () => {
@@ -89,6 +93,11 @@ const Wiki = (props: WikiProps) => {
     setSecurityAnswer(answer);
   };
 
+  // WikiEditor에서 텍스트 받아오기
+  const handleContentStateChange = useCallback((newContentState: any) => {
+    setContentState(newContentState);
+  }, []);
+
   // 수정 완료 처리
   const handleEditComplete = async (updatedProfile: ProfileDetail) => {
     if (editTimeout) {
@@ -97,6 +106,8 @@ const Wiki = (props: WikiProps) => {
 
     try {
       if (updatedProfile) {
+        console.log('contentState', contentState);
+
         await updateProfiles(profile.code, {
           // patch api
           securityAnswer: profile.securityAnswer,
@@ -111,7 +122,7 @@ const Wiki = (props: WikiProps) => {
           mbti: updatedProfile.mbti,
           city: updatedProfile.city,
           image: updatedProfile.image,
-          content: updatedProfile.content,
+          content: contentState,
         });
 
         console.log('wiki updateProfiles', updatedProfile);
@@ -206,6 +217,7 @@ const Wiki = (props: WikiProps) => {
             isEditable={isEditable}
             setIsEditable={setIsEditable}
             onEditComplete={handleEditComplete}
+            contentState={contentState}
           />
         </main>
       </div>

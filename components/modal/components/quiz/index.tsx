@@ -1,5 +1,4 @@
 import Image from 'next/image';
-import closeIcon from '@/assets/icons/ic_close.svg';
 import lockIcon from '@/assets/icons/ic_lock.svg';
 import Input from '@/components/input';
 import styles from '@/components/modal/components/quiz/styles.module.scss';
@@ -14,7 +13,7 @@ interface QuizProps {
   setIsEditable: (editable: boolean) => void;
   setIsModalOpen: (open: boolean) => void;
   securityQuestion: string;
-  onAnswerSubmit: (answer: string) => Promise<void>; // 추가
+  onAnswerSubmit: (answer: string) => void;
 }
 
 const Quiz = ({
@@ -23,7 +22,7 @@ const Quiz = ({
   setIsEditable,
   setIsModalOpen,
   securityQuestion,
-  onAnswerSubmit, // 추가
+  onAnswerSubmit,
 }: QuizProps) => {
   const [answer, setAnswer] = useState<string>('');
   const [errorMessage, setErrorMessage] = useState<string>('');
