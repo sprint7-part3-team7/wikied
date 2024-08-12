@@ -4,9 +4,9 @@ import { useRouter } from 'next/router';
 import styles from './styles.module.scss';
 
 const AddBoard = () => {
-    const router = useRouter();
+  const router = useRouter();
 
-    const handleBackButtonClick = () => {
+  const handleBackButtonClick = () => {
     router.push('/boards');
   };
 

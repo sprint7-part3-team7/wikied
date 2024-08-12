@@ -8,7 +8,6 @@ import UserProfile from './components/userProfile';
 import { useAuth } from '@/contexts/AuthProvider';
 import DeskMenu from './components/deskMenu';
 
-
 const Header = () => {
   const [isMobileMenu, setIsMobileMenu] = useState(false);
   const [isDeskMenuOpen, setIsDeskMenuOpen] = useState(false);
@@ -20,7 +19,7 @@ const Header = () => {
 
   const deskMenu = () => {
     setIsDeskMenuOpen((prev) => !prev);
-    console.log(isDeskMenuOpen)
+    console.log(isDeskMenuOpen);
   };
 
   const handleMenuClose = () => {

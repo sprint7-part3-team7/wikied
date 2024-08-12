@@ -33,7 +33,10 @@ const Toast = ({ message, type, onClose, duration = 2000 }: ToastProps) => {
         <p>{message}</p>
       </div>
       <div className={styles['progress-bar-wrapper']}>
-        <div className={styles['progress-bar']} style={{ width: `${progress}%` }} />
+        <div
+          className={styles['progress-bar']}
+          style={{ width: `${progress}%` }}
+        />
       </div>
     </div>
   );

@@ -60,7 +60,8 @@ const UserWikiList = () => {
             {searchTerm && (
               <>
                 "{searchTerm}"님을 총{' '}
-                <span className={styles['total-count']}>{totalCount}</span>명 찾았습니다.
+                <span className={styles['total-count']}>{totalCount}</span>명
+                찾았습니다.
               </>
             )}
           </div>
