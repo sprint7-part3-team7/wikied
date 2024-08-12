@@ -45,4 +45,5 @@ export type AuthResponseType = {
   user: User;
   accessToken: string;
   refreshToken: string;
+  password?: string;
 };
