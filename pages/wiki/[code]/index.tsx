@@ -95,41 +95,41 @@ const Wiki = (props: WikiProps) => {
       clearTimeout(editTimeout);
     }
 
-    try {
-      if (updatedProfile) {
-        await updateProfiles(profile.code, {
-          // patch api
-          securityAnswer: profile.securityAnswer,
-          securityQuestion: updatedProfile.securityQuestion,
-          nationality: updatedProfile.nationality,
-          family: updatedProfile.family,
-          bloodType: updatedProfile.bloodType,
-          nickname: updatedProfile.nickname,
-          birthday: updatedProfile.birthday,
-          sns: updatedProfile.sns,
-          job: updatedProfile.job,
-          mbti: updatedProfile.mbti,
-          city: updatedProfile.city,
-          image: updatedProfile.image,
-          content: updatedProfile.content,
-        });
+  //   try {
+  //     if (updatedProfile) {
+  //       await updateProfiles(profile.code, {
+  //         // patch api
+  //         securityAnswer: profile.securityAnswer,
+  //         securityQuestion: updatedProfile.securityQuestion,
+  //         nationality: updatedProfile.nationality,
+  //         family: updatedProfile.family,
+  //         bloodType: updatedProfile.bloodType,
+  //         nickname: updatedProfile.nickname,
+  //         birthday: updatedProfile.birthday,
+  //         sns: updatedProfile.sns,
+  //         job: updatedProfile.job,
+  //         mbti: updatedProfile.mbti,
+  //         city: updatedProfile.city,
+  //         image: updatedProfile.image,
+  //         content: updatedProfile.content,
+  //       });
 
-        console.log('wiki updateProfiles', updatedProfile);
+  //       console.log('wiki updateProfiles', updatedProfile);
 
-        setProfile(updatedProfile);
+  //       setProfile(updatedProfile);
 
-        // 수정 후 answer를 사용해 post api 호출
-        const response = await updateProfileEditStatus(profile.code, {
-          securityAnswer: securityAnswer,
-        });
+  //       // 수정 후 answer를 사용해 post api 호출
+  //       const response = await updateProfileEditStatus(profile.code, {
+  //         securityAnswer: securityAnswer,
+  //       });
 
-        console.log('API Response:', response.data);
+  //       console.log('API Response:', response.data);
 
-        setIsEditable(false);
-      }
-    } catch (err) {
-      console.error(err);
-    }
+  //       setIsEditable(false);
+  //     }
+  //   } catch (err) {
+  //     console.error(err);
+  //   }
   };
 
   useEffect(() => {
@@ -182,11 +182,10 @@ const Wiki = (props: WikiProps) => {
           <WikiHeader
             className={styles['wiki-header']}
             profile={profile}
-            sections={sectionsData}
             isEditable={isEditable}
             onParticipateClick={handleModalToggle}
             checkEditStatus={checkEditStatus}
-            showParticipateBtn={showParticipateBtn}
+            showParticipateBtn={showParticipateBtn ?? false}
             code={typeof code === 'string' ? code : ''}
           />
           <div className={styles['space1']}></div>

@@ -1,4 +1,4 @@
-import { Profile, ProfileRequest } from '@/types/profile';
+import { Profile, ProfileRequest, UserInfo } from '@/types/profile';
 import { ProfileDetail, ProfileEditStatus, ProfileSummary } from '@/types/wiki';
 import { authAxiosInstance, publicAxiosInstance } from './axiosInstance';
 
@@ -68,4 +68,9 @@ export const imageFileToUrl = (image: File) => {
   const formData = new FormData();
   formData.append('image', image);
   return authAxiosInstance.post<{ url: string }>('/images/upload', formData);
+};
+
+
+export const getUserInfo = () => {
+  return authAxiosInstance.get<UserInfo>('/users/me');
 };

@@ -22,3 +22,15 @@ export interface ProfileRequest {
   securityQuestion: string;
   securityAnswer: string;
 }
+
+export interface UserInfo {
+  id: number;
+  name: string;
+  teamId: string;
+  createdAt: string;
+  updatedAt: string;
+  profile: {
+    id: number;
+    code: string;
+  };
+}
