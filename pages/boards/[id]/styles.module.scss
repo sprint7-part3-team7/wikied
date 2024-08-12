@@ -60,6 +60,12 @@
     }
   }
 
+  .like-button {
+    @include Size(18px, 18px);
+    padding: 0;
+    background-color: transparent;
+  }
+
   .like-count {
     @include Flex(row, flex-start, center);
     gap: 4px;
