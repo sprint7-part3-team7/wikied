@@ -18,7 +18,7 @@ import Image from 'next/image';
 import styles from './styles.module.scss';
 import likeIcon from '@/assets/icons/ic_heart.svg';
 import filledLikeIcon from '@/assets/icons/heart_fill.svg';
-import CommentList from './components/commentList';
+import CommentList from '../../../components/boards/commentList';
 import Button from '@/components/common/button';
 import editIcon from '@/assets/icons/ic_edit.svg';
 import deleteIcon from '@/assets/icons/ic_delete.svg';

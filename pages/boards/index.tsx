@@ -1,5 +1,5 @@
-import ArticleList from './components/articleList';
-import BestArticleList from './components/bestArticleList';
+import ArticleList from "@/components/boards/articleList";
+import BestArticleList from "@/components/boards/bestArticleList";
 
 const Boards = () => {
   return (
