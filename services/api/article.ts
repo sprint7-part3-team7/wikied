@@ -41,3 +41,10 @@ export const updateArticle = (
 export const deleteArticle = (articleId: number) => {
   return authAxiosInstance.delete<void>(`/articles/${articleId}`);
 };
+
+export const imageUpload = (formData: FormData) => {
+  return authAxiosInstance.post<{ url: string }>(
+    '/images/upload',
+    formData,
+  );
+};
