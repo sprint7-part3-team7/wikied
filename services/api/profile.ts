@@ -1,10 +1,5 @@
-import { Profile, ProfileRequest } from '@/types/profile';
-import {
-  ProfileDetail,
-  ProfileEditStatus,
-  ProfileSummary,
-  UserInfo,
-} from '@/types/wiki';
+import { Profile, ProfileRequest, UserInfo } from '@/types/profile';
+import { ProfileDetail, ProfileEditStatus, ProfileSummary } from '@/types/wiki';
 import { authAxiosInstance, publicAxiosInstance } from './axiosInstance';
 
 interface ProfileResponse {
@@ -63,10 +58,6 @@ export const updateProfile = (
   },
 ) => {
   return authAxiosInstance.patch<ProfileDetail>(`/profiles/${code}`, payload);
-};
-
-export const updateProfiles = (code: string, formData: FormData) => {
-  return authAxiosInstance.patch<ProfileDetail>(`/profiles/${code}`, formData);
 };
 
 export const imageFileToUrl = (image: File) => {

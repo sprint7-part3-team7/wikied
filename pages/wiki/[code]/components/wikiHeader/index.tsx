@@ -75,7 +75,7 @@ const WikiHeader = ({
       await checkEditStatus(profile.code);
     } catch (error) {
       console.error('Error during checkEditStatus:', error);
-      handleError(); // Handle errors here if needed
+      handleError();
     }
   }, [checkEditStatus, profile.code]);
 

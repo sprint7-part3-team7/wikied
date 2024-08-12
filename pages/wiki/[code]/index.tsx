@@ -4,7 +4,7 @@ import clsx from 'clsx';
 import {
   checkProfileEditStatus,
   getProfileByCode,
-  updateProfiles,
+  updateProfile,
   updateProfileEditStatus,
 } from '@/services/api/profile';
 import { ProfileDetail, Section } from '@/types/wiki';
@@ -98,35 +98,24 @@ const Wiki = (props: WikiProps) => {
 
     try {
       if (updatedProfile) {
-        // FormData 객체 생성
-        const formData = new FormData();
+        await updateProfile(profile.code, {
+          // patch api
+          securityAnswer: securityAnswer,
+          securityQuestion: updatedProfile.securityQuestion,
+          nationality: updatedProfile.nationality,
+          family: updatedProfile.family,
+          bloodType: updatedProfile.bloodType,
+          nickname: updatedProfile.nickname,
+          birthday: updatedProfile.birthday,
+          sns: updatedProfile.sns,
+          job: updatedProfile.job,
+          mbti: updatedProfile.mbti,
+          city: updatedProfile.city,
+          image: updatedProfile.image,
+          content: updatedProfile.content,
+        });
 
-        // 프로필 데이터를 FormData에 추가
-        formData.append('securityAnswer', securityAnswer); // securityAnswer 추가
-        formData.append(
-          'securityQuestion',
-          updatedProfile.securityQuestion || '',
-        );
-        formData.append('nationality', updatedProfile.nationality || '');
-        formData.append('family', updatedProfile.family || '');
-        formData.append('bloodType', updatedProfile.bloodType || '');
-        formData.append('nickname', updatedProfile.nickname || '');
-        formData.append('birthday', updatedProfile.birthday || '');
-        formData.append('sns', updatedProfile.sns || '');
-        formData.append('job', updatedProfile.job || '');
-        formData.append('mbti', updatedProfile.mbti || '');
-        formData.append('city', updatedProfile.city || '');
-        if (updatedProfile.image) {
-          formData.append('image', updatedProfile.image);
-        }
-        if (updatedProfile.content) {
-          formData.append('content', JSON.stringify(updatedProfile.content));
-        }
-
-        // FormData로 API 호출
-        await updateProfiles(profile.code, formData);
-
-        console.log('wiki updateProfiles', updatedProfile);
+        console.log('wiki updateProfile', updatedProfile);
 
         setProfile(updatedProfile);
 
