@@ -21,6 +21,7 @@ import editIcon from '@/assets/icons/ic_edit.svg';
 import deleteIcon from '@/assets/icons/ic_delete.svg';
 import { useAuth } from '@/contexts/AuthProvider';
 import DOMPurify from 'dompurify';
+import axios from 'axios';
 
 const ArticleDetailPage = () => {
   const router = useRouter();
@@ -74,8 +75,11 @@ const ArticleDetailPage = () => {
       await postComment(articleId, newComment);
       await fetchComments();
     } catch (error) {
-      console.error('Failed to add comment:', error);
-      alert('댓글 등록에 실패했습니다.');
+      if (axios.isAxiosError(error) && error.message) {
+        alert(error.message);
+      } else {
+        alert('댓글 등록에 실패했습니다.');
+      }
     }
   };
 
@@ -84,7 +88,7 @@ const ArticleDetailPage = () => {
       await deleteComment(commentId);
       await fetchComments();
     } catch (error) {
-      console.error('Failed to delete comment:', error);
+      console.error(error);
       alert('댓글 삭제에 실패했습니다.');
     }
   };
@@ -94,7 +98,7 @@ const ArticleDetailPage = () => {
       await patchComment(commentId, newContent);
       await fetchComments();
     } catch (error) {
-      console.error('Failed to edit comment:', error);
+      console.error(error);
       alert('댓글 수정에 실패했습니다.');
     }
   };
@@ -133,7 +137,7 @@ const ArticleDetailPage = () => {
   }
 
   if (!article) {
-    return <div>Article not found</div>;
+    return <div>게시글이 존재하지 않습니다.</div>;
   }
 
   return (

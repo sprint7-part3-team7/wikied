@@ -2,7 +2,6 @@ import { useCallback } from 'react';
 import { ProfileDetail, Section } from '@/types/wiki';
 import Button from '@/components/button';
 import styles from '@/pages/wiki/[code]/components/wikiArticle/styles.module.scss';
-import Editor from '@/components/editor';
 import WikiEditor from '@/components/wikiEditor';
 
 interface WikiArticleProps {
@@ -43,7 +42,7 @@ const WikiArticle = ({
         <div className={styles['grid-item']}>
           <span className={styles['wiki-article-content']}>
             {/* 여기에 에디터 컴포넌트 추가 */}
-            <WikiEditor />
+            <WikiEditor profile={profile} />
           </span>
         </div>
       ) : (
