@@ -2,6 +2,8 @@ import {
   getArticleById,
   updateArticle,
   deleteArticle,
+  postLike,
+  deleteLike,
 } from '@/services/api/article';
 import {
   deleteComment,
@@ -15,12 +17,14 @@ import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import styles from './styles.module.scss';
 import likeIcon from '@/assets/icons/ic_heart.svg';
+import filledLikeIcon from '@/assets/icons/heart_fill.svg';
 import CommentList from './components/commentList';
 import Button from '@/components/button';
 import editIcon from '@/assets/icons/ic_edit.svg';
 import deleteIcon from '@/assets/icons/ic_delete.svg';
 import { useAuth } from '@/contexts/AuthProvider';
 import DOMPurify from 'dompurify';
+import axios from 'axios';
 
 const ArticleDetailPage = () => {
   const router = useRouter();
@@ -29,53 +33,59 @@ const ArticleDetailPage = () => {
   const [comments, setComments] = useState<Comment[]>([]);
   const [loading, setLoading] = useState(true);
   const [isAuthor, setIsAuthor] = useState(false);
+  const [isLiked, setIsLiked] = useState(false);
   const articleId = Number(Array.isArray(id) ? id[0] : id);
   const { user } = useAuth();
 
+  const fetchArticle = async () => {
+    if (!articleId) return;
+
+    try {
+      const articleResponse = await getArticleById(articleId);
+      const articleData = articleResponse.data;
+
+      articleData.content = articleData.content.replace(/<img.*?>/g, '');
+      setArticle(articleData);
+
+      setIsAuthor(user?.id === articleData.writer.id);
+      setIsLiked(articleData.isLiked === true);
+    } catch (error) {
+      console.error('Failed to fetch article:', error);
+      alert('게시글을 불러오는데 실패했습니다.');
+    } finally {
+      setLoading(false);
+    }
+  };
+
   const fetchComments = async () => {
+    if (!articleId) return;
+
     try {
       const commentsResponse = await getArticleComments(articleId);
       setComments(commentsResponse.data.list);
     } catch (error) {
-      console.error(error);
+      console.error('Failed to fetch comments:', error);
+      alert('댓글을 불러오는데 실패했습니다.');
     }
   };
 
   useEffect(() => {
-    if (id) {
-      const fetchArticleAndComments = async () => {
-        try {
-          const [articleResponse, commentsResponse] = await Promise.all([
-            getArticleById(articleId),
-            getArticleComments(articleId),
-          ]);
-
-          const articleData = articleResponse.data;
-          const commentsData = commentsResponse.data;
-
-          articleData.content = articleData.content.replace(/<img.*?>/g, '');
-          setArticle(articleData);
-          setComments(commentsData.list);
-
-          setIsAuthor(user?.id === articleData.writer.id);
-        } catch (error) {
-          console.log(error);
-          alert('게시글을 불러오는데 실패했습니다.');
-        } finally {
-          setLoading(false);
-        }
-      };
-      fetchArticleAndComments();
+    if (articleId) {
+      fetchArticle();
+      fetchComments();
     }
-  }, [id, user]);
+  }, [articleId, user]);
 
   const handleAddComment = async (newComment: string) => {
     try {
       await postComment(articleId, newComment);
       await fetchComments();
     } catch (error) {
-      console.error('Failed to add comment:', error);
-      alert('댓글 등록에 실패했습니다.');
+      if (axios.isAxiosError(error) && error.message) {
+        alert(error.message);
+      } else {
+        alert('댓글 등록에 실패했습니다.');
+      }
     }
   };
 
@@ -84,7 +94,7 @@ const ArticleDetailPage = () => {
       await deleteComment(commentId);
       await fetchComments();
     } catch (error) {
-      console.error('Failed to delete comment:', error);
+      console.error(error);
       alert('댓글 삭제에 실패했습니다.');
     }
   };
@@ -94,7 +104,7 @@ const ArticleDetailPage = () => {
       await patchComment(commentId, newContent);
       await fetchComments();
     } catch (error) {
-      console.error('Failed to edit comment:', error);
+      console.error(error);
       alert('댓글 수정에 실패했습니다.');
     }
   };
@@ -128,12 +138,39 @@ const ArticleDetailPage = () => {
     }
   };
 
+  const handleLikeButtonClick = async () => {
+    if (!article) return;
+
+    try {
+      if (isLiked) {
+        await deleteLike(article.id);
+        setIsLiked(false);
+        setArticle((prev) =>
+          prev ? { ...prev, likeCount: prev.likeCount - 1 } : null,
+        );
+      } else {
+        await postLike(article.id);
+        setIsLiked(true);
+        setArticle((prev) =>
+          prev ? { ...prev, likeCount: prev.likeCount + 1 } : null,
+        );
+      }
+    } catch (error) {
+      if (axios.isAxiosError(error) && error.message) {
+        alert(error.message);
+      } else {
+        alert('좋아요 처리에 실패했습니다.');
+      }
+      fetchArticle();
+    }
+  };
+
   if (loading) {
     return <div>Loading...</div>;
   }
 
   if (!article) {
-    return <div>Article not found</div>;
+    return <div>게시글이 존재하지 않습니다.</div>;
   }
 
   return (
@@ -181,7 +218,12 @@ const ArticleDetailPage = () => {
               <span>{new Date(article.createdAt).toLocaleDateString()}</span>
             </div>
             <div className={styles['like-count']}>
-              <Image src={likeIcon} alt="likeIcon" width={18} />
+              <button
+                className={styles['like-button']}
+                onClick={handleLikeButtonClick}
+              >
+                <Image src={isLiked ? filledLikeIcon : likeIcon } alt="likeIcon" width={18} height={18} />
+              </button>
               <span>{article.likeCount}</span>
             </div>
           </div>
