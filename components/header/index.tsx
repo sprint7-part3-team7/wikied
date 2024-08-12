@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import styles from '@/components/header/styles.module.scss';
-import MobileMenu from './components/mobileMenu';
+import MobileMenu from './components/mobilemenu';
 import Logo from './components/logo';
 import List from './components/list';
 import GuestProfile from './components/guestProfile';
