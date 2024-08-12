@@ -1,5 +1,5 @@
 import styles from '@/pages/wikilist/styles.module.scss';
-import UserWikiList from './components/userWikiList';
+import UserWikiList from '@/components/wikilist/userWikiList';
 
 const Wikilist = () => {
   return (

@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
 import styles from './styles.module.scss';
 import LinkIcon from '@/assets/icons/ic_link.svg';
-import Image from 'next/image';
 import SnackBar from '@/components/common/snackbar';
+import Image from 'next/image';
 
 interface UserLinkProps {
   url: string;

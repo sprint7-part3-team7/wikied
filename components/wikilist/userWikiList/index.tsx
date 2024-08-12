@@ -1,9 +1,9 @@
 import { useState, useEffect, useCallback } from 'react';
 import styles from './styles.module.scss';
-import UserCard from './userWikiCard';
+import UserWikiCard from '@/components/wikilist/userWikiList/userWikiCard';
 import Pagination from '@/components/common/pagination';
 import SearchForm from '@/components/common/searchForm';
-import NotFound from '@/pages/wikilist/components/notFound';
+import NotFound from '@/components/wikilist/notFound';
 import { getProfiles } from '@/services/api/profile';
 import { ProfileSummary } from '@/types/wiki';
 
@@ -67,7 +67,7 @@ const UserWikiList = () => {
           </div>
           <div className={styles['user-list']}>
             {users.map((user) => (
-              <UserCard key={user.id} user={user} />
+              <UserWikiCard key={user.id} user={user} />
             ))}
           </div>
           <Pagination

@@ -2,7 +2,7 @@ import Link from 'next/link';
 import styles from './styles.module.scss';
 import { ProfileSummary } from '@/types/wiki';
 import DefaultProfileImg from '@/assets/icons/ic_profile.svg';
-import UserLink from './userWikiLink';
+import UserWikiLink from '@/components/wikilist/userWikiList/userWikiCard/userWikiLink';
 import Image from 'next/image';
 
 interface UserCardProps {
@@ -42,7 +42,7 @@ const UserWikiCard = ({ user }: UserCardProps) => {
         </div>
       </Link>
       <div className={styles['user-link-container']}>
-        <UserLink url={`https://www.wikied.kr/wiki/${user.code}`} />
+        <UserWikiLink url={`https://www.wikied.kr/wiki/${user.code}`} />
       </div>
     </div>
   );
