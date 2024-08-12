@@ -10,15 +10,27 @@ type MenuProps = {
 const DeskMenu = ({ handleMenuClose }: MenuProps) => {
   const router = useRouter();
   const menuRef = useRef<HTMLDivElement>(null);
+  const { logout } = useAuth();
+  const { user } = useAuth();
+  const code = user && user?.profile?.code;
+  
 
   const handleNavigation = (path: string) => {
     router.push(path);
     handleMenuClose();
   };
 
-  const { logout } = useAuth();
-  const { user } = useAuth();
-  const code = user?.profile?.code
+
+  const handleNavigationWiki = (path: string) => {
+    if(user && user?.profile?.code) {
+      router.push(path);
+    } else {
+      router.push('/mypage');
+    }
+    handleMenuClose();
+  };
+
+
 
   const handleLogoutClick = () => {
     logout();
@@ -49,7 +61,7 @@ const DeskMenu = ({ handleMenuClose }: MenuProps) => {
       </button>
       <button
         className={styles['menu-list']}
-        onClick={() => handleNavigation(`/wiki/${code}`)}
+        onClick={() => handleNavigationWiki(`/wiki/${code}`)}
       >
         내 위키
       </button>
