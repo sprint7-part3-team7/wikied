@@ -45,7 +45,7 @@
 }
 
 .comment-input-footer {
-  @include Flex(col, space-between, end);
+  @include Flex(column, space-between, flex-end);
   padding: 0 15px 13px;
   background-color: transparent;
 }

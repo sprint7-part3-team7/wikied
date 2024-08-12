@@ -11,7 +11,7 @@ import landing_10 from '@/assets/images/landing/landing_10.png';
 import landing_11 from '@/assets/images/landing/landing_11.png';
 import landing_12 from '@/assets/images/landing/landing_12.png';
 import Ellipse from '@/assets/icons/ic_Ellipse 22.svg';
-import Button from '@/components/button';
+import Button from '@/components/common/button';
 import { useRouter } from 'next/router';
 
 const Landing = () => {

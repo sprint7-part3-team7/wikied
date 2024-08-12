@@ -1,6 +1,6 @@
 import '@/styles/globals.scss';
 import type { AppProps } from 'next/app';
-import Header from '@/components/header';
+import Header from '@/components/common/header';
 import 'contenido/dist/styles.css';
 import { AuthProvider } from '@/contexts/AuthProvider';
 

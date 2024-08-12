@@ -4,7 +4,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { ProfileDetail } from '@/types/wiki';
 import UserAttribute from '@/pages/wiki/[code]/components/wikiAside/components/userAttribute';
 import { imageFileToUrl, getUserInfo } from '@/services/api/profile';
-import Button from '@/components/button';
+import Button from '@/components/common/button';
 import styles from '@/pages/wiki/[code]/components/wikiAside/styles.module.scss';
 import expandIcon from '@/assets/icons/ic_expand.svg';
 import fileUploadIcon from '@/assets/icons/ic_camera.svg';
@@ -42,7 +42,7 @@ const WikiAside = ({
   useEffect(() => {
     const fetchCurrentUser = async () => {
       try {
-        const response = await getUserInfo();
+        const response = await getUserInfo(); // 변경된 부분
         console.log('API Response:', response);
 
         const { data } = response; // 응답에서 데이터 추출

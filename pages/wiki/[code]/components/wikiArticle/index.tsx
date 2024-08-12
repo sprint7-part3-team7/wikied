@@ -1,8 +1,9 @@
 import { useCallback } from 'react';
 import { ProfileDetail, Section } from '@/types/wiki';
-import Button from '@/components/button';
+import Button from '@/components/common/button';
 import styles from '@/pages/wiki/[code]/components/wikiArticle/styles.module.scss';
-import WikiEditor from '@/components/wikiEditor';
+import Editor from '@/components/common/editor';
+import WikiEditor from '@/components/common/wikiEditor';
 
 interface WikiArticleProps {
   className: string;

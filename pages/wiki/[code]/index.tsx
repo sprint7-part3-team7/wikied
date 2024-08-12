@@ -11,10 +11,10 @@ import { ProfileDetail, Section } from '@/types/wiki';
 import WikiHeader from '@/pages/wiki/[code]/components/wikiHeader';
 import WikiArticle from '@/pages/wiki/[code]/components/wikiArticle';
 import WikiAside from '@/pages/wiki/[code]/components/wikiAside';
-import Quiz from '@/components/modal/components/quiz';
+import Quiz from '@/components/common/modal/components/quiz';
 import styles from '@/pages/wiki/[code]/styles.module.scss';
-import Modal from '@/components/modal';
-import Alert from '@/components/modal/components/alert';
+import Modal from '@/components/common/modal';
+import Alert from '@/components/common/modal/components/alert';
 
 interface WikiProps {
   className: string;

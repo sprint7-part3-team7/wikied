@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import styles from './styles.module.scss';
 import LinkIcon from '@/assets/icons/ic_link.svg';
 import Image from 'next/image';
-import SnackBar from '@/components/snackbar';
+import SnackBar from '@/components/common/snackbar';
 
 interface UserLinkProps {
   url: string;

@@ -1,8 +1,8 @@
 import { useState, ChangeEvent, FocusEvent, useEffect } from 'react';
 import styles from '@/pages/signup/styles.module.scss';
 import Link from 'next/link';
-import Button from '@/components/button';
-import Input from '@/components/input';
+import Button from '@/components/common/button';
+import Input from '@/components/common/input';
 import { SignupInputId, getErrorMessage } from '@/types/authUtils';
 import useDebounce from '@/hooks/useDebounce/useDebounce';
 import { publicAxiosInstance } from '@/services/api/axiosInstance';

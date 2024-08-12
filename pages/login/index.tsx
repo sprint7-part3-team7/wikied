@@ -5,8 +5,8 @@ import styles from '@/pages/login/styles.module.scss';
 import Link from 'next/link';
 import { useAuth } from '@/contexts/AuthProvider';
 import { LoginInputId, getErrorMessage } from '@/types/authUtils';
-import Button from '@/components/button';
-import Input from '@/components/input';
+import Button from '@/components/common/button';
+import Input from '@/components/common/input';
 import useDebounce from '@/hooks/useDebounce/useDebounce';
 import { AuthResponseType } from '@/types/auth';
 

@@ -1,8 +1,8 @@
 import { useState, useEffect, useCallback } from 'react';
 import styles from './styles.module.scss';
 import UserCard from './userWikiCard';
-import Pagination from '@/components/pagination';
-import SearchForm from '@/components/searchForm';
+import Pagination from '@/components/common/pagination';
+import SearchForm from '@/components/common/searchForm';
 import NotFound from '@/pages/wikilist/components/notFound';
 import { getProfiles } from '@/services/api/profile';
 import { ProfileSummary } from '@/types/wiki';

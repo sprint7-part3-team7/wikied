@@ -1,5 +1,5 @@
-import Editor from '@/components/editor';
-import Button from '@/components/button';
+import Editor from '@/components/common/editor';
+import Button from '@/components/common/button';
 import { useRouter } from 'next/router';
 import styles from './styles.module.scss';
 
