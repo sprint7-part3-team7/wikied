@@ -32,6 +32,7 @@ const Wiki = (props: WikiProps) => {
   const [isErrorModalOpen, setIsErrorModalOpen] = useState<boolean>(false); // 오류 모달 상태
   const [editTimeout, setEditTimeout] = useState<NodeJS.Timeout | null>(null);
   const [isModalVisible, setModalVisible] = useState(false);
+  const [securityAnswer, setSecurityAnswer] = useState<string>('');
 
   const closeModal = () => setModalVisible(false);
 
@@ -98,6 +99,10 @@ const Wiki = (props: WikiProps) => {
     }, 300000); // 5분 = 300,000ms
 
     setEditTimeout(timer);
+  };
+
+  const handleAnswerSubmit = (answer: string) => {
+    setSecurityAnswer(answer);
   };
 
   // 수정 완료 처리
@@ -189,6 +194,7 @@ const Wiki = (props: WikiProps) => {
               setIsModalOpen={setModalVisible}
               securityQuestion={profile.securityQuestion}
               size={size}
+              onAnswerSubmit={handleAnswerSubmit}
             />
           )}
           onClose={closeModal}
