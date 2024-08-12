@@ -1,20 +1,31 @@
 import { useState } from 'react';
 import styles from '@/components/header/styles.module.scss';
-import Menu from './components/menu';
+import MobileMenu from './components/mobileMenu';
 import Logo from './components/logo';
 import List from './components/list';
 import GuestProfile from './components/guestProfile';
 import UserProfile from './components/userProfile';
+import { useAuth } from '@/contexts/AuthProvider';
+import DeskMenu from './components/deskMenu';
 
-/**
- * 1. 로그인 기능 완성 되면 로직 변경 필요
- */
 
 const Header = () => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isMobileMenu, setIsMobileMenu] = useState(false);
+  const [isDeskMenuOpen, setIsDeskMenuOpen] = useState(false);
+  const { isLoggedIn } = useAuth();
 
-  const toggleMenu = () => {
-    setIsMenuOpen((prev) => !prev);
+  const mobileMenu = () => {
+    setIsMobileMenu((prev) => !prev);
+  };
+
+  const deskMenu = () => {
+    setIsDeskMenuOpen((prev) => !prev);
+    console.log(isDeskMenuOpen)
+  };
+
+  const handleMenuClose = () => {
+    setIsMobileMenu(false);
+    setIsDeskMenuOpen(false);
   };
 
   return (
@@ -24,10 +35,14 @@ const Header = () => {
         <List />
       </div>
       <div className={styles['login-wrapper']}>
-        <GuestProfile />
-        {/* <UserProfile toggleMenu={toggleMenu} /> */}
+        {isLoggedIn ? (
+          <UserProfile deskMenu={deskMenu} mobileMenu={mobileMenu} />
+        ) : (
+          <GuestProfile />
+        )}
       </div>
-      {/* {isMenuOpen && <Menu />} */}
+      {isMobileMenu && <MobileMenu handleMenuClose={handleMenuClose} />}
+      {isDeskMenuOpen && <DeskMenu handleMenuClose={handleMenuClose} />}
     </header>
   );
 };

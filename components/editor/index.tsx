@@ -5,6 +5,7 @@ import {
   convertToRaw,
   AtomicBlockUtils,
   ContentBlock,
+  RawDraftContentBlock,
 } from 'draft-js';
 import { Editor as DraftEditor } from 'draft-js';
 import 'draft-js/dist/Draft.css';
@@ -15,17 +16,21 @@ import { colorPalette } from '@/components/editor/components/colorPalette';
 import Media from '@/components/editor/components/media';
 import AddImage from '@/components/modal/components/addImage';
 import Modal from '../modal';
+import { useRouter } from 'next/router';
+import { imageUpload, postArticle } from '@/services/api/article';
+import { AxiosError } from 'axios';
+import { Options, RenderConfig, stateToHTML } from 'draft-js-export-html';
 
 const Editor = () => {
-  const [editorState, setEditorState] = useState<EditorState | null>(null);
+  const [editorState, setEditorState] = useState(() =>
+    EditorState.createEmpty(),
+  );
   const [title, setTitle] = useState('');
+  const [imageUrl, setImageUrl] = useState('');
   const [isSubmitEnabled, setIsSubmitEnabled] = useState(false);
   const [isImageModalOpen, setIsImageModalOpen] = useState(false);
+  const router = useRouter();
   const editorRef = useRef<DraftEditor | null>(null);
-
-  useEffect(() => {
-    setEditorState(EditorState.createEmpty());
-  }, []);
 
   const styleMap = {
     ...initialStyleMap,
@@ -34,9 +39,16 @@ const Editor = () => {
     ),
   };
 
+  const inlineStyles = Object.entries(styleMap).reduce<
+    Record<string, RenderConfig>
+  >((acc, [key, value]) => {
+    acc[key] = { style: value as React.CSSProperties };
+    return acc;
+  }, {});
+
   const checkSubmitEnabled = useCallback(() => {
-    const contentState = editorState?.getCurrentContent();
-    const hasText = contentState ? contentState.hasText() : false;
+    const contentState = editorState.getCurrentContent();
+    const hasText = contentState.hasText();
     const isTitleValid = title.trim().length > 0;
     setIsSubmitEnabled(isTitleValid && hasText);
   }, [editorState, title]);
@@ -67,29 +79,40 @@ const Editor = () => {
   );
 
   const handleImageUpload = useCallback(
-    (file: File) => {
-      const reader = new FileReader();
-      reader.onload = (e) => {
-        const src = e.target?.result as string;
-        const contentState = editorState!.getCurrentContent();
+    async (file: File) => {
+      const formData = new FormData();
+      formData.append('image', file);
+
+      try {
+        const response = await imageUpload(formData);
+        const uploadedImageUrl = response.data.url;
+        setImageUrl(response.data.url);
+        console.log('Image uploaded:', response.data.url);
+
+        const contentState = editorState.getCurrentContent();
         const contentStateWithEntity = contentState.createEntity(
           'IMAGE',
           'IMMUTABLE',
-          { src },
+          { src: uploadedImageUrl },
         );
         const entityKey = contentStateWithEntity.getLastCreatedEntityKey();
-        const newEditorState = EditorState.set(editorState!, {
+        const newEditorState = EditorState.set(editorState, {
           currentContent: contentStateWithEntity,
         });
-        handleEditorChange(
-          AtomicBlockUtils.insertAtomicBlock(newEditorState, entityKey, ' '),
+        const newState = AtomicBlockUtils.insertAtomicBlock(
+          newEditorState,
+          entityKey,
+          ' ',
         );
-      };
-      reader.readAsDataURL(file);
-      setIsImageModalOpen(false);
+        handleEditorChange(newState);
+        setIsImageModalOpen(false);
+      } catch (error) {
+        console.error('Image upload failed:', error);
+      }
     },
     [editorState],
   );
+
 
   const blockRendererFn = (contentBlock: ContentBlock) => {
     if (contentBlock.getType() === 'atomic') {
@@ -101,22 +124,94 @@ const Editor = () => {
     return null;
   };
 
-  const handleSubmit = () => {
-    if (editorState) {
+  const handleSubmit = async () => {
+    if (isSubmitEnabled) {
       const contentState = editorState.getCurrentContent();
-      const rawContent = convertToRaw(contentState);
-      console.log('Title:', title);
-      console.log('Content:', JSON.stringify(rawContent));
+      const rawContentState = convertToRaw(contentState);
+
+      const options: Options = {
+        inlineStyles: inlineStyles,
+        blockStyleFn: (block) => {
+          const alignment = block.getData().get('text-align');
+          if (alignment) {
+            return {
+              style: `text-align: ${alignment};`,
+            };
+          }
+          return {};
+        },
+        entityStyleFn: (entity: any) => {
+          const entityType = entity.get('type').toLowerCase();
+          if (entityType === 'image') {
+            const data = entity.getData();
+            return {
+              element: 'img',
+              attributes: {
+                src: data.src,
+                alt: data.alt || '',
+              },
+              style: {
+                maxWidth: '100%',
+                height: 'auto',
+              },
+            };
+          }
+        },
+      };
+
+      let htmlContent = stateToHTML(contentState, options);
+
+      htmlContent = htmlContent.replace(/<(ol|ul)>[\s\S]*?<\/\1>/g, (match) => {
+        return match.replace(
+          /<li([^>]*)>([\s\S]*?)<\/li>/g,
+          (liMatch, liAttributes, liContent) => {
+            const block = (
+              rawContentState.blocks as RawDraftContentBlock[]
+            ).find((b) => b.text.trim() === liContent.trim());
+            const alignment = block?.data?.['text-align'];
+            return alignment
+              ? `<li${liAttributes} style="text-align: ${alignment};">${liContent}</li>`
+              : liMatch;
+          },
+        );
+      });
+
+      const styledHtmlContent = htmlContent
+        .replace(
+          /<ul>/g,
+          '<ul style="list-style-type: disc; padding-left: 20px;">',
+        )
+        .replace(
+          /<ol>/g,
+          '<ol style="list-style-type: decimal; padding-left: 20px;">',
+        );
+
+      const articleData = {
+        title: title.trim(),
+        content: styledHtmlContent,
+        image:
+          imageUrl ||
+          'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRVoYGmUnYaMQR-BxOTuHivxnVnTK8ZPjzACw&s',
+      };
+
+      try {
+        const response = await postArticle(articleData);
+        console.log('Response:', response);
+        alert('게시물이 등록되었습니다.');
+        router.push(`/boards/${response.data.id}`);
+      } catch (error) {
+        console.error('Error details:', error);
+        const axiosError = error as AxiosError;
+        console.error('Error details:', axiosError.response?.data);
+        console.error('Error status:', axiosError.response?.status);
+        console.error('Error headers:', axiosError.response?.headers);
+      }
     }
   };
 
   const characterCount = editorState
-    ? editorState.getCurrentContent().getPlainText('').length
-    : 0;
-
-  if (!editorState) {
-    return <div>Loading editor...</div>;
-  }
+    .getCurrentContent()
+    .getPlainText('').length;
 
   return (
     <div className={styles['editor-wrapper']}>
@@ -150,7 +245,11 @@ const Editor = () => {
         />
         <span className={styles['title-count']}>
           <span className={styles['current-count']}>{title.length}/</span>
-          <span className={`${styles['max-count']} ${title.length > 29 ? styles['over-max'] : ''}`}>30</span>
+          <span
+            className={`${styles['max-count']} ${title.length > 29 ? styles['over-max'] : ''}`}
+          >
+            30
+          </span>
         </span>
       </div>
       <div className={styles['content-count']}>

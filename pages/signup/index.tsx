@@ -3,7 +3,7 @@ import styles from '@/pages/signup/styles.module.scss';
 import Link from 'next/link';
 import Button from '@/components/button';
 import Input from '@/components/input';
-import { SignupInputId, getErrorMessage } from './authUtils';
+import { SignupInputId, getErrorMessage } from '@/types/authUtils';
 import useDebounce from '@/hooks/useDebounce/useDebounce';
 import { publicAxiosInstance } from '@/services/api/axiosInstance';
 
@@ -106,21 +106,6 @@ const SignupPage = () => {
     }
   };
 
-  //   const { name, email, password, passwordConfirmation } = formState;
-  //   if (isValid) {
-  //     try {
-  //       const response = await axiosInstance.post('/auth/signUp', {
-  //         email,
-  //         name,
-  //         password,
-  //         passwordConfirmation,
-  //       });
-  //       console.log('회원가입 성공:', response.data);
-  //     } catch (error) {
-  //       console.error('회원가입 실패:', error);
-  //     }
-  //   }
-  // };
 
   return (
     <div className={styles['signup-container']}>

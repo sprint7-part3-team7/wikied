@@ -13,6 +13,7 @@ const UserWikiCard = ({ user }: UserCardProps) => {
   return (
     <div className={styles['user-card-container']}>
       <Link className={styles['user-card']} href={`/wiki/${user.code}`}>
+
         {user.image ? (
           <img
             src={user.image}
@@ -30,6 +31,7 @@ const UserWikiCard = ({ user }: UserCardProps) => {
             className={styles['profile-image']}
           />
         )}
+        
         <div className={styles['user-info']}>
           <div className={styles['user-name']}>{user.name}</div>
           <div className={styles['user-details']}>

@@ -4,10 +4,14 @@ import { getArticles } from '@/services/api/article';
 import { Article } from '@/types/article';
 import BestBoardCard from './bestArticleCard';
 import Button from '@/components/button';
+import Link from 'next/link';
+import { useAuth } from '@/contexts/AuthProvider';
 
 const BestArticleList = () => {
   const [bestBoards, setBestBoards] = useState<Article[]>([]);
   const [loading, setLoading] = useState(true);
+  const { isLoggedIn } = useAuth();
+
 
   const fetchArticles = async () => {
     try {
@@ -37,7 +41,11 @@ const BestArticleList = () => {
     <div className={styles['best-board-list']}>
       <div className={styles['best-board-header']}>
         <div className={styles['header']}>베스트 게시글</div>
-        <Button className={styles['add-board-button']}>게시물 등록하기</Button>
+        { isLoggedIn && (<Link href="/addboard">
+          <Button className={styles['add-board-button']} color="primary">
+            게시물 등록하기
+          </Button>
+        </Link>)}
       </div>
       <div className={styles['board-grid']}>
         {bestBoards.map((board) => (
