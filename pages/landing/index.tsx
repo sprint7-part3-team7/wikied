@@ -12,8 +12,19 @@ import landing_11 from '@/assets/images/landing/landing_11.png';
 import landing_12 from '@/assets/images/landing/landing_12.png';
 import Ellipse from '@/assets/icons/ic_Ellipse 22.svg';
 import Button from '@/components/button';
+import { useRouter } from 'next/router';
 
 const Landing = () => {
+  const router = useRouter();
+
+  /**
+   * @ TODO
+   * @ 로그인 되어있는 경우에 이동하게 해야 함
+   * @ 로그인이 안 되어있는 경우에는 /login 으로 이동하게 해야 함
+   */
+  const handleCreateWikiClick = () => {
+    router.push('/mypage');
+  };
   return (
     <>
       <div className={styles['landing-container']}>
@@ -28,6 +39,7 @@ const Landing = () => {
                 color="main-top"
                 size="x-large"
                 className={styles['main-page-top-button']}
+                onClick={handleCreateWikiClick}
               >
                 위키 만들기
               </Button>
