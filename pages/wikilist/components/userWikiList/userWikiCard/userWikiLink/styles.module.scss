@@ -27,6 +27,18 @@
   }
 }
 
+@media screen and (max-width: $mobile-max-width){
+  .link-text {
+    margin-left: 8px;
+    @include Font(
+      $font-size-xs,
+      $line-height-xs-18,
+      $font-weight-xs-regular,
+      $color-primary-green-200
+    );
+  }
+}
+
 .snackbar-wrapper {
   position: fixed;
   top: 120px;
