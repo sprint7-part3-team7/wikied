@@ -79,11 +79,11 @@ const LoginPage: React.FC = () => {
         const authResponse: AuthResponseType = response.data;
         login(authResponse);
         console.log('로그인 성공:', response.data);
-        alert('로그인이 완료되었습니다.');
+        alert('성공적으로 로그인 되었어요 😃');
         router.push('/landing');
       } catch (error) {
         console.error('로그인 실패:', error);
-        alert('로그인이 실패되었습니다.');
+        alert('로그인이 실패했어요 🙁');
       }
     }
   };

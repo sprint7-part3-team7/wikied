@@ -7,7 +7,7 @@
 }
 
 .editor-header {
-  @include Flex(column, space-between, center);
+  @include Flex(row, space-between, center);
   margin-bottom: 24px;
 }
 
@@ -35,7 +35,7 @@
 }
 
 .title-wrapper {
-  @include Flex(column, space-between, center);
+  @include Flex(row, space-between, center);
   padding: 12px 0;
   border-bottom: 1px solid $color-grayscale-200;
   border-top: 1px solid $color-grayscale-200;

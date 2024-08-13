@@ -101,9 +101,11 @@ const SignupPage = () => {
           password: formState.password,
           passwordConfirmation: formState.passwordConfirmation,
         });
+        alert('성공적으로 회원가입 되었어요 😃');
         router.push('/login');
         console.log('회원가입 성공:', response.data);
       } catch (error) {
+        alert('회원가입이 실패했어요 🙁');
         console.error('회원가입 실패:', error);
       }
     }

@@ -1,32 +1,19 @@
+
 import { useEffect, useRef } from 'react';
 import styles from '@/components/common/header/components/deskToggle/styles.module.scss';
-import { useRouter } from 'next/router';
+import useWikiNavigation from '@/hooks/useCode/useCode';
 import { useAuth } from '@/contexts/AuthProvider';
+import { useRouter } from 'next/router';
 
 type MenuProps = {
   handleMenuClose: () => void;
 };
 
 const DeskMenu = ({ handleMenuClose }: MenuProps) => {
-  const router = useRouter();
   const menuRef = useRef<HTMLDivElement>(null);
   const { logout } = useAuth();
-  const { user } = useAuth();
-  const code = user && user?.profile?.code;
-
-  const handleNavigation = (path: string) => {
-    router.push(path);
-    handleMenuClose();
-  };
-
-  const handleNavigationWiki = (path: string) => {
-    if (user && user?.profile?.code) {
-      router.push(path);
-    } else {
-      router.push('/mypage');
-    }
-    handleMenuClose();
-  };
+  const { handleNavigationWiki } = useWikiNavigation();
+  const router = useRouter();
 
   const handleLogoutClick = () => {
     logout();
@@ -51,13 +38,19 @@ const DeskMenu = ({ handleMenuClose }: MenuProps) => {
     <div className={styles['container']} ref={menuRef}>
       <button
         className={styles['menu-list']}
-        onClick={() => handleNavigation('/mypage')}
+        onClick={() => {
+          router.push('/mypage');
+          handleMenuClose();
+        }}
       >
         계정 설정
       </button>
       <button
         className={styles['menu-list']}
-        onClick={() => handleNavigationWiki(`/wiki/${code}`)}
+        onClick={() => {
+          handleNavigationWiki();
+          handleMenuClose();
+        }}
       >
         내 위키
       </button>
