@@ -2,7 +2,6 @@ import { useCallback } from 'react';
 import { ProfileDetail, Section } from '@/types/wiki';
 import Button from '@/components/common/button';
 import styles from '@/components/wiki/wikiArticle/styles.module.scss';
-import Editor from '@/components/common/editor';
 import WikiEditor from '@/components/common/wikiEditor';
 import DOMPurify from 'dompurify';
 
@@ -13,6 +12,7 @@ interface WikiArticleProps {
   onParticipateClick: () => void;
   checkEditStatus: (code: string) => Promise<any>;
   isEditable: boolean;
+  onEditorChange: (content: string, htmlContent: string) => void;
 }
 
 const WikiArticle = ({
@@ -22,6 +22,7 @@ const WikiArticle = ({
   onParticipateClick,
   checkEditStatus,
   isEditable,
+  onEditorChange,
 }: WikiArticleProps) => {
   const checkParticipationStatus = useCallback(async () => {
     try {
@@ -46,7 +47,11 @@ const WikiArticle = ({
       ) : isEditable ? (
         <div className={styles['grid-item']}>
           <span className={styles['wiki-article-content']}>
-            <WikiEditor profile={profile} />
+            <WikiEditor
+              profile={profile}
+              onEditorChange={onEditorChange}
+              initialContent={profile.content}
+            />{' '}
           </span>
         </div>
       ) : (

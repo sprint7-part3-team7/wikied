@@ -31,6 +31,10 @@ const Wiki = (props: WikiProps) => {
   const [isModalVisible, setModalVisible] = useState(false);
   const [responseState, setResponseState] = useState<boolean>(true);
 
+  const [editorContent, setEditorContent] = useState('');
+  const [editedProfile, setEditedProfile] = useState<ProfileDetail>(profile);
+  const [editorHtmlContent, setEditorHtmlContent] = useState('');
+
   const router = useRouter();
   const { code } = router.query;
 
@@ -82,38 +86,6 @@ const Wiki = (props: WikiProps) => {
     setEditTimeout(timer);
   };
 
-  // 수정 완료 처리
-  const handleEditComplete = async (updatedProfile: ProfileDetail) => {
-    if (editTimeout) {
-      clearTimeout(editTimeout);
-    }
-
-    try {
-      if (updatedProfile) {
-        await updateProfile(profile.code, {
-          // patch api
-          securityAnswer: profile.securityAnswer,
-          securityQuestion: updatedProfile.securityQuestion,
-          nationality: updatedProfile.nationality,
-          family: updatedProfile.family,
-          bloodType: updatedProfile.bloodType,
-          nickname: updatedProfile.nickname,
-          birthday: updatedProfile.birthday,
-          sns: updatedProfile.sns,
-          job: updatedProfile.job,
-          mbti: updatedProfile.mbti,
-          city: updatedProfile.city,
-          image: updatedProfile.image,
-          content: updatedProfile.content,
-        });
-
-        window.location.reload();
-      }
-    } catch (err) {
-      console.log(err);
-    }
-  };
-
   useEffect(() => {
     const fetchData = async () => {
       if (typeof code === 'string') {
@@ -142,6 +114,66 @@ const Wiki = (props: WikiProps) => {
   if (!profile) {
     return <div>Loading...</div>;
   }
+
+  const handleEditorChange = (content: string, htmlContent: string) => {
+    setEditorContent(content);
+    setEditorHtmlContent(htmlContent);
+  };
+
+  const handleProfileChange = (updatedProfile: ProfileDetail) => {
+    console.log('Profile updated:', updatedProfile);
+    setEditedProfile(updatedProfile);
+  };
+
+  // 수정 완료 처리
+  const handleSave = async () => {
+    if (editTimeout) {
+      clearTimeout(editTimeout);
+    }
+
+    try {
+      console.log('Saving profile:', editedProfile);
+      console.log('Saving content:', editorContent);
+
+      const updatedData = {
+        securityAnswer: profile.securityAnswer,
+        securityQuestion: editedProfile.securityQuestion,
+        nationality: editedProfile.nationality,
+        family: editedProfile.family,
+        bloodType: editedProfile.bloodType,
+        nickname: editedProfile.nickname,
+        birthday: editedProfile.birthday,
+        sns: editedProfile.sns,
+        job: editedProfile.job,
+        mbti: editedProfile.mbti,
+        city: editedProfile.city,
+        image: editedProfile.image,
+        content: editorContent,
+      };
+
+      console.log('Data to be sent:', updatedData);
+
+      const response = await updateProfile(profile.code, updatedData);
+      console.log('Update response:', response);
+
+      if (response.data) {
+        setProfile(response.data);
+        setIsEditable(false);
+        alert('프로필이 성공적으로 저장되었습니다.');
+        window.location.reload();
+      } else {
+        throw new Error('Failed to update profile');
+      }
+    } catch (err) {
+      console.error(err);
+      alert('프로필 저장에 실패했습니다. 다시 시도해 주세요.');
+    }
+  };
+
+  const handleCancel = () => {
+    setIsEditable(false);
+    setEditedProfile(profile);
+  };
 
   return (
     <>
@@ -172,6 +204,7 @@ const Wiki = (props: WikiProps) => {
             onParticipateClick={handleModalToggle}
             checkEditStatus={checkEditStatus}
             isEditable={isEditable}
+            onEditorChange={handleEditorChange}
           />
           <div className={styles['space2']}></div>
           <WikiAside
@@ -180,7 +213,9 @@ const Wiki = (props: WikiProps) => {
             setProfile={setProfile}
             isEditable={isEditable}
             setIsEditable={setIsEditable}
-            onEditComplete={handleEditComplete}
+            onProfileChange={handleProfileChange}
+            onSave={handleSave}
+            onCancel={handleCancel}
           />
         </main>
       </div>

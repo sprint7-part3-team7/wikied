@@ -16,22 +16,23 @@ interface WikiAsideProps {
   setProfile: React.Dispatch<React.SetStateAction<ProfileDetail>>;
   isEditable: boolean;
   setIsEditable: (isEditable: boolean) => void;
-  onEditComplete?: (updatedProfile: ProfileDetail) => void;
+  onProfileChange: (updatedProfile: ProfileDetail) => void;
+  onSave: () => void;
+  onCancel: () => void;
 }
 
 const WikiAside = ({
   className,
   profile,
-  setProfile,
   isEditable,
-  setIsEditable,
-  onEditComplete,
+  onProfileChange,
+  onSave,
+  onCancel,
 }: WikiAsideProps) => {
   const [isExpanded, setIsExpanded] = useState(false);
   const [preview, setPreview] = useState<string | null>(null);
   const [editedProfile, setEditedProfile] = useState<ProfileDetail>(profile);
   const [imageFile, setImageFile] = useState<File | null>(null);
-  const [currentUserId, setCurrentUserId] = useState<string | null>(null); // 현재 사용자 ID 상태 추가
   const [isCurrentUser, setIsCurrentUser] = useState<boolean>(false);
   const inputRef = useRef<HTMLInputElement | null>(null);
 
@@ -43,10 +44,9 @@ const WikiAside = ({
     const fetchCurrentUser = async () => {
       try {
         const response = await getUserInfo();
-        const { data } = response; // 응답에서 데이터 추출
-        const userId = String(data.profile.id); // 현재 사용자 ID 추출
-        const profileIdStr = String(profile.id); // 프로필 ID 문자열로 변환
-        // 현재 사용자인지 여부를 설정
+        const { data } = response;
+        const userId = String(data.profile.id);
+        const profileIdStr = String(profile.id);
         setIsCurrentUser(profileIdStr === userId);
       } catch (err) {
         console.error(err);
@@ -56,27 +56,33 @@ const WikiAside = ({
     fetchCurrentUser();
   }, [profile.id]);
 
-  const handleCancelClick = () => {
-    setIsEditable(false);
-    setEditedProfile(profile); // 취소 시 원래 프로필로 복원
-  };
-
   const handleToggle = () => {
     setIsExpanded((prevState) => !prevState);
   };
 
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
       const nextPreview = URL.createObjectURL(file);
       setPreview(nextPreview);
 
-      // 파일명 영어로 변환
       const newFileName = `${uuidv4()}.${file.name.split('.').pop()}`;
       const newFile = new File([file], newFileName, { type: file.type });
-      setImageFile(newFile); // 파일 상태 업데이트
+      setImageFile(newFile);
 
-      // 파일 URL을 해제 (클린업)
+      try {
+        const response = await imageFileToUrl(newFile);
+        const imageUrl = response.data.url;
+        const updatedProfile = {
+          ...editedProfile,
+          image: imageUrl,
+        };
+        setEditedProfile(updatedProfile);
+        onProfileChange(updatedProfile);
+      } catch (error) {
+        console.error('Failed to upload image:', error);
+      }
+
       return () => {
         URL.revokeObjectURL(nextPreview);
       };
@@ -88,45 +94,12 @@ const WikiAside = ({
   };
 
   const handleInputChange = (name: string, value: string) => {
-    setEditedProfile((prevProfile) => ({
-      ...prevProfile,
+    const updatedProfile = {
+      ...editedProfile,
       [name]: value,
-    }));
-  };
-
-  const handleSave = async () => {
-    try {
-      if (imageFile) {
-        const response = await imageFileToUrl(imageFile);
-        const imageUrl = response.data.url;
-
-        const updatedProfile = {
-          ...editedProfile,
-          image: imageUrl,
-        };
-
-        // FormData 객체 생성
-        const formData = new FormData();
-
-        // updatedProfile의 각 필드를 FormData에 추가
-        Object.keys(updatedProfile).forEach((key) => {
-          const value = updatedProfile[key as keyof typeof updatedProfile];
-
-          if (typeof value === 'string' || typeof value === 'number') {
-            formData.append(key, String(value)); // string으로 변환하여 추가
-          } else if ((value as any) instanceof Blob) {
-            formData.append(key, value as any); // Blob일 경우 직접 추가
-          }
-        });
-
-        if (onEditComplete) {
-          onEditComplete(updatedProfile); // 업데이트된 프로필 전달
-        }
-        setIsEditable(false);
-      }
-    } catch (err) {
-      console.error(err);
-    }
+    };
+    setEditedProfile(updatedProfile);
+    onProfileChange(updatedProfile);
   };
 
   const attributes = [
@@ -148,7 +121,6 @@ const WikiAside = ({
           [styles['non-editable']]: !isEditable,
         })}
       >
-        {/* 프로필 이미지 부분 */}
         <div className={styles['image-container']}>
           {isEditable && isCurrentUser ? (
             <div
@@ -210,7 +182,6 @@ const WikiAside = ({
           )}
         </div>
 
-        {/* 프로필 내용 관련 부분 */}
         <div className={styles['user-attribute-container']}>
           {isEditable ? (
             <>
@@ -284,7 +255,7 @@ const WikiAside = ({
             className={styles['cancel-btn']}
             color="outline"
             size="small"
-            onClick={handleCancelClick}
+            onClick={onCancel}
           >
             취소
           </Button>
@@ -292,7 +263,7 @@ const WikiAside = ({
             className={styles['save-btn']}
             color="primary"
             size="small"
-            onClick={handleSave}
+            onClick={onSave}
           >
             저장
           </Button>
