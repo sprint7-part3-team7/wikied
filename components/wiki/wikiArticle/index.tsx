@@ -36,11 +36,12 @@ const WikiArticle = ({
     <div className={`${styles['grid-container']} ${className}`}>
       {profile.content && !isEditable ? (
         <div className={styles['grid-item']}>
-          <div className={styles['wiki-article-content']}
-                    dangerouslySetInnerHTML={{
-            __html: DOMPurify.sanitize(profile.content),
-          }}
-        ></div>
+          <div
+            className={styles['wiki-article-content']}
+            dangerouslySetInnerHTML={{
+              __html: DOMPurify.sanitize(profile.content),
+            }}
+          ></div>
         </div>
       ) : isEditable ? (
         <div className={styles['grid-item']}>
