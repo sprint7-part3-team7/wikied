@@ -54,14 +54,9 @@
 }
 
 @media screen and (max-width: $tablet-max-width) {
-  .signup-container {
-    margin-top: 203px;
-  }
+
 }
 
 @media screen and (max-width: $mobile-max-width) {
-  .signup-container {
-    // @include Size(335px, "");
-    margin-top: 48px;
-  }
+
 }
