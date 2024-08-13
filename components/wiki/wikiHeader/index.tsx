@@ -31,7 +31,10 @@ const WikiHeader = ({
     'success',
   );
   const [showSnackBar, setShowSnackBar] = useState<boolean>(false);
-  const [showLinkCopyModal, setShowLinkCopyModal] = useState<boolean>(false);
+  const [showLinkCopySnackBar, setShowLinkCopySnackBar] =
+    useState<boolean>(false);
+  const [showEditingSnackBar, setShowEditingSnackBar] =
+    useState<boolean>(false);
 
   const handleCopyClick = () => {
     const linkToCopy = `https://www.wikied.kr/${profile.code}`;
@@ -41,13 +44,13 @@ const WikiHeader = ({
         setSnackBarMessage('내 위키 링크가 복사되었습니다.');
         setSnackBarType('success');
         setShowSnackBar(true);
-        setShowLinkCopyModal(true);
+        setShowLinkCopySnackBar(true);
       })
       .catch(() => {
         setSnackBarMessage('복사에 실패했습니다.');
         setSnackBarType('error');
         setShowSnackBar(true);
-        setShowLinkCopyModal(true);
+        setShowLinkCopySnackBar(true);
       });
   };
 
@@ -57,13 +60,14 @@ const WikiHeader = ({
     );
     setSnackBarType('error');
     setShowSnackBar(true);
+    setShowEditingSnackBar(true);
   };
 
   useEffect(() => {
     if (showSnackBar) {
       const timer = setTimeout(() => {
         setShowSnackBar(false);
-        setShowLinkCopyModal(false);
+        setShowLinkCopySnackBar(false);
       }, 3000);
 
       return () => clearTimeout(timer);
@@ -95,21 +99,23 @@ const WikiHeader = ({
             <span className={styles['user-name']}>{profile.name}</span>
             {profile.content &&
               (showParticipateBtn ? (
-                <Button
-                  className={styles['participate-btn']}
-                  color="primary"
-                  size="large"
-                  onClick={() => {
-                    checkParticipationStatus();
-                    onParticipateClick();
-                  }}
-                >
-                  위키 참여하기
-                </Button>
+                <>
+                  <Button
+                    className={styles['participate-btn']}
+                    color="primary"
+                    size="large"
+                    onClick={() => {
+                      checkParticipationStatus();
+                      onParticipateClick();
+                    }}
+                  >
+                    위키 참여하기
+                  </Button>
+                </>
               ) : (
                 <>
                   <Button
-                    className={styles['Editing-btn']}
+                    className={styles['editing-btn']}
                     color="disabled"
                     size="large"
                     onClick={onParticipateClick}
