@@ -106,7 +106,6 @@ const Wiki = (props: WikiProps) => {
           image: updatedProfile.image,
           content: updatedProfile.content,
         });
-        setProfile(updatedProfile);
 
         window.location.reload();
       }
