@@ -32,9 +32,9 @@ const WikiHeader = ({
   );
   const [showSnackBar, setShowSnackBar] = useState<boolean>(false);
   const [showLinkCopySnackBar, setShowLinkCopySnackBar] =
-    useState<boolean>(false);
-  const [showEditingSnackBar, setShowEditingSnackBar] =
-    useState<boolean>(false);
+    useState<boolean>(true);
+  const [showHandleErrSnackBar, setShowHandleErrSnackBar] =
+    useState<boolean>(true);
 
   const handleCopyClick = () => {
     const linkToCopy = `https://www.wikied.kr/${profile.code}`;
@@ -60,9 +60,10 @@ const WikiHeader = ({
     );
     setSnackBarType('error');
     setShowSnackBar(true);
-    setShowEditingSnackBar(true);
+    setShowHandleErrSnackBar(true);
   };
 
+  // 3초 뒤 스낵바 사라짐
   useEffect(() => {
     if (showSnackBar) {
       const timer = setTimeout(() => {
@@ -77,8 +78,8 @@ const WikiHeader = ({
   const checkParticipationStatus = useCallback(async () => {
     try {
       await checkEditStatus(profile.code);
-    } catch (error) {
-      console.error('Error during checkEditStatus:', error);
+    } catch (err) {
+      console.error(err);
       handleError();
     }
   }, [checkEditStatus, profile.code]);
@@ -131,15 +132,9 @@ const WikiHeader = ({
           <section className={styles['link']}>
             <section className={styles['link-wrapper']}>
               <img src={link.src} width={20} height={20} alt="링크 아이콘" />
-              {showSnackBar && !showParticipateBtn && (
-                <div className={styles['snackbar-container-large']}>
-                  <SnackBar
-                    message={snackBarMessage}
-                    type={snackBarType}
-                    size="large"
-                  />
-                </div>
-              )}
+              {/* {showSnackBar && !showParticipateBtn && (
+
+              )} */}
               <button
                 onClick={handleCopyClick}
                 className={styles['link-copy-btn']}
@@ -153,13 +148,22 @@ const WikiHeader = ({
         </section>
       )}
       {showSnackBar && (
-        <div className={styles['snackbar-container-small']}>
-          <SnackBar
-            message={snackBarMessage}
-            type={snackBarType}
-            size="small"
-          />
-        </div>
+        <>
+          <div className={styles['snackbar-container-large']}>
+            <SnackBar
+              message={snackBarMessage}
+              type={snackBarType}
+              size="large"
+            />
+          </div>
+          <div className={styles['snackbar-container-small']}>
+            <SnackBar
+              message={snackBarMessage}
+              type={snackBarType}
+              size="small"
+            />
+          </div>
+        </>
       )}
     </>
   );

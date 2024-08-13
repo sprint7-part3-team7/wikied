@@ -5,7 +5,6 @@ import {
   checkProfileEditStatus,
   getProfileByCode,
   updateProfile,
-  updateProfileEditStatus,
 } from '@/services/api/profile';
 import { ProfileDetail, Section } from '@/types/wiki';
 import WikiHeader from '@/components/wiki/wikiHeader';
@@ -30,7 +29,6 @@ const Wiki = (props: WikiProps) => {
   const [isErrorModalOpen, setIsErrorModalOpen] = useState<boolean>(false);
   const [editTimeout, setEditTimeout] = useState<NodeJS.Timeout | null>(null);
   const [isModalVisible, setModalVisible] = useState(false);
-  const [securityAnswer, setSecurityAnswer] = useState<string>('');
   const [responseState, setResponseState] = useState<boolean>(true);
 
   const router = useRouter();
@@ -56,9 +54,8 @@ const Wiki = (props: WikiProps) => {
       const data = response.data;
       setProfile(data);
       setSectionsData(profile.content || []);
-      console.log('sectionsData', sectionsData);
     } catch (err) {
-      console.error(err);
+      console.log(err);
     }
   }, []);
 
@@ -66,9 +63,8 @@ const Wiki = (props: WikiProps) => {
   const checkEditStatus = useCallback(async (code: string) => {
     try {
       const response = await checkProfileEditStatus(code);
-      console.log('checkProfileEditStatus API Response1:', response);
     } catch (err) {
-      console.error(err);
+      console.log(err);
     }
   }, []);
 
@@ -86,11 +82,6 @@ const Wiki = (props: WikiProps) => {
     setEditTimeout(timer);
   };
 
-  // Quiz 컴포넌트에서 securityAnswer 받아오기
-  const handleAnswerSubmit = (answer: string) => {
-    setSecurityAnswer(answer);
-  };
-
   // 수정 완료 처리
   const handleEditComplete = async (updatedProfile: ProfileDetail) => {
     if (editTimeout) {
@@ -101,7 +92,7 @@ const Wiki = (props: WikiProps) => {
       if (updatedProfile) {
         await updateProfile(profile.code, {
           // patch api
-          securityAnswer: securityAnswer,
+          securityAnswer: profile.securityAnswer,
           securityQuestion: updatedProfile.securityQuestion,
           nationality: updatedProfile.nationality,
           family: updatedProfile.family,
@@ -116,21 +107,10 @@ const Wiki = (props: WikiProps) => {
           content: updatedProfile.content,
         });
 
-        console.log('wiki updateProfile', updatedProfile);
-
-        setProfile(updatedProfile);
-
-        // 수정 후 answer를 사용해 post api 호출
-        const response = await updateProfileEditStatus(profile.code, {
-          securityAnswer: securityAnswer,
-        });
-
-        console.log('API Response:', response.data);
-
-        setIsEditable(false);
+        window.location.reload();
       }
     } catch (err) {
-      console.error(err);
+      console.log(err);
     }
   };
 
@@ -139,11 +119,9 @@ const Wiki = (props: WikiProps) => {
       if (typeof code === 'string') {
         await getList(code);
         const response = await checkProfileEditStatus(code);
-        console.log('checkProfileEditStatus API Response2:', response);
-        if (response.status === 200) {
+        if (response.status === 204) {
           setResponseState(true);
           setShowParticipateBtn(true);
-          console.log('showParticipateBtn', showParticipateBtn);
         } else {
           setResponseState(false);
           setShowParticipateBtn(false);
@@ -160,12 +138,6 @@ const Wiki = (props: WikiProps) => {
       clearTimeout(editTimeout);
     }
   }, [isEditable]);
-
-  useEffect(() => {
-    if (profile) {
-      console.log('Profile updated:', profile);
-    }
-  }, [profile]);
 
   if (!profile) {
     return <div>Loading...</div>;
@@ -223,7 +195,6 @@ const Wiki = (props: WikiProps) => {
               setIsModalOpen={setModalVisible}
               securityQuestion={profile.securityQuestion}
               size={size}
-              onAnswerSubmit={handleAnswerSubmit}
             />
           )}
           onClose={() => closeModal('quiz')}

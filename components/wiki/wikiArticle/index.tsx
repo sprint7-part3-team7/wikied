@@ -27,8 +27,8 @@ const WikiArticle = ({
     try {
       // 위키 참여 클릭 후 상태 확인
       await checkEditStatus(profile.code);
-    } catch (error) {
-      console.error('Error during checkEditStatus:', error);
+    } catch (err) {
+      console.error(err);
     }
   }, [checkEditStatus, profile.code]);
 
