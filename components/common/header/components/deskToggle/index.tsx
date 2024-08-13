@@ -73,7 +73,7 @@
 
 import { useEffect, useRef } from 'react';
 import styles from '@/components/common/header/components/deskToggle/styles.module.scss';
-import UseWikiNavigation from '@/hooks/useCode/useCode'; // 
+import useWikiNavigation from '@/hooks/useCode/useCode';
 import { useAuth } from '@/contexts/AuthProvider';
 import { useRouter } from 'next/router';
 
@@ -84,7 +84,7 @@ type MenuProps = {
 const DeskMenu = ({ handleMenuClose }: MenuProps) => {
   const menuRef = useRef<HTMLDivElement>(null);
   const { logout } = useAuth();
-  const { code, handleNavigationWiki } = UseWikiNavigation();
+  const { handleNavigationWiki } = useWikiNavigation();
   const router = useRouter();
 
   const handleLogoutClick = () => {
@@ -120,7 +120,7 @@ const DeskMenu = ({ handleMenuClose }: MenuProps) => {
       <button
         className={styles['menu-list']}
         onClick={() => {
-          handleNavigationWiki(`/wiki/${code}`);
+          handleNavigationWiki();
           handleMenuClose();
         }}
       >
