@@ -13,12 +13,29 @@ import landing_12 from '@/assets/images/landing/landing_12.png';
 import Ellipse from '@/assets/icons/ic_Ellipse 22.svg';
 import Button from '@/components/common/button';
 import useWikiNavigation from '@/hooks/useCode/useCode';
-
+import { useEffect, useState } from 'react';
+import Toast from '@/components/common/toast';
 
 const Landing = () => {
-
-
   const { handleNavigationWiki } = useWikiNavigation();
+
+  const [toast, setToast] = useState<{
+    message: string;
+    type: 'success' | 'error';
+    visible: boolean;
+  } | null>(null);
+
+  useEffect(() => {
+    const storedToast = localStorage.getItem('toast');
+    if (storedToast) {
+      setToast(JSON.parse(storedToast));
+      localStorage.removeItem('toast');
+    }
+  }, []);
+
+  const handleCloseToast = () => {
+    setToast(null);
+  };
 
   return (
     <>
@@ -199,6 +216,14 @@ const Landing = () => {
             </div>
           </div>
         </footer>
+
+        {toast && toast.visible && (
+          <Toast
+            message={toast.message}
+            type={toast.type}
+            onClose={handleCloseToast}
+          />
+        )}
       </div>
     </>
   );

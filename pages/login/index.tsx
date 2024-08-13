@@ -91,11 +91,15 @@ const LoginPage = () => {
         const authResponse: AuthResponseType = response.data;
         login(authResponse);
         console.log('로그인 성공:', response.data);
-        setToast({
-          message: `성공적으로 로그인 되었어요 😃`,
-          type: 'success',
-          visible: true,
-        });
+        localStorage.setItem(
+          'toast',
+          JSON.stringify({
+            message: `성공적으로 로그인 되었어요 😃`,
+            type: 'success',
+            visible: true,
+          }),
+        );
+
         router.push('/landing');
       } catch (error) {
         console.error('로그인 실패:', error);
