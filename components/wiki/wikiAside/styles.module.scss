@@ -346,6 +346,19 @@
       grid-column: 3;
       grid-row: 3;
       background-color: $color-grayscale-50;
+      border: none;
+      cursor: pointer;
+      padding: 10px;
+
+      .expand-icon {
+        transition: transform 0.3s ease;
+      }
+
+      &.expanded {
+        .expand-icon {
+          transform: rotate(180deg);
+        }
+      }
     }
   }
 

@@ -240,7 +240,12 @@ const WikiAside = ({
           )}
         </div>
         {!isEditable && (
-          <button className={styles['expand-btn']} onClick={handleToggle}>
+          <button
+            className={clsx(styles['expand-btn'], {
+              [styles['expanded']]: isExpanded,
+            })}
+            onClick={handleToggle}
+          >
             <img
               className={styles['expand-icon']}
               src={expandIcon.src}
