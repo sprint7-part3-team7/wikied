@@ -32,7 +32,7 @@ const WikiHeader = ({
   );
   const [showSnackBar, setShowSnackBar] = useState<boolean>(false);
   const [showLinkCopySnackBar, setShowLinkCopySnackBar] =
-    useState<boolean>(false);
+    useState<boolean>(true);
   const [showEditingSnackBar, setShowEditingSnackBar] =
     useState<boolean>(false);
 

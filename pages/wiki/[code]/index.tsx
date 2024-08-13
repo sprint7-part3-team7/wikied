@@ -5,7 +5,6 @@ import {
   checkProfileEditStatus,
   getProfileByCode,
   updateProfile,
-  updateProfileEditStatus,
 } from '@/services/api/profile';
 import { ProfileDetail, Section } from '@/types/wiki';
 import WikiHeader from '@/components/wiki/wikiHeader';
@@ -121,11 +120,10 @@ const Wiki = (props: WikiProps) => {
         setProfile(updatedProfile);
 
         // 수정 후 answer를 사용해 post api 호출
-        const response = await updateProfileEditStatus(profile.code, {
-          securityAnswer: securityAnswer,
-        });
-
-        console.log('API Response:', response.data);
+        // const response = await updateProfileEditStatus(profile.code, {
+        //   securityAnswer: securityAnswer,
+        // });
+        // console.log('API Response:', response.data);
 
         setIsEditable(false);
       }
@@ -140,7 +138,7 @@ const Wiki = (props: WikiProps) => {
         await getList(code);
         const response = await checkProfileEditStatus(code);
         console.log('checkProfileEditStatus API Response2:', response);
-        if (response.status === 200) {
+        if (response.status === 204) {
           setResponseState(true);
           setShowParticipateBtn(true);
           console.log('showParticipateBtn', showParticipateBtn);
@@ -223,7 +221,7 @@ const Wiki = (props: WikiProps) => {
               setIsModalOpen={setModalVisible}
               securityQuestion={profile.securityQuestion}
               size={size}
-              onAnswerSubmit={handleAnswerSubmit}
+              // onAnswerSubmit={handleAnswerSubmit}
             />
           )}
           onClose={() => closeModal('quiz')}
