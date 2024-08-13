@@ -3,24 +3,38 @@ import Input from '@/components/common/input';
 import styles from '@/components/mypage/addWikiInput/styles.module.scss';
 import { ProfileRequest } from '@/types/profile';
 import { useState } from 'react';
+import Toast from '@/components/common/toast';
 
 interface AddWikiInputProps {
-  onAddWiki: (profileData: ProfileRequest) => Promise<void>;
+  onAddWiki: (profileData: ProfileRequest) => Promise<boolean>;
 }
 
 const AddWikiInput = ({ onAddWiki }: AddWikiInputProps) => {
   const [question, setQuestion] = useState('');
   const [answer, setAnswer] = useState('');
+  const [showToast, setShowToast] = useState(false);
+  const [toastMessage, setToastMessage] = useState('');
+  const [toastType, setToastType] = useState<'success' | 'error'>('success');
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
     try {
-      await onAddWiki({ securityAnswer: answer, securityQuestion: question });
-      setQuestion('');
-      setAnswer('');
+      const success = await onAddWiki({
+        securityAnswer: answer,
+        securityQuestion: question,
+      });
+      if (success) {
+        setToastMessage('위키 생성에 성공했어요 😃');
+        setToastType('success');
+        setQuestion('');
+        setAnswer('');
+      }
     } catch (error) {
-      console.error('위키를 생성하는 데 실패했어요 🙁', error);
+      setToastMessage('이미 위키가 존재해요 🙁');
+      setToastType('error');
     }
+    setShowToast(true);
+    setTimeout(() => setShowToast(false), 2000);
   };
 
   return (
@@ -51,6 +65,14 @@ const AddWikiInput = ({ onAddWiki }: AddWikiInputProps) => {
       <Button color="primary" size="small" alignEnd defaultPadding>
         생성하기
       </Button>
+
+      {showToast && (
+        <Toast
+          message={toastMessage}
+          type={toastType}
+          onClose={() => setShowToast(false)}
+        />
+      )}
     </form>
   );
 };

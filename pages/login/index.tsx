@@ -9,6 +9,7 @@ import Button from '@/components/common/button';
 import Input from '@/components/common/input';
 import useDebounce from '@/hooks/useDebounce/useDebounce';
 import { AuthResponseType } from '@/types/auth';
+import Toast from '@/components/common/toast';
 
 interface FormState {
   email: string;
@@ -28,6 +29,8 @@ const LoginPage: React.FC = () => {
   });
 
   const [errors, setErrors] = useState<ErrorState>({});
+  const [showToast, setShowToast] = useState(false);
+  const [toastType, setToastType] = useState<'success' | 'error'>('success');
   const { login } = useAuth();
 
   const debouncedPassword = useDebounce(formState.password, 500);
@@ -78,12 +81,16 @@ const LoginPage: React.FC = () => {
         });
         const authResponse: AuthResponseType = response.data;
         login(authResponse);
-        console.log('로그인 성공:', response.data);
-        alert('성공적으로 로그인 되었어요 😃');
-        router.push('/landing');
+        setToastType('success');
+        setShowToast(true);
+
+        setTimeout(() => {
+          router.push('/landing');
+        }, 1000);
       } catch (error) {
         console.error('로그인 실패:', error);
-        alert('로그인이 실패했어요 🙁');
+        setToastType('error');
+        setShowToast(true);
       }
     }
   };
@@ -128,6 +135,15 @@ const LoginPage: React.FC = () => {
       <Link className={styles['signup']} href="/signup">
         회원가입
       </Link>
+
+      {showToast && (
+        <Toast
+          message={toastType === 'success' ? '로그인 성공' : '로그인 실패'}
+          type={toastType}
+          onClose={() => setShowToast(false)}
+          duration={1000}
+        />
+      )}
     </div>
   );
 };
