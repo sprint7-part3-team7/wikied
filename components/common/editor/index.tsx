@@ -200,10 +200,6 @@ const Editor = () => {
         router.push(`/boards/${response.data.id}`);
       } catch (error) {
         console.error('Error details:', error);
-        const axiosError = error as AxiosError;
-        console.error('Error details:', axiosError.response?.data);
-        console.error('Error status:', axiosError.response?.status);
-        console.error('Error headers:', axiosError.response?.headers);
       }
     }
   };

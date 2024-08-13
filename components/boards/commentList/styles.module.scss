@@ -38,6 +38,7 @@
   border: none;
   background-color: transparent;
   resize: none;
+  font-family: Pretendard, sans-serif;
 
   &:focus {
     outline: none;
@@ -45,7 +46,7 @@
 }
 
 .comment-input-footer {
-  @include Flex(column, space-between, flex-end);
+  @include Flex(row, space-between, flex-end);
   padding: 0 15px 13px;
   background-color: transparent;
 }
