@@ -4,6 +4,7 @@ import Button from '@/components/common/button';
 import styles from '@/components/wiki/wikiArticle/styles.module.scss';
 import Editor from '@/components/common/editor';
 import WikiEditor from '@/components/common/wikiEditor';
+import DOMPurify from 'dompurify';
 
 interface WikiArticleProps {
   className: string;
@@ -35,9 +36,12 @@ const WikiArticle = ({
     <div className={`${styles['grid-container']} ${className}`}>
       {profile.content && !isEditable ? (
         <div className={styles['grid-item']}>
-          <span className={styles['wiki-article-content']}>
-            {profile.content}
-          </span>
+          <div
+            className={styles['wiki-article-content']}
+            dangerouslySetInnerHTML={{
+              __html: DOMPurify.sanitize(profile.content),
+            }}
+          ></div>
         </div>
       ) : isEditable ? (
         <div className={styles['grid-item']}>
