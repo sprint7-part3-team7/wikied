@@ -251,6 +251,7 @@ const WikiAside = ({
       </div>
       {isEditable && (
         <div className={styles['profile-save-btn']}>
+          <span className={styles['user-name']}>{profile.name}</span>
           <Button
             className={styles['cancel-btn']}
             color="outline"

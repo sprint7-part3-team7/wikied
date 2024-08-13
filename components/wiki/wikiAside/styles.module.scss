@@ -1,5 +1,7 @@
 @import '@/styles/index.scss';
-
+.user-name-container {
+  display: none; // 기본적으로 숨김
+}
 // 프로필 이미지 관련 부분
 .user-profile {
   @include Flex(column, inherit, inherit);
@@ -191,6 +193,10 @@
   right: 80px;
   gap: 10px;
 
+  .user-name {
+    display: none;
+  }
+
   .cancel-btn {
     background-color: $color-grayscale-50;
   }
@@ -271,9 +277,6 @@
             gap: 16px;
             margin: 0;
 
-            .attribute-name {
-            }
-
             .attribute-value {
               background-color: $color-grayscale-100;
               width: 200px;
@@ -347,8 +350,36 @@
   }
 
   .profile-save-btn {
+    @include Flex(row, space-between, center);
+    position: absolute;
     top: 47px;
+    left: 57px;
     right: 57px;
+    border-radius: 10px;
+    background-color: $color-grayscale-100;
+    padding: 5px 20px;
+    margin-bottom: 10px;
+
+    .user-name {
+      @include Font(
+        $font-size-xl,
+        $line-height-xl,
+        $font-weight-xl-medium,
+        $color-grayscale-500
+      );
+      display: block;
+      margin-right: auto;
+    }
+
+    .cancel-btn {
+      background-color: transparent;
+    }
+
+    .cancel-btn,
+    .save-btn {
+      @include Size(65px, '');
+      margin-left: 10px;
+    }
   }
 }
 
@@ -375,9 +406,6 @@
       .image {
         @include Size(62px, 62px);
       }
-    }
-
-    .user-attribute-container {
     }
 
     // 수정 모드
@@ -423,9 +451,6 @@
     &.non-editable {
       grid-template-columns: 62px 20px auto 20px 62px;
 
-      .image-container {
-      }
-
       .non-editable-attribute-container {
         @include Font(
           $font-size-xs,
@@ -438,16 +463,9 @@
         .always-show-user-attribute {
           gap: 8px;
         }
-        .desktop-user-attribute {
-        }
+
         .tablet-mobile-expanded {
           gap: 8px;
-          .user-attribute {
-            .attribute-name {
-            }
-            .attribute-value {
-            }
-          }
         }
       }
     }
@@ -455,6 +473,26 @@
 
   .profile-save-btn {
     top: 15px;
+    left: 17px;
     right: 17px;
+    padding: 5px 15px;
+
+    .user-name {
+      @include Font(
+        $font-size-xl,
+        $line-height-xl,
+        $font-weight-xl-medium,
+        $color-grayscale-500
+      );
+    }
+    .cancel-btn {
+      background-color: transparent;
+    }
+
+    .cancel-btn,
+    .save-btn {
+      @include Size(56px, '');
+      font-size: $font-size-xs;
+    }
   }
 }
