@@ -1,12 +1,10 @@
-import React, { useState, useRef, useCallback, useEffect } from 'react';
+import { useState, useRef, useCallback, useEffect } from 'react';
 import {
   EditorState,
   convertToRaw,
   AtomicBlockUtils,
   RichUtils,
   ContentBlock,
-  convertFromRaw,
-  RawDraftContentBlock,
   convertFromHTML,
   ContentState,
 } from 'draft-js';
@@ -17,8 +15,6 @@ import ToolBar from '@/components/common/wikiEditor/components/toolBar';
 import Button from '@/components/common/button';
 import { stateFromHTML } from 'draft-js-import-html';
 import 'draft-js/dist/Draft.css';
-
-import { useRouter } from 'next/router';
 import { Options, stateToHTML } from 'draft-js-export-html';
 import Modal from '@/components/common/modal';
 import AddImage from '@/components/common/modal/components/addImage';
@@ -35,12 +31,12 @@ interface WikiEditorProps {
   initialContent?: string;
 }
 
-const WikiEditor: React.FC<WikiEditorProps> = ({
+const WikiEditor = ({
   profile,
   onCancel,
   onSubmit,
   initialContent,
-}) => {
+}: WikiEditorProps) => {
   const [editorState, setEditorState] = useState(() =>
     EditorState.createEmpty(),
   );
@@ -48,7 +44,6 @@ const WikiEditor: React.FC<WikiEditorProps> = ({
   useEffect(() => {
     if (initialContent) {
       try {
-        // Use stateFromHTML to convert HTML to ContentState
         const contentState = stateFromHTML(initialContent);
         setEditorState(EditorState.createWithContent(contentState));
       } catch (error) {
@@ -161,7 +156,7 @@ const WikiEditor: React.FC<WikiEditorProps> = ({
 
     onSubmit(styledHtmlContent, styledHtmlContent);
   };
-  
+
   const focusEditor = () => {
     editorRef.current?.focus();
   };
@@ -238,18 +233,7 @@ const WikiEditor: React.FC<WikiEditorProps> = ({
           />
         </div>
       </div>
-      <div className={styles['button-container']}>
-        <Button color="outline" size="large" onClick={onCancel}>
-          취소
-        </Button>
-        <Button
-          color={isSubmitEnabled ? 'primary' : 'disabled'}
-          size="large"
-          onClick={handleSubmit}
-        >
-          작성 완료
-        </Button>
-      </div>
+      
       {isImageModalOpen && (
         <Modal
           size="large"
