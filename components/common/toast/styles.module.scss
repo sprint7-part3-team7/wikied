@@ -15,7 +15,7 @@
   z-index: 1000;
 
   .content-wrapper {
-    @include Flex(row, space-between, center);
+    @include Flex(column, space-between, left);
 
     .close-button {
       background: none;

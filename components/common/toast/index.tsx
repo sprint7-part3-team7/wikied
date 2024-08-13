@@ -30,7 +30,9 @@ const Toast = ({ message, type, onClose, duration = 2000 }: ToastProps) => {
   return (
     <div className={clsx(styles['toast'], styles[type])} onClick={onClose}>
       <div className={styles['content-wrapper']}>
-        <p>{message}</p>
+        {message.split('\n').map((line, index) => (
+          <p key={index}>{line}</p>
+        ))}
       </div>
       <div className={styles['progress-bar-wrapper']}>
         <div
