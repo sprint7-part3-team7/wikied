@@ -177,7 +177,7 @@ const Wiki = (props: WikiProps) => {
         className={clsx(styles['container'], {
           [styles['non-editable']]: !isEditable,
           [styles['non-editable-no-data']]:
-            !isEditable && sectionsData.length === 0,
+            !isEditable && profile.content.length === 0,
           [styles['editable']]: isEditable,
         })}
       >

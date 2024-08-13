@@ -99,21 +99,23 @@ const WikiHeader = ({
             <span className={styles['user-name']}>{profile.name}</span>
             {profile.content &&
               (showParticipateBtn ? (
-                <Button
-                  className={styles['participate-btn']}
-                  color="primary"
-                  size="large"
-                  onClick={() => {
-                    checkParticipationStatus();
-                    onParticipateClick();
-                  }}
-                >
-                  위키 참여하기
-                </Button>
+                <>
+                  <Button
+                    className={styles['participate-btn']}
+                    color="primary"
+                    size="large"
+                    onClick={() => {
+                      checkParticipationStatus();
+                      onParticipateClick();
+                    }}
+                  >
+                    위키 참여하기
+                  </Button>
+                </>
               ) : (
                 <>
                   <Button
-                    className={styles['Editing-btn']}
+                    className={styles['editing-btn']}
                     color="disabled"
                     size="large"
                     onClick={onParticipateClick}
