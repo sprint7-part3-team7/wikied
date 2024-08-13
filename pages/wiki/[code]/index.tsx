@@ -137,18 +137,19 @@ const Wiki = (props: WikiProps) => {
 
       const updatedData = {
         securityAnswer: profile.securityAnswer,
-        securityQuestion: editedProfile.securityQuestion,
-        nationality: editedProfile.nationality,
-        family: editedProfile.family,
-        bloodType: editedProfile.bloodType,
-        nickname: editedProfile.nickname,
-        birthday: editedProfile.birthday,
-        sns: editedProfile.sns,
-        job: editedProfile.job,
-        mbti: editedProfile.mbti,
-        city: editedProfile.city,
-        image: editedProfile.image,
-        content: editorContent,
+        securityQuestion:
+          editedProfile?.securityQuestion || profile.securityQuestion,
+        nationality: editedProfile?.nationality || profile.nationality,
+        family: editedProfile?.family || profile.family,
+        bloodType: editedProfile?.bloodType || profile.bloodType,
+        nickname: editedProfile?.nickname || profile.nickname,
+        birthday: editedProfile?.birthday || profile.birthday,
+        sns: editedProfile?.sns || profile.sns,
+        job: editedProfile?.job || profile.job,
+        mbti: editedProfile?.mbti || profile.mbti,
+        city: editedProfile?.city || profile.city,
+        image: editedProfile?.image || profile.image,
+        content: editorContent || profile.content,
       };
 
       console.log('Data to be sent:', updatedData);
@@ -245,7 +246,7 @@ const Wiki = (props: WikiProps) => {
               description="위키 참여하기를 통해 다시 위키를 수정해 주세요."
               content="확인"
               size={size}
-              onClose={() => closeModal('error')} 
+              onClose={() => closeModal('error')}
             />
           )}
           onClose={() => closeModal('error')}
