@@ -26,7 +26,7 @@ const Wiki = (props: WikiProps) => {
   const [profile, setProfile] = useState<any>(null);
   const [sectionsData, setSectionsData] = useState<Section[]>([]);
   const [isEditable, setIsEditable] = useState<boolean>(false);
-  const [showParticipateBtn, setShowParticipateBtn] = useState<boolean>();
+  const [showParticipateBtn, setShowParticipateBtn] = useState<boolean>(true);
   const [isErrorModalOpen, setIsErrorModalOpen] = useState<boolean>(false);
   const [editTimeout, setEditTimeout] = useState<NodeJS.Timeout | null>(null);
   const [isModalVisible, setModalVisible] = useState(false);
@@ -66,6 +66,7 @@ const Wiki = (props: WikiProps) => {
   const checkEditStatus = useCallback(async (code: string) => {
     try {
       const response = await checkProfileEditStatus(code);
+      console.log('checkProfileEditStatus API Response1:', response);
     } catch (err) {
       console.error(err);
     }
@@ -138,7 +139,7 @@ const Wiki = (props: WikiProps) => {
       if (typeof code === 'string') {
         await getList(code);
         const response = await checkProfileEditStatus(code);
-        console.log('checkProfileEditStatus API Response:', response);
+        console.log('checkProfileEditStatus API Response2:', response);
         if (response.status === 200) {
           setResponseState(true);
           setShowParticipateBtn(true);
