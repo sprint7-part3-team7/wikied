@@ -14,7 +14,10 @@
     @include Size(100%, '');
     max-width: 1920px;
     display: grid;
-    grid-template-columns: minmax(60px, 1fr) minmax(0, 860px) 80px 320px 200px;
+    grid-template-columns: minmax(60px, 1fr) minmax(0, 860px) 80px 320px minmax(
+        60px,
+        0.43479fr
+      );
     grid-template-rows: 190px auto;
     position: relative;
 
@@ -68,7 +71,10 @@
 
   .wiki-main {
     display: grid;
-    grid-template-columns: minmax(60px, 1fr) minmax(0, 1120px) 120px 400px 80px !important;
+    grid-template-columns: minmax(60px, 1fr) minmax(0, 1120px) 120px 400px minmax(
+        60px,
+        0.4fr
+      ) !important;
     grid-template-areas:
       'space1 header space2 aside space3'
       'space1 article space2 article space3';
@@ -112,7 +118,10 @@
   padding-top: 40px;
 
   .wiki-main {
-    grid-template-columns: minmax(60px, 1fr) minmax(0, 859px) 81px 320px 200px;
+    grid-template-columns: minmax(60px, 1fr) minmax(0, 859px) 81px 320px minmax(
+        60px,
+        0.43479fr
+      );
 
     .space1 {
       height: 16px;
