@@ -245,6 +245,7 @@ const Wiki = (props: WikiProps) => {
               description="위키 참여하기를 통해 다시 위키를 수정해 주세요."
               content="확인"
               size={size}
+              onClose={() => closeModal('error')} 
             />
           )}
           onClose={() => closeModal('error')}
