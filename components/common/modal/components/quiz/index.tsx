@@ -23,7 +23,6 @@ const Quiz = ({
   setIsEditable,
   setIsModalOpen,
   securityQuestion,
-  // onAnswerSubmit,
 }: QuizProps) => {
   const [answer, setAnswer] = useState<string>('');
   const [errorMessage, setErrorMessage] = useState<string>('');
@@ -41,8 +40,6 @@ const Quiz = ({
       setIsEditable(true);
       setIsModalOpen(false);
       setErrorMessage('');
-
-      // onAnswerSubmit(answer);
     } catch (error) {
       setIsEditable(false);
       setErrorMessage('정답이 아닙니다. 다시 시도해 주세요.');

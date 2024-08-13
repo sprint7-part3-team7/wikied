@@ -42,22 +42,14 @@ const WikiAside = ({
   useEffect(() => {
     const fetchCurrentUser = async () => {
       try {
-        const response = await getUserInfo(); // 변경된 부분
-        console.log('API Response:', response);
-
+        const response = await getUserInfo();
         const { data } = response; // 응답에서 데이터 추출
-        console.log('response: ', response);
-        console.log('Response Data:', response.data);
         const userId = String(data.profile.id); // 현재 사용자 ID 추출
         const profileIdStr = String(profile.id); // 프로필 ID 문자열로 변환
-
-        console.log('userId:', userId);
-        console.log('profile.id:', profileIdStr);
-
         // 현재 사용자인지 여부를 설정
         setIsCurrentUser(profileIdStr === userId);
       } catch (err) {
-        console.error('Error fetching user:', err);
+        console.error(err);
       }
     };
 
