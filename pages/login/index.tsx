@@ -9,6 +9,7 @@ import Button from '@/components/common/button';
 import Input from '@/components/common/input';
 import useDebounce from '@/hooks/useDebounce/useDebounce';
 import { AuthResponseType } from '@/types/auth';
+import Toast from '@/components/common/toast';
 
 interface FormState {
   email: string;
@@ -28,6 +29,17 @@ const LoginPage: React.FC = () => {
   });
 
   const [errors, setErrors] = useState<ErrorState>({});
+
+  const [toast, setToast] = useState<{
+    message: string;
+    type: 'success' | 'error';
+    visible: boolean;
+  }>({
+    message: '',
+    type: 'success',
+    visible: false,
+  });
+
   const { login } = useAuth();
 
   const debouncedPassword = useDebounce(formState.password, 500);
@@ -83,9 +95,17 @@ const LoginPage: React.FC = () => {
         router.push('/landing');
       } catch (error) {
         console.error('로그인 실패:', error);
-        alert('로그인이 실패했어요 🙁');
+        setToast({
+          message: `로그인에 실패했습니다. #이메일 & 비밀번호#를 다시 확인 해주세요 🙁`,
+          type: 'error',
+          visible: true,
+        });
       }
     }
+  };
+
+  const handleCloseToast = () => {
+    setToast((prevState) => ({ ...prevState, visible: false }));
   };
 
   return (
@@ -128,6 +148,14 @@ const LoginPage: React.FC = () => {
       <Link className={styles['signup']} href="/signup">
         회원가입
       </Link>
+
+      {toast.visible && (
+          <Toast
+            message={toast.message}
+            type={toast.type}
+            onClose={handleCloseToast}
+          />
+      )}
     </div>
   );
 };

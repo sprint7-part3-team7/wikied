@@ -7,6 +7,7 @@ import { SignupInputId, getErrorMessage } from '@/types/authUtils';
 import useDebounce from '@/hooks/useDebounce/useDebounce';
 import { publicAxiosInstance } from '@/services/api/axiosInstance';
 import { useRouter } from 'next/router';
+import Toast from '@/components/common/toast';
 
 interface FormState {
   email: string;
@@ -31,6 +32,20 @@ const SignupPage = () => {
   });
   const [errors, setErrors] = useState<ErrorState>({});
   const router = useRouter();
+
+  const [toast, setToast] = useState<{
+    message: string;
+    type: 'success' | 'error';
+    visible: boolean;
+  }>({
+    message: '',
+    type: 'success',
+    visible: false,
+  });
+
+  const handleCloseToast = () => {
+    setToast((prevState) => ({ ...prevState, visible: false }));
+  };
 
   const debouncedPassword = useDebounce(formState.password, 500);
   const debouncedPasswordConfirmation = useDebounce(
@@ -105,7 +120,11 @@ const SignupPage = () => {
         router.push('/login');
         console.log('회원가입 성공:', response.data);
       } catch (error) {
-        alert('회원가입이 실패했어요 🙁');
+        setToast({
+          message: `회원가입에 실패했습니다. #이름 & 이메일 & 비밀번호#를 다시 확인 해주세요 🙁`,
+          type: 'error',
+          visible: true,
+        });
         console.error('회원가입 실패:', error);
       }
     }
@@ -172,6 +191,13 @@ const SignupPage = () => {
           로그인하기
         </Link>
       </div>
+      {toast.visible && (
+        <Toast
+          message={toast.message}
+          type={toast.type}
+          onClose={handleCloseToast}
+        />
+      )}
     </div>
   );
 };
