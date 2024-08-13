@@ -2,7 +2,8 @@
 
 .toast {
   @include Flex(column, null, center);
-  @include Size(200px, auto);
+  max-width: 300px;
+  @include Size(100%, auto);
   position: fixed;
   bottom: 5%;
   left: 50%;
