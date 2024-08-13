@@ -17,15 +17,23 @@
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+    margin-left: 20px;
   }
 
   .left-buttons {
     display: flex;
-    column-gap: 10px;
+    align-items: center;
 
     .button-wrapper {
       display: flex;
       column-gap: 10px;
+      padding: 0 10px;
+      border-right: 1px solid $color-grayscale-300;
+
+      &:last-child {
+        border-right: none;
+      }
+    
 
       .heading {
         @include Size(80px, auto);
