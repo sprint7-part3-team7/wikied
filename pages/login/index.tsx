@@ -21,7 +21,7 @@ interface ErrorState {
   password?: string;
 }
 
-const LoginPage: React.FC = () => {
+const LoginPage = () => {
   const router = useRouter();
   const [formState, setFormState] = useState<FormState>({
     email: '',
@@ -91,12 +91,20 @@ const LoginPage: React.FC = () => {
         const authResponse: AuthResponseType = response.data;
         login(authResponse);
         console.log('로그인 성공:', response.data);
-        alert('성공적으로 로그인 되었어요 😃');
+        localStorage.setItem(
+          'toast',
+          JSON.stringify({
+            message: `성공적으로 로그인 되었어요 😃`,
+            type: 'success',
+            visible: true,
+          }),
+        );
+
         router.push('/landing');
       } catch (error) {
         console.error('로그인 실패:', error);
         setToast({
-          message: `로그인에 실패했습니다. #이메일 & 비밀번호#를 다시 확인 해주세요 🙁`,
+          message: `로그인에 실패했습니다. \n이메일 & 비밀번호를 다시 확인 해주세요 🙁`,
           type: 'error',
           visible: true,
         });
@@ -150,11 +158,11 @@ const LoginPage: React.FC = () => {
       </Link>
 
       {toast.visible && (
-          <Toast
-            message={toast.message}
-            type={toast.type}
-            onClose={handleCloseToast}
-          />
+        <Toast
+          message={toast.message}
+          type={toast.type}
+          onClose={handleCloseToast}
+        />
       )}
     </div>
   );

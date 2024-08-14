@@ -7,6 +7,7 @@ interface AlertProps {
   description: string;
   content: string;
   size?: 'small' | 'large';
+  onClose?: () => void;
 }
 
 const Alert = ({
@@ -14,6 +15,7 @@ const Alert = ({
   description,
   content,
   size = 'large',
+  onClose,
 }: AlertProps): JSX.Element => {
   const buttonColor =
     title === '저장하지 않고 나가시겠어요?' ? 'alert' : 'primary';
@@ -26,7 +28,7 @@ const Alert = ({
           {description}
         </p>
       </div>
-      <Button color={buttonColor} size="small" defaultPadding alignEnd>
+      <Button color={buttonColor} size="small" defaultPadding alignEnd onClick={onClose}>
         {content}
       </Button>
     </>

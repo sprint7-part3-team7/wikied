@@ -1,24 +1,17 @@
-import React, { useState, useRef, useCallback, useEffect } from 'react';
+import { useState, useRef, useCallback, useEffect } from 'react';
 import {
   EditorState,
   convertToRaw,
   AtomicBlockUtils,
   RichUtils,
   ContentBlock,
-  convertFromRaw,
-  RawDraftContentBlock,
-  convertFromHTML,
-  ContentState,
 } from 'draft-js';
 import { Editor as DraftEditor } from 'draft-js';
 import 'draft-js/dist/Draft.css';
 import styles from './styles.module.scss';
 import ToolBar from '@/components/common/wikiEditor/components/toolBar';
-import Button from '@/components/common/button';
 import { stateFromHTML } from 'draft-js-import-html';
 import 'draft-js/dist/Draft.css';
-
-import { useRouter } from 'next/router';
 import { Options, stateToHTML } from 'draft-js-export-html';
 import Modal from '@/components/common/modal';
 import AddImage from '@/components/common/modal/components/addImage';
@@ -30,17 +23,15 @@ import { imageFileToUrl } from '@/services/api/profile';
 
 interface WikiEditorProps {
   profile: ProfileDetail;
-  onCancel: () => void;
-  onSubmit: (content: string, htmlContent: string) => void;
+  onEditorChange: (content: string, htmlContent: string) => void;
   initialContent?: string;
 }
 
-const WikiEditor: React.FC<WikiEditorProps> = ({
+const WikiEditor = ({
   profile,
-  onCancel,
-  onSubmit,
+  onEditorChange,
   initialContent,
-}) => {
+}: WikiEditorProps) => {
   const [editorState, setEditorState] = useState(() =>
     EditorState.createEmpty(),
   );
@@ -48,7 +39,6 @@ const WikiEditor: React.FC<WikiEditorProps> = ({
   useEffect(() => {
     if (initialContent) {
       try {
-        // Use stateFromHTML to convert HTML to ContentState
         const contentState = stateFromHTML(initialContent);
         setEditorState(EditorState.createWithContent(contentState));
       } catch (error) {
@@ -58,25 +48,9 @@ const WikiEditor: React.FC<WikiEditorProps> = ({
     }
   }, [initialContent]);
 
-  const [isSubmitEnabled, setIsSubmitEnabled] = useState(false);
   const [isImageModalOpen, setIsImageModalOpen] = useState(false);
   const [imageUrl, setImageUrl] = useState('');
   const editorRef = useRef<DraftEditor>(null);
-
-  useEffect(() => {
-    if (typeof window !== 'undefined') {
-      if (initialContent) {
-        const blocksFromHTML = convertFromHTML(initialContent);
-        const contentState = ContentState.createFromBlockArray(
-          blocksFromHTML.contentBlocks,
-          blocksFromHTML.entityMap,
-        );
-        setEditorState(EditorState.createWithContent(contentState));
-      } else {
-        setEditorState(EditorState.createEmpty());
-      }
-    }
-  }, [initialContent]);
 
   const styleMap = {
     ...initialStyleMap,
@@ -95,11 +69,6 @@ const WikiEditor: React.FC<WikiEditorProps> = ({
   const handleEditorChange = (newEditorState: EditorState) => {
     setEditorState(newEditorState);
     const contentState = newEditorState.getCurrentContent();
-    setIsSubmitEnabled(contentState.hasText());
-  };
-
-  const handleSubmit = async () => {
-    const contentState = editorState.getCurrentContent();
     const rawContentState = convertToRaw(contentState);
 
     const options: Options = {
@@ -159,9 +128,9 @@ const WikiEditor: React.FC<WikiEditorProps> = ({
         '<ol style="list-style-type: decimal; padding-left: 20px;">',
       );
 
-    onSubmit(styledHtmlContent, styledHtmlContent);
+    onEditorChange(styledHtmlContent, styledHtmlContent);
   };
-  
+
   const focusEditor = () => {
     editorRef.current?.focus();
   };
@@ -238,18 +207,7 @@ const WikiEditor: React.FC<WikiEditorProps> = ({
           />
         </div>
       </div>
-      <div className={styles['button-container']}>
-        <Button color="outline" size="large" onClick={onCancel}>
-          취소
-        </Button>
-        <Button
-          color={isSubmitEnabled ? 'primary' : 'disabled'}
-          size="large"
-          onClick={handleSubmit}
-        >
-          작성 완료
-        </Button>
-      </div>
+
       {isImageModalOpen && (
         <Modal
           size="large"
