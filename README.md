@@ -81,18 +81,18 @@
       ]
     }
     ```
- - Prettier
-     ```
-    {
-      "tabWidth": 2,
-      "semi": true,
-      "singleQuote": true,
-      "bracketSpacing": true,
-      "trailingComma": "all",
-      "arrowParens": "always"
-    }
-    ```
- 
+   - Prettier
+       ```
+      {
+        "tabWidth": 2,
+        "semi": true,
+        "singleQuote": true,
+        "bracketSpacing": true,
+        "trailingComma": "all",
+        "arrowParens": "always"
+      }
+      ```
+   
 ## 5. 채택한 개발 기술과 브랜치 전략
 ### 채택한 개발 기술
 1. Next.js
