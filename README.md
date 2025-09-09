@@ -3,9 +3,9 @@
 
 <img width="1225" height="738" alt="image" src="https://github.com/user-attachments/assets/30a8740d-117e-4726-91a1-ff4b4d6944f3" />
 
-- 배포 주소: [wikied-team-3.vercel.app](https://wikied-team-3.vercel.app/)
+- 배포 주소: [wikied-team-7.vercel.app](https://wikied-team-7.vercel.app/)
 - 테스트 계정
-  | id        | pw                               |
+  | id | pw |
   |:---:|:---:|
   | wikiedTest@test.com | test123!@#  |
 
@@ -14,7 +14,7 @@
 ## 1. 팀원 소개
 | 강효성 | 고용빈 | 정유승 | 최예원 | 하유리 |
 |:---:|:---:|:---:|:---:|:---:|
-|<img width="150" height="150" alt="image" src="https://github.com/user-attachments/assets/8753470a-8d63-495c-9151-5fe661a14566" />|<img width="150" height="150" alt="image" src="https://github.com/user-attachments/assets/aabb31d6-54cf-4ffd-8737-8d039fc1c813" />|<img width="150" height="150" alt="image" src="https://github.com/user-attachments/assets/7177f0f3-5789-4acb-9fb7-5534ae7d3c8e" />|<img width="150" height="150" alt="image" src="https://github.com/user-attachments/assets/17ca45e7-5383-4fa7-808f-c16857d3f311" />|<img width="150" height="150" alt="image" src="https://github.com/user-attachments/assets/ad3879ff-2996-4944-8a31-e196c02ed1ff" />|
+|<img alt="image" src="https://github.com/user-attachments/assets/8753470a-8d63-495c-9151-5fe661a14566" style="width:150px; height:150px;" />|<img alt="image" src="https://github.com/user-attachments/assets/aabb31d6-54cf-4ffd-8737-8d039fc1c813" style="width:150px; height:150px; object-fit:cover;" />|<img  alt="image" src="https://github.com/user-attachments/assets/7177f0f3-5789-4acb-9fb7-5534ae7d3c8e" style="width:150px; height:150px; object-fit:cover;" />|<img alt="image" src="https://github.com/user-attachments/assets/17ca45e7-5383-4fa7-808f-c16857d3f311" style="width:150px; height:150px; object-fit:cover;" />|<img alt="image" src="https://github.com/user-attachments/assets/ad3879ff-2996-4944-8a31-e196c02ed1ff" style="width:150px; height:150px; object-fit:cover;" />|
 |[@kanghyosung1](https://github.com/kanghyosung1)|[@yongb2n](https://github.com/youngbin2n)|[@OurIsland](https://github.com/OurIsland)|[@ddol9](https://github.com/ddol9)|[@hayuri1990](https://github.com/hayuri1990)|
 |유저 기능 <br/> 로그인 페이지 <br/> 회원가입 페이지|계정 설정 페이지 <br/> 공용 컴포넌트 <br/> 위키 에디터|위키 리스트 페이지 <br/> 게시물 작성 페이지|자유게시판 페이지 <br/> 게시글 에디터 <br/> axios 인스턴스 설정|위키 페이지 <br/> 접근 제한 기능|
 
