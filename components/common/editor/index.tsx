@@ -8,7 +8,6 @@ import {
   ContentState,
   SelectionState,
   Modifier,
-  RawDraftContentBlock,
 } from 'draft-js';
 import { Editor as DraftEditor } from 'draft-js';
 import 'draft-js/dist/Draft.css';
@@ -26,8 +25,6 @@ import {
   updateArticle,
 } from '@/services/api/article';
 import { Article } from '@/types/article';
-import { AxiosError } from 'axios';
-import { Options, RenderConfig, stateToHTML } from 'draft-js-export-html';
 import htmlToDraft from 'html-to-draftjs';
 import draftToHtml from 'draftjs-to-html';
 
@@ -79,13 +76,6 @@ const Editor = ({ article }: { article?: Article }) => {
       colorPalette.map((color) => [color.name, { color: color.color }]),
     ),
   };
-
-  const inlineStyles = Object.entries(styleMap).reduce<
-    Record<string, RenderConfig>
-  >((acc, [key, value]) => {
-    acc[key] = { style: value as React.CSSProperties };
-    return acc;
-  }, {});
 
   const checkSubmitEnabled = useCallback(() => {
     const contentState = editorState.getCurrentContent();
