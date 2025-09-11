@@ -223,10 +223,15 @@ const Editor = ({ article }: { article?: Article }) => {
     .getCurrentContent()
     .getPlainText('').length;
 
+  const dateToDisplay = article ? article.createdAt : new Date().toISOString();
+  const formattedDate = dateToDisplay.split('T')[0].replace(/-/g, '.') + '.';
+
   return (
     <div className={styles['editor-wrapper']}>
       <div className={styles['editor-header']}>
-        <div className={styles['heading']}>게시물 등록하기</div>
+        <div className={styles['heading']}>
+          {article ? '게시물 수정하기' : '게시물 등록하기'}
+        </div>
         <button
           className={`${styles['submit-button']} ${
             isSubmitEnabled ? '' : styles['disabled']
@@ -234,12 +239,12 @@ const Editor = ({ article }: { article?: Article }) => {
           onClick={handleSubmit}
           disabled={!isSubmitEnabled}
         >
-          등록하기
+          {article ? '수정하기' : '등록하기'}
         </button>
       </div>
       <div className={styles['date-wrapper']}>
         <span className={styles['date-post']}>등록일</span>
-        <span>{new Date().toISOString().split('T')[0].replace(/-/g, '.')}</span>
+        <span>{formattedDate}</span>
       </div>
       <div className={styles['title-wrapper']}>
         <input
@@ -264,7 +269,7 @@ const Editor = ({ article }: { article?: Article }) => {
       </div>
       <div className={styles['content-count']}>
         <span className={styles['content-count-text']}>
-          공백포함 : 총 {characterCount}자 | 공백제외 : 총{' '}
+          공백 포함 : 총 {characterCount}자 | 공백 제외 : 총{' '}
           {characterCount -
             editorState.getCurrentContent().getPlainText().split(' ').length +
             1}
