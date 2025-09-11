@@ -6,6 +6,8 @@ import {
   AtomicBlockUtils,
   ContentBlock,
   ContentState,
+  SelectionState,
+  Modifier,
   RawDraftContentBlock,
 } from 'draft-js';
 import { Editor as DraftEditor } from 'draft-js';
@@ -128,22 +130,51 @@ const Editor = ({ article }: { article?: Article }) => {
         setImageUrl(response.data.url);
         console.log('Image uploaded:', response.data.url);
 
-        const contentState = editorState.getCurrentContent();
-        const contentStateWithEntity = contentState.createEntity(
-          'IMAGE',
-          'IMMUTABLE',
-          { src: uploadedImageUrl },
-        );
-        const entityKey = contentStateWithEntity.getLastCreatedEntityKey();
-        const newEditorState = EditorState.set(editorState, {
-          currentContent: contentStateWithEntity,
+        let finalEditorState = editorState;
+        let finalContentState = finalEditorState.getCurrentContent();
+
+        finalContentState.getBlocksAsArray().forEach((block) => {
+          if (block.getType() === 'atomic') {
+            const entityKey = block.getEntityAt(0);
+            if (entityKey) {
+              const entity = finalContentState.getEntity(entityKey);
+              if (entity.getType() === 'IMAGE') {
+                const selection = new SelectionState({
+                  anchorKey: block.getKey(),
+                  anchorOffset: 0,
+                  focusKey: block.getKey(),
+                  focusOffset: block.getLength(),
+                });
+                finalContentState = Modifier.removeRange(
+                  finalContentState,
+                  selection,
+                  'forward',
+                );
+              }
+            }
+          }
         });
-        const newState = AtomicBlockUtils.insertAtomicBlock(
-          newEditorState,
+
+        finalEditorState = EditorState.push(
+          finalEditorState,
+          finalContentState,
+          'remove-range',
+        );
+
+        const contentStateWithEntity = finalEditorState
+          .getCurrentContent()
+          .createEntity('IMAGE', 'IMMUTABLE', { src: uploadedImageUrl });
+        const entityKey = contentStateWithEntity.getLastCreatedEntityKey();
+
+        finalEditorState = AtomicBlockUtils.insertAtomicBlock(
+          EditorState.set(finalEditorState, {
+            currentContent: contentStateWithEntity,
+          }),
           entityKey,
           ' ',
         );
-        handleEditorChange(newState);
+
+        setEditorState(finalEditorState);
         setIsImageModalOpen(false);
       } catch (error) {
         console.error('Image upload failed:', error);
