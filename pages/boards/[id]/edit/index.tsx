@@ -3,7 +3,11 @@ import { useEffect, useState } from 'react';
 import { getArticleById } from '@/services/api/article';
 import { Article } from '@/types/article';
 import { useAuth } from '@/contexts/AuthProvider';
-import Editor from '@/components/common/editor';
+import dynamic from 'next/dynamic';
+
+const DynamicEditor = dynamic(() => import('@/components/common/editor'), {
+  ssr: false,
+});
 
 const ArticleEditPage = () => {
   const { id } = useRouter().query;
@@ -47,7 +51,7 @@ const ArticleEditPage = () => {
 
   return (
     <>
-      <Editor article={article} />
+      <DynamicEditor article={article} />
     </>
   );
 };
