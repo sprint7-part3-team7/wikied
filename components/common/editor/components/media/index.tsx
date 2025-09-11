@@ -6,8 +6,14 @@ interface MediaComponentProps {
 }
 
 const Media = ({ contentState, block }: MediaComponentProps) => {
-  const entity = contentState.getEntity(block.getEntityAt(0));
+  const entityKey = block.getEntityAt(0);
+  if (!entityKey) {
+    return null;
+  }
+
+  const entity = contentState.getEntity(entityKey);
   const { src } = entity.getData();
+
   return (
     <img
       src={src}

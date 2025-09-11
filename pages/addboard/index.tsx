@@ -1,7 +1,11 @@
-import Editor from '@/components/common/editor';
+import dynamic from 'next/dynamic';
 import Button from '@/components/common/button';
 import { useRouter } from 'next/router';
 import styles from './styles.module.scss';
+
+const DynamicEditor = dynamic(() => import('@/components/common/editor'), {
+  ssr: false,
+});
 
 const AddBoard = () => {
   const router = useRouter();
@@ -13,7 +17,7 @@ const AddBoard = () => {
   return (
     <div className={styles['add-board-container']}>
       <div className={styles['editor-container']}>
-        <Editor />
+        <DynamicEditor />
       </div>
       <Button
         color="outline"
