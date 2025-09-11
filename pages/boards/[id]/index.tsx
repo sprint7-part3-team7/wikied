@@ -115,7 +115,7 @@ const ArticleDetailPage = () => {
 
   const handleEditButtonClick = () => {
     if (article && isAuthor) {
-      router.push(`/board/${article.id}/edit`);
+      router.push(`/boards/${article.id}/edit`);
     } else {
       alert('게시글 수정 권한이 없습니다.');
     }
