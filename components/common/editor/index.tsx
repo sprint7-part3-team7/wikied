@@ -17,16 +17,22 @@ import Media from '@/components/common/editor/components/media';
 import AddImage from '@/components/common/modal/components/addImage';
 import Modal from '../modal';
 import { useRouter } from 'next/router';
-import { imageUpload, postArticle } from '@/services/api/article';
+import {
+  imageUpload,
+  postArticle,
+  updateArticle,
+} from '@/services/api/article';
+import { Article } from '@/types/article';
 import { AxiosError } from 'axios';
 import { Options, RenderConfig, stateToHTML } from 'draft-js-export-html';
+import draftToHtml from 'draftjs-to-html';
 
-const Editor = () => {
+const Editor = ({ article }: { article?: Article }) => {
   const [editorState, setEditorState] = useState(() =>
     EditorState.createEmpty(),
   );
-  const [title, setTitle] = useState('');
-  const [imageUrl, setImageUrl] = useState('');
+  const [title, setTitle] = useState(article ? article.title : '');
+  const [imageUrl, setImageUrl] = useState(article ? article.image : '');
   const [isSubmitEnabled, setIsSubmitEnabled] = useState(false);
   const [isImageModalOpen, setIsImageModalOpen] = useState(false);
   const router = useRouter();
@@ -126,84 +132,29 @@ const Editor = () => {
   const handleSubmit = async () => {
     if (isSubmitEnabled) {
       const contentState = editorState.getCurrentContent();
-      const rawContentState = convertToRaw(contentState);
-
-      const options: Options = {
-        inlineStyles: inlineStyles,
-        blockStyleFn: (block) => {
-          const alignment = block.getData().get('text-align');
-          if (alignment) {
-            return {
-              style: `text-align: ${alignment};`,
-            };
-          }
-          return {};
-        },
-        entityStyleFn: (entity: any) => {
-          const entityType = entity.get('type').toLowerCase();
-          if (entityType === 'image') {
-            const data = entity.getData();
-            return {
-              element: 'img',
-              attributes: {
-                src: data.src,
-                alt: data.alt || '',
-              },
-              style: {
-                maxWidth: '100%',
-                height: 'auto',
-              },
-            };
-          }
-        },
-      };
-
-      let htmlContent = stateToHTML(contentState, options);
-
-      htmlContent = htmlContent.replace(/<(ol|ul)>[\s\S]*?<\/\1>/g, (match) => {
-        return match.replace(
-          /<li([^>]*)>([\s\S]*?)<\/li>/g,
-          (liMatch, liAttributes, liContent) => {
-            const block = (
-              rawContentState.blocks as RawDraftContentBlock[]
-            ).find((b) => b.text.trim() === liContent.trim());
-            const alignment = block?.data?.['text-align'];
-            return alignment
-              ? `<li${liAttributes} style="text-align: ${alignment};">${liContent}</li>`
-              : liMatch;
-          },
-        );
-      });
-
-      const styledHtmlContent = htmlContent
-        .replace(
-          /<ul>/g,
-          '<ul style="list-style-type: disc; padding-left: 20px;">',
-        )
-        .replace(
-          /<ol>/g,
-          '<ol style="list-style-type: decimal; padding-left: 20px;">',
-        );
+      const htmlContent = draftToHtml(convertToRaw(contentState));
 
       const articleData = {
         title: title.trim(),
-        content: styledHtmlContent,
-        image:
-          imageUrl ||
-          'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRVoYGmUnYaMQR-BxOTuHivxnVnTK8ZPjzACw&s',
+        content: htmlContent,
+        image: imageUrl || article?.image || null,
       };
 
       try {
-        const response = await postArticle(articleData);
-        console.log('Response:', response);
-        alert('게시물이 등록되었습니다.');
-        router.push(`/boards/${response.data.id}`);
+        if (article) {
+          const response = await updateArticle(article.id, articleData);
+          alert('게시물이 수정되었습니다.');
+          router.push(`/boards/${response.data.id}`);
+        } else {
+          const response = await postArticle(articleData);
+          alert('게시물이 등록되었습니다.');
+          router.push(`/boards/${response.data.id}`);
+        }
       } catch (error) {
         console.error('Error details:', error);
       }
     }
   };
-
   const characterCount = editorState
     .getCurrentContent()
     .getPlainText('').length;
