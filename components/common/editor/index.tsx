@@ -5,6 +5,7 @@ import {
   convertToRaw,
   AtomicBlockUtils,
   ContentBlock,
+  ContentState,
   RawDraftContentBlock,
 } from 'draft-js';
 import { Editor as DraftEditor } from 'draft-js';
@@ -25,6 +26,7 @@ import {
 import { Article } from '@/types/article';
 import { AxiosError } from 'axios';
 import { Options, RenderConfig, stateToHTML } from 'draft-js-export-html';
+import htmlToDraft from 'html-to-draftjs';
 import draftToHtml from 'draftjs-to-html';
 
 const Editor = ({ article }: { article?: Article }) => {
@@ -32,6 +34,37 @@ const Editor = ({ article }: { article?: Article }) => {
     EditorState.createEmpty(),
   );
   const [title, setTitle] = useState(article ? article.title : '');
+
+  useEffect(() => {
+    if (article) {
+      const blocksFromHtml = htmlToDraft(article.content);
+      if (blocksFromHtml) {
+        const { contentBlocks, entityMap } = blocksFromHtml;
+        const contentState = ContentState.createFromBlockArray(
+          contentBlocks,
+          entityMap,
+        );
+
+        let newEditorState = EditorState.createWithContent(contentState);
+
+        if (article.image) {
+          const contentStateWithEntity = newEditorState
+            .getCurrentContent()
+            .createEntity('IMAGE', 'IMMUTABLE', { src: article.image });
+          const entityKey = contentStateWithEntity.getLastCreatedEntityKey();
+
+          newEditorState = AtomicBlockUtils.insertAtomicBlock(
+            EditorState.createWithContent(contentStateWithEntity),
+            entityKey,
+            ' ',
+          );
+        }
+        setEditorState(newEditorState);
+        setTitle(article.title);
+      }
+    }
+  }, [article]);
+
   const [imageUrl, setImageUrl] = useState(article ? article.image : '');
   const [isSubmitEnabled, setIsSubmitEnabled] = useState(false);
   const [isImageModalOpen, setIsImageModalOpen] = useState(false);
