@@ -15,7 +15,6 @@ const UserWikiCard = ({ user }: UserCardProps) => {
       <Link className={styles['user-card-link']} href={`/wiki/${user.code}`}>
         <div className={styles['user-card']}>
           <div className={styles['user-profile-image-container']}>
-            {/* 프로필 이미지 */}
             {user.image ? (
               <Image
                 src={user.image}
@@ -34,7 +33,6 @@ const UserWikiCard = ({ user }: UserCardProps) => {
               />
             )}
           </div>
-          {/* 닉네임 및 정보 */}
           <div className={styles['user-info']}>
             <div className={styles['user-name']}>{user.name}</div>
             <div className={styles['user-details']}>
