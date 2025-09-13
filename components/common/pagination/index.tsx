@@ -3,6 +3,7 @@ import rightArrow from '@/assets/icons/pg_right.svg';
 import leftArrow from '@/assets/icons/pg_left.svg';
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
+import useClientWidth from '@/hooks/useClientWidth/useClientWidth';
 
 interface PaginationProps {
   currentPage: number;
@@ -15,19 +16,8 @@ const Pagination = ({
   totalPages,
   onPageChange,
 }: PaginationProps) => {
-  // 화면 크기 측정
-  const [clientWidth, setClientWidth] = useState<number>(0);
+  const clientWidth = useClientWidth(); // 화면 너비
   const [pageGroupSize, setPageGroupSize] = useState<number>(5); // 한번에 보여줄 페이지 수
-
-  useEffect(() => {
-    const handleResize = () =>
-      setClientWidth(document.documentElement.clientWidth);
-
-    handleResize();
-    window.addEventListener('resize', handleResize);
-
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
 
   // 화면 크기에 따라 페이지 그룹 사이즈 변경
   useEffect(() => {
