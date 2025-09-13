@@ -3,6 +3,7 @@
 .pagination {
   @include Flex(row, center, center);
   margin: 60px 0 120px;
+  gap: 15px;
 
   button {
     @include Font(
@@ -15,10 +16,9 @@
     background-color: $color-grayscale-50;
     box-shadow: 0px 4px 20px 0px #00000014;
     border-radius: 10px;
-    margin: 0 5px;
 
     &.active {
-      color: $color-primary-green-200;
+      @include Font('', '', $font-weight-2xl-bold, $color-primary-green-200);
     }
 
     &:disabled {
@@ -36,6 +36,7 @@
 
 @media (max-width: $mobile-max-width) {
   .pagination {
+    gap: 10px;
     button {
       @include Font(
         $font-size-xs,
