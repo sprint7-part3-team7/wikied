@@ -3,16 +3,19 @@ import styles from './styles.module.scss';
 import LinkIcon from '@/assets/icons/ic_link.svg';
 import SnackBar from '@/components/common/snackbar';
 import Image from 'next/image';
+import { ProfileSummary } from '@/types/wiki';
 
 interface UserLinkProps {
   url: string;
+  user: ProfileSummary;
 }
 
-const UserWikiLink = ({ url }: UserLinkProps) => {
+const UserWikiLink = ({ url, user }: UserLinkProps) => {
   const [showSnackBar, setShowSnackBar] = useState(false);
   const [snackBarSize, setSnackBarSize] = useState<'small' | 'large'>('large');
 
-  const copyToClipboard = () => {
+  const copyToClipboard = (e: React.MouseEvent) => {
+    e.stopPropagation();
     navigator.clipboard
       .writeText(url)
       .then(() => {
@@ -60,7 +63,9 @@ const UserWikiLink = ({ url }: UserLinkProps) => {
       )}
       <div className={styles['link-container']} onClick={copyToClipboard}>
         <Image src={LinkIcon} alt="링크" width={20} height={20} />
-        <span className={styles['link-text']}>{url}</span>
+        <span className={styles['link-text']}>
+          {'https://www.wikied.kr/' + user.id}
+        </span>
       </div>
     </div>
   );

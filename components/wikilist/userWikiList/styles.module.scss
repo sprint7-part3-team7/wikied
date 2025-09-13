@@ -38,5 +38,10 @@
 @media screen and (max-width: $mobile-max-width) {
   .user-list-container {
     margin-top: 20px;
+
+    .user-list {
+      @include Flex(column, flex-start, flex-start);
+      row-gap: 8px;
+    }
   }
 }

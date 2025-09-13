@@ -15,6 +15,7 @@
   .input-wrapper {
     flex: 1;
     position: relative;
+    width: 100%;
 
     .search-icon {
       position: absolute;
@@ -24,26 +25,34 @@
     }
 
     input {
-      @include Size(100%, 40px);
+      @include Size(100%, 45px);
       @include Font(
-        $font-size-md,
-        $line-height-md,
-        $font-weight-md-regular,
+        $font-size-xl,
+        $line-height-5xl,
+        $font-weight-xl-medium,
         $color-grayscale-500
       );
       background-color: $color-grayscale-100;
       border: none;
-      border-radius: 8px;
-      padding: 7px 0 7px 58px;
+      border-radius: 10px;
+      padding: 12.5px 57px;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+
+      &:focus {
+        outline: 2px solid $color-primary-green-200;
+      }
 
       &::placeholder {
         color: $color-grayscale-400;
+        font-weight: $font-weight-2xl-regular;
       }
     }
   }
 
   .search-button {
     @include Size(80px, 45px);
+    font-weight: $font-weight-2xl-medium !important;
   }
 }
 
