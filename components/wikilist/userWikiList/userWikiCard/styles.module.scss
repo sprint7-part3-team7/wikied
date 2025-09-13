@@ -12,6 +12,10 @@
   background-color: $color-grayscale-50;
   box-shadow: 0px 4px 20px 0px rgba(0, 0, 0, 0.08);
   cursor: pointer;
+
+  &:hover {
+    background-color: $color-grayscale-100;
+  }
 }
 
 .user-card-link {
@@ -25,10 +29,6 @@
   @include Flex(row, flex-start, flex-start);
   gap: 32px;
   text-decoration: none;
-
-  &:hover {
-    background-color: $color-grayscale-100;
-  }
 }
 
 .user-profile-image-container {
