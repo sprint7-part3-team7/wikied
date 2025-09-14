@@ -15,9 +15,9 @@
 }
 
 .landing-container {
-  width: 1920px;
   @include Size(100%, auto);
   overflow: hidden;
+  white-space: nowrap;
   position: relative;
 
   &::-webkit-scrollbar {
@@ -40,6 +40,7 @@
   .wikid-banner {
     @include Flex(column, '', center);
     @include Size(100%, 914px);
+    padding: 0 80px;
   }
 
   .banner-title {
@@ -70,14 +71,25 @@
     margin-top: 40px;
   }
 
+  .landing-img1-wrapper {
+    @include Size(498px, 644px);
+    position: relative;
+    flex-shrink: 0;
+  }
+
   .landing-img1 {
+    @include Size(498px, 590px);
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
     margin-top: 54px;
     z-index: 1;
   }
 
   .write-container {
     @include Size(100%, 1211px);
-    @include Flex(column, center, center);
+    padding: 0 80px 200px 80px;
+    @include Flex(column, end, center);
     background-color: $color-grayscale-500;
 
     .write-wrapper {
@@ -86,7 +98,7 @@
 
       .feature-text {
         @include Size(364px, 681px);
-        @include Flex(column, '', '');
+        @include Flex(column, space-between, '');
         margin-right: 40px;
 
         .feature-title {
@@ -98,8 +110,8 @@
         }
 
         .feature-content {
-          margin-bottom: 60px;
           margin-top: 20px;
+          margin-bottom: 60px;
           p {
             font-family: 'NEXON Lv1 Gothic OTF';
             font-size: 50px;
@@ -119,8 +131,8 @@
   }
 
   .share-container {
-    @include Size(100%, 1051px);
     @include Flex(column, center, center);
+    padding: 200px 0;
     overflow: hidden;
 
     .share-wrapper {
@@ -182,7 +194,7 @@
   }
 
   .view-container {
-    @include Size(100%, 1291px);
+    padding: 200px 80px;
     @include Flex(column, center, center);
     background-color: #ecf0fa;
 
@@ -235,7 +247,7 @@
   }
 
   .start-container {
-    @include Size(100%, 568px);
+    padding: 200px 0;
     @include Flex(column, center, center);
     background-color: $color-grayscale-500;
 
@@ -255,15 +267,15 @@
     .main-page-bottom-button {
       padding: 15px 30px;
       border-radius: 15px;
-      margin-top: 40px;
     }
   }
 
   .footer-container {
-    @include Size(100%, 270px);
+    // @include Size(100%, 270px);
     background-color: $color-grayscale-600;
     padding: 80px;
     color: $color-grayscale-50;
+    // white-space: nowrap;
 
     .footer-wrapper {
       .copyright {
@@ -297,6 +309,7 @@
   @media screen and (max-width: $tablet-max-width) {
     .wikid-banner {
       @include Size(100%, 900px);
+      padding: 0 48px;
     }
     .ellipse-img {
       top: 784px;
@@ -305,6 +318,7 @@
 
     .write-container {
       @include Size(100%, 942px);
+      padding: 0 48px 160px 48px;
 
       .write-wrapper {
         margin-top: 71.5px;
@@ -336,13 +350,13 @@
     }
 
     .share-container {
-      @include Size(100%, 676px);
+      padding: 160px 0;
 
       .share-wrapper {
         @include Flex(column, center, center);
 
         .feature-text {
-          @include Size(647px, '');
+          @include Size(648px, '');
 
           .feature-title {
             font-size: 20px;
@@ -350,7 +364,7 @@
           }
 
           .feature-content {
-            margin-top: 32px;
+            margin-top: 20px;
             p {
               font-size: 32px;
               font-weight: 400;
@@ -385,7 +399,7 @@
     }
 
     .view-container {
-      @include Size(100%, 933px);
+      padding: 160px 48px;
 
       .view-wrapper {
         @include Size(648px, 613px);
@@ -423,12 +437,20 @@
         }
       }
     }
+
+    .start-container {
+      padding: 160px 0px;
+    }
+
+    .footer-container {
+      padding: 60px 48px;
+    }
   }
 }
 
 @media (max-width: $mobile-max-width) {
   .landing-container {
-    min-width: 375px;
+    // min-width: 375px;
 
     .ellipse-img {
       @include Size(100%, 180px);
@@ -437,6 +459,7 @@
 
     .wikid-banner {
       @include Size(100%, 592px);
+      padding: 0 20px;
     }
 
     .banner-title {
@@ -463,6 +486,10 @@
       );
     }
 
+    .landing-img1-wrapper {
+      @include Size(336px, 442px);
+    }
+
     .landing-img1 {
       @include Size(336px, 398px);
       margin-top: 44px;
@@ -470,9 +497,10 @@
 
     .write-container {
       @include Size(100%, 624px);
+      padding: 0 20px 100px 20px;
 
       .write-wrapper {
-        margin-top: 87px;
+        margin-top: 130.5px;
 
         .feature-text {
           @include Size(133px, 250px);
@@ -484,7 +512,8 @@
           }
 
           .feature-content {
-            margin-bottom: 10px;
+            margin-top: 10px;
+            margin-bottom: 30px;
             p {
               font-size: 16px;
               line-height: 18.4px;
@@ -501,7 +530,7 @@
     }
 
     .share-container {
-      @include Size(100%, 374px);
+      padding: 100px 0;
 
       .share-wrapper {
         .feature-text {
@@ -546,7 +575,7 @@
     }
 
     .view-container {
-      @include Size(100%, 512px);
+      padding: 100px 20px;
 
       .view-wrapper {
         @include Size(335px, 312px);
@@ -588,7 +617,7 @@
     }
 
     .start-container {
-      @include Size(100%, 329px);
+      padding: 100px 0px;
 
       .start-wrapper {
         gap: 40px;
@@ -610,10 +639,9 @@
     }
 
     .footer-container {
-      @include Size(100%, 152px);
-      padding: 40px;
+      padding: 40px 20px;
       .footer-wrapper {
-        @include Size(335px, 72px);
+        // @include Size(335px, 72px);
 
         .copyright {
           @include Font(
@@ -634,8 +662,8 @@
           margin-top: 10px;
         }
 
-        p {
-          @include Size(100%, '');
+        .footer-menu {
+          gap: 15px;
         }
       }
     }
