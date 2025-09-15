@@ -21,11 +21,7 @@
 
 @media screen and (max-width: $mobile-max-width) {
   .item-list {
-    .wiki {
-      display: none;
-    }
-
-    .boards {
+    .link {
       display: none;
     }
   }
