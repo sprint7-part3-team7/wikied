@@ -4,11 +4,7 @@ import { useRouter } from 'next/router';
 import { useAuth } from '@/contexts/AuthProvider';
 import EditNotification from '@/components/common/modal/components/editNotification';
 
-type MenuProps = {
-  handleMenuClose: () => void;
-};
-
-const MobileMenu = ({ handleMenuClose }: MenuProps) => {
+const MobileMenu = () => {
   const router = useRouter();
   const menuRef = useRef<HTMLDivElement>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -16,30 +12,13 @@ const MobileMenu = ({ handleMenuClose }: MenuProps) => {
 
   const handleNavigation = (path: string) => {
     router.push(path);
-    handleMenuClose();
   };
 
   const { logout } = useAuth();
 
   const handleLogoutClick = () => {
     logout();
-    handleMenuClose();
   };
-
-  // Click outside the menu to close it
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
-        handleMenuClose();
-      }
-    };
-
-    document.addEventListener('mousedown', handleClickOutside);
-
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-    };
-  }, [handleMenuClose]);
 
   const toggleModal = () => {
     setIsModalOpen((prev) => !prev);

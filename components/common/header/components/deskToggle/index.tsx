@@ -1,15 +1,10 @@
-
 import { useEffect, useRef } from 'react';
 import styles from '@/components/common/header/components/deskToggle/styles.module.scss';
 import useWikiNavigation from '@/hooks/useCode/useCode';
 import { useAuth } from '@/contexts/AuthProvider';
 import { useRouter } from 'next/router';
 
-type MenuProps = {
-  handleMenuClose: () => void;
-};
-
-const DeskMenu = ({ handleMenuClose }: MenuProps) => {
+const DeskMenu = () => {
   const menuRef = useRef<HTMLDivElement>(null);
   const { logout } = useAuth();
   const { handleNavigationWiki } = useWikiNavigation();
@@ -17,22 +12,7 @@ const DeskMenu = ({ handleMenuClose }: MenuProps) => {
 
   const handleLogoutClick = () => {
     logout();
-    handleMenuClose();
   };
-
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
-        handleMenuClose();
-      }
-    };
-
-    document.addEventListener('mousedown', handleClickOutside);
-
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-    };
-  }, [handleMenuClose]);
 
   return (
     <div className={styles['container']} ref={menuRef}>
@@ -40,7 +20,6 @@ const DeskMenu = ({ handleMenuClose }: MenuProps) => {
         className={styles['menu-list']}
         onClick={() => {
           router.push('/mypage');
-          handleMenuClose();
         }}
       >
         계정 설정
@@ -49,7 +28,6 @@ const DeskMenu = ({ handleMenuClose }: MenuProps) => {
         className={styles['menu-list']}
         onClick={() => {
           handleNavigationWiki();
-          handleMenuClose();
         }}
       >
         내 위키

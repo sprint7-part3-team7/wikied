@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import styles from '@/components/common/header/styles.module.scss';
 import MobileMenu from './components/mobileToggle';
 import Logo from './components/logo';
@@ -12,23 +12,33 @@ const Header = () => {
   const [isMobileMenu, setIsMobileMenu] = useState(false);
   const [isDeskMenuOpen, setIsDeskMenuOpen] = useState(false);
   const { isLoggedIn } = useAuth();
+  const headerRef = useRef<HTMLElement>(null);
 
-  const mobileMenu = () => {
+  const mobileMenu = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.stopPropagation();
     setIsMobileMenu((prev) => !prev);
   };
 
-  const deskMenu = () => {
+  const deskMenu = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.stopPropagation();
     setIsDeskMenuOpen((prev) => !prev);
-    console.log(isDeskMenuOpen);
   };
 
-  const handleMenuClose = () => {
-    setIsMobileMenu(false);
-    setIsDeskMenuOpen(false);
-  };
+  useEffect(() => {
+    const handleClickOutside = (e: MouseEvent) => {
+      if (headerRef.current && !headerRef.current.contains(e.target as Node)) {
+        setIsMobileMenu(false);
+        setIsDeskMenuOpen(false);
+      }
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
 
   return (
-    <header className={styles['container']}>
+    <header className={styles['container']} ref={headerRef}>
       <div className={styles['logo-item-wrapper']}>
         <Logo />
         <List />
@@ -40,8 +50,8 @@ const Header = () => {
           <GuestProfile />
         )}
       </div>
-      {isMobileMenu && <MobileMenu handleMenuClose={handleMenuClose} />}
-      {isDeskMenuOpen && <DeskMenu handleMenuClose={handleMenuClose} />}
+      {isMobileMenu && <MobileMenu />}
+      {isDeskMenuOpen && <DeskMenu />}
     </header>
   );
 };
