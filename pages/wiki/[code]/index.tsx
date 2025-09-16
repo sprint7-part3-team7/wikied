@@ -57,7 +57,7 @@ const Wiki = (props: WikiProps) => {
       const response = await getProfileByCode(code);
       const data = response.data;
       setProfile(data);
-      setSectionsData(profile.content || []);
+      setSectionsData(profile?.content || []);
     } catch (err) {
       console.log(err);
     }
