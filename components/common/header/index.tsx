@@ -7,6 +7,7 @@ import GuestProfile from './components/guestProfile';
 import UserProfile from './components/userProfile';
 import { useAuth } from '@/contexts/AuthProvider';
 import DeskMenu from './components/deskToggle';
+import EditNotification from '../modal/components/editNotification';
 
 const Header = () => {
   const [isMobileMenu, setIsMobileMenu] = useState(false);
@@ -22,6 +23,12 @@ const Header = () => {
   const deskMenu = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.stopPropagation();
     setIsDeskMenuOpen((prev) => !prev);
+  };
+
+  const [modalSize, setModalSize] = useState<'small' | 'large'>('large');
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const toggleModal = () => {
+    setIsModalOpen((prev) => !prev);
   };
 
   useEffect(() => {
@@ -50,8 +57,28 @@ const Header = () => {
           <GuestProfile />
         )}
       </div>
-      {isMobileMenu && <MobileMenu />}
-      {isDeskMenuOpen && <DeskMenu />}
+      {isMobileMenu && (
+        <MobileMenu
+          mobileMenu={mobileMenu}
+          toggleModal={toggleModal}
+          setModalSize={setModalSize}
+        />
+      )}
+      {isDeskMenuOpen && (
+        <DeskMenu
+          deskMenu={deskMenu}
+          toggleMenu={toggleModal}
+          setModalSize={setModalSize}
+        />
+      )}
+      {isModalOpen && (
+        <EditNotification
+          size={modalSize}
+          onClose={() => {
+            setIsModalOpen(false);
+          }}
+        />
+      )}
     </header>
   );
 };
