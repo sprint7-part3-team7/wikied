@@ -26,7 +26,7 @@ const DeskMenu = ({ deskMenu }: DeskMenuProps) => {
           deskMenu(e);
         }}
       >
-        계정 설정
+        마이페이지
       </button>
       <button
         className={styles['menu-list']}
