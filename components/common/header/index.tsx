@@ -8,41 +8,32 @@ import UserProfile from './components/userProfile';
 import { useAuth } from '@/contexts/AuthProvider';
 import DeskMenu from './components/deskToggle';
 import EditNotification from '../modal/components/editNotification';
+import { useOutsideClick } from '@/hooks/useOutsideClick/useOutsideClick';
+import { useModal } from '@/hooks/useModal/useModal';
+import { useMenu } from '@/hooks/useMenu/useMenu';
 
 const Header = () => {
-  const [isMobileMenu, setIsMobileMenu] = useState(false);
-  const [isDeskMenuOpen, setIsDeskMenuOpen] = useState(false);
   const { isLoggedIn } = useAuth();
   const headerRef = useRef<HTMLElement>(null);
 
-  const mobileMenu = (e: React.MouseEvent<HTMLButtonElement>) => {
-    e.stopPropagation();
-    setIsMobileMenu((prev) => !prev);
-  };
+  // 메뉴 상태 관리
+  const {
+    isMobileMenu,
+    setIsMobileMenu,
+    isDeskMenuOpen,
+    setIsDeskMenuOpen,
+    mobileMenu,
+    deskMenu,
+  } = useMenu();
 
-  const deskMenu = (e: React.MouseEvent<HTMLButtonElement>) => {
-    e.stopPropagation();
-    setIsDeskMenuOpen((prev) => !prev);
-  };
+  // 모달 관련 훅
+  const { isModalOpen, closeModal, toggleModal, modalSize } = useModal();
 
-  const [modalSize, setModalSize] = useState<'small' | 'large'>('large');
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const toggleModal = () => {
-    setIsModalOpen((prev) => !prev);
-  };
-
-  useEffect(() => {
-    const handleClickOutside = (e: MouseEvent) => {
-      if (headerRef.current && !headerRef.current.contains(e.target as Node)) {
-        setIsMobileMenu(false);
-        setIsDeskMenuOpen(false);
-      }
-    };
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-    };
-  }, []);
+  // 외부 클릭 감지
+  useOutsideClick(headerRef, () => {
+    setIsMobileMenu(false);
+    setIsDeskMenuOpen(false);
+  });
 
   return (
     <header className={styles['container']} ref={headerRef}>
@@ -58,24 +49,14 @@ const Header = () => {
         )}
       </div>
       {isMobileMenu && (
-        <MobileMenu
-          mobileMenu={mobileMenu}
-          toggleModal={toggleModal}
-          setModalSize={setModalSize}
-        />
+        <MobileMenu mobileMenu={mobileMenu} toggleModal={toggleModal} />
       )}
-      {isDeskMenuOpen && (
-        <DeskMenu
-          deskMenu={deskMenu}
-          toggleMenu={toggleModal}
-          setModalSize={setModalSize}
-        />
-      )}
+      {isDeskMenuOpen && <DeskMenu deskMenu={deskMenu} />}
       {isModalOpen && (
         <EditNotification
           size={modalSize}
           onClose={() => {
-            setIsModalOpen(false);
+            closeModal();
           }}
         />
       )}

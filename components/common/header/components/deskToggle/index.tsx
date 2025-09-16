@@ -1,4 +1,3 @@
-import { useEffect, useRef } from 'react';
 import styles from '@/components/common/header/components/deskToggle/styles.module.scss';
 import useWikiNavigation from '@/hooks/useCode/useCode';
 import { useAuth } from '@/contexts/AuthProvider';
@@ -6,22 +5,20 @@ import { useRouter } from 'next/router';
 
 type DeskMenuProps = {
   deskMenu: (e: React.MouseEvent<HTMLButtonElement>) => void;
-  toggleMenu: () => void;
-  setModalSize: React.Dispatch<React.SetStateAction<'small' | 'large'>>;
 };
 
-const DeskMenu = ({ deskMenu, toggleMenu, setModalSize }: DeskMenuProps) => {
-  const menuRef = useRef<HTMLDivElement>(null);
-  const { logout } = useAuth();
-  const { handleNavigationWiki } = useWikiNavigation();
+const DeskMenu = ({ deskMenu }: DeskMenuProps) => {
   const router = useRouter();
 
+  const { handleNavigationWiki } = useWikiNavigation();
+
+  const { logout } = useAuth();
   const handleLogoutClick = () => {
     logout();
   };
 
   return (
-    <div className={styles['container']} ref={menuRef}>
+    <div className={styles['container']}>
       <button
         className={styles['menu-list']}
         onClick={(e) => {
@@ -29,7 +26,7 @@ const DeskMenu = ({ deskMenu, toggleMenu, setModalSize }: DeskMenuProps) => {
           deskMenu(e);
         }}
       >
-        계정 설정
+        마이페이지
       </button>
       <button
         className={styles['menu-list']}
