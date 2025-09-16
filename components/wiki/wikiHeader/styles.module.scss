@@ -72,6 +72,7 @@
         text-overflow: ellipsis;
         place-self: flex-start;
         background-color: transparent;
+        text-align: left;
 
         .link-address {
           @include Font(
@@ -81,6 +82,11 @@
             $color-primary-green-200
           );
           display: inline;
+          display: -webkit-box;
+          -webkit-box-orient: vertical;
+          -webkit-line-clamp: 1;
+          line-clamp: 1;
+          word-break: break-all;
         }
       }
     }
