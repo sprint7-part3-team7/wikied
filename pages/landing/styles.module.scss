@@ -293,6 +293,10 @@
         );
         margin-top: 10px;
         text-decoration: none;
+
+        .toggle-button {
+          display: none;
+        }
       }
 
       .footer-menu {
@@ -663,6 +667,17 @@
             $color-grayscale-50
           );
           margin-top: 10px;
+
+          .toggle-button {
+            display: inline-flex;
+            margin-bottom: 10px;
+            gap: 5px;
+            cursor: pointer;
+
+            .toggle-icon {
+              fill: #fff;
+            }
+          }
         }
 
         .footer-menu {
