@@ -46,6 +46,10 @@ const Quiz = ({
     }
   };
 
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter') handleSubmit();
+  };
+
   return (
     <>
       <div className={styles['title-wrapper']}>
@@ -71,6 +75,7 @@ const Quiz = ({
           fullWidth
           errorMessage={errorMessage}
           onChange={handleInputChange}
+          onKeyDown={handleKeyDown}
         />
       </div>
       <Button color="primary" size="small" fullWidth onClick={handleSubmit}>
