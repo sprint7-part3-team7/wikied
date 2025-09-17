@@ -289,10 +289,9 @@
           $font-size-md,
           $line-height-md,
           $font-weight-md-regular,
-          ''
+          $color-grayscale-50
         );
         margin-top: 10px;
-        text-decoration: none;
 
         .toggle-button {
           display: none;
@@ -300,6 +299,11 @@
 
         .business-info {
           display: block;
+
+          .business-info-detail {
+            text-decoration: none;
+            color: inherit;
+          }
         }
       }
 
@@ -669,10 +673,10 @@
 
         .impormaion {
           @include Font(
-            $font-size-3xs,
-            $line-height-3xs-8,
-            $font-weight-3xs-regular,
-            $color-grayscale-50
+            $font-size-2xs,
+            $line-height-2xs-10,
+            $font-weight-2xs-regular,
+            ''
           );
           margin-top: 10px;
 
@@ -688,6 +692,7 @@
           }
 
           .business-info {
+            @include Font('', $line-height-2xs-12, '', '');
             display: none;
             &[data-open='true'] {
               display: block;
@@ -701,9 +706,9 @@
 
           .footer-link {
             @include Font(
-              $font-size-3xs,
-              $line-height-3xs-8,
-              $font-weight-3xs-medium,
+              $font-size-2xs,
+              $line-height-2xs-10,
+              $font-weight-2xs-medium,
               $color-grayscale-50
             );
           }
