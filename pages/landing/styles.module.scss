@@ -297,6 +297,10 @@
         .toggle-button {
           display: none;
         }
+
+        .business-info {
+          display: block;
+        }
       }
 
       .footer-menu {
@@ -680,6 +684,13 @@
 
             .toggle-icon {
               fill: #fff;
+            }
+          }
+
+          .business-info {
+            display: none;
+            &[data-open='true'] {
+              display: block;
             }
           }
         }

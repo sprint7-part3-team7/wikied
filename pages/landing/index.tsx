@@ -208,33 +208,21 @@ const Landing = () => {
                 onClick={() => setOpen((prev) => !prev)}
               >
                 <span>Wikied 사업자 정보</span>
-                {!open ? (
-                  <Image
-                    src={ic_arrow_down}
-                    width={8}
-                    height={8}
-                    className={styles['toggle-icon']}
-                    alt="사업자 정보 토글 버튼"
-                  />
-                ) : (
-                  <Image
-                    src={ic_arrow_up}
-                    width={8}
-                    height={8}
-                    className={styles['toggle-icon']}
-                    alt="사업자 정보 토글 버튼"
-                  />
-                )}
+                <Image
+                  src={open ? ic_arrow_up : ic_arrow_down}
+                  width={8}
+                  height={8}
+                  className={styles['toggle-icon']}
+                  alt="사업자 정보 토글 버튼"
+                />
               </div>
-              {open && (
-                <>
-                  <p>
-                    사업자등록번호 000-00-00000 | 통신판매신고
-                    제2020-서울-00000호 | 대표 : 이지은
-                  </p>
-                  <p>서울특별시 중구 청계천로 123, 위키드빌딩</p>
-                </>
-              )}
+              <div className={styles['business-info']} data-open={open}>
+                <p>
+                  사업자등록번호 000-00-00000 | 통신판매신고 제2020-서울-00000호
+                  | 대표 : 이지은
+                </p>
+                <p>서울특별시 중구 청계천로 123, 위키드빌딩</p>
+              </div>
             </div>
             <div className={styles['footer-menu']}>
               <a className={styles['footer-link']} href="#">
