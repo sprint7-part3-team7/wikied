@@ -278,6 +278,8 @@
     // white-space: nowrap;
 
     .footer-wrapper {
+      white-space: break-spaces;
+
       .copyright {
         @include Font($font-size-lg, $line-height-lg, $font-weight-lg-bold, '');
       }
@@ -645,25 +647,32 @@
 
         .copyright {
           @include Font(
-            $font-size-lg,
-            $line-height-lg,
-            $font-weight-lg-bold,
+            $font-size-2xs,
+            $line-height-2xs-10,
+            $font-weight-2xs-bold,
             ''
           );
         }
 
         .impormaion {
           @include Font(
-            $font-size-md,
-            $line-height-md,
-            $font-weight-md-regular,
+            $font-size-3xs,
+            $line-height-3xs-8,
+            $font-weight-3xs-regular,
             ''
           );
           margin-top: 10px;
         }
 
         .footer-menu {
+          @include Font(
+            $font-size-3xs,
+            $line-height-3xs-8,
+            $font-weight-3xs-medium,
+            ''
+          );
           gap: 15px;
+          margin-top: 20px;
         }
       }
     }
