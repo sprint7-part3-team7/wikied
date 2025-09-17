@@ -217,7 +217,7 @@ const Landing = () => {
                 />
               </div>
               <div className={styles['business-info']} data-open={open}>
-                <p>
+                <p className={styles['business-info-detail']}>
                   사업자등록번호 000-00-00000 | 통신판매신고 제2020-서울-00000호
                   | 대표 : 이지은
                 </p>
