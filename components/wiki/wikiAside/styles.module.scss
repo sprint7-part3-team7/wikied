@@ -80,6 +80,7 @@
           inherit
         );
         gap: 16px;
+        width: 100%;
 
         .user-attribute {
           @include Flex(row, '', center);
@@ -96,7 +97,7 @@
           .attribute-value {
             @include Size(240px, 45px);
             background-color: $color-grayscale-100;
-            padding: 14px 20px;
+            padding: 10.5px 20px;
             border-radius: 10px;
             outline: none;
           }
@@ -439,21 +440,31 @@
       }
 
       .user-attribute-container {
-        @include Size(268px, '');
+        @include Size(100%, '');
+        padding: 0 30px;
+
         .attribute-wrapper {
-          @include Size('', 384px);
+          @include Size(100%, 384px);
           padding-bottom: 17px;
           flex-flow: column;
 
           .user-attribute {
+            @include Size(100%, 34px);
+            max-width: none;
+
             .attribute-name {
+              @include Size('', 34px);
               @include Font($font-size-xs, $line-height-xs-18, '', '');
+              min-width: 60px;
+              padding: 8px 0;
             }
 
             .attribute-value {
-              @include Size('', 34px);
+              @include Size(100%, 34px);
               @include Font($font-size-xs, $line-height-xs-18, '', '');
-              padding: 10px 16px;
+              padding: 8px 16px;
+              flex: 1;
+              overflow: hidden;
             }
           }
         }

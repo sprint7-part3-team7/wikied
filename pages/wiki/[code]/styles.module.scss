@@ -296,7 +296,7 @@
 
     .wiki-main {
       display: grid;
-      grid-template-columns: 1fr !important;
+      grid-template-columns: 100% !important;
       grid-template-rows: 55px 511px 15px 60px 15px 1fr;
 
       .wiki-aside {
