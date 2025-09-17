@@ -10,6 +10,8 @@ import landing_7 from '@/assets/images/landing/landing_7.png';
 import landing_10 from '@/assets/images/landing/landing_10.png';
 import landing_11 from '@/assets/images/landing/landing_11.png';
 import landing_12 from '@/assets/images/landing/landing_12.png';
+import ic_arrow_down from '@/assets/icons/ic_arrow_down.svg';
+import ic_arrow_up from '@/assets/icons/ic_arrow_up.svg';
 import Ellipse from '@/assets/icons/ic_Ellipse 22.svg';
 import Button from '@/components/common/button';
 import useWikiNavigation from '@/hooks/useCode/useCode';
@@ -36,6 +38,8 @@ const Landing = () => {
   const handleCloseToast = () => {
     setToast(null);
   };
+
+  const [open, setOpen] = useState(false);
 
   return (
     <div className={styles['landing-container']}>
@@ -199,16 +203,37 @@ const Landing = () => {
               Copyright ⓒ Wikied. All Rights Reserved
             </div>
             <div className={styles['impormaion']}>
-              <p>
-                사업자등록번호 000-00-00000 | 통신판매신고 제2020-서울-00000호 |
-                대표 : 이지은
-              </p>
-              <p>서울특별시 중구 청계천로 123, 위키드빌딩</p>
+              <div
+                className={styles['toggle-button']}
+                onClick={() => setOpen((prev) => !prev)}
+              >
+                <span>Wikied 사업자 정보</span>
+                <Image
+                  src={open ? ic_arrow_up : ic_arrow_down}
+                  width={8}
+                  height={8}
+                  className={styles['toggle-icon']}
+                  alt="사업자 정보 토글 버튼"
+                />
+              </div>
+              <div className={styles['business-info']} data-open={open}>
+                <p>
+                  사업자등록번호 000-00-00000 | 통신판매신고 제2020-서울-00000호
+                  | 대표 : 이지은
+                </p>
+                <p>서울특별시 중구 청계천로 123, 위키드빌딩</p>
+              </div>
             </div>
             <div className={styles['footer-menu']}>
-              <p>서비스 이용약관</p>
-              <p>개인정보 취급방침</p>
-              <p>전자금융거래 기본약관</p>
+              <a className={styles['footer-link']} href="#">
+                서비스 이용약관
+              </a>
+              <a className={styles['footer-link']} href="#">
+                개인정보 취급방침
+              </a>
+              <a className={styles['footer-link']} href="#">
+                전자금융거래 기본약관
+              </a>
             </div>
           </div>
         </div>

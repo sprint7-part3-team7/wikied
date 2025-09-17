@@ -278,6 +278,8 @@
     // white-space: nowrap;
 
     .footer-wrapper {
+      white-space: break-spaces;
+
       .copyright {
         @include Font($font-size-lg, $line-height-lg, $font-weight-lg-bold, '');
       }
@@ -290,18 +292,31 @@
           ''
         );
         margin-top: 10px;
+        text-decoration: none;
+
+        .toggle-button {
+          display: none;
+        }
+
+        .business-info {
+          display: block;
+        }
       }
 
       .footer-menu {
         @include Flex(row, '', center);
-        @include Font(
-          $font-size-md,
-          $line-height-md,
-          $font-weight-md-medium,
-          ''
-        );
         margin-top: 30px;
         gap: 30px;
+
+        .footer-link {
+          @include Font(
+            $font-size-md,
+            $line-height-md,
+            $font-weight-md-medium,
+            $color-grayscale-50
+          );
+          text-decoration: none;
+        }
       }
     }
   }
@@ -645,25 +660,53 @@
 
         .copyright {
           @include Font(
-            $font-size-lg,
-            $line-height-lg,
-            $font-weight-lg-bold,
+            $font-size-2xs,
+            $line-height-2xs-10,
+            $font-weight-2xs-bold,
             ''
           );
         }
 
         .impormaion {
           @include Font(
-            $font-size-md,
-            $line-height-md,
-            $font-weight-md-regular,
-            ''
+            $font-size-3xs,
+            $line-height-3xs-8,
+            $font-weight-3xs-regular,
+            $color-grayscale-50
           );
           margin-top: 10px;
+
+          .toggle-button {
+            display: inline-flex;
+            margin-bottom: 10px;
+            gap: 5px;
+            cursor: pointer;
+
+            .toggle-icon {
+              fill: #fff;
+            }
+          }
+
+          .business-info {
+            display: none;
+            &[data-open='true'] {
+              display: block;
+            }
+          }
         }
 
         .footer-menu {
+          margin-top: 20px;
           gap: 15px;
+
+          .footer-link {
+            @include Font(
+              $font-size-3xs,
+              $line-height-3xs-8,
+              $font-weight-3xs-medium,
+              $color-grayscale-50
+            );
+          }
         }
       }
     }
