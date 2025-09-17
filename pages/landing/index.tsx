@@ -237,9 +237,15 @@ const Landing = () => {
               )}
             </div>
             <div className={styles['footer-menu']}>
-              <p>서비스 이용약관</p>
-              <p>개인정보 취급방침</p>
-              <p>전자금융거래 기본약관</p>
+              <a className={styles['footer-link']} href="#">
+                서비스 이용약관
+              </a>
+              <a className={styles['footer-link']} href="#">
+                개인정보 취급방침
+              </a>
+              <a className={styles['footer-link']} href="#">
+                전자금융거래 기본약관
+              </a>
             </div>
           </div>
         </div>
