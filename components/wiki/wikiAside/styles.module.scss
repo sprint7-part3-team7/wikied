@@ -106,6 +106,8 @@
             padding: 10.5px 20px;
             border-radius: 10px;
             outline: none;
+            overflow: hidden;
+            text-overflow: ellipsis;
           }
 
           .attribute-value:focus {
@@ -154,6 +156,8 @@
             flex: 1;
             text-align: left;
             min-width: 0;
+            overflow: hidden;
+            text-overflow: ellipsis;
           }
         }
       }
@@ -178,6 +182,8 @@
             flex: 1;
             text-align: left;
             min-width: 0;
+            overflow: hidden;
+            text-overflow: ellipsis;
           }
         }
       }
@@ -290,6 +296,8 @@
             .attribute-value {
               background-color: $color-grayscale-100;
               width: 200px;
+              overflow: hidden;
+              text-overflow: ellipsis;
             }
           }
         }
@@ -299,7 +307,7 @@
     // 비수정 모드일 때
     &.non-editable {
       display: grid;
-      grid-template-columns: 71px 40px auto 40px 71px;
+      grid-template-columns: 71px 40px minmax(0, 1fr);
       grid-template-rows: auto 1px 24px;
       gap: 0;
 
@@ -316,7 +324,7 @@
         .always-show-user-attribute {
           gap: 4px;
           .user-attribute {
-            gap: 10px;
+            gap: 20px;
           }
         }
 
@@ -331,7 +339,7 @@
           .user-attribute {
             @include Flex(row, '', '');
             white-space: nowrap;
-            gap: 10px;
+            gap: 20px;
 
             .attribute-name {
               @include Size(60px, '');
@@ -344,6 +352,8 @@
               text-align: left;
               min-width: 0;
               color: $color-grayscale-500;
+              overflow: hidden;
+              text-overflow: ellipsis;
             }
           }
         }
@@ -489,7 +499,7 @@
 
     // 비수정 모드
     &.non-editable {
-      grid-template-columns: 62px 20px auto 20px 62px;
+      grid-template-columns: 62px 20px minmax(0, 1fr);
 
       .non-editable-attribute-container {
         @include Font(
@@ -502,10 +512,18 @@
 
         .always-show-user-attribute {
           gap: 8px;
+
+          .user-attribute {
+            gap: 10px;
+          }
         }
 
         .tablet-mobile-expanded {
           gap: 8px;
+
+          .user-attribute {
+            gap: 10px;
+          }
         }
       }
     }
