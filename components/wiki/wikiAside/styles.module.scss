@@ -371,13 +371,7 @@
       padding: 10px;
 
       .expand-icon {
-        transition: transform 0.3s ease;
-      }
-
-      &.expanded {
-        .expand-icon {
-          transform: rotate(180deg);
-        }
+        margin-right: 111px;
       }
     }
   }
@@ -526,6 +520,10 @@
           }
         }
       }
+    }
+
+    .expand-btn {
+      margin-right: 82px;
     }
   }
 
