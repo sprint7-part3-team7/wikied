@@ -88,21 +88,29 @@
 }
 
 @media screen and (max-width: $mobile-max-width) {
-  .button-wrapper {
-    .bullet-button {
-      display: none;
+  .toolbar {
+    overflow-x: auto;
+
+    .button-wrapper {
+      .bullet-button {
+        display: none;
+      }
+
+      .number-button {
+        display: none;
+      }
+
+      .color-palette-button {
+        display: none;
+      }
+
+      .link-button {
+        display: none;
+      }
     }
 
-    .number-button {
-      display: none;
-    }
-
-    .color-palette-button {
-      display: none;
-    }
-
-    .link-button {
-      display: none;
+    &.scroll {
+      justify-content: flex-start;
     }
   }
 }
