@@ -2,13 +2,12 @@
 
 // 비수정 모드
 .non-editable {
-  @include Size(100%, 100vh);
+  @include Size(100%, '');
   @include Flex(column, inherit, center);
   max-width: 100%;
   margin: 0 auto;
   position: relative;
   box-sizing: border-box;
-  padding-top: 38px;
 
   .wiki-main {
     @include Size(100%, '');
@@ -20,6 +19,7 @@
       );
     grid-template-rows: 190px auto;
     position: relative;
+    padding: 38px 0 78px 0;
 
     .wiki-padding {
       @include Size(100%, '');
@@ -33,10 +33,8 @@
       @include Size(100%, '');
       grid-column: 2;
       grid-row: 1;
-      margin-top: 40px;
-      margin-bottom: 56px;
+      margin: 40px 0 56px 0;
       box-sizing: border-box;
-      gap: 31px;
     }
 
     .wiki-article {
@@ -153,8 +151,7 @@
 @media screen and (max-width: $tablet-max-width) {
   // 비수정 모드
   .non-editable {
-    padding: 0 60px;
-    padding-top: 60px;
+    padding: 60px;
 
     .wiki-main {
       grid-template-columns: 1fr;
@@ -165,6 +162,7 @@
         'aside'
         'space2'
         'article';
+      padding: 0;
 
       .wiki-padding {
         display: none;
@@ -270,8 +268,7 @@
 @media screen and (max-width: $mobile-max-width) {
   // 비수정 모드
   .non-editable {
-    padding: 0 20px;
-    margin-top: 40px;
+    padding: 40px 20px;
 
     .wiki-main {
       .space1 {
@@ -296,7 +293,7 @@
 
     .wiki-main {
       display: grid;
-      grid-template-columns: 1fr !important;
+      grid-template-columns: 100% !important;
       grid-template-rows: 55px 511px 15px 60px 15px 1fr;
 
       .wiki-aside {

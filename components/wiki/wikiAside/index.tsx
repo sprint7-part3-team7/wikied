@@ -7,8 +7,10 @@ import { imageFileToUrl, getUserInfo } from '@/services/api/profile';
 import Button from '@/components/common/button';
 import styles from '@/components/wiki/wikiAside/styles.module.scss';
 import expandIcon from '@/assets/icons/ic_expand.svg';
+import expandIconReverse from '@/assets/icons/ic_expand_reverse.svg';
 import fileUploadIcon from '@/assets/icons/ic_camera.svg';
 import basicProfileImg from '@/assets/icons/ic_profile.svg';
+import Image from 'next/image';
 
 interface WikiAsideProps {
   className: string;
@@ -29,7 +31,6 @@ const WikiAside = ({
   onSave,
   onCancel,
 }: WikiAsideProps) => {
-  const [isExpanded, setIsExpanded] = useState(false);
   const [preview, setPreview] = useState<string | null>(null);
   const [editedProfile, setEditedProfile] = useState<ProfileDetail>(profile);
   const [imageFile, setImageFile] = useState<File | null>(null);
@@ -56,6 +57,7 @@ const WikiAside = ({
     fetchCurrentUser();
   }, [profile.id]);
 
+  const [isExpanded, setIsExpanded] = useState(false);
   const handleToggle = () => {
     setIsExpanded((prevState) => !prevState);
   };
@@ -246,9 +248,9 @@ const WikiAside = ({
             })}
             onClick={handleToggle}
           >
-            <img
+            <Image
               className={styles['expand-icon']}
-              src={expandIcon.src}
+              src={isExpanded ? expandIconReverse : expandIcon}
               alt="더보기 아이콘"
             />
           </button>
