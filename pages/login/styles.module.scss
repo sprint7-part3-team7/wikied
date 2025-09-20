@@ -1,0 +1,57 @@
+@import '@/styles/index.scss';
+
+.login-container {
+  @include Size(400px, auto);
+  @include Flex(column, center, '');
+  margin: 0 auto;
+  padding: 140px 0;
+
+  .login-wrapper {
+    @include Flex(column, '', '');
+
+    .title {
+      @include Font(
+        $font-size-2xl,
+        $line-height-2xl,
+        $font-weight-2xl-semibold,
+        $color-grayscale-500
+      );
+      text-align: center;
+      margin-bottom: 50px;
+    }
+
+    .form {
+      @include Flex(column, center, '');
+      row-gap: 32px;
+
+      .input-wrapper {
+        @include Flex(column, center, '');
+        row-gap: 24px;
+      }
+    }
+  }
+
+  .signup {
+    @include Font(
+      $font-size-md,
+      $line-height-md,
+      $font-weight-md-regular,
+      $color-grayscale-500
+    );
+    text-decoration: none;
+    align-self: center;
+    color: $color-primary-green-200;
+    margin-top: 40px;
+  }
+}
+
+@media screen and (max-width: $tablet-max-width) {
+
+}
+
+@media screen and (max-width: $mobile-max-width) {
+  .login-container {
+    @include Size(335px, '');
+
+  }
+}

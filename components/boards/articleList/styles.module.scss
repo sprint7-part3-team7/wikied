@@ -1,0 +1,114 @@
+@import '@/styles/index.scss';
+
+.board-list-container {
+  max-width: 1060px;
+  margin: 0 auto;
+}
+
+.search-order-container {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  gap: 20px;
+}
+
+.board-table {
+  @include Size(100%, auto);
+  border-collapse: collapse;
+  cursor: pointer;
+
+  th,
+  td {
+    padding: 12px;
+    text-align: center;
+    border-top: 1px solid $color-grayscale-200;
+    border-bottom: 1px solid $color-grayscale-200;
+  }
+
+  th {
+    @include Font(
+      $font-size-lg,
+      $line-height-lg,
+      $font-weight-2lg-regular,
+      $color-grayscale-400
+    );
+  }
+
+  td {
+    @include Font(
+      $font-size-lg,
+      $line-height-lg,
+      $font-weight-2lg-regular,
+      $color-grayscale-500
+    );
+  }
+}
+
+.mobile-list {
+  display: none;
+
+  .mobile-list-item {
+    border-bottom: 1px solid $color-grayscale-200;
+    margin-bottom: 14px;
+
+    .title {
+      @include Font(
+        $font-size-lg,
+        $line-height-lg,
+        $font-weight-lg-regular,
+        $color-grayscale-500
+      );
+      margin-bottom: 3px;
+    }
+
+    .info {
+      @include Flex(row, space-between, center);
+      @include Font(
+        $font-size-lg,
+        $line-height-lg,
+        $font-weight-lg-regular,
+        $color-grayscale-400
+      );
+      margin-bottom: 10px;
+
+      .author {
+        margin-right: 16px;
+      }
+
+      .date {
+        flex-grow: 1;
+      }
+
+      .like-count {
+        @include Flex(row, flex-start, center);
+        gap: 4px;
+      }
+    }
+  }
+}
+
+@media (max-width: $tablet-max-width) {
+  .board-list-container {
+    padding: 0 60px 20px 60px;
+  }
+}
+
+@media (max-width: $mobile-max-width) {
+  .board-list-container {
+    padding: 0 20px 20px 20px;
+  }
+
+  .search-order-container {
+    flex-direction: column;
+    align-items: stretch;
+    margin-bottom: 30px;
+  }
+
+  .board-table {
+    display: none;
+  }
+
+  .mobile-list {
+    display: block;
+  }
+}

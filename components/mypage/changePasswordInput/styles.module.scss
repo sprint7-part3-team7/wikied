@@ -1,0 +1,22 @@
+@import '@/styles/index.scss';
+
+.container {
+  @include Flex(column, '', '');
+  row-gap: 10px;
+  padding-bottom: 32px;
+  border-bottom: 1px solid $color-grayscale-200;
+
+  .label {
+    @include Font(
+      $font-size-md,
+      $line-height-md,
+      $font-weight-md-regular,
+      $color-grayscale-500
+    );
+  }
+
+  .pwd-input-wrapper {
+    @include Flex(column, '', '');
+    gap: 8px;
+  }
+}

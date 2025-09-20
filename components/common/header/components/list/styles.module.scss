@@ -1,0 +1,28 @@
+@import '@/styles/index.scss';
+
+.item-list {
+  display: flex;
+  column-gap: 40px;
+
+  .link {
+    @include Font(
+      $font-size-md,
+      $line-height-md,
+      $font-weight-md-regular,
+      $color-grayscale-500
+    );
+    text-decoration: none;
+  }
+
+  .active {
+    color: $color-primary-green-200;
+  }
+}
+
+@media screen and (max-width: $mobile-max-width) {
+  .item-list {
+    .link {
+      display: none;
+    }
+  }
+}

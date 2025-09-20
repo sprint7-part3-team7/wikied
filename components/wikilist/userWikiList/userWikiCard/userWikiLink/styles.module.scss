@@ -1,0 +1,57 @@
+@import '@/styles/index.scss';
+
+.container {
+  position: relative;
+}
+
+.link-container {
+  @include Flex(row, '', center);
+  padding: 5px 10px;
+  border-radius: 10px;
+  background-color: $color-primary-green-100;
+  cursor: pointer;
+}
+
+.link-text {
+  margin-left: 7px;
+  @include Font(
+    $font-size-md,
+    $line-height-md,
+    $font-weight-md-regular,
+    $color-primary-green-200
+  );
+  text-decoration: none;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: block;
+  width: 100%;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+.snackbar-wrapper {
+  position: fixed;
+  top: 120px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1000;
+}
+
+@media screen and (max-width: $mobile-max-width) {
+  .link-text {
+    @include Font(
+      $font-size-xs,
+      $line-height-xs-18,
+      $font-weight-xs-regular,
+      $color-primary-green-200
+    );
+  }
+
+  .snackbar-wrapper {
+    top: auto;
+    bottom: 80px;
+  }
+}

@@ -1,0 +1,143 @@
+@import '@/styles/index.scss';
+
+.user-card-container {
+  position: relative;
+  width: 100%;
+  height: 142px;
+  display: flex;
+  justify-content: space-between;
+  padding: 24px 36px;
+  border: 1px solid $color-grayscale-100;
+  border-radius: 10px;
+  background-color: $color-grayscale-50;
+  box-shadow: 0px 4px 20px 0px rgba(0, 0, 0, 0.08);
+  cursor: pointer;
+
+  &:hover {
+    background-color: $color-grayscale-100;
+  }
+}
+
+.user-card-link {
+  display: block;
+  width: 100%;
+  height: 100%;
+  text-decoration: none;
+}
+
+.user-card {
+  @include Flex(row, flex-start, flex-start);
+  gap: 32px;
+  text-decoration: none;
+}
+
+.user-profile-image-container {
+  width: 85px;
+  height: 85px;
+  aspect-ratio: 1 / 1;
+}
+
+.profile-image {
+  @include Size(85px, 85px);
+  border-radius: 50%;
+}
+
+.user-info {
+  @include Flex(column, flex-start, flex-start);
+  flex: 1 1 auto;
+  min-width: 0;
+  gap: 14px;
+}
+
+.user-name {
+  @include Font(
+    $font-size-2xl,
+    $line-height-2xl,
+    $font-weight-2xl-semibold,
+    $color-grayscale-500
+  );
+  min-width: 0;
+  border: none;
+}
+
+.user-details {
+  @include Font(
+    $font-size-md,
+    $line-height-md,
+    $font-weight-md-regular,
+    $color-grayscale-400
+  );
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  width: 100%;
+}
+
+.user-name,
+.user-address,
+.user-job {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  width: 100%;
+}
+
+.user-link-container {
+  position: absolute;
+  right: 36px;
+  bottom: 24px;
+}
+
+@media screen and (max-width: $mobile-max-width) {
+  .user-card-container {
+    padding: 21px 25px;
+    height: 150px;
+  }
+
+  .user-card {
+    gap: 20px;
+  }
+
+  .user-info {
+    gap: 10px;
+  }
+
+  .user-name {
+    @include Font(
+      $font-size-xl,
+      $line-height-md,
+      $font-weight-xl-semibold,
+      $color-grayscale-500
+    );
+    border: none;
+  }
+
+  .user-details {
+    @include Font(
+      $font-size-xs,
+      $line-height-xs-16,
+      $font-weight-xs-regular,
+      $color-grayscale-400
+    );
+  }
+
+  .user-profile-image-container {
+    width: 60px;
+    height: 60px;
+    aspect-ratio: 1 / 1;
+  }
+
+  .profile-image {
+    width: 60px;
+    height: 60px;
+  }
+
+  .user-link-container {
+    right: auto;
+    left: 105px;
+    bottom: 21px;
+    max-width: calc(100% - 130px);
+    overflow: hidden;
+    white-space: nowrap;
+  }
+}

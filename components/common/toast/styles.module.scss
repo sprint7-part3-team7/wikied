@@ -1,0 +1,49 @@
+@import '@/styles/index.scss';
+
+.toast {
+  @include Flex(column, null, center);
+  max-width: 300px;
+  @include Size(100%, auto);
+  position: fixed;
+  bottom: 5%;
+  left: 50%;
+  transform: translateX(-50%);
+  color: $color-grayscale-50;
+  padding: 10px;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+
+  .content-wrapper {
+    @include Flex(column, space-between, left);
+
+    .close-button {
+      background: none;
+      border: none;
+      color: $color-grayscale-50;
+      font-size: 20px;
+      margin-left: 10px;
+    }
+  }
+
+  .progress-bar-wrapper {
+    @include Size(100%, 4px);
+    margin-top: 5px;
+    border-radius: 2px;
+
+    .progress-bar {
+      height: 4px;
+      background-color: $color-grayscale-50;
+      margin-top: 5px;
+      transition: width 0.05s linear;
+    }
+  }
+}
+
+.success {
+  background-color: $color-primary-green-200;
+}
+
+.error {
+  background-color: $color-secondary-red-200;
+}

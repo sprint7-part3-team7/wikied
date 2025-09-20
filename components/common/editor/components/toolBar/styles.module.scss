@@ -1,0 +1,56 @@
+@import '@/styles/index.scss';
+
+.toolbar {
+  @include Flex(row, space-between, center);
+  border: 1px solid $color-grayscale-200;
+  border-radius: 21.5px;
+  padding: 10px 16px;
+  margin-top: 10px;
+
+  .left-buttons {
+    display: flex;
+    gap: 16px;
+
+    .button-wrapper {
+      display: flex;
+      gap: 4px;
+
+      .align-button {
+        @include Flex(row, center, center);
+        @include Size(24px, 24px);
+        background: none;
+        border: none;
+        border-radius: 5px;
+        padding: 0;
+
+        &:hover {
+          background-color: $color-grayscale-200;
+        }
+
+        &.active {
+          background-color: $color-grayscale-200;
+        }
+      }
+    }
+  }
+
+  button {
+    @include Size(24px, 24px);
+    @include Flex(row, center, center);
+    background: none;
+    border: none;
+    border-radius: 5px;
+    padding: 0px;
+
+    &:hover {
+      background-color: $color-grayscale-200;
+    }
+  }
+
+  .link-button {
+    @include Flex(row, center, center);
+    background-color: $color-grayscale-100;
+    border-radius: 50%;
+    padding: 2px;
+  }
+}
