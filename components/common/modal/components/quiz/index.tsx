@@ -1,5 +1,4 @@
 import Image from 'next/image';
-import closeIcon from '@/assets/icons/ic_close.svg';
 import lockIcon from '@/assets/icons/ic_lock.svg';
 import Input from '@/components/common/input';
 import styles from '@/components/common/modal/components/quiz/styles.module.scss';
@@ -14,11 +13,9 @@ interface QuizProps {
   setIsEditable: (editable: boolean) => void;
   setIsModalOpen: (open: boolean) => void;
   securityQuestion: string;
-  // onAnswerSubmit: (answer: string) => void;
 }
 
 const Quiz = ({
-  size = 'large',
   code,
   setIsEditable,
   setIsModalOpen,

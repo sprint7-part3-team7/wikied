@@ -11,13 +11,13 @@ import {
 } from 'draft-js';
 import { Editor as DraftEditor } from 'draft-js';
 import 'draft-js/dist/Draft.css';
-import styles from './styles.module.scss';
+import styles from '@/components/common/editor/styles.module.scss';
 import ToolBar from '@/components/common/editor/components/toolBar';
 import { blockStyleFn, initialStyleMap } from 'contenido';
 import { colorPalette } from '@/components/common/editor/components/colorPalette';
 import Media from '@/components/common/editor/components/media';
 import AddImage from '@/components/common/modal/components/addImage';
-import Modal from '../modal';
+import Modal from '@/components/common/modal';
 import { useRouter } from 'next/router';
 import {
   imageUpload,

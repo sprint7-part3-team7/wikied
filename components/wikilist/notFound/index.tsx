@@ -1,4 +1,4 @@
-import styles from './styles.module.scss';
+import styles from '@/components/wikilist/notFound/styles.module.scss';
 import Image from 'next/image';
 import NotFoundImage from '@/assets/images/landing/landing_9.png';
 

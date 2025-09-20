@@ -1,5 +1,8 @@
 import { Comment } from '@/types/article';
-import { authAxiosInstance, publicAxiosInstance } from './axiosInstance';
+import {
+  authAxiosInstance,
+  publicAxiosInstance,
+} from '@/services/api/axiosInstance';
 
 interface CommentResponse {
   list: Comment[];

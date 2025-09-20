@@ -131,9 +131,6 @@ const WikiHeader = ({
           <section className={styles['link']}>
             <section className={styles['link-wrapper']}>
               <img src={link.src} width={20} height={20} alt="링크 아이콘" />
-              {/* {showSnackBar && !showParticipateBtn && (
-
-              )} */}
               <button
                 onClick={handleCopyClick}
                 className={styles['link-copy-btn']}

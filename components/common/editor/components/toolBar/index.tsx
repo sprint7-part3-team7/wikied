@@ -7,8 +7,7 @@ import {
   toggleTextAlign,
 } from 'contenido';
 import ColorPalette from '@/components/common/editor/components/colorPalette';
-import styles from './styles.module.scss';
-
+import styles from '@/components/common/editor/components/toolBar/styles.module.scss';
 import boldIcon from '@/assets/icons/ic_bold.svg';
 import italicIcon from '@/assets/icons/ic_italic.svg';
 import underlineIcon from '@/assets/icons/ic_underline.svg';

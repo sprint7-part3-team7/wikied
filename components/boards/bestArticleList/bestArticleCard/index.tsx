@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import styles from '../styles.module.scss';
+import styles from '@/components/boards/bestArticleList/styles.module.scss';
 import likeIcon from '@/assets/icons/ic_heart.svg';
 import noImage from '@/assets/icons/ic_camera.svg';
 import { Article } from '@/types/article';

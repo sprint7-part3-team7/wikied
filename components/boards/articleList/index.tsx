@@ -1,12 +1,12 @@
 import { useState, useEffect, useCallback } from 'react';
 import Image from 'next/image';
-import styles from './styles.module.scss';
+import styles from '@/components/boards/articleList/styles.module.scss';
 import { Article } from '@/types/article';
 import { getArticles } from '@/services/api/article';
 import SearchForm from '@/components/common/searchForm';
 import Pagination from '@/components/common/pagination';
 import likeIcon from '@/assets/icons/ic_heart.svg';
-import OrderDropdown from '../articleOrderDropdown';
+import OrderDropdown from '@/components/boards/articleOrderDropdown';
 import { useRouter } from 'next/router';
 
 const ArticleList = () => {

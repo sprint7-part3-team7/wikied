@@ -1,7 +1,7 @@
 import dynamic from 'next/dynamic';
 import Button from '@/components/common/button';
 import { useRouter } from 'next/router';
-import styles from './styles.module.scss';
+import styles from '@/pages/addboard/styles.module.scss';
 
 const DynamicEditor = dynamic(() => import('@/components/common/editor'), {
   ssr: false,

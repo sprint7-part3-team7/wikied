@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { EditorState } from 'draft-js';
 import { RichUtils } from 'draft-js';
-import styles from './styles.module.scss';
+import styles from '@/components/common/wikiEditor/components/colorPalette/styles.module.scss';
 import Image from 'next/image';
 import coloringIcon from '@/assets/icons/ic_coloring.svg';
 import clsx from 'clsx';

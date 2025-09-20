@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import styles from './styles.module.scss';
+import styles from '@/components/boards/commentList/styles.module.scss';
 import { Comment } from '@/types/article';
 import Image from 'next/image';
 import defaultProfile from '@/assets/icons/ic_profile.svg';

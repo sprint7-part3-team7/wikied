@@ -8,7 +8,7 @@ import {
 } from 'draft-js';
 import { Editor as DraftEditor } from 'draft-js';
 import 'draft-js/dist/Draft.css';
-import styles from './styles.module.scss';
+import styles from '@/components/common/wikiEditor/styles.module.scss';
 import ToolBar from '@/components/common/wikiEditor/components/toolBar';
 import { stateFromHTML } from 'draft-js-import-html';
 import 'draft-js/dist/Draft.css';

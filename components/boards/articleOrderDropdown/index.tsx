@@ -1,5 +1,5 @@
 import { useState, useCallback, useMemo, useEffect, useRef } from 'react';
-import styles from './styles.module.scss';
+import styles from '@/components/boards/articleOrderDropdown/styles.module.scss';
 
 interface ArticleOrderDropdownProps {
   options: { value: string; label: string }[];

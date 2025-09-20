@@ -1,6 +1,9 @@
 import { Profile, ProfileRequest, UserInfo } from '@/types/profile';
 import { ProfileDetail, ProfileEditStatus, ProfileSummary } from '@/types/wiki';
-import { authAxiosInstance, publicAxiosInstance } from './axiosInstance';
+import {
+  authAxiosInstance,
+  publicAxiosInstance,
+} from '@/services/api/axiosInstance';
 
 interface ProfileResponse {
   totalCount: number;
