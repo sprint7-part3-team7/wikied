@@ -44,7 +44,7 @@ const Landing = () => {
   return (
     <div className={styles['landing-container']}>
       <header className={styles['header']}>
-        <section className={styles['wikid-banner']}>
+        <section className={styles['wikied-banner']}>
           <div className={styles['banner-title']}>
             <div className={styles['paragraph']}>남들이 만드는</div>
             <div className={styles['heading']}>나만의 위키</div>
@@ -202,7 +202,7 @@ const Landing = () => {
             <div className={styles['copyright']}>
               Copyright ⓒ Wikied. All Rights Reserved
             </div>
-            <div className={styles['impormaion']}>
+            <div className={styles['information']}>
               <div
                 className={styles['toggle-button']}
                 onClick={() => setOpen((prev) => !prev)}

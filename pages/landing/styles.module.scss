@@ -37,7 +37,7 @@
     background-color: #f1f4fd;
   }
 
-  .wikid-banner {
+  .wikied-banner {
     @include Flex(column, '', center);
     @include Size(100%, 914px);
     padding: 0 80px;
@@ -284,7 +284,7 @@
         @include Font($font-size-lg, $line-height-lg, $font-weight-lg-bold, '');
       }
 
-      .impormaion {
+      .information {
         @include Font(
           $font-size-md,
           $line-height-md,
@@ -326,7 +326,7 @@
   }
 
   @media screen and (max-width: $tablet-max-width) {
-    .wikid-banner {
+    .wikied-banner {
       @include Size(100%, 900px);
       padding: 0 48px;
     }
@@ -476,7 +476,7 @@
       top: 502px;
     }
 
-    .wikid-banner {
+    .wikied-banner {
       @include Size(100%, 592px);
       padding: 0 20px;
     }
@@ -671,7 +671,7 @@
           );
         }
 
-        .impormaion {
+        .information {
           @include Font(
             $font-size-2xs,
             $line-height-2xs-10,
