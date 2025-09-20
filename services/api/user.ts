@@ -1,5 +1,5 @@
 import { ChangePasswordRequest, User } from '@/types/user';
-import { authAxiosInstance } from './axiosInstance';
+import { authAxiosInstance } from '@/services/api/axiosInstance';
 
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL;
 

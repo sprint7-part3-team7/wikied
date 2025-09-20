@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import styles from './styles.module.scss';
+import styles from '@/components/wikilist/userWikiList/userWikiCard/styles.module.scss';
 import { ProfileSummary } from '@/types/wiki';
 import DefaultProfileImg from '@/assets/icons/ic_profile.svg';
 import UserWikiLink from '@/components/wikilist/userWikiList/userWikiCard/userWikiLink';

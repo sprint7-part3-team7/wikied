@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
-import styles from './styles.module.scss';
+import styles from '@/components/boards/bestArticleList/styles.module.scss';
 import { getArticles } from '@/services/api/article';
 import { Article } from '@/types/article';
-import BestBoardCard from './bestArticleCard';
+import BestBoardCard from '@/components/boards/bestArticleList/bestArticleCard';
 import Button from '@/components/common/button';
 import Link from 'next/link';
 import { useAuth } from '@/contexts/AuthProvider';

@@ -1,4 +1,7 @@
-import { authAxiosInstance, publicAxiosInstance } from './axiosInstance';
+import {
+  authAxiosInstance,
+  publicAxiosInstance,
+} from '@/services/api/axiosInstance';
 import { Article } from '@/types/article';
 
 interface ArticleResponse {

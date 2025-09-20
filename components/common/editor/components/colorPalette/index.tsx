@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { EditorState, Modifier } from 'draft-js';
-import styles from './styles.module.scss';
+import styles from '@/components/common/editor/components/colorPalette/styles.module.scss';
 import Image from 'next/image';
 import coloringIcon from '@/assets/icons/ic_coloring.svg';
 

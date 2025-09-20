@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback } from 'react';
-import styles from './styles.module.scss';
+import styles from '@/components/wikilist/userWikiList/styles.module.scss';
 import UserWikiCard from '@/components/wikilist/userWikiList/userWikiCard';
 import Pagination from '@/components/common/pagination';
 import SearchForm from '@/components/common/searchForm';

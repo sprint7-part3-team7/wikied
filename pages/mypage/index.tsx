@@ -1,6 +1,6 @@
 import styles from '@/pages/mypage/styles.module.scss';
-import ChangePasswordInput from '../../components/mypage/changePasswordInput';
-import AddWikiInput from '../../components/mypage/addWikiInput';
+import ChangePasswordInput from '@/components/mypage/changePasswordInput';
+import AddWikiInput from '@/components/mypage/addWikiInput';
 import { changePassword } from '@/services/api/user';
 import { addProfiles } from '@/services/api/profile';
 import { ProfileRequest } from '@/types/profile';

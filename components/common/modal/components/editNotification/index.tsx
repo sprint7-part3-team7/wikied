@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import topCloseIcon from '@/assets/icons/close.svg';
 import styles from '@/components/common/modal/components/editNotification/styles.module.scss';
-import NotificationCard from './notificationCard';
+import NotificationCard from '@/components/common/modal/components/editNotification/notificationCard';
 import { useState, useEffect, useCallback } from 'react';
 import clsx from 'clsx';
 

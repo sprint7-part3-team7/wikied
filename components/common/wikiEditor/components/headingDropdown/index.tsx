@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { createPortal } from 'react-dom';
 import Image from 'next/image';
-import styles from './styles.module.scss';
+import styles from '@/components/common/wikiEditor/components/headingDropdown/styles.module.scss';
 import arrowIcon from '@/assets/icons/ic_arrow.svg';
 
 interface HeadingDropdownProps {
