@@ -1,6 +1,5 @@
 import {
   getArticleById,
-  updateArticle,
   deleteArticle,
   postLike,
   deleteLike,

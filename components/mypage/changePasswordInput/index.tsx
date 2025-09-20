@@ -4,7 +4,7 @@ import styles from '@/components/mypage/changePasswordInput/styles.module.scss';
 import { ChangePasswordRequest } from '@/types/user';
 import { useState, ChangeEvent, useEffect } from 'react';
 import useDebounce from '@/hooks/useDebounce/useDebounce';
-import { SignupInputId, getErrorMessage } from '@/types/authUtils';
+import { getErrorMessage } from '@/types/authUtils';
 import Toast from '@/components/common/toast';
 
 interface FormState {

@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useRef } from 'react';
 import styles from '@/components/common/header/styles.module.scss';
 import MobileMenu from '@/components/common/header/components/mobileToggle';
 import Logo from '@/components/common/header/components/logo';

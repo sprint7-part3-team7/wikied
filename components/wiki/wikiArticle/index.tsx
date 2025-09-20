@@ -18,7 +18,6 @@ interface WikiArticleProps {
 const WikiArticle = ({
   className,
   profile,
-  sections,
   onParticipateClick,
   checkEditStatus,
   isEditable,

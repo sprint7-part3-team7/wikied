@@ -6,7 +6,7 @@ import {
   useContext,
 } from 'react';
 import { useRouter } from 'next/router';
-import axios, { AxiosError, AxiosResponse } from 'axios';
+import { AxiosError, AxiosResponse } from 'axios';
 import { AuthResponseType, UserInfo } from '@/types/auth';
 import { authAxiosInstance } from '@/services/api/axiosInstance';
 

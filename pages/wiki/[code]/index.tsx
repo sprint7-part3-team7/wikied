@@ -79,9 +79,9 @@ const Wiki = (props: WikiProps) => {
     }
 
     const timer = setTimeout(() => {
-      setIsErrorModalOpen(true); // 5분 후 오류 모달 띄우기
+      setIsErrorModalOpen(true);
       setIsEditable(false);
-    }, 300000); // 5분 = 300,000ms
+    }, 300000);
 
     setEditTimeout(timer);
   };
