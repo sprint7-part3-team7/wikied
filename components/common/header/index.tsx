@@ -30,8 +30,15 @@ const Header = () => {
   const { isModalOpen, closeModal, toggleModal, modalSize } = useModal();
 
   // 외부 클릭 감지
-  useOutsideClick(headerRef, () => {
+  const mobileMenuBtnRef = useRef<HTMLButtonElement>(null);
+  const mobileMenuRef = useRef<HTMLDivElement>(null);
+  useOutsideClick([mobileMenuRef, mobileMenuBtnRef], () => {
     setIsMobileMenu(false);
+  });
+
+  const deskMenuBtnRef = useRef<HTMLButtonElement>(null);
+  const deskMenuRef = useRef<HTMLDivElement>(null);
+  useOutsideClick([deskMenuRef, deskMenuBtnRef], () => {
     setIsDeskMenuOpen(false);
   });
 
@@ -43,15 +50,26 @@ const Header = () => {
       </div>
       <div className={styles['login-wrapper']}>
         {isLoggedIn ? (
-          <UserProfile deskMenu={deskMenu} mobileMenu={mobileMenu} />
+          <UserProfile
+            mobileMenu={mobileMenu}
+            deskMenu={deskMenu}
+            mobileMenuBtnRef={mobileMenuBtnRef}
+            deskMenuBtnRef={deskMenuBtnRef}
+          />
         ) : (
           <GuestProfile />
         )}
       </div>
       {isMobileMenu && (
-        <MobileMenu mobileMenu={mobileMenu} toggleModal={toggleModal} />
+        <div ref={mobileMenuRef} style={{ display: 'contents' }}>
+          <MobileMenu mobileMenu={mobileMenu} toggleModal={toggleModal} />
+        </div>
       )}
-      {isDeskMenuOpen && <DeskMenu deskMenu={deskMenu} />}
+      {isDeskMenuOpen && (
+        <div ref={deskMenuRef} style={{ display: 'contents' }}>
+          <DeskMenu deskMenu={deskMenu} />
+        </div>
+      )}
       {isModalOpen && (
         <EditNotification
           size={modalSize}
