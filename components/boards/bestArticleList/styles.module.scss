@@ -26,7 +26,6 @@
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 16px;
-    max-width: 1048px;
   }
 }
 
@@ -36,7 +35,6 @@
   border-radius: 8px;
   box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.1);
   overflow: hidden;
-  margin: 8px;
   cursor: pointer;
 
   .image {
@@ -95,26 +93,29 @@
     .board-grid {
       grid-template-columns: repeat(2, 1fr);
       max-width: 100%;
+      gap: 20px;
     }
   }
 }
 
 @media (max-width: $mobile-max-width) {
-  .best-board-header {
-    margin: 40px 0;
+  .best-board-list {
+    .best-board-header {
+      margin: 40px 0;
 
-    .add-board-button {
-      @include Size(130px, 45px);
+      .add-board-button {
+        @include Size(130px, 45px);
+      }
     }
-  }
 
-  .header {
-    @include Font(
-      $font-size-2xl,
-      $line-height-2xl,
-      $font-weight-2xl-semibold,
-      $color-grayscale-500
-    );
+    .header {
+      @include Font(
+        $font-size-2xl,
+        $line-height-2xl,
+        $font-weight-2xl-semibold,
+        $color-grayscale-500
+      );
+    }
   }
 
   .best-board-list {
@@ -125,7 +126,7 @@
       display: flex;
       flex-wrap: nowrap;
       overflow-x: scroll;
-      gap: 0px;
+      gap: 16px;
     }
   }
 
