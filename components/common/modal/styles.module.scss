@@ -17,6 +17,7 @@
     padding: 20px;
     position: relative;
     background: $color-grayscale-50;
+    @include Size(395px, auto);
 
     .close-button {
       @include Size(20px, 20px);
@@ -29,13 +30,14 @@
         margin-bottom: 10px;
       }
     }
+  }
+}
 
-    &.large {
-      @include Size(395px, auto);
-    }
-
-    &.small {
-      @include Size(335px, auto);
+@media screen and (max-width: $mobile-max-width) {
+  .overlay {
+    .container {
+      @include Size(90%, auto);
+      max-width: 335px;
     }
   }
 }

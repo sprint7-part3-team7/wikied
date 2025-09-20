@@ -9,11 +9,18 @@ import { getProfileByCode } from '@/services/api/profile';
 import { useAuth } from '@/contexts/AuthProvider';
 
 type UserProfileProps = {
-  mobileMenu: () => void;
-  deskMenu: () => void;
+  mobileMenu: (e: React.MouseEvent<HTMLButtonElement>) => void;
+  deskMenu: (e: React.MouseEvent<HTMLButtonElement>) => void;
+  mobileMenuBtnRef?: React.RefObject<HTMLButtonElement>;
+  deskMenuBtnRef?: React.RefObject<HTMLButtonElement>;
 };
 
-const UserProfile = ({ mobileMenu, deskMenu }: UserProfileProps) => {
+const UserProfile = ({
+  mobileMenu,
+  deskMenu,
+  mobileMenuBtnRef,
+  deskMenuBtnRef,
+}: UserProfileProps) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalSize, setModalSize] = useState<'small' | 'large'>('small');
   const [profileImage, setProfileImage] = useState<string | null>(null);
@@ -63,7 +70,11 @@ const UserProfile = ({ mobileMenu, deskMenu }: UserProfileProps) => {
         <Image src={alarm} alt="알림" width={32} height={32} />
       </button>
       {profileImage ? (
-        <button className={styles['profile-user']} onClick={deskMenu}>
+        <button
+          ref={deskMenuBtnRef}
+          className={styles['profile-user']}
+          onClick={(e) => deskMenu(e)}
+        >
           <img
             className={styles['profile-user-img']}
             src={profileImage}
@@ -73,7 +84,11 @@ const UserProfile = ({ mobileMenu, deskMenu }: UserProfileProps) => {
           />
         </button>
       ) : (
-        <button className={styles['profile-default']} onClick={deskMenu}>
+        <button
+          ref={deskMenuBtnRef}
+          className={styles['profile-default']}
+          onClick={(e) => deskMenu(e)}
+        >
           <Image
             className={styles['profile-default-img']}
             src={profile}
@@ -83,7 +98,11 @@ const UserProfile = ({ mobileMenu, deskMenu }: UserProfileProps) => {
           />
         </button>
       )}
-      <button className={styles['menu']} onClick={mobileMenu}>
+      <button
+        ref={mobileMenuBtnRef}
+        className={styles['menu']}
+        onClick={(e) => mobileMenu(e)}
+      >
         <Image src={menu} alt="메뉴" width={24} height={24} />
       </button>
       {isModalOpen && (

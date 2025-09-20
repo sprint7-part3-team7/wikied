@@ -1,60 +1,49 @@
-
-import { useEffect, useRef } from 'react';
 import styles from '@/components/common/header/components/deskToggle/styles.module.scss';
 import useWikiNavigation from '@/hooks/useCode/useCode';
 import { useAuth } from '@/contexts/AuthProvider';
 import { useRouter } from 'next/router';
 
-type MenuProps = {
-  handleMenuClose: () => void;
+type DeskMenuProps = {
+  deskMenu: (e: React.MouseEvent<HTMLButtonElement>) => void;
 };
 
-const DeskMenu = ({ handleMenuClose }: MenuProps) => {
-  const menuRef = useRef<HTMLDivElement>(null);
-  const { logout } = useAuth();
-  const { handleNavigationWiki } = useWikiNavigation();
+const DeskMenu = ({ deskMenu }: DeskMenuProps) => {
   const router = useRouter();
 
+  const { handleNavigationWiki } = useWikiNavigation();
+
+  const { logout } = useAuth();
   const handleLogoutClick = () => {
     logout();
-    handleMenuClose();
   };
 
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
-        handleMenuClose();
-      }
-    };
-
-    document.addEventListener('mousedown', handleClickOutside);
-
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-    };
-  }, [handleMenuClose]);
-
   return (
-    <div className={styles['container']} ref={menuRef}>
+    <div className={styles['container']}>
       <button
         className={styles['menu-list']}
-        onClick={() => {
+        onClick={(e) => {
           router.push('/mypage');
-          handleMenuClose();
+          deskMenu(e);
         }}
       >
-        계정 설정
+        마이페이지
       </button>
       <button
         className={styles['menu-list']}
-        onClick={() => {
+        onClick={(e) => {
           handleNavigationWiki();
-          handleMenuClose();
+          deskMenu(e);
         }}
       >
         내 위키
       </button>
-      <button className={styles['menu-list']} onClick={handleLogoutClick}>
+      <button
+        className={styles['menu-list']}
+        onClick={(e) => {
+          handleLogoutClick();
+          deskMenu(e);
+        }}
+      >
         로그아웃
       </button>
     </div>

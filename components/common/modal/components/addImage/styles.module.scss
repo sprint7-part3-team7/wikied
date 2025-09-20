@@ -7,6 +7,7 @@
     @include Flex(column, center, center);
     row-gap: 20px;
     position: relative;
+    overflow: hidden;
 
     .image-label {
       @include Font(
@@ -18,7 +19,8 @@
     }
 
     .image-input-box {
-      @include Size(354px, 160px);
+      max-width: 354px;
+      @include Size(100%, 160px);
       background-color: $color-grayscale-100;
       border-radius: 10px;
       cursor: pointer;

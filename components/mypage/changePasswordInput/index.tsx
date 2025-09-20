@@ -118,36 +118,38 @@ const ChangePasswordInput = ({
       <label htmlFor="password" className={styles['label']}>
         비밀번호 변경
       </label>
-      <Input
-        id="currentPassword"
-        name="currentPassword"
-        placeholder="기존 비밀번호"
-        value={formState.currentPassword}
-        onChange={handleChange}
-        type="password"
-        fullWidth
-        errorMessage={errors.currentPassword}
-      />
-      <Input
-        id="newPassword"
-        name="newPassword"
-        value={formState.newPassword}
-        placeholder="새 비밀번호"
-        onChange={handleChange}
-        type="password"
-        fullWidth
-        errorMessage={errors.newPassword}
-      />
-      <Input
-        id="verifyNewPassword"
-        name="verifyNewPassword"
-        value={formState.verifyNewPassword}
-        placeholder="새 비밀번호 확인"
-        onChange={handleChange}
-        type="password"
-        fullWidth
-        errorMessage={errors.verifyNewPassword}
-      />
+      <div className={styles['pwd-input-wrapper']}>
+        <Input
+          id="currentPassword"
+          name="currentPassword"
+          placeholder="기존 비밀번호"
+          value={formState.currentPassword}
+          onChange={handleChange}
+          type="password"
+          fullWidth
+          errorMessage={errors.currentPassword}
+        />
+        <Input
+          id="newPassword"
+          name="newPassword"
+          value={formState.newPassword}
+          placeholder="새 비밀번호"
+          onChange={handleChange}
+          type="password"
+          fullWidth
+          errorMessage={errors.newPassword}
+        />
+        <Input
+          id="verifyNewPassword"
+          name="verifyNewPassword"
+          value={formState.verifyNewPassword}
+          placeholder="새 비밀번호 확인"
+          onChange={handleChange}
+          type="password"
+          fullWidth
+          errorMessage={errors.verifyNewPassword}
+        />
+      </div>
       <Button color="primary" size="small" alignEnd defaultPadding>
         변경하기
       </Button>

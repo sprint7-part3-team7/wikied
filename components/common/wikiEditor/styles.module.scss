@@ -14,7 +14,7 @@
   min-height: 200px;
   overflow-x: hidden;
   overflow-y: auto;
-  margin-top: 60px;
+  margin-top: 52px;
   word-wrap: break-word;
 
   :global {
@@ -78,6 +78,7 @@
   .editor-container {
     min-height: 200px;
     overflow-y: auto;
+    margin-top: 60px;
   }
 }
 
@@ -87,5 +88,6 @@
     min-height: 200px;
     overflow-x: hidden;
     overflow-y: auto;
+    margin-top: 40px;
   }
 }

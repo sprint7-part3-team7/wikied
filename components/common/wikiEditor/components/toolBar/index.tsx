@@ -21,6 +21,8 @@ import linkIcon from '@/assets/icons/link_gray.svg';
 import imageIcon from '@/assets/icons/ic_image.svg';
 import HeadingDropdown from '@/components/common/wikiEditor/components/headingDropdown';
 import { ProfileDetail } from '@/types/wiki';
+import { useEffect, useState } from 'react';
+import clsx from 'clsx';
 
 interface ToolBarProps {
   editorState: EditorState;
@@ -63,8 +65,22 @@ const ToolBar = ({
   const currentBlockType = RichUtils.getCurrentBlockType(editorState);
   const selectedHeading = getHeadingType(currentBlockType);
 
+  const [isScrollable, setIsScrollable] = useState(false);
+  useEffect(() => {
+    const toolbar = document.querySelector(`.${styles.toolbar}`);
+    if (!toolbar) return;
+
+    const checkScroll = () => {
+      setIsScrollable(toolbar.scrollWidth > toolbar.clientWidth);
+    };
+
+    checkScroll();
+    window.addEventListener('resize', checkScroll);
+    return () => window.removeEventListener('resize', checkScroll);
+  }, []);
+
   return (
-    <div className={styles['toolbar']}>
+    <div className={clsx(styles.toolbar, { [styles.scroll]: isScrollable })}>
       <span className={styles['user-name']}>{profile.name}</span>
       <div className={styles['left-buttons']}>
         <div className={styles['button-wrapper']}>

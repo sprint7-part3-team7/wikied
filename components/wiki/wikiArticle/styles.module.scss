@@ -79,6 +79,14 @@
 
     .grid-item {
       // gap: 8px;
+      .wiki-article-content {
+        @include Font(
+          $font-size-md,
+          $line-height-md,
+          $font-weight-md-regular,
+          ''
+        );
+      }
     }
 
     .blockquote-item {
