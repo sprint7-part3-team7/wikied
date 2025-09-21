@@ -1,8 +1,0 @@
-@import '@/styles/index.scss';
-
-.wikilist-ui {
-  @include Flex(column, center, center);
-  margin: 0 auto;
-  max-width: 860px;
-  padding: 20px;
-}
